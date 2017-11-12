@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<!-- 去掉注释 -->
+	<commentGenerator>
+	  <property name="suppressAllComments" value="true" />
+	</commentGenerator>
+	
+  	<!-- 配置数据库连接 -->
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+        userId="ims"
+        password="password">
+    </jdbcConnection>
+    <!--true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+            false：默认,
+                scale>0;length>18：使用BigDecimal;
+                scale=0;length[10,18]：使用Long；
+                scale=0;length[5,9]：使用Integer；
+                scale=0;length<5：使用Short；
+    -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="true" />
+    </javaTypeResolver>
+	<!-- 指定对象生成的位置以及参数 -->
+    <javaModelGenerator targetPackage="com.navinfo.IMS.entity" 
+    					targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem">
+        <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+      <property name="enableSubPackages" value="false" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+	<!-- 设置映射文件mapper的位置 -->
+    <!--<sqlMapGenerator targetPackage="mapper"  -->
+    				 <!--targetProject=".\src\main\resources">-->
+      <!--<property name="enableSubPackages" value="true" />-->
+    <!--</sqlMapGenerator>-->
+      <sqlMapGenerator targetPackage="mapper"
+                       targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem">
+          <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+          <property name="enableSubPackages" value="false" />
+      </sqlMapGenerator>
+	<!-- 设置dao接口的位置 -->
+    <javaClientGenerator type="XMLMAPPER"
+    targetPackage="com.navinfo.IMS.dao"  targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem">
+        <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+      <property name="enableSubPackages" value="false" />
+    </javaClientGenerator>
+	
+	<!-- 指定表的生成策略 -->
+	<!--<table schema="ims" tableName="emp" domainObjectName="Emp" ></table>-->
+	<!--<table schema="ims" tableName="emp_resume" domainObjectName="EmpResume"></table>-->
+	<!--<table tableName="menu" domainObjectName="Menu"></table>-->
+	<!--<table schema="ims" tableName="pre_grade" domainObjectName="PreGrade"></table>-->
+	<!--<table schema="ims" tableName="test_grade" domainObjectName="TestGrade"></table>-->
+	<!--<table schema="ims" tableName="pro_ability" domainObjectName="ProAbility"></table>-->
+	<table schema="ims" tableName="sys_user" domainObjectName="SysUser"></table>
+	<!--<table schema="ims" tableName="work_diary" domainObjectName="WorkDiary"></table>-->
+	<!--<table tableName="work_stat" domainObjectName="WorkStat"></table>-->
+      <!--<table schema="ims" tableName="sys_role" domainObjectName="SysRole"></table>-->
+      <!--<table schema="ims" tableName="sys_permission" domainObjectName="SysPermission"></table>-->
+      <!--<table schema="ims" tableName="user_role_rel" domainObjectName="UserRoleRel"></table>-->
+      <!--<table schema="ims" tableName="role_permission_rel" domainObjectName="RolePermissionRel"></table>-->
+      <!--<table schema="ims" tableName="work_data" domainObjectName="WorkData"></table>-->
+
+  </context>
+</generatorConfiguration>

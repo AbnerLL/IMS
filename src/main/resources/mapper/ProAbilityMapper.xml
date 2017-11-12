@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.ProAbilityMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.ProAbility">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="EMP_ID" jdbcType="VARCHAR" property="empId" />
+    <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
+    <result column="R_MARK_LOG" jdbcType="VARCHAR" property="rMarkLog" />
+    <result column="R_MARK_TEST" jdbcType="VARCHAR" property="rMarkTest" />
+    <result column="CH_POI_LOG" jdbcType="VARCHAR" property="chPoiLog" />
+    <result column="CH_POI_TEST" jdbcType="VARCHAR" property="chPoiTest" />
+    <result column="EN_POI_LOG" jdbcType="VARCHAR" property="enPoiLog" />
+    <result column="EN_POI_TEST" jdbcType="VARCHAR" property="enPoiTest" />
+    <result column="ROAD_ITEM_LOG" jdbcType="VARCHAR" property="roadItemLog" />
+    <result column="ROAD_ITEM_TEST" jdbcType="VARCHAR" property="roadItemTest" />
+    <result column="POI_ITEM_LOG" jdbcType="VARCHAR" property="poiItemLog" />
+    <result column="POI_ITEM_TEST" jdbcType="VARCHAR" property="poiItemTest" />
+    <result column="DEPTH_INFO_LOG" jdbcType="VARCHAR" property="depthInfoLog" />
+    <result column="DEPTH_INFO_TEST" jdbcType="VARCHAR" property="depthInfoTest" />
+    <result column="POINT_LOG" jdbcType="VARCHAR" property="pointLog" />
+    <result column="POINT_TEST" jdbcType="VARCHAR" property="pointTest" />
+    <result column="AGENCY_LOG" jdbcType="VARCHAR" property="agencyLog" />
+    <result column="AGENCY_TEST" jdbcType="VARCHAR" property="agencyTest" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ATTR1" jdbcType="VARCHAR" property="attr1" />
+    <result column="ATTR2" jdbcType="VARCHAR" property="attr2" />
+    <result column="ATTR3" jdbcType="VARCHAR" property="attr3" />
+    <result column="ATTR4" jdbcType="VARCHAR" property="attr4" />
+    <result column="ATTR5" jdbcType="VARCHAR" property="attr5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, VERSION, EMP_ID, EMP_NAME, R_MARK_LOG, R_MARK_TEST, CH_POI_LOG, CH_POI_TEST, 
+    EN_POI_LOG, EN_POI_TEST, ROAD_ITEM_LOG, ROAD_ITEM_TEST, POI_ITEM_LOG, POI_ITEM_TEST, 
+    DEPTH_INFO_LOG, DEPTH_INFO_TEST, POINT_LOG, POINT_TEST, AGENCY_LOG, AGENCY_TEST, 
+    CREATE_TIME, CREATOR_ID, CREATOR, UPDATE_TIME, UPDATER_ID, UPDATER, STATUS, ATTR1, 
+    ATTR2, ATTR3, ATTR4, ATTR5
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.ProAbilityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.PRO_ABILITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.PRO_ABILITY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.PRO_ABILITY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.ProAbilityExample">
+    delete from IMS.PRO_ABILITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.ProAbility">
+    insert into IMS.PRO_ABILITY (ID, VERSION, EMP_ID, 
+      EMP_NAME, R_MARK_LOG, R_MARK_TEST, 
+      CH_POI_LOG, CH_POI_TEST, EN_POI_LOG, 
+      EN_POI_TEST, ROAD_ITEM_LOG, ROAD_ITEM_TEST, 
+      POI_ITEM_LOG, POI_ITEM_TEST, DEPTH_INFO_LOG, 
+      DEPTH_INFO_TEST, POINT_LOG, POINT_TEST, 
+      AGENCY_LOG, AGENCY_TEST, CREATE_TIME, 
+      CREATOR_ID, CREATOR, UPDATE_TIME, 
+      UPDATER_ID, UPDATER, STATUS, 
+      ATTR1, ATTR2, ATTR3, 
+      ATTR4, ATTR5)
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
+      #{empName,jdbcType=VARCHAR}, #{rMarkLog,jdbcType=VARCHAR}, #{rMarkTest,jdbcType=VARCHAR}, 
+      #{chPoiLog,jdbcType=VARCHAR}, #{chPoiTest,jdbcType=VARCHAR}, #{enPoiLog,jdbcType=VARCHAR}, 
+      #{enPoiTest,jdbcType=VARCHAR}, #{roadItemLog,jdbcType=VARCHAR}, #{roadItemTest,jdbcType=VARCHAR}, 
+      #{poiItemLog,jdbcType=VARCHAR}, #{poiItemTest,jdbcType=VARCHAR}, #{depthInfoLog,jdbcType=VARCHAR}, 
+      #{depthInfoTest,jdbcType=VARCHAR}, #{pointLog,jdbcType=VARCHAR}, #{pointTest,jdbcType=VARCHAR}, 
+      #{agencyLog,jdbcType=VARCHAR}, #{agencyTest,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}, 
+      #{attr4,jdbcType=VARCHAR}, #{attr5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.ProAbility">
+    insert into IMS.PRO_ABILITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="empId != null">
+        EMP_ID,
+      </if>
+      <if test="empName != null">
+        EMP_NAME,
+      </if>
+      <if test="rMarkLog != null">
+        R_MARK_LOG,
+      </if>
+      <if test="rMarkTest != null">
+        R_MARK_TEST,
+      </if>
+      <if test="chPoiLog != null">
+        CH_POI_LOG,
+      </if>
+      <if test="chPoiTest != null">
+        CH_POI_TEST,
+      </if>
+      <if test="enPoiLog != null">
+        EN_POI_LOG,
+      </if>
+      <if test="enPoiTest != null">
+        EN_POI_TEST,
+      </if>
+      <if test="roadItemLog != null">
+        ROAD_ITEM_LOG,
+      </if>
+      <if test="roadItemTest != null">
+        ROAD_ITEM_TEST,
+      </if>
+      <if test="poiItemLog != null">
+        POI_ITEM_LOG,
+      </if>
+      <if test="poiItemTest != null">
+        POI_ITEM_TEST,
+      </if>
+      <if test="depthInfoLog != null">
+        DEPTH_INFO_LOG,
+      </if>
+      <if test="depthInfoTest != null">
+        DEPTH_INFO_TEST,
+      </if>
+      <if test="pointLog != null">
+        POINT_LOG,
+      </if>
+      <if test="pointTest != null">
+        POINT_TEST,
+      </if>
+      <if test="agencyLog != null">
+        AGENCY_LOG,
+      </if>
+      <if test="agencyTest != null">
+        AGENCY_TEST,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="attr1 != null">
+        ATTR1,
+      </if>
+      <if test="attr2 != null">
+        ATTR2,
+      </if>
+      <if test="attr3 != null">
+        ATTR3,
+      </if>
+      <if test="attr4 != null">
+        ATTR4,
+      </if>
+      <if test="attr5 != null">
+        ATTR5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="rMarkLog != null">
+        #{rMarkLog,jdbcType=VARCHAR},
+      </if>
+      <if test="rMarkTest != null">
+        #{rMarkTest,jdbcType=VARCHAR},
+      </if>
+      <if test="chPoiLog != null">
+        #{chPoiLog,jdbcType=VARCHAR},
+      </if>
+      <if test="chPoiTest != null">
+        #{chPoiTest,jdbcType=VARCHAR},
+      </if>
+      <if test="enPoiLog != null">
+        #{enPoiLog,jdbcType=VARCHAR},
+      </if>
+      <if test="enPoiTest != null">
+        #{enPoiTest,jdbcType=VARCHAR},
+      </if>
+      <if test="roadItemLog != null">
+        #{roadItemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="roadItemTest != null">
+        #{roadItemTest,jdbcType=VARCHAR},
+      </if>
+      <if test="poiItemLog != null">
+        #{poiItemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="poiItemTest != null">
+        #{poiItemTest,jdbcType=VARCHAR},
+      </if>
+      <if test="depthInfoLog != null">
+        #{depthInfoLog,jdbcType=VARCHAR},
+      </if>
+      <if test="depthInfoTest != null">
+        #{depthInfoTest,jdbcType=VARCHAR},
+      </if>
+      <if test="pointLog != null">
+        #{pointLog,jdbcType=VARCHAR},
+      </if>
+      <if test="pointTest != null">
+        #{pointTest,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyLog != null">
+        #{agencyLog,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyTest != null">
+        #{agencyTest,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="attr1 != null">
+        #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null">
+        #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null">
+        #{attr3,jdbcType=VARCHAR},
+      </if>
+      <if test="attr4 != null">
+        #{attr4,jdbcType=VARCHAR},
+      </if>
+      <if test="attr5 != null">
+        #{attr5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.ProAbilityExample" resultType="java.lang.Long">
+    select count(*) from IMS.PRO_ABILITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.PRO_ABILITY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null">
+        EMP_ID = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empName != null">
+        EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rMarkLog != null">
+        R_MARK_LOG = #{record.rMarkLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rMarkTest != null">
+        R_MARK_TEST = #{record.rMarkTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chPoiLog != null">
+        CH_POI_LOG = #{record.chPoiLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chPoiTest != null">
+        CH_POI_TEST = #{record.chPoiTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enPoiLog != null">
+        EN_POI_LOG = #{record.enPoiLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enPoiTest != null">
+        EN_POI_TEST = #{record.enPoiTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roadItemLog != null">
+        ROAD_ITEM_LOG = #{record.roadItemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roadItemTest != null">
+        ROAD_ITEM_TEST = #{record.roadItemTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poiItemLog != null">
+        POI_ITEM_LOG = #{record.poiItemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poiItemTest != null">
+        POI_ITEM_TEST = #{record.poiItemTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depthInfoLog != null">
+        DEPTH_INFO_LOG = #{record.depthInfoLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depthInfoTest != null">
+        DEPTH_INFO_TEST = #{record.depthInfoTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pointLog != null">
+        POINT_LOG = #{record.pointLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pointTest != null">
+        POINT_TEST = #{record.pointTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyLog != null">
+        AGENCY_LOG = #{record.agencyLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyTest != null">
+        AGENCY_TEST = #{record.agencyTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr1 != null">
+        ATTR1 = #{record.attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr2 != null">
+        ATTR2 = #{record.attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr3 != null">
+        ATTR3 = #{record.attr3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr4 != null">
+        ATTR4 = #{record.attr4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr5 != null">
+        ATTR5 = #{record.attr5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.PRO_ABILITY
+    set ID = #{record.id,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      EMP_ID = #{record.empId,jdbcType=VARCHAR},
+      EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      R_MARK_LOG = #{record.rMarkLog,jdbcType=VARCHAR},
+      R_MARK_TEST = #{record.rMarkTest,jdbcType=VARCHAR},
+      CH_POI_LOG = #{record.chPoiLog,jdbcType=VARCHAR},
+      CH_POI_TEST = #{record.chPoiTest,jdbcType=VARCHAR},
+      EN_POI_LOG = #{record.enPoiLog,jdbcType=VARCHAR},
+      EN_POI_TEST = #{record.enPoiTest,jdbcType=VARCHAR},
+      ROAD_ITEM_LOG = #{record.roadItemLog,jdbcType=VARCHAR},
+      ROAD_ITEM_TEST = #{record.roadItemTest,jdbcType=VARCHAR},
+      POI_ITEM_LOG = #{record.poiItemLog,jdbcType=VARCHAR},
+      POI_ITEM_TEST = #{record.poiItemTest,jdbcType=VARCHAR},
+      DEPTH_INFO_LOG = #{record.depthInfoLog,jdbcType=VARCHAR},
+      DEPTH_INFO_TEST = #{record.depthInfoTest,jdbcType=VARCHAR},
+      POINT_LOG = #{record.pointLog,jdbcType=VARCHAR},
+      POINT_TEST = #{record.pointTest,jdbcType=VARCHAR},
+      AGENCY_LOG = #{record.agencyLog,jdbcType=VARCHAR},
+      AGENCY_TEST = #{record.agencyTest,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      ATTR1 = #{record.attr1,jdbcType=VARCHAR},
+      ATTR2 = #{record.attr2,jdbcType=VARCHAR},
+      ATTR3 = #{record.attr3,jdbcType=VARCHAR},
+      ATTR4 = #{record.attr4,jdbcType=VARCHAR},
+      ATTR5 = #{record.attr5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.ProAbility">
+    update IMS.PRO_ABILITY
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        EMP_ID = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="rMarkLog != null">
+        R_MARK_LOG = #{rMarkLog,jdbcType=VARCHAR},
+      </if>
+      <if test="rMarkTest != null">
+        R_MARK_TEST = #{rMarkTest,jdbcType=VARCHAR},
+      </if>
+      <if test="chPoiLog != null">
+        CH_POI_LOG = #{chPoiLog,jdbcType=VARCHAR},
+      </if>
+      <if test="chPoiTest != null">
+        CH_POI_TEST = #{chPoiTest,jdbcType=VARCHAR},
+      </if>
+      <if test="enPoiLog != null">
+        EN_POI_LOG = #{enPoiLog,jdbcType=VARCHAR},
+      </if>
+      <if test="enPoiTest != null">
+        EN_POI_TEST = #{enPoiTest,jdbcType=VARCHAR},
+      </if>
+      <if test="roadItemLog != null">
+        ROAD_ITEM_LOG = #{roadItemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="roadItemTest != null">
+        ROAD_ITEM_TEST = #{roadItemTest,jdbcType=VARCHAR},
+      </if>
+      <if test="poiItemLog != null">
+        POI_ITEM_LOG = #{poiItemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="poiItemTest != null">
+        POI_ITEM_TEST = #{poiItemTest,jdbcType=VARCHAR},
+      </if>
+      <if test="depthInfoLog != null">
+        DEPTH_INFO_LOG = #{depthInfoLog,jdbcType=VARCHAR},
+      </if>
+      <if test="depthInfoTest != null">
+        DEPTH_INFO_TEST = #{depthInfoTest,jdbcType=VARCHAR},
+      </if>
+      <if test="pointLog != null">
+        POINT_LOG = #{pointLog,jdbcType=VARCHAR},
+      </if>
+      <if test="pointTest != null">
+        POINT_TEST = #{pointTest,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyLog != null">
+        AGENCY_LOG = #{agencyLog,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyTest != null">
+        AGENCY_TEST = #{agencyTest,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="attr1 != null">
+        ATTR1 = #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null">
+        ATTR2 = #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null">
+        ATTR3 = #{attr3,jdbcType=VARCHAR},
+      </if>
+      <if test="attr4 != null">
+        ATTR4 = #{attr4,jdbcType=VARCHAR},
+      </if>
+      <if test="attr5 != null">
+        ATTR5 = #{attr5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.ProAbility">
+    update IMS.PRO_ABILITY
+    set VERSION = #{version,jdbcType=VARCHAR},
+      EMP_ID = #{empId,jdbcType=VARCHAR},
+      EMP_NAME = #{empName,jdbcType=VARCHAR},
+      R_MARK_LOG = #{rMarkLog,jdbcType=VARCHAR},
+      R_MARK_TEST = #{rMarkTest,jdbcType=VARCHAR},
+      CH_POI_LOG = #{chPoiLog,jdbcType=VARCHAR},
+      CH_POI_TEST = #{chPoiTest,jdbcType=VARCHAR},
+      EN_POI_LOG = #{enPoiLog,jdbcType=VARCHAR},
+      EN_POI_TEST = #{enPoiTest,jdbcType=VARCHAR},
+      ROAD_ITEM_LOG = #{roadItemLog,jdbcType=VARCHAR},
+      ROAD_ITEM_TEST = #{roadItemTest,jdbcType=VARCHAR},
+      POI_ITEM_LOG = #{poiItemLog,jdbcType=VARCHAR},
+      POI_ITEM_TEST = #{poiItemTest,jdbcType=VARCHAR},
+      DEPTH_INFO_LOG = #{depthInfoLog,jdbcType=VARCHAR},
+      DEPTH_INFO_TEST = #{depthInfoTest,jdbcType=VARCHAR},
+      POINT_LOG = #{pointLog,jdbcType=VARCHAR},
+      POINT_TEST = #{pointTest,jdbcType=VARCHAR},
+      AGENCY_LOG = #{agencyLog,jdbcType=VARCHAR},
+      AGENCY_TEST = #{agencyTest,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ATTR1 = #{attr1,jdbcType=VARCHAR},
+      ATTR2 = #{attr2,jdbcType=VARCHAR},
+      ATTR3 = #{attr3,jdbcType=VARCHAR},
+      ATTR4 = #{attr4,jdbcType=VARCHAR},
+      ATTR5 = #{attr5,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

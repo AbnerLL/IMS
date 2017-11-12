@@ -1,0 +1,97 @@
+package com.navinfo.IMS.service.impl;
+
+import com.navinfo.IMS.dao.SysUserMapper;
+import com.navinfo.IMS.entity.SysUser;
+import com.navinfo.IMS.entity.SysUserExample;
+import com.navinfo.IMS.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+/**
+ * 用户的业务实现类
+ * Created by luozhihui on 2017/10/15.
+ */
+@Service("sysUserService")
+public class SysUserServiceImpl implements SysUserService{
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
+    /**
+     * 根据用户名获取用户
+     * @param username
+     * @return
+     */
+    public boolean getSysUser(String username,String password){
+        SysUserExample example=new SysUserExample();
+        example.or().andIdEqualTo(username).andPasswordEqualTo(password);
+        List<SysUser> users=sysUserMapper.selectByExample(example);
+        return users.size()!=0;
+    }
+
+    /**
+     * 查询所有数据
+     * @return
+     */
+    public List getAllUser(){
+        SysUserExample sysUserExample=new SysUserExample();
+        sysUserExample.setOrderByClause("create_time asc");
+        List list=sysUserMapper.selectByExample(sysUserExample);
+        return list;
+    }
+
+    /**
+     * 新增用户
+     * @param sysUser
+     */
+    public boolean insertUser(SysUser sysUser){
+        //设置创建时间
+        sysUser.setCreateTime(new Date());
+        int count=sysUserMapper.insertSelective(sysUser);
+        return count!=0;
+    }
+
+    /**
+     * 根据主键获取用户
+     * 可以根据分隔符来获取多位用户
+     * @return
+     */
+    public List<SysUser> getUserById(String userId){
+        List<SysUser> users=new ArrayList<SysUser>();
+        if (!userId.contains(",")){
+            users.add(this.sysUserMapper.selectByPrimaryKey(userId));
+        }else{
+            List ids=Arrays.asList(userId.split(","));
+            SysUserExample example=new SysUserExample();
+            example.or().andIdIn(ids);
+            this.sysUserMapper.selectByExample(example);
+        }
+
+        return users;
+    }
+
+    /**
+     * 根据ID动态更新用户数据
+     * @param user
+     * @return
+     */
+    public boolean updateUser(SysUser user){
+        int num=sysUserMapper.updateByPrimaryKeySelective(user);
+        return num==1;
+    }
+
+    /**
+     * 删除用户
+     * @param ids
+     * @return
+     */
+    public boolean deleteUser(String ids){
+        List list=Arrays.asList(ids.split(","));
+        SysUserExample example=new SysUserExample();
+        example.or().andIdIn(list);
+        int num=sysUserMapper.deleteByExample(example);
+        return num!=0;
+    }
+}

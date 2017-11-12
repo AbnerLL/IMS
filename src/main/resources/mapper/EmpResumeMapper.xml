@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.EmpResumeMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.EmpResume">
+    <id column="RESUME_ID" jdbcType="VARCHAR" property="resumeId" />
+    <result column="EMP_ID" jdbcType="VARCHAR" property="empId" />
+    <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
+    <result column="SPECIALITY" jdbcType="VARCHAR" property="speciality" />
+    <result column="CERTIFICATE" jdbcType="VARCHAR" property="certificate" />
+    <result column="AWARD" jdbcType="VARCHAR" property="award" />
+    <result column="TRAINING" jdbcType="VARCHAR" property="training" />
+    <result column="PROJECT" jdbcType="VARCHAR" property="project" />
+    <result column="WORK_RECORD" jdbcType="VARCHAR" property="workRecord" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    RESUME_ID, EMP_ID, EMP_NAME, SPECIALITY, CERTIFICATE, AWARD, TRAINING, PROJECT, WORK_RECORD, 
+    CREATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.EmpResumeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.EMP_RESUME
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.EMP_RESUME
+    where RESUME_ID = #{resumeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.EMP_RESUME
+    where RESUME_ID = #{resumeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.EmpResumeExample">
+    delete from IMS.EMP_RESUME
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.EmpResume">
+    insert into IMS.EMP_RESUME (RESUME_ID, EMP_ID, EMP_NAME, 
+      SPECIALITY, CERTIFICATE, AWARD, 
+      TRAINING, PROJECT, WORK_RECORD, 
+      CREATE_TIME)
+    values (#{resumeId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
+      #{speciality,jdbcType=VARCHAR}, #{certificate,jdbcType=VARCHAR}, #{award,jdbcType=VARCHAR}, 
+      #{training,jdbcType=VARCHAR}, #{project,jdbcType=VARCHAR}, #{workRecord,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.EmpResume">
+    insert into IMS.EMP_RESUME
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resumeId != null">
+        RESUME_ID,
+      </if>
+      <if test="empId != null">
+        EMP_ID,
+      </if>
+      <if test="empName != null">
+        EMP_NAME,
+      </if>
+      <if test="speciality != null">
+        SPECIALITY,
+      </if>
+      <if test="certificate != null">
+        CERTIFICATE,
+      </if>
+      <if test="award != null">
+        AWARD,
+      </if>
+      <if test="training != null">
+        TRAINING,
+      </if>
+      <if test="project != null">
+        PROJECT,
+      </if>
+      <if test="workRecord != null">
+        WORK_RECORD,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resumeId != null">
+        #{resumeId,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null">
+        #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null">
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="award != null">
+        #{award,jdbcType=VARCHAR},
+      </if>
+      <if test="training != null">
+        #{training,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null">
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="workRecord != null">
+        #{workRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.EmpResumeExample" resultType="java.lang.Long">
+    select count(*) from IMS.EMP_RESUME
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.EMP_RESUME
+    <set>
+      <if test="record.resumeId != null">
+        RESUME_ID = #{record.resumeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null">
+        EMP_ID = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empName != null">
+        EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speciality != null">
+        SPECIALITY = #{record.speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificate != null">
+        CERTIFICATE = #{record.certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.award != null">
+        AWARD = #{record.award,jdbcType=VARCHAR},
+      </if>
+      <if test="record.training != null">
+        TRAINING = #{record.training,jdbcType=VARCHAR},
+      </if>
+      <if test="record.project != null">
+        PROJECT = #{record.project,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workRecord != null">
+        WORK_RECORD = #{record.workRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.EMP_RESUME
+    set RESUME_ID = #{record.resumeId,jdbcType=VARCHAR},
+      EMP_ID = #{record.empId,jdbcType=VARCHAR},
+      EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      SPECIALITY = #{record.speciality,jdbcType=VARCHAR},
+      CERTIFICATE = #{record.certificate,jdbcType=VARCHAR},
+      AWARD = #{record.award,jdbcType=VARCHAR},
+      TRAINING = #{record.training,jdbcType=VARCHAR},
+      PROJECT = #{record.project,jdbcType=VARCHAR},
+      WORK_RECORD = #{record.workRecord,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.EmpResume">
+    update IMS.EMP_RESUME
+    <set>
+      <if test="empId != null">
+        EMP_ID = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null">
+        SPECIALITY = #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null">
+        CERTIFICATE = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="award != null">
+        AWARD = #{award,jdbcType=VARCHAR},
+      </if>
+      <if test="training != null">
+        TRAINING = #{training,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null">
+        PROJECT = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="workRecord != null">
+        WORK_RECORD = #{workRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RESUME_ID = #{resumeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.EmpResume">
+    update IMS.EMP_RESUME
+    set EMP_ID = #{empId,jdbcType=VARCHAR},
+      EMP_NAME = #{empName,jdbcType=VARCHAR},
+      SPECIALITY = #{speciality,jdbcType=VARCHAR},
+      CERTIFICATE = #{certificate,jdbcType=VARCHAR},
+      AWARD = #{award,jdbcType=VARCHAR},
+      TRAINING = #{training,jdbcType=VARCHAR},
+      PROJECT = #{project,jdbcType=VARCHAR},
+      WORK_RECORD = #{workRecord,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where RESUME_ID = #{resumeId,jdbcType=VARCHAR}
+  </update>
+</mapper>
