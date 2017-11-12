@@ -12,17 +12,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 员工的业务层实现类
  * Created by luozhihui on 2017/9/21.
  */
 @Service("empService")
 public class EmpServiceImpl implements EmpService{
 
     @Autowired
-    EmpMapper empMapper;
+    private EmpMapper empMapper;
 
     public List findAllEmp() {
-       List emps= empMapper.selectByExample(null);
-        return emps;
+        return empMapper.selectByExample(null);
     }
 
     /**
@@ -35,7 +35,7 @@ public class EmpServiceImpl implements EmpService{
         if (!empId.contains(",")){
             emps.add(this.empMapper.selectByPrimaryKey(empId));
         }else{
-            List ids= Arrays.asList(empId.split(","));
+            List<String> ids= Arrays.asList(empId.split(","));
             EmpExample example=new EmpExample();
             example.or().andEmpIdIn(ids);
             this.empMapper.selectByExample(example);
@@ -69,7 +69,7 @@ public class EmpServiceImpl implements EmpService{
      * @return
      */
     public boolean deleteEmp(String empId){
-        List ids= Arrays.asList(empId.split(","));
+        List<String> ids= Arrays.asList(empId.split(","));
         EmpExample empExample=new EmpExample();
         empExample.or().andEmpIdIn(ids);
         int num=empMapper.deleteByExample(empExample);
