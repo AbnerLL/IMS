@@ -4,13 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
 import com.navinfo.IMS.entity.Emp;
-import com.navinfo.IMS.entity.EmpExample;
 import com.navinfo.IMS.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 import java.util.List;
 
 /**
