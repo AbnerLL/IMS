@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <description>此文件用于配置shiro</description>
+    <!--自定义realm-->
+    <bean id="myRealm" class="com.navinfo.IMS.base.shiro.MyRealm"/>
+
+    <!--配置SecurityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--可以配置多个realm-->
+        <property name="realm" ref="myRealm"/>
+    </bean>
+    <!--配置shrio的过滤器  核心-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--shiro核心安全接口 必要属性-->
+        <property name="securityManager" ref="securityManager"/>
+        <!--登录跳转的url-->
+        <property name="loginUrl" value="/login"/>
+        <!--登录成功跳转的url-->
+        <property name="successUrl" value="/index2"/>
+        <!--未授权跳转的url-->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <!--配置过滤链-->
+        <property name="filterChainDefinitions">
+            <value>
+                /login=anon
+                /toLogin=anon
+                /logout=logout
+                /css/**=anon
+                /images/**=anon
+                /**=authc
+            </value>
+        </property>
+    </bean>
+</beans>
