@@ -52,7 +52,7 @@
 
     <!--配置事务的控制-->
     <aop:config>
-        <!--切入点，只是事务作用到哪个对象上去-->
+        <!--切入点，指示事务作用到哪个对象上去-->
         <aop:pointcut id="txPoint" expression="execution(* com.navinfo.IMS.service..*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
     </aop:config>
