@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.DepInfoReportMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.DepInfoReport">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
+    <result column="WORKER_ID" jdbcType="VARCHAR" property="workerId" />
+    <result column="WORKER" jdbcType="VARCHAR" property="worker" />
+    <result column="WORK_DATE" jdbcType="TIMESTAMP" property="workDate" />
+    <result column="DEP_INFO" jdbcType="VARCHAR" property="depInfo" />
+    <result column="DCOM_AUDIT_NUM" jdbcType="DECIMAL" property="dcomAuditNum" />
+    <result column="DCOM_ERROR_NUM" jdbcType="DECIMAL" property="dcomErrorNum" />
+    <result column="DCOM_PASS_RATE" jdbcType="DECIMAL" property="dcomPassRate" />
+    <result column="DP_AUDIT_NUM" jdbcType="DECIMAL" property="dpAuditNum" />
+    <result column="DP_ERROR_NUM" jdbcType="DECIMAL" property="dpErrorNum" />
+    <result column="DP_PASS_RATE" jdbcType="DECIMAL" property="dpPassRate" />
+    <result column="DCAR_AUDIT_NUM" jdbcType="DECIMAL" property="dcarAuditNum" />
+    <result column="DCAR_ERROR_NUM" jdbcType="DECIMAL" property="dcarErrorNum" />
+    <result column="DCAR_PASS_NUM" jdbcType="DECIMAL" property="dcarPassNum" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, VERSION, SECTION, WORKER_ID, WORKER, WORK_DATE, DEP_INFO, DCOM_AUDIT_NUM, DCOM_ERROR_NUM, 
+    DCOM_PASS_RATE, DP_AUDIT_NUM, DP_ERROR_NUM, DP_PASS_RATE, DCAR_AUDIT_NUM, DCAR_ERROR_NUM, 
+    DCAR_PASS_NUM, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, 
+    UPDATER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.DepInfoReportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.DEPINFO_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.DEPINFO_REPORT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.DEPINFO_REPORT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.DepInfoReportExample">
+    delete from IMS.DEPINFO_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.DepInfoReport">
+    insert into IMS.DEPINFO_REPORT (ID, VERSION, SECTION, 
+      WORKER_ID, WORKER, WORK_DATE, 
+      DEP_INFO, DCOM_AUDIT_NUM, DCOM_ERROR_NUM, 
+      DCOM_PASS_RATE, DP_AUDIT_NUM, DP_ERROR_NUM, 
+      DP_PASS_RATE, DCAR_AUDIT_NUM, DCAR_ERROR_NUM, 
+      DCAR_PASS_NUM, REMARK, STATUS, 
+      DEL_FLAG, CREATOR_ID, CREATOR, 
+      CREATE_TIME, UPDATER_ID, UPDATER, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, 
+      #{workerId,jdbcType=VARCHAR}, #{worker,jdbcType=VARCHAR}, #{workDate,jdbcType=TIMESTAMP}, 
+      #{depInfo,jdbcType=VARCHAR}, #{dcomAuditNum,jdbcType=DECIMAL}, #{dcomErrorNum,jdbcType=DECIMAL}, 
+      #{dcomPassRate,jdbcType=DECIMAL}, #{dpAuditNum,jdbcType=DECIMAL}, #{dpErrorNum,jdbcType=DECIMAL}, 
+      #{dpPassRate,jdbcType=DECIMAL}, #{dcarAuditNum,jdbcType=DECIMAL}, #{dcarErrorNum,jdbcType=DECIMAL}, 
+      #{dcarPassNum,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.DepInfoReport">
+    insert into IMS.DEPINFO_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="section != null">
+        SECTION,
+      </if>
+      <if test="workerId != null">
+        WORKER_ID,
+      </if>
+      <if test="worker != null">
+        WORKER,
+      </if>
+      <if test="workDate != null">
+        WORK_DATE,
+      </if>
+      <if test="depInfo != null">
+        DEP_INFO,
+      </if>
+      <if test="dcomAuditNum != null">
+        DCOM_AUDIT_NUM,
+      </if>
+      <if test="dcomErrorNum != null">
+        DCOM_ERROR_NUM,
+      </if>
+      <if test="dcomPassRate != null">
+        DCOM_PASS_RATE,
+      </if>
+      <if test="dpAuditNum != null">
+        DP_AUDIT_NUM,
+      </if>
+      <if test="dpErrorNum != null">
+        DP_ERROR_NUM,
+      </if>
+      <if test="dpPassRate != null">
+        DP_PASS_RATE,
+      </if>
+      <if test="dcarAuditNum != null">
+        DCAR_AUDIT_NUM,
+      </if>
+      <if test="dcarErrorNum != null">
+        DCAR_ERROR_NUM,
+      </if>
+      <if test="dcarPassNum != null">
+        DCAR_PASS_NUM,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depInfo != null">
+        #{depInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="dcomAuditNum != null">
+        #{dcomAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcomErrorNum != null">
+        #{dcomErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcomPassRate != null">
+        #{dcomPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="dpAuditNum != null">
+        #{dpAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dpErrorNum != null">
+        #{dpErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dpPassRate != null">
+        #{dpPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="dcarAuditNum != null">
+        #{dcarAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcarErrorNum != null">
+        #{dcarErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcarPassNum != null">
+        #{dcarPassNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.DepInfoReportExample" resultType="java.lang.Long">
+    select count(*) from IMS.DEPINFO_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.DEPINFO_REPORT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workerId != null">
+        WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.worker != null">
+        WORKER = #{record.worker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workDate != null">
+        WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.depInfo != null">
+        DEP_INFO = #{record.depInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dcomAuditNum != null">
+        DCOM_AUDIT_NUM = #{record.dcomAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dcomErrorNum != null">
+        DCOM_ERROR_NUM = #{record.dcomErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dcomPassRate != null">
+        DCOM_PASS_RATE = #{record.dcomPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dpAuditNum != null">
+        DP_AUDIT_NUM = #{record.dpAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dpErrorNum != null">
+        DP_ERROR_NUM = #{record.dpErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dpPassRate != null">
+        DP_PASS_RATE = #{record.dpPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dcarAuditNum != null">
+        DCAR_AUDIT_NUM = #{record.dcarAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dcarErrorNum != null">
+        DCAR_ERROR_NUM = #{record.dcarErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dcarPassNum != null">
+        DCAR_PASS_NUM = #{record.dcarPassNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.DEPINFO_REPORT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
+      WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      WORKER = #{record.worker,jdbcType=VARCHAR},
+      WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
+      DEP_INFO = #{record.depInfo,jdbcType=VARCHAR},
+      DCOM_AUDIT_NUM = #{record.dcomAuditNum,jdbcType=DECIMAL},
+      DCOM_ERROR_NUM = #{record.dcomErrorNum,jdbcType=DECIMAL},
+      DCOM_PASS_RATE = #{record.dcomPassRate,jdbcType=DECIMAL},
+      DP_AUDIT_NUM = #{record.dpAuditNum,jdbcType=DECIMAL},
+      DP_ERROR_NUM = #{record.dpErrorNum,jdbcType=DECIMAL},
+      DP_PASS_RATE = #{record.dpPassRate,jdbcType=DECIMAL},
+      DCAR_AUDIT_NUM = #{record.dcarAuditNum,jdbcType=DECIMAL},
+      DCAR_ERROR_NUM = #{record.dcarErrorNum,jdbcType=DECIMAL},
+      DCAR_PASS_NUM = #{record.dcarPassNum,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.DepInfoReport">
+    update IMS.DEPINFO_REPORT
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        WORKER = #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depInfo != null">
+        DEP_INFO = #{depInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="dcomAuditNum != null">
+        DCOM_AUDIT_NUM = #{dcomAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcomErrorNum != null">
+        DCOM_ERROR_NUM = #{dcomErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcomPassRate != null">
+        DCOM_PASS_RATE = #{dcomPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="dpAuditNum != null">
+        DP_AUDIT_NUM = #{dpAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dpErrorNum != null">
+        DP_ERROR_NUM = #{dpErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dpPassRate != null">
+        DP_PASS_RATE = #{dpPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="dcarAuditNum != null">
+        DCAR_AUDIT_NUM = #{dcarAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcarErrorNum != null">
+        DCAR_ERROR_NUM = #{dcarErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="dcarPassNum != null">
+        DCAR_PASS_NUM = #{dcarPassNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.DepInfoReport">
+    update IMS.DEPINFO_REPORT
+    set VERSION = #{version,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
+      WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      WORKER = #{worker,jdbcType=VARCHAR},
+      WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
+      DEP_INFO = #{depInfo,jdbcType=VARCHAR},
+      DCOM_AUDIT_NUM = #{dcomAuditNum,jdbcType=DECIMAL},
+      DCOM_ERROR_NUM = #{dcomErrorNum,jdbcType=DECIMAL},
+      DCOM_PASS_RATE = #{dcomPassRate,jdbcType=DECIMAL},
+      DP_AUDIT_NUM = #{dpAuditNum,jdbcType=DECIMAL},
+      DP_ERROR_NUM = #{dpErrorNum,jdbcType=DECIMAL},
+      DP_PASS_RATE = #{dpPassRate,jdbcType=DECIMAL},
+      DCAR_AUDIT_NUM = #{dcarAuditNum,jdbcType=DECIMAL},
+      DCAR_ERROR_NUM = #{dcarErrorNum,jdbcType=DECIMAL},
+      DCAR_PASS_NUM = #{dcarPassNum,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

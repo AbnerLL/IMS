@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.PoiQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.PoiQuestion">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="TASK_CODE" jdbcType="VARCHAR" property="taskCode" />
+    <result column="TASK_NAME" jdbcType="VARCHAR" property="taskName" />
+    <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType" />
+    <result column="FID" jdbcType="VARCHAR" property="fid" />
+    <result column="ITEM" jdbcType="VARCHAR" property="item" />
+    <result column="ITEM_TYPE" jdbcType="VARCHAR" property="itemType" />
+    <result column="FINE_TYPE" jdbcType="VARCHAR" property="fineType" />
+    <result column="ERROR_CONTENT" jdbcType="VARCHAR" property="errorContent" />
+    <result column="ERROR_TYPE" jdbcType="VARCHAR" property="errorType" />
+    <result column="ERROR_LEVEL" jdbcType="VARCHAR" property="errorLevel" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="RIGHT_CONTENT" jdbcType="VARCHAR" property="rightContent" />
+    <result column="ORIGINAL_CONTENT" jdbcType="VARCHAR" property="originalContent" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
+    <result column="WORKER_ID" jdbcType="VARCHAR" property="workerId" />
+    <result column="WORKER" jdbcType="VARCHAR" property="worker" />
+    <result column="WORK_TIME" jdbcType="TIMESTAMP" property="workTime" />
+    <result column="AUDITOR_ID" jdbcType="VARCHAR" property="auditorId" />
+    <result column="AUDITOR" jdbcType="VARCHAR" property="auditor" />
+    <result column="AUDIT_TIME" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, VERSION, TASK_CODE, TASK_NAME, WORK_TYPE, FID, ITEM, ITEM_TYPE, FINE_TYPE, ERROR_CONTENT, 
+    ERROR_TYPE, ERROR_LEVEL, DESCRIPTION, RIGHT_CONTENT, ORIGINAL_CONTENT, SECTION, WORKER_ID, 
+    WORKER, WORK_TIME, AUDITOR_ID, AUDITOR, AUDIT_TIME, REMARK, STATUS, DEL_FLAG, CREATOR_ID, 
+    CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.PoiQuestionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.POI_QUESTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.POI_QUESTION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.POI_QUESTION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.PoiQuestionExample">
+    delete from IMS.POI_QUESTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.PoiQuestion">
+    insert into IMS.POI_QUESTION (ID, VERSION, TASK_CODE, 
+      TASK_NAME, WORK_TYPE, FID, 
+      ITEM, ITEM_TYPE, FINE_TYPE, 
+      ERROR_CONTENT, ERROR_TYPE, ERROR_LEVEL, 
+      DESCRIPTION, RIGHT_CONTENT, ORIGINAL_CONTENT, 
+      SECTION, WORKER_ID, WORKER, 
+      WORK_TIME, AUDITOR_ID, AUDITOR, 
+      AUDIT_TIME, REMARK, STATUS, 
+      DEL_FLAG, CREATOR_ID, CREATOR, 
+      CREATE_TIME, UPDATER_ID, UPDATER, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{taskCode,jdbcType=VARCHAR}, 
+      #{taskName,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, #{fid,jdbcType=VARCHAR}, 
+      #{item,jdbcType=VARCHAR}, #{itemType,jdbcType=VARCHAR}, #{fineType,jdbcType=VARCHAR}, 
+      #{errorContent,jdbcType=VARCHAR}, #{errorType,jdbcType=VARCHAR}, #{errorLevel,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{rightContent,jdbcType=VARCHAR}, #{originalContent,jdbcType=VARCHAR}, 
+      #{section,jdbcType=VARCHAR}, #{workerId,jdbcType=VARCHAR}, #{worker,jdbcType=VARCHAR}, 
+      #{workTime,jdbcType=TIMESTAMP}, #{auditorId,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.PoiQuestion">
+    insert into IMS.POI_QUESTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="taskCode != null">
+        TASK_CODE,
+      </if>
+      <if test="taskName != null">
+        TASK_NAME,
+      </if>
+      <if test="workType != null">
+        WORK_TYPE,
+      </if>
+      <if test="fid != null">
+        FID,
+      </if>
+      <if test="item != null">
+        ITEM,
+      </if>
+      <if test="itemType != null">
+        ITEM_TYPE,
+      </if>
+      <if test="fineType != null">
+        FINE_TYPE,
+      </if>
+      <if test="errorContent != null">
+        ERROR_CONTENT,
+      </if>
+      <if test="errorType != null">
+        ERROR_TYPE,
+      </if>
+      <if test="errorLevel != null">
+        ERROR_LEVEL,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="rightContent != null">
+        RIGHT_CONTENT,
+      </if>
+      <if test="originalContent != null">
+        ORIGINAL_CONTENT,
+      </if>
+      <if test="section != null">
+        SECTION,
+      </if>
+      <if test="workerId != null">
+        WORKER_ID,
+      </if>
+      <if test="worker != null">
+        WORKER,
+      </if>
+      <if test="workTime != null">
+        WORK_TIME,
+      </if>
+      <if test="auditorId != null">
+        AUDITOR_ID,
+      </if>
+      <if test="auditor != null">
+        AUDITOR,
+      </if>
+      <if test="auditTime != null">
+        AUDIT_TIME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null">
+        #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=VARCHAR},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null">
+        #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="fineType != null">
+        #{fineType,jdbcType=VARCHAR},
+      </if>
+      <if test="errorContent != null">
+        #{errorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="errorType != null">
+        #{errorType,jdbcType=VARCHAR},
+      </if>
+      <if test="errorLevel != null">
+        #{errorLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="rightContent != null">
+        #{rightContent,jdbcType=VARCHAR},
+      </if>
+      <if test="originalContent != null">
+        #{originalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null">
+        #{workTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.PoiQuestionExample" resultType="java.lang.Long">
+    select count(*) from IMS.POI_QUESTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.POI_QUESTION
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskCode != null">
+        TASK_CODE = #{record.taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskName != null">
+        TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workType != null">
+        WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fid != null">
+        FID = #{record.fid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item != null">
+        ITEM = #{record.item,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemType != null">
+        ITEM_TYPE = #{record.itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fineType != null">
+        FINE_TYPE = #{record.fineType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorContent != null">
+        ERROR_CONTENT = #{record.errorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorType != null">
+        ERROR_TYPE = #{record.errorType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorLevel != null">
+        ERROR_LEVEL = #{record.errorLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightContent != null">
+        RIGHT_CONTENT = #{record.rightContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalContent != null">
+        ORIGINAL_CONTENT = #{record.originalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workerId != null">
+        WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.worker != null">
+        WORKER = #{record.worker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTime != null">
+        WORK_TIME = #{record.workTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditorId != null">
+        AUDITOR_ID = #{record.auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null">
+        AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null">
+        AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.POI_QUESTION
+    set ID = #{record.id,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      TASK_CODE = #{record.taskCode,jdbcType=VARCHAR},
+      TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
+      FID = #{record.fid,jdbcType=VARCHAR},
+      ITEM = #{record.item,jdbcType=VARCHAR},
+      ITEM_TYPE = #{record.itemType,jdbcType=VARCHAR},
+      FINE_TYPE = #{record.fineType,jdbcType=VARCHAR},
+      ERROR_CONTENT = #{record.errorContent,jdbcType=VARCHAR},
+      ERROR_TYPE = #{record.errorType,jdbcType=VARCHAR},
+      ERROR_LEVEL = #{record.errorLevel,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      RIGHT_CONTENT = #{record.rightContent,jdbcType=VARCHAR},
+      ORIGINAL_CONTENT = #{record.originalContent,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
+      WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      WORKER = #{record.worker,jdbcType=VARCHAR},
+      WORK_TIME = #{record.workTime,jdbcType=TIMESTAMP},
+      AUDITOR_ID = #{record.auditorId,jdbcType=VARCHAR},
+      AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.PoiQuestion">
+    update IMS.POI_QUESTION
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null">
+        TASK_CODE = #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null">
+        TASK_NAME = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        WORK_TYPE = #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        FID = #{fid,jdbcType=VARCHAR},
+      </if>
+      <if test="item != null">
+        ITEM = #{item,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null">
+        ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="fineType != null">
+        FINE_TYPE = #{fineType,jdbcType=VARCHAR},
+      </if>
+      <if test="errorContent != null">
+        ERROR_CONTENT = #{errorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="errorType != null">
+        ERROR_TYPE = #{errorType,jdbcType=VARCHAR},
+      </if>
+      <if test="errorLevel != null">
+        ERROR_LEVEL = #{errorLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="rightContent != null">
+        RIGHT_CONTENT = #{rightContent,jdbcType=VARCHAR},
+      </if>
+      <if test="originalContent != null">
+        ORIGINAL_CONTENT = #{originalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        WORKER = #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null">
+        WORK_TIME = #{workTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null">
+        AUDITOR_ID = #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.PoiQuestion">
+    update IMS.POI_QUESTION
+    set VERSION = #{version,jdbcType=VARCHAR},
+      TASK_CODE = #{taskCode,jdbcType=VARCHAR},
+      TASK_NAME = #{taskName,jdbcType=VARCHAR},
+      WORK_TYPE = #{workType,jdbcType=VARCHAR},
+      FID = #{fid,jdbcType=VARCHAR},
+      ITEM = #{item,jdbcType=VARCHAR},
+      ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
+      FINE_TYPE = #{fineType,jdbcType=VARCHAR},
+      ERROR_CONTENT = #{errorContent,jdbcType=VARCHAR},
+      ERROR_TYPE = #{errorType,jdbcType=VARCHAR},
+      ERROR_LEVEL = #{errorLevel,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      RIGHT_CONTENT = #{rightContent,jdbcType=VARCHAR},
+      ORIGINAL_CONTENT = #{originalContent,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
+      WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      WORKER = #{worker,jdbcType=VARCHAR},
+      WORK_TIME = #{workTime,jdbcType=TIMESTAMP},
+      AUDITOR_ID = #{auditorId,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

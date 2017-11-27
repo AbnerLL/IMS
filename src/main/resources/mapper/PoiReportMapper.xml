@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.PoiReportMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.PoiReport">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="WORKER_ID" jdbcType="VARCHAR" property="workerId" />
+    <result column="WORKER" jdbcType="VARCHAR" property="worker" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
+    <result column="WORK_DATE" jdbcType="TIMESTAMP" property="workDate" />
+    <result column="CP_AUDIT_NUM" jdbcType="DECIMAL" property="cpAuditNum" />
+    <result column="CP_ERROR_NUM" jdbcType="DECIMAL" property="cpErrorNum" />
+    <result column="CP_PASS_RATE" jdbcType="DECIMAL" property="cpPassRate" />
+    <result column="CA_AUDIT_NUM" jdbcType="DECIMAL" property="caAuditNum" />
+    <result column="CA_ERROR_NUM" jdbcType="DECIMAL" property="caErrorNum" />
+    <result column="CA_PASS_RATE" jdbcType="DECIMAL" property="caPassRate" />
+    <result column="EP_AUDIT_NUM" jdbcType="DECIMAL" property="epAuditNum" />
+    <result column="EP_ERROR_NUM" jdbcType="DECIMAL" property="epErrorNum" />
+    <result column="EP_PASS_RATE" jdbcType="DECIMAL" property="epPassRate" />
+    <result column="EA_AUDIT_NUM" jdbcType="DECIMAL" property="eaAuditNum" />
+    <result column="EA_ERROR_NUM" jdbcType="DECIMAL" property="eaErrorNum" />
+    <result column="EA_PASS_NUM" jdbcType="DECIMAL" property="eaPassNum" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, VERSION, WORKER_ID, WORKER, SECTION, WORK_DATE, CP_AUDIT_NUM, CP_ERROR_NUM, CP_PASS_RATE, 
+    CA_AUDIT_NUM, CA_ERROR_NUM, CA_PASS_RATE, EP_AUDIT_NUM, EP_ERROR_NUM, EP_PASS_RATE, 
+    EA_AUDIT_NUM, EA_ERROR_NUM, EA_PASS_NUM, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, 
+    CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.PoiReportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.POI_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.POI_REPORT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.POI_REPORT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.PoiReportExample">
+    delete from IMS.POI_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.PoiReport">
+    insert into IMS.POI_REPORT (ID, VERSION, WORKER_ID, 
+      WORKER, SECTION, WORK_DATE, 
+      CP_AUDIT_NUM, CP_ERROR_NUM, CP_PASS_RATE, 
+      CA_AUDIT_NUM, CA_ERROR_NUM, CA_PASS_RATE, 
+      EP_AUDIT_NUM, EP_ERROR_NUM, EP_PASS_RATE, 
+      EA_AUDIT_NUM, EA_ERROR_NUM, EA_PASS_NUM, 
+      REMARK, STATUS, DEL_FLAG, 
+      CREATOR_ID, CREATOR, CREATE_TIME, 
+      UPDATER_ID, UPDATER, UPDATE_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{workerId,jdbcType=VARCHAR}, 
+      #{worker,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{workDate,jdbcType=TIMESTAMP}, 
+      #{cpAuditNum,jdbcType=DECIMAL}, #{cpErrorNum,jdbcType=DECIMAL}, #{cpPassRate,jdbcType=DECIMAL}, 
+      #{caAuditNum,jdbcType=DECIMAL}, #{caErrorNum,jdbcType=DECIMAL}, #{caPassRate,jdbcType=DECIMAL}, 
+      #{epAuditNum,jdbcType=DECIMAL}, #{epErrorNum,jdbcType=DECIMAL}, #{epPassRate,jdbcType=DECIMAL}, 
+      #{eaAuditNum,jdbcType=DECIMAL}, #{eaErrorNum,jdbcType=DECIMAL}, #{eaPassNum,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.PoiReport">
+    insert into IMS.POI_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="workerId != null">
+        WORKER_ID,
+      </if>
+      <if test="worker != null">
+        WORKER,
+      </if>
+      <if test="section != null">
+        SECTION,
+      </if>
+      <if test="workDate != null">
+        WORK_DATE,
+      </if>
+      <if test="cpAuditNum != null">
+        CP_AUDIT_NUM,
+      </if>
+      <if test="cpErrorNum != null">
+        CP_ERROR_NUM,
+      </if>
+      <if test="cpPassRate != null">
+        CP_PASS_RATE,
+      </if>
+      <if test="caAuditNum != null">
+        CA_AUDIT_NUM,
+      </if>
+      <if test="caErrorNum != null">
+        CA_ERROR_NUM,
+      </if>
+      <if test="caPassRate != null">
+        CA_PASS_RATE,
+      </if>
+      <if test="epAuditNum != null">
+        EP_AUDIT_NUM,
+      </if>
+      <if test="epErrorNum != null">
+        EP_ERROR_NUM,
+      </if>
+      <if test="epPassRate != null">
+        EP_PASS_RATE,
+      </if>
+      <if test="eaAuditNum != null">
+        EA_AUDIT_NUM,
+      </if>
+      <if test="eaErrorNum != null">
+        EA_ERROR_NUM,
+      </if>
+      <if test="eaPassNum != null">
+        EA_PASS_NUM,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpAuditNum != null">
+        #{cpAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="cpErrorNum != null">
+        #{cpErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="cpPassRate != null">
+        #{cpPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="caAuditNum != null">
+        #{caAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="caErrorNum != null">
+        #{caErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="caPassRate != null">
+        #{caPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="epAuditNum != null">
+        #{epAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="epErrorNum != null">
+        #{epErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="epPassRate != null">
+        #{epPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="eaAuditNum != null">
+        #{eaAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="eaErrorNum != null">
+        #{eaErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="eaPassNum != null">
+        #{eaPassNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.PoiReportExample" resultType="java.lang.Long">
+    select count(*) from IMS.POI_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.POI_REPORT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workerId != null">
+        WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.worker != null">
+        WORKER = #{record.worker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workDate != null">
+        WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cpAuditNum != null">
+        CP_AUDIT_NUM = #{record.cpAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cpErrorNum != null">
+        CP_ERROR_NUM = #{record.cpErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cpPassRate != null">
+        CP_PASS_RATE = #{record.cpPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.caAuditNum != null">
+        CA_AUDIT_NUM = #{record.caAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.caErrorNum != null">
+        CA_ERROR_NUM = #{record.caErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.caPassRate != null">
+        CA_PASS_RATE = #{record.caPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.epAuditNum != null">
+        EP_AUDIT_NUM = #{record.epAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.epErrorNum != null">
+        EP_ERROR_NUM = #{record.epErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.epPassRate != null">
+        EP_PASS_RATE = #{record.epPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eaAuditNum != null">
+        EA_AUDIT_NUM = #{record.eaAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eaErrorNum != null">
+        EA_ERROR_NUM = #{record.eaErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eaPassNum != null">
+        EA_PASS_NUM = #{record.eaPassNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.POI_REPORT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      WORKER = #{record.worker,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
+      WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
+      CP_AUDIT_NUM = #{record.cpAuditNum,jdbcType=DECIMAL},
+      CP_ERROR_NUM = #{record.cpErrorNum,jdbcType=DECIMAL},
+      CP_PASS_RATE = #{record.cpPassRate,jdbcType=DECIMAL},
+      CA_AUDIT_NUM = #{record.caAuditNum,jdbcType=DECIMAL},
+      CA_ERROR_NUM = #{record.caErrorNum,jdbcType=DECIMAL},
+      CA_PASS_RATE = #{record.caPassRate,jdbcType=DECIMAL},
+      EP_AUDIT_NUM = #{record.epAuditNum,jdbcType=DECIMAL},
+      EP_ERROR_NUM = #{record.epErrorNum,jdbcType=DECIMAL},
+      EP_PASS_RATE = #{record.epPassRate,jdbcType=DECIMAL},
+      EA_AUDIT_NUM = #{record.eaAuditNum,jdbcType=DECIMAL},
+      EA_ERROR_NUM = #{record.eaErrorNum,jdbcType=DECIMAL},
+      EA_PASS_NUM = #{record.eaPassNum,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.PoiReport">
+    update IMS.POI_REPORT
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        WORKER = #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpAuditNum != null">
+        CP_AUDIT_NUM = #{cpAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="cpErrorNum != null">
+        CP_ERROR_NUM = #{cpErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="cpPassRate != null">
+        CP_PASS_RATE = #{cpPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="caAuditNum != null">
+        CA_AUDIT_NUM = #{caAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="caErrorNum != null">
+        CA_ERROR_NUM = #{caErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="caPassRate != null">
+        CA_PASS_RATE = #{caPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="epAuditNum != null">
+        EP_AUDIT_NUM = #{epAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="epErrorNum != null">
+        EP_ERROR_NUM = #{epErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="epPassRate != null">
+        EP_PASS_RATE = #{epPassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="eaAuditNum != null">
+        EA_AUDIT_NUM = #{eaAuditNum,jdbcType=DECIMAL},
+      </if>
+      <if test="eaErrorNum != null">
+        EA_ERROR_NUM = #{eaErrorNum,jdbcType=DECIMAL},
+      </if>
+      <if test="eaPassNum != null">
+        EA_PASS_NUM = #{eaPassNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.PoiReport">
+    update IMS.POI_REPORT
+    set VERSION = #{version,jdbcType=VARCHAR},
+      WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      WORKER = #{worker,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
+      WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
+      CP_AUDIT_NUM = #{cpAuditNum,jdbcType=DECIMAL},
+      CP_ERROR_NUM = #{cpErrorNum,jdbcType=DECIMAL},
+      CP_PASS_RATE = #{cpPassRate,jdbcType=DECIMAL},
+      CA_AUDIT_NUM = #{caAuditNum,jdbcType=DECIMAL},
+      CA_ERROR_NUM = #{caErrorNum,jdbcType=DECIMAL},
+      CA_PASS_RATE = #{caPassRate,jdbcType=DECIMAL},
+      EP_AUDIT_NUM = #{epAuditNum,jdbcType=DECIMAL},
+      EP_ERROR_NUM = #{epErrorNum,jdbcType=DECIMAL},
+      EP_PASS_RATE = #{epPassRate,jdbcType=DECIMAL},
+      EA_AUDIT_NUM = #{eaAuditNum,jdbcType=DECIMAL},
+      EA_ERROR_NUM = #{eaErrorNum,jdbcType=DECIMAL},
+      EA_PASS_NUM = #{eaPassNum,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.RoadQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.RoadQuestion">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="PARENT_TASK_CODE" jdbcType="VARCHAR" property="parentTaskCode" />
+    <result column="PARENT_TASK_NAME" jdbcType="VARCHAR" property="parentTaskName" />
+    <result column="TASK_CODE" jdbcType="VARCHAR" property="taskCode" />
+    <result column="TASK_NAME" jdbcType="VARCHAR" property="taskName" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
+    <result column="WORKER_ID" jdbcType="VARCHAR" property="workerId" />
+    <result column="WORKER" jdbcType="VARCHAR" property="worker" />
+    <result column="WORK_DATE" jdbcType="TIMESTAMP" property="workDate" />
+    <result column="AUDITOR_ID" jdbcType="VARCHAR" property="auditorId" />
+    <result column="AUDITOR" jdbcType="VARCHAR" property="auditor" />
+    <result column="AUDIT_DATE" jdbcType="TIMESTAMP" property="auditDate" />
+    <result column="MAP_CODE" jdbcType="VARCHAR" property="mapCode" />
+    <result column="FEATURE" jdbcType="VARCHAR" property="feature" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="ERROR_REASON" jdbcType="VARCHAR" property="errorReason" />
+    <result column="ERROR_CONTENT" jdbcType="VARCHAR" property="errorContent" />
+    <result column="ERROR_LEVEL" jdbcType="VARCHAR" property="errorLevel" />
+    <result column="BIG_ERROR_FLAG" jdbcType="VARCHAR" property="bigErrorFlag" />
+    <result column="ALTER_FLAG" jdbcType="VARCHAR" property="alterFlag" />
+    <result column="REALTER_FLAG" jdbcType="VARCHAR" property="realterFlag" />
+    <result column="QUESTION_TYPE" jdbcType="VARCHAR" property="questionType" />
+    <result column="QUESTION_ITEM" jdbcType="VARCHAR" property="questionItem" />
+    <result column="ERROR_TYPE" jdbcType="VARCHAR" property="errorType" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, VERSION, PARENT_TASK_CODE, PARENT_TASK_NAME, TASK_CODE, TASK_NAME, SECTION, WORKER_ID, 
+    WORKER, WORK_DATE, AUDITOR_ID, AUDITOR, AUDIT_DATE, MAP_CODE, FEATURE, DESCRIPTION, 
+    ERROR_REASON, ERROR_CONTENT, ERROR_LEVEL, BIG_ERROR_FLAG, ALTER_FLAG, REALTER_FLAG, 
+    QUESTION_TYPE, QUESTION_ITEM, ERROR_TYPE, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, 
+    CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.RoadQuestionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.ROAD_QUESTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.ROAD_QUESTION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.ROAD_QUESTION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.RoadQuestionExample">
+    delete from IMS.ROAD_QUESTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.RoadQuestion">
+    insert into IMS.ROAD_QUESTION (ID, VERSION, PARENT_TASK_CODE, 
+      PARENT_TASK_NAME, TASK_CODE, TASK_NAME, 
+      SECTION, WORKER_ID, WORKER, 
+      WORK_DATE, AUDITOR_ID, AUDITOR, 
+      AUDIT_DATE, MAP_CODE, FEATURE, 
+      DESCRIPTION, ERROR_REASON, ERROR_CONTENT, 
+      ERROR_LEVEL, BIG_ERROR_FLAG, ALTER_FLAG, 
+      REALTER_FLAG, QUESTION_TYPE, QUESTION_ITEM, 
+      ERROR_TYPE, REMARK, STATUS, 
+      DEL_FLAG, CREATOR_ID, CREATOR, 
+      CREATE_TIME, UPDATER_ID, UPDATER, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{parentTaskCode,jdbcType=VARCHAR}, 
+      #{parentTaskName,jdbcType=VARCHAR}, #{taskCode,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, 
+      #{section,jdbcType=VARCHAR}, #{workerId,jdbcType=VARCHAR}, #{worker,jdbcType=VARCHAR}, 
+      #{workDate,jdbcType=TIMESTAMP}, #{auditorId,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{auditDate,jdbcType=TIMESTAMP}, #{mapCode,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{errorReason,jdbcType=VARCHAR}, #{errorContent,jdbcType=VARCHAR}, 
+      #{errorLevel,jdbcType=VARCHAR}, #{bigErrorFlag,jdbcType=VARCHAR}, #{alterFlag,jdbcType=VARCHAR}, 
+      #{realterFlag,jdbcType=VARCHAR}, #{questionType,jdbcType=VARCHAR}, #{questionItem,jdbcType=VARCHAR}, 
+      #{errorType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.RoadQuestion">
+    insert into IMS.ROAD_QUESTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="parentTaskCode != null">
+        PARENT_TASK_CODE,
+      </if>
+      <if test="parentTaskName != null">
+        PARENT_TASK_NAME,
+      </if>
+      <if test="taskCode != null">
+        TASK_CODE,
+      </if>
+      <if test="taskName != null">
+        TASK_NAME,
+      </if>
+      <if test="section != null">
+        SECTION,
+      </if>
+      <if test="workerId != null">
+        WORKER_ID,
+      </if>
+      <if test="worker != null">
+        WORKER,
+      </if>
+      <if test="workDate != null">
+        WORK_DATE,
+      </if>
+      <if test="auditorId != null">
+        AUDITOR_ID,
+      </if>
+      <if test="auditor != null">
+        AUDITOR,
+      </if>
+      <if test="auditDate != null">
+        AUDIT_DATE,
+      </if>
+      <if test="mapCode != null">
+        MAP_CODE,
+      </if>
+      <if test="feature != null">
+        FEATURE,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="errorReason != null">
+        ERROR_REASON,
+      </if>
+      <if test="errorContent != null">
+        ERROR_CONTENT,
+      </if>
+      <if test="errorLevel != null">
+        ERROR_LEVEL,
+      </if>
+      <if test="bigErrorFlag != null">
+        BIG_ERROR_FLAG,
+      </if>
+      <if test="alterFlag != null">
+        ALTER_FLAG,
+      </if>
+      <if test="realterFlag != null">
+        REALTER_FLAG,
+      </if>
+      <if test="questionType != null">
+        QUESTION_TYPE,
+      </if>
+      <if test="questionItem != null">
+        QUESTION_ITEM,
+      </if>
+      <if test="errorType != null">
+        ERROR_TYPE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="parentTaskCode != null">
+        #{parentTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentTaskName != null">
+        #{parentTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null">
+        #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null">
+        #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mapCode != null">
+        #{mapCode,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="errorReason != null">
+        #{errorReason,jdbcType=VARCHAR},
+      </if>
+      <if test="errorContent != null">
+        #{errorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="errorLevel != null">
+        #{errorLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="bigErrorFlag != null">
+        #{bigErrorFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="alterFlag != null">
+        #{alterFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="realterFlag != null">
+        #{realterFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null">
+        #{questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="questionItem != null">
+        #{questionItem,jdbcType=VARCHAR},
+      </if>
+      <if test="errorType != null">
+        #{errorType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.RoadQuestionExample" resultType="java.lang.Long">
+    select count(*) from IMS.ROAD_QUESTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.ROAD_QUESTION
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentTaskCode != null">
+        PARENT_TASK_CODE = #{record.parentTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentTaskName != null">
+        PARENT_TASK_NAME = #{record.parentTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskCode != null">
+        TASK_CODE = #{record.taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskName != null">
+        TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workerId != null">
+        WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.worker != null">
+        WORKER = #{record.worker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workDate != null">
+        WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditorId != null">
+        AUDITOR_ID = #{record.auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null">
+        AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditDate != null">
+        AUDIT_DATE = #{record.auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mapCode != null">
+        MAP_CODE = #{record.mapCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feature != null">
+        FEATURE = #{record.feature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorReason != null">
+        ERROR_REASON = #{record.errorReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorContent != null">
+        ERROR_CONTENT = #{record.errorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorLevel != null">
+        ERROR_LEVEL = #{record.errorLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigErrorFlag != null">
+        BIG_ERROR_FLAG = #{record.bigErrorFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alterFlag != null">
+        ALTER_FLAG = #{record.alterFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realterFlag != null">
+        REALTER_FLAG = #{record.realterFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionType != null">
+        QUESTION_TYPE = #{record.questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionItem != null">
+        QUESTION_ITEM = #{record.questionItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorType != null">
+        ERROR_TYPE = #{record.errorType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.ROAD_QUESTION
+    set ID = #{record.id,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      PARENT_TASK_CODE = #{record.parentTaskCode,jdbcType=VARCHAR},
+      PARENT_TASK_NAME = #{record.parentTaskName,jdbcType=VARCHAR},
+      TASK_CODE = #{record.taskCode,jdbcType=VARCHAR},
+      TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
+      WORKER_ID = #{record.workerId,jdbcType=VARCHAR},
+      WORKER = #{record.worker,jdbcType=VARCHAR},
+      WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
+      AUDITOR_ID = #{record.auditorId,jdbcType=VARCHAR},
+      AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      AUDIT_DATE = #{record.auditDate,jdbcType=TIMESTAMP},
+      MAP_CODE = #{record.mapCode,jdbcType=VARCHAR},
+      FEATURE = #{record.feature,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      ERROR_REASON = #{record.errorReason,jdbcType=VARCHAR},
+      ERROR_CONTENT = #{record.errorContent,jdbcType=VARCHAR},
+      ERROR_LEVEL = #{record.errorLevel,jdbcType=VARCHAR},
+      BIG_ERROR_FLAG = #{record.bigErrorFlag,jdbcType=VARCHAR},
+      ALTER_FLAG = #{record.alterFlag,jdbcType=VARCHAR},
+      REALTER_FLAG = #{record.realterFlag,jdbcType=VARCHAR},
+      QUESTION_TYPE = #{record.questionType,jdbcType=VARCHAR},
+      QUESTION_ITEM = #{record.questionItem,jdbcType=VARCHAR},
+      ERROR_TYPE = #{record.errorType,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.RoadQuestion">
+    update IMS.ROAD_QUESTION
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="parentTaskCode != null">
+        PARENT_TASK_CODE = #{parentTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentTaskName != null">
+        PARENT_TASK_NAME = #{parentTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null">
+        TASK_CODE = #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null">
+        TASK_NAME = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="workerId != null">
+        WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      </if>
+      <if test="worker != null">
+        WORKER = #{worker,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null">
+        AUDITOR_ID = #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null">
+        AUDIT_DATE = #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mapCode != null">
+        MAP_CODE = #{mapCode,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        FEATURE = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="errorReason != null">
+        ERROR_REASON = #{errorReason,jdbcType=VARCHAR},
+      </if>
+      <if test="errorContent != null">
+        ERROR_CONTENT = #{errorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="errorLevel != null">
+        ERROR_LEVEL = #{errorLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="bigErrorFlag != null">
+        BIG_ERROR_FLAG = #{bigErrorFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="alterFlag != null">
+        ALTER_FLAG = #{alterFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="realterFlag != null">
+        REALTER_FLAG = #{realterFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null">
+        QUESTION_TYPE = #{questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="questionItem != null">
+        QUESTION_ITEM = #{questionItem,jdbcType=VARCHAR},
+      </if>
+      <if test="errorType != null">
+        ERROR_TYPE = #{errorType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.RoadQuestion">
+    update IMS.ROAD_QUESTION
+    set VERSION = #{version,jdbcType=VARCHAR},
+      PARENT_TASK_CODE = #{parentTaskCode,jdbcType=VARCHAR},
+      PARENT_TASK_NAME = #{parentTaskName,jdbcType=VARCHAR},
+      TASK_CODE = #{taskCode,jdbcType=VARCHAR},
+      TASK_NAME = #{taskName,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
+      WORKER_ID = #{workerId,jdbcType=VARCHAR},
+      WORKER = #{worker,jdbcType=VARCHAR},
+      WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
+      AUDITOR_ID = #{auditorId,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_DATE = #{auditDate,jdbcType=TIMESTAMP},
+      MAP_CODE = #{mapCode,jdbcType=VARCHAR},
+      FEATURE = #{feature,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      ERROR_REASON = #{errorReason,jdbcType=VARCHAR},
+      ERROR_CONTENT = #{errorContent,jdbcType=VARCHAR},
+      ERROR_LEVEL = #{errorLevel,jdbcType=VARCHAR},
+      BIG_ERROR_FLAG = #{bigErrorFlag,jdbcType=VARCHAR},
+      ALTER_FLAG = #{alterFlag,jdbcType=VARCHAR},
+      REALTER_FLAG = #{realterFlag,jdbcType=VARCHAR},
+      QUESTION_TYPE = #{questionType,jdbcType=VARCHAR},
+      QUESTION_ITEM = #{questionItem,jdbcType=VARCHAR},
+      ERROR_TYPE = #{errorType,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
