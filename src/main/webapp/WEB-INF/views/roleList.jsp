@@ -13,6 +13,7 @@
     <%@include file="head.jsp"%>
     <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css"  rel="stylesheet" />
+    <link herf="${basePath}/css/zTree/zTreeStyle.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container-fluid">
@@ -26,6 +27,9 @@
             </button >
             <button id="del_btn" type="button" class="btn btn-danger">
                 <span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除
+            </button >
+            <button id="permission_set_btn" type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-cog" aria- hidden="true" ></span >权限配置
             </button >
         </div>
             <%--数据列表--%>
@@ -67,7 +71,7 @@
     </div>
     <%--角色修改模态框--%>
     <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" aria-hidden="true">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -98,10 +102,31 @@
             </div>
         </div>
     </div>
+    <%--权限模态框--%>
+    <div class="modal fade" id="permission_set_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h6 class="modal-title" id="myModalLabel3">权限配置</h6>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <ul id="permissionTree" class="ztree"></ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close">取消</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="permission_save_btn" aria-label="save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
     <script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
     <script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${basePath}/js/zTree/jquery.ztree.all-3.5.min.js"></script>
     <script type="text/javascript">
         $(function(){
             initTable();
@@ -305,6 +330,42 @@
                     }
                 }
             });
+        }
+        //权限配置按钮
+        $("#permission_set_btn").click(function(){
+            $("#permission_set_modal").modal("toggle");
+        });
+        //给权限设置模态框绑定事件（show.bs.modal事件：在模态框出来之前）
+        $("#permission_set_modal").on("show.bs.modal",function(){
+            //加载树
+            requestPermissionData();
+        });
+        //请求权限数据
+        function requestPermissionData() {
+            $.ajax({
+                url:"${basePath}/permissions?pageSize=&pageNum=",
+                type:"GET",
+                dataType:"json",
+                success:function(result){
+                    if(result.code==1){
+                        alert("处理成功");
+
+                    }
+                }
+            });
+        }
+        var treeSet={
+            data:{
+                simpleData:{
+                    enable:true,
+                    idKey:"permissionId",
+                    pIdKey:"parentId",
+                }
+            }
+        }
+        //加载权限树
+        function loadPermissionTree(data){
+
         }
     </script>
 </body>

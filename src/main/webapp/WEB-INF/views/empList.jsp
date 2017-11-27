@@ -287,8 +287,8 @@
 <%--本地化文件要放在bootstrap文件下--%>
 <script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
 <%--日期插件js文件及本地化文件--%>
-<script src="${basePath}/js/bootrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
-<script src="${basePath}/js/bootrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
+<script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
 <script>
     $(function(){
         //初始化表格

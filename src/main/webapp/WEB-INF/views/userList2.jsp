@@ -312,12 +312,12 @@
     }
     //显示编辑界面的员工信息
     function show_user_update_info(userInfo){
-        $("#username_update_p").text(userInfo[0].id);
-        $("#password_update_input").val(userInfo[0].password);
-        $("#nickname_update_input").val(userInfo[0].nickname);
-        $("#edit_modal input[name=status]").val([userInfo[0].status]);
+        $("#username_update_p").text(userInfo.id);
+        $("#password_update_input").val(userInfo.password);
+        $("#nickname_update_input").val(userInfo.nickname);
+        $("#edit_modal input[name=status]").val([userInfo.status]);
         //给更新按钮添加个update-id属性用来存储userId
-        $("#update_btn").attr("edit-id",userInfo[0].id);
+        $("#update_btn").attr("edit-id",userInfo.id);
     }
     //点击更新数据
     $("#update_btn").click(function(){

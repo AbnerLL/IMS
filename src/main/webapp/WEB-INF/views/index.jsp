@@ -211,7 +211,7 @@
                         <li><a href="#"><i class="ace-icon fa fa-edit orange"></i>修改密码</a></li>
                         <li><a href="#"><i class="ace-icon fa fa-lock orange"></i>锁住屏幕</a></li>
                         <li class="divider"></li>
-                        <li><a href="/Account/Logout" onclick="javascript:window._logout=true"><i class="ace-icon fa fa-power-off red"></i>安全退出</a></li>
+                        <li><a href="${requestScope.basePath}/logout" onclick="javascript:window._logout=true"><i class="ace-icon fa fa-power-off red"></i>安全退出</a></li>
                     </ul>
                 </li>
             </ul>
