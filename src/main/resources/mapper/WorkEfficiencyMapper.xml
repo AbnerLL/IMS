@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.view.WorkEfficiencyMapper">
+    <select id="calculateEfficiency" parameterType="Map" resultMap="baseResultMap">
+        SELECT emp_id,emp_name
+        <if test="workType=='RoadMark' or workType==''">
+            ,SUM (before_road_input_num) as work_num,
+            SUM (before_road_input_hours) as hours,
+            SUM (before_road_audit_num) as work_num2,
+            SUM (before_road_audit_hours) as hours2
+        </if>
+        <if test="workType=='ChPOI'">
+            ,SUM (fm_cp_input_num) as work_num,
+            SUM (fm_cp_input_hours) as hours,
+            SUM (fm_cp_audit_num) as work_num2,
+            SUM (fm_cp_audit_hours) as hours2
+        </if>
+        <if test="workType=='ChAddress'">
+            ,SUM (fm_ca_input_num) as work_num,
+            SUM (fm_ca_input_hours) as hours,
+            SUM (fm_ca_audit_num) as work_num2,
+            SUM (fm_ca_audit_hours) as hours2
+        </if>
+        <if test="workType=='EnPOI'">
+            ,SUM (fm_ep_input_num) as work_num,
+            SUM (fm_ep_input_hours) as hours,
+            SUM (fm_ep_audit_num) as work_num2,
+            SUM (fm_ep_audit_hours) as hours2
+        </if>
+        <if test="workType=='EnAddress'">
+            ,SUM (fm_ea_input_num) as work_num,
+            SUM (fm_ea_input_hours) as hours,
+            SUM (fm_ea_audit_num) as work_num2,
+            SUM (fm_ea_audit_hours) as hours2
+        </if>
+        <if test="workType=='DepthInfo'">
+            ,SUM (dp_info_work_num) as work_num,
+            SUM (dp_info_work_hours) as hours,
+            SUM (dp_info_audit_num) as work_num2,
+            SUM (dp_info_audit_hours) as hours2
+        </if>
+        <if test="workType=='Agency'">
+            ,SUM (before_agency_work_num) as work_num,
+            SUM (before_agency_work_hours) as hours,
+            SUM (after_agency_work_num) as work_num2,
+            SUM (after_agency_work_hours) as hours2
+        </if>
+        FROM WORK_EFFICIENCY
+        <where>
+            <if test="empId!=null and empId!=''">
+                EMP_ID =#{empId}
+            </if>
+            <if test="empName!=null and empName!=''">
+                AND EMP_NAME=#{empName}
+            </if>
+            <if test="searchDateStart!=null and searchDateStart!=''">
+                AND WORK_DATE &gt;=to_date( #{searchDateStart},'yyyy/mm/dd')
+            </if>
+            <if test="searchDateEnd!=null and searchDateEnd!=''">
+                AND WORK_DATE &lt;=to_date( #{searchDateEnd},'yyyy/mm/dd')
+            </if>
+        </where>
+        GROUP BY emp_id,emp_name
+    </select>
+    <resultMap id="baseResultMap" type="com.navinfo.IMS.dto.view.WorkEfficiency">
+        <result column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="work_num" property="workNum"/>
+        <result column ="work_num2" property="workNum2"/>
+        <result column="hours" property="hours"/>
+    </resultMap>
+</mapper>

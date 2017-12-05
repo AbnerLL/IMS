@@ -6,13 +6,21 @@
     <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
     <result column="EMP_SEX" jdbcType="VARCHAR" property="empSex" />
     <result column="EMP_HIREDATE" jdbcType="TIMESTAMP" property="empHiredate" />
+    <result column="RANK" jdbcType="VARCHAR" property="rank" />
     <result column="EMP_ENTRY_AGE" jdbcType="DECIMAL" property="empEntryAge" />
     <result column="EMP_DEPT" jdbcType="VARCHAR" property="empDept" />
     <result column="EMP_SEC" jdbcType="VARCHAR" property="empSec" />
     <result column="EMP_POST" jdbcType="VARCHAR" property="empPost" />
     <result column="EMP_EMAIL" jdbcType="VARCHAR" property="empEmail" />
     <result column="EMP_TEL" jdbcType="VARCHAR" property="empTel" />
+    <result column="EMP_ADDRESS" jdbcType="VARCHAR" property="empAddress" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="ATTR1" jdbcType="VARCHAR" property="attr1" />
     <result column="ATTR2" jdbcType="VARCHAR" property="attr2" />
@@ -79,8 +87,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    EMP_ID, EMP_NAME, EMP_SEX, EMP_HIREDATE, EMP_ENTRY_AGE, EMP_DEPT, EMP_SEC, EMP_POST, 
-    EMP_EMAIL, EMP_TEL, CREATE_TIME, UPDATE_TIME, ATTR1, ATTR2, ATTR3, ATTR4, ATTR5
+    EMP_ID, EMP_NAME, EMP_SEX, EMP_HIREDATE, RANK, EMP_ENTRY_AGE, EMP_DEPT, EMP_SEC, 
+    EMP_POST, EMP_EMAIL, EMP_TEL, EMP_ADDRESS, REMARK, STATUS, CREATOR_ID, CREATOR, CREATE_TIME, 
+    UPDATER_ID, UPDATER, UPDATE_TIME, ATTR1, ATTR2, ATTR3, ATTR4, ATTR5
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.EmpExample" resultMap="BaseResultMap">
     select
@@ -114,17 +123,23 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.IMS.entity.Emp">
     insert into IMS.EMP (EMP_ID, EMP_NAME, EMP_SEX, 
-      EMP_HIREDATE, EMP_ENTRY_AGE, EMP_DEPT, 
-      EMP_SEC, EMP_POST, EMP_EMAIL, 
-      EMP_TEL, CREATE_TIME, UPDATE_TIME, 
-      ATTR1, ATTR2, ATTR3, 
-      ATTR4, ATTR5)
+      EMP_HIREDATE, RANK, EMP_ENTRY_AGE, 
+      EMP_DEPT, EMP_SEC, EMP_POST, 
+      EMP_EMAIL, EMP_TEL, EMP_ADDRESS, 
+      REMARK, STATUS, CREATOR_ID, 
+      CREATOR, CREATE_TIME, UPDATER_ID, 
+      UPDATER, UPDATE_TIME, ATTR1, 
+      ATTR2, ATTR3, ATTR4, 
+      ATTR5)
     values (#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{empSex,jdbcType=VARCHAR}, 
-      #{empHiredate,jdbcType=TIMESTAMP}, #{empEntryAge,jdbcType=DECIMAL}, #{empDept,jdbcType=VARCHAR}, 
-      #{empSec,jdbcType=VARCHAR}, #{empPost,jdbcType=VARCHAR}, #{empEmail,jdbcType=VARCHAR}, 
-      #{empTel,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}, 
-      #{attr4,jdbcType=VARCHAR}, #{attr5,jdbcType=VARCHAR})
+      #{empHiredate,jdbcType=TIMESTAMP}, #{rank,jdbcType=VARCHAR}, #{empEntryAge,jdbcType=DECIMAL}, 
+      #{empDept,jdbcType=VARCHAR}, #{empSec,jdbcType=VARCHAR}, #{empPost,jdbcType=VARCHAR}, 
+      #{empEmail,jdbcType=VARCHAR}, #{empTel,jdbcType=VARCHAR}, #{empAddress,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{attr1,jdbcType=VARCHAR}, 
+      #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}, #{attr4,jdbcType=VARCHAR}, 
+      #{attr5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.Emp">
     insert into IMS.EMP
@@ -140,6 +155,9 @@
       </if>
       <if test="empHiredate != null">
         EMP_HIREDATE,
+      </if>
+      <if test="rank != null">
+        RANK,
       </if>
       <if test="empEntryAge != null">
         EMP_ENTRY_AGE,
@@ -159,8 +177,29 @@
       <if test="empTel != null">
         EMP_TEL,
       </if>
+      <if test="empAddress != null">
+        EMP_ADDRESS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
       <if test="createTime != null">
         CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
       </if>
       <if test="updateTime != null">
         UPDATE_TIME,
@@ -194,6 +233,9 @@
       <if test="empHiredate != null">
         #{empHiredate,jdbcType=TIMESTAMP},
       </if>
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
+      </if>
       <if test="empEntryAge != null">
         #{empEntryAge,jdbcType=DECIMAL},
       </if>
@@ -212,8 +254,29 @@
       <if test="empTel != null">
         #{empTel,jdbcType=VARCHAR},
       </if>
+      <if test="empAddress != null">
+        #{empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
@@ -256,6 +319,9 @@
       <if test="record.empHiredate != null">
         EMP_HIREDATE = #{record.empHiredate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.rank != null">
+        RANK = #{record.rank,jdbcType=VARCHAR},
+      </if>
       <if test="record.empEntryAge != null">
         EMP_ENTRY_AGE = #{record.empEntryAge,jdbcType=DECIMAL},
       </if>
@@ -274,8 +340,29 @@
       <if test="record.empTel != null">
         EMP_TEL = #{record.empTel,jdbcType=VARCHAR},
       </if>
+      <if test="record.empAddress != null">
+        EMP_ADDRESS = #{record.empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
       </if>
       <if test="record.updateTime != null">
         UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -306,13 +393,21 @@
       EMP_NAME = #{record.empName,jdbcType=VARCHAR},
       EMP_SEX = #{record.empSex,jdbcType=VARCHAR},
       EMP_HIREDATE = #{record.empHiredate,jdbcType=TIMESTAMP},
+      RANK = #{record.rank,jdbcType=VARCHAR},
       EMP_ENTRY_AGE = #{record.empEntryAge,jdbcType=DECIMAL},
       EMP_DEPT = #{record.empDept,jdbcType=VARCHAR},
       EMP_SEC = #{record.empSec,jdbcType=VARCHAR},
       EMP_POST = #{record.empPost,jdbcType=VARCHAR},
       EMP_EMAIL = #{record.empEmail,jdbcType=VARCHAR},
       EMP_TEL = #{record.empTel,jdbcType=VARCHAR},
+      EMP_ADDRESS = #{record.empAddress,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       ATTR1 = #{record.attr1,jdbcType=VARCHAR},
       ATTR2 = #{record.attr2,jdbcType=VARCHAR},
@@ -335,6 +430,9 @@
       <if test="empHiredate != null">
         EMP_HIREDATE = #{empHiredate,jdbcType=TIMESTAMP},
       </if>
+      <if test="rank != null">
+        RANK = #{rank,jdbcType=VARCHAR},
+      </if>
       <if test="empEntryAge != null">
         EMP_ENTRY_AGE = #{empEntryAge,jdbcType=DECIMAL},
       </if>
@@ -353,8 +451,29 @@
       <if test="empTel != null">
         EMP_TEL = #{empTel,jdbcType=VARCHAR},
       </if>
+      <if test="empAddress != null">
+        EMP_ADDRESS = #{empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
@@ -382,13 +501,21 @@
     set EMP_NAME = #{empName,jdbcType=VARCHAR},
       EMP_SEX = #{empSex,jdbcType=VARCHAR},
       EMP_HIREDATE = #{empHiredate,jdbcType=TIMESTAMP},
+      RANK = #{rank,jdbcType=VARCHAR},
       EMP_ENTRY_AGE = #{empEntryAge,jdbcType=DECIMAL},
       EMP_DEPT = #{empDept,jdbcType=VARCHAR},
       EMP_SEC = #{empSec,jdbcType=VARCHAR},
       EMP_POST = #{empPost,jdbcType=VARCHAR},
       EMP_EMAIL = #{empEmail,jdbcType=VARCHAR},
       EMP_TEL = #{empTel,jdbcType=VARCHAR},
+      EMP_ADDRESS = #{empAddress,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       ATTR1 = #{attr1,jdbcType=VARCHAR},
       ATTR2 = #{attr2,jdbcType=VARCHAR},

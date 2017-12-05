@@ -17,7 +17,7 @@
     <result column="DP_PASS_RATE" jdbcType="DECIMAL" property="dpPassRate" />
     <result column="DCAR_AUDIT_NUM" jdbcType="DECIMAL" property="dcarAuditNum" />
     <result column="DCAR_ERROR_NUM" jdbcType="DECIMAL" property="dcarErrorNum" />
-    <result column="DCAR_PASS_NUM" jdbcType="DECIMAL" property="dcarPassNum" />
+    <result column="DCAR_PASS_RATE" jdbcType="DECIMAL" property="dcarPassRate" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
@@ -89,7 +89,7 @@
   <sql id="Base_Column_List">
     ID, VERSION, SECTION, WORKER_ID, WORKER, WORK_DATE, DEP_INFO, DCOM_AUDIT_NUM, DCOM_ERROR_NUM, 
     DCOM_PASS_RATE, DP_AUDIT_NUM, DP_ERROR_NUM, DP_PASS_RATE, DCAR_AUDIT_NUM, DCAR_ERROR_NUM, 
-    DCAR_PASS_NUM, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, 
+    DCAR_PASS_RATE, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, 
     UPDATER, UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.DepInfoReportExample" resultMap="BaseResultMap">
@@ -128,7 +128,7 @@
       DEP_INFO, DCOM_AUDIT_NUM, DCOM_ERROR_NUM, 
       DCOM_PASS_RATE, DP_AUDIT_NUM, DP_ERROR_NUM, 
       DP_PASS_RATE, DCAR_AUDIT_NUM, DCAR_ERROR_NUM, 
-      DCAR_PASS_NUM, REMARK, STATUS, 
+      DCAR_PASS_RATE, REMARK, STATUS, 
       DEL_FLAG, CREATOR_ID, CREATOR, 
       CREATE_TIME, UPDATER_ID, UPDATER, 
       UPDATE_TIME)
@@ -137,7 +137,7 @@
       #{depInfo,jdbcType=VARCHAR}, #{dcomAuditNum,jdbcType=DECIMAL}, #{dcomErrorNum,jdbcType=DECIMAL}, 
       #{dcomPassRate,jdbcType=DECIMAL}, #{dpAuditNum,jdbcType=DECIMAL}, #{dpErrorNum,jdbcType=DECIMAL}, 
       #{dpPassRate,jdbcType=DECIMAL}, #{dcarAuditNum,jdbcType=DECIMAL}, #{dcarErrorNum,jdbcType=DECIMAL}, 
-      #{dcarPassNum,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{dcarPassRate,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP})
@@ -190,8 +190,8 @@
       <if test="dcarErrorNum != null">
         DCAR_ERROR_NUM,
       </if>
-      <if test="dcarPassNum != null">
-        DCAR_PASS_NUM,
+      <if test="dcarPassRate != null">
+        DCAR_PASS_RATE,
       </if>
       <if test="remark != null">
         REMARK,
@@ -267,8 +267,8 @@
       <if test="dcarErrorNum != null">
         #{dcarErrorNum,jdbcType=DECIMAL},
       </if>
-      <if test="dcarPassNum != null">
-        #{dcarPassNum,jdbcType=DECIMAL},
+      <if test="dcarPassRate != null">
+        #{dcarPassRate,jdbcType=DECIMAL},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -353,8 +353,8 @@
       <if test="record.dcarErrorNum != null">
         DCAR_ERROR_NUM = #{record.dcarErrorNum,jdbcType=DECIMAL},
       </if>
-      <if test="record.dcarPassNum != null">
-        DCAR_PASS_NUM = #{record.dcarPassNum,jdbcType=DECIMAL},
+      <if test="record.dcarPassRate != null">
+        DCAR_PASS_RATE = #{record.dcarPassRate,jdbcType=DECIMAL},
       </if>
       <if test="record.remark != null">
         REMARK = #{record.remark,jdbcType=VARCHAR},
@@ -405,7 +405,7 @@
       DP_PASS_RATE = #{record.dpPassRate,jdbcType=DECIMAL},
       DCAR_AUDIT_NUM = #{record.dcarAuditNum,jdbcType=DECIMAL},
       DCAR_ERROR_NUM = #{record.dcarErrorNum,jdbcType=DECIMAL},
-      DCAR_PASS_NUM = #{record.dcarPassNum,jdbcType=DECIMAL},
+      DCAR_PASS_RATE = #{record.dcarPassRate,jdbcType=DECIMAL},
       REMARK = #{record.remark,jdbcType=VARCHAR},
       STATUS = #{record.status,jdbcType=VARCHAR},
       DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
@@ -464,8 +464,8 @@
       <if test="dcarErrorNum != null">
         DCAR_ERROR_NUM = #{dcarErrorNum,jdbcType=DECIMAL},
       </if>
-      <if test="dcarPassNum != null">
-        DCAR_PASS_NUM = #{dcarPassNum,jdbcType=DECIMAL},
+      <if test="dcarPassRate != null">
+        DCAR_PASS_RATE = #{dcarPassRate,jdbcType=DECIMAL},
       </if>
       <if test="remark != null">
         REMARK = #{remark,jdbcType=VARCHAR},
@@ -513,7 +513,7 @@
       DP_PASS_RATE = #{dpPassRate,jdbcType=DECIMAL},
       DCAR_AUDIT_NUM = #{dcarAuditNum,jdbcType=DECIMAL},
       DCAR_ERROR_NUM = #{dcarErrorNum,jdbcType=DECIMAL},
-      DCAR_PASS_NUM = #{dcarPassNum,jdbcType=DECIMAL},
+      DCAR_PASS_RATE = #{dcarPassRate,jdbcType=DECIMAL},
       REMARK = #{remark,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
       DEL_FLAG = #{delFlag,jdbcType=VARCHAR},

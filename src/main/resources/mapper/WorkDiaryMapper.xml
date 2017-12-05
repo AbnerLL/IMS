@@ -7,12 +7,17 @@
     <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
     <result column="WORK_DATE" jdbcType="TIMESTAMP" property="workDate" />
     <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType" />
-    <result column="HOURS" jdbcType="VARCHAR" property="hours" />
-    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
-    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="WORK_HOURS" jdbcType="VARCHAR" property="workHours" />
+    <result column="WORK_CONTENT" jdbcType="VARCHAR" property="workContent" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <result column="ATTR1" jdbcType="VARCHAR" property="attr1" />
-    <result column="ATTR2" jdbcType="VARCHAR" property="attr2" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, EMP_ID, EMP_NAME, WORK_DATE, WORK_TYPE, HOURS, CONTENT, REMARKS, STATUS, ATTR1, 
-    ATTR2
+    ID, EMP_ID, EMP_NAME, WORK_DATE, WORK_TYPE, WORK_HOURS, WORK_CONTENT, REMARK, STATUS, 
+    DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.WorkDiaryExample" resultMap="BaseResultMap">
     select
@@ -108,13 +113,17 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.IMS.entity.WorkDiary">
     insert into IMS.WORK_DIARY (ID, EMP_ID, EMP_NAME, 
-      WORK_DATE, WORK_TYPE, HOURS, 
-      CONTENT, REMARKS, STATUS, 
-      ATTR1, ATTR2)
+      WORK_DATE, WORK_TYPE, WORK_HOURS, 
+      WORK_CONTENT, REMARK, STATUS, 
+      DEL_FLAG, CREATOR_ID, CREATOR, 
+      CREATE_TIME, UPDATER_ID, UPDATER, 
+      UPDATE_TIME)
     values (#{id,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
-      #{workDate,jdbcType=TIMESTAMP}, #{workType,jdbcType=VARCHAR}, #{hours,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR})
+      #{workDate,jdbcType=TIMESTAMP}, #{workType,jdbcType=VARCHAR}, #{workHours,jdbcType=VARCHAR}, 
+      #{workContent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.WorkDiary">
     insert into IMS.WORK_DIARY
@@ -134,23 +143,38 @@
       <if test="workType != null">
         WORK_TYPE,
       </if>
-      <if test="hours != null">
-        HOURS,
+      <if test="workHours != null">
+        WORK_HOURS,
       </if>
-      <if test="content != null">
-        CONTENT,
+      <if test="workContent != null">
+        WORK_CONTENT,
       </if>
-      <if test="remarks != null">
-        REMARKS,
+      <if test="remark != null">
+        REMARK,
       </if>
       <if test="status != null">
         STATUS,
       </if>
-      <if test="attr1 != null">
-        ATTR1,
+      <if test="delFlag != null">
+        DEL_FLAG,
       </if>
-      <if test="attr2 != null">
-        ATTR2,
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -169,23 +193,38 @@
       <if test="workType != null">
         #{workType,jdbcType=VARCHAR},
       </if>
-      <if test="hours != null">
-        #{hours,jdbcType=VARCHAR},
+      <if test="workHours != null">
+        #{workHours,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
+      <if test="workContent != null">
+        #{workContent,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=VARCHAR},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="attr1 != null">
-        #{attr1,jdbcType=VARCHAR},
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
       </if>
-      <if test="attr2 != null">
-        #{attr2,jdbcType=VARCHAR},
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -213,23 +252,38 @@
       <if test="record.workType != null">
         WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
       </if>
-      <if test="record.hours != null">
-        HOURS = #{record.hours,jdbcType=VARCHAR},
+      <if test="record.workHours != null">
+        WORK_HOURS = #{record.workHours,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null">
-        CONTENT = #{record.content,jdbcType=VARCHAR},
+      <if test="record.workContent != null">
+        WORK_CONTENT = #{record.workContent,jdbcType=VARCHAR},
       </if>
-      <if test="record.remarks != null">
-        REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
         STATUS = #{record.status,jdbcType=VARCHAR},
       </if>
-      <if test="record.attr1 != null">
-        ATTR1 = #{record.attr1,jdbcType=VARCHAR},
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
       </if>
-      <if test="record.attr2 != null">
-        ATTR2 = #{record.attr2,jdbcType=VARCHAR},
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -243,12 +297,17 @@
       EMP_NAME = #{record.empName,jdbcType=VARCHAR},
       WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
       WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
-      HOURS = #{record.hours,jdbcType=VARCHAR},
-      CONTENT = #{record.content,jdbcType=VARCHAR},
-      REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      WORK_HOURS = #{record.workHours,jdbcType=VARCHAR},
+      WORK_CONTENT = #{record.workContent,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
       STATUS = #{record.status,jdbcType=VARCHAR},
-      ATTR1 = #{record.attr1,jdbcType=VARCHAR},
-      ATTR2 = #{record.attr2,jdbcType=VARCHAR}
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -268,23 +327,38 @@
       <if test="workType != null">
         WORK_TYPE = #{workType,jdbcType=VARCHAR},
       </if>
-      <if test="hours != null">
-        HOURS = #{hours,jdbcType=VARCHAR},
+      <if test="workHours != null">
+        WORK_HOURS = #{workHours,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        CONTENT = #{content,jdbcType=VARCHAR},
+      <if test="workContent != null">
+        WORK_CONTENT = #{workContent,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        REMARKS = #{remarks,jdbcType=VARCHAR},
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="attr1 != null">
-        ATTR1 = #{attr1,jdbcType=VARCHAR},
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
       </if>
-      <if test="attr2 != null">
-        ATTR2 = #{attr2,jdbcType=VARCHAR},
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
@@ -295,12 +369,17 @@
       EMP_NAME = #{empName,jdbcType=VARCHAR},
       WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
       WORK_TYPE = #{workType,jdbcType=VARCHAR},
-      HOURS = #{hours,jdbcType=VARCHAR},
-      CONTENT = #{content,jdbcType=VARCHAR},
-      REMARKS = #{remarks,jdbcType=VARCHAR},
+      WORK_HOURS = #{workHours,jdbcType=VARCHAR},
+      WORK_CONTENT = #{workContent,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
-      ATTR1 = #{attr1,jdbcType=VARCHAR},
-      ATTR2 = #{attr2,jdbcType=VARCHAR}
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -186,10 +186,10 @@
     </if>
   </update>
   <select id="selectSimpleByPid" resultMap="BaseResultMap">
-    SELECT * FROM MENU WHERE PID=#{pid}
+    SELECT * FROM MENU WHERE PID=#{pid} ORDER BY id
   </select>
   <select id="selectByPid" resultMap="MenuAndSubMenuMap">
-    SELECT * FROM MENU WHERE PID=#{pid}
+    SELECT * FROM MENU WHERE PID=#{pid} ORDER BY id
   </select>
   <resultMap id="MenuAndSubMenuMap" type="com.navinfo.IMS.utils.MenuUtil">
     <result column="id" property="id" javaType="String"/>
