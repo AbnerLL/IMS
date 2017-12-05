@@ -1,17 +1,18 @@
 package com.navinfo.IMS.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WorkDiaryExample {
+public class DepInfoReportExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public WorkDiaryExample() {
+    public DepInfoReportExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -175,143 +176,283 @@ public class WorkDiaryExample {
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdIsNull() {
-            addCriterion("EMP_ID is null");
+        public Criteria andVersionIsNull() {
+            addCriterion("VERSION is null");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdIsNotNull() {
-            addCriterion("EMP_ID is not null");
+        public Criteria andVersionIsNotNull() {
+            addCriterion("VERSION is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdEqualTo(String value) {
-            addCriterion("EMP_ID =", value, "empId");
+        public Criteria andVersionEqualTo(String value) {
+            addCriterion("VERSION =", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotEqualTo(String value) {
-            addCriterion("EMP_ID <>", value, "empId");
+        public Criteria andVersionNotEqualTo(String value) {
+            addCriterion("VERSION <>", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdGreaterThan(String value) {
-            addCriterion("EMP_ID >", value, "empId");
+        public Criteria andVersionGreaterThan(String value) {
+            addCriterion("VERSION >", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdGreaterThanOrEqualTo(String value) {
-            addCriterion("EMP_ID >=", value, "empId");
+        public Criteria andVersionGreaterThanOrEqualTo(String value) {
+            addCriterion("VERSION >=", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdLessThan(String value) {
-            addCriterion("EMP_ID <", value, "empId");
+        public Criteria andVersionLessThan(String value) {
+            addCriterion("VERSION <", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdLessThanOrEqualTo(String value) {
-            addCriterion("EMP_ID <=", value, "empId");
+        public Criteria andVersionLessThanOrEqualTo(String value) {
+            addCriterion("VERSION <=", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdLike(String value) {
-            addCriterion("EMP_ID like", value, "empId");
+        public Criteria andVersionLike(String value) {
+            addCriterion("VERSION like", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotLike(String value) {
-            addCriterion("EMP_ID not like", value, "empId");
+        public Criteria andVersionNotLike(String value) {
+            addCriterion("VERSION not like", value, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdIn(List<String> values) {
-            addCriterion("EMP_ID in", values, "empId");
+        public Criteria andVersionIn(List<String> values) {
+            addCriterion("VERSION in", values, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotIn(List<String> values) {
-            addCriterion("EMP_ID not in", values, "empId");
+        public Criteria andVersionNotIn(List<String> values) {
+            addCriterion("VERSION not in", values, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdBetween(String value1, String value2) {
-            addCriterion("EMP_ID between", value1, value2, "empId");
+        public Criteria andVersionBetween(String value1, String value2) {
+            addCriterion("VERSION between", value1, value2, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotBetween(String value1, String value2) {
-            addCriterion("EMP_ID not between", value1, value2, "empId");
+        public Criteria andVersionNotBetween(String value1, String value2) {
+            addCriterion("VERSION not between", value1, value2, "version");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameIsNull() {
-            addCriterion("EMP_NAME is null");
+        public Criteria andSectionIsNull() {
+            addCriterion("SECTION is null");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameIsNotNull() {
-            addCriterion("EMP_NAME is not null");
+        public Criteria andSectionIsNotNull() {
+            addCriterion("SECTION is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameEqualTo(String value) {
-            addCriterion("EMP_NAME =", value, "empName");
+        public Criteria andSectionEqualTo(String value) {
+            addCriterion("SECTION =", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameNotEqualTo(String value) {
-            addCriterion("EMP_NAME <>", value, "empName");
+        public Criteria andSectionNotEqualTo(String value) {
+            addCriterion("SECTION <>", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameGreaterThan(String value) {
-            addCriterion("EMP_NAME >", value, "empName");
+        public Criteria andSectionGreaterThan(String value) {
+            addCriterion("SECTION >", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameGreaterThanOrEqualTo(String value) {
-            addCriterion("EMP_NAME >=", value, "empName");
+        public Criteria andSectionGreaterThanOrEqualTo(String value) {
+            addCriterion("SECTION >=", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameLessThan(String value) {
-            addCriterion("EMP_NAME <", value, "empName");
+        public Criteria andSectionLessThan(String value) {
+            addCriterion("SECTION <", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameLessThanOrEqualTo(String value) {
-            addCriterion("EMP_NAME <=", value, "empName");
+        public Criteria andSectionLessThanOrEqualTo(String value) {
+            addCriterion("SECTION <=", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameLike(String value) {
-            addCriterion("EMP_NAME like", value, "empName");
+        public Criteria andSectionLike(String value) {
+            addCriterion("SECTION like", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameNotLike(String value) {
-            addCriterion("EMP_NAME not like", value, "empName");
+        public Criteria andSectionNotLike(String value) {
+            addCriterion("SECTION not like", value, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameIn(List<String> values) {
-            addCriterion("EMP_NAME in", values, "empName");
+        public Criteria andSectionIn(List<String> values) {
+            addCriterion("SECTION in", values, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameNotIn(List<String> values) {
-            addCriterion("EMP_NAME not in", values, "empName");
+        public Criteria andSectionNotIn(List<String> values) {
+            addCriterion("SECTION not in", values, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameBetween(String value1, String value2) {
-            addCriterion("EMP_NAME between", value1, value2, "empName");
+        public Criteria andSectionBetween(String value1, String value2) {
+            addCriterion("SECTION between", value1, value2, "section");
             return (Criteria) this;
         }
 
-        public Criteria andEmpNameNotBetween(String value1, String value2) {
-            addCriterion("EMP_NAME not between", value1, value2, "empName");
+        public Criteria andSectionNotBetween(String value1, String value2) {
+            addCriterion("SECTION not between", value1, value2, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdIsNull() {
+            addCriterion("WORKER_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdIsNotNull() {
+            addCriterion("WORKER_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdEqualTo(String value) {
+            addCriterion("WORKER_ID =", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdNotEqualTo(String value) {
+            addCriterion("WORKER_ID <>", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdGreaterThan(String value) {
+            addCriterion("WORKER_ID >", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdGreaterThanOrEqualTo(String value) {
+            addCriterion("WORKER_ID >=", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdLessThan(String value) {
+            addCriterion("WORKER_ID <", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdLessThanOrEqualTo(String value) {
+            addCriterion("WORKER_ID <=", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdLike(String value) {
+            addCriterion("WORKER_ID like", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdNotLike(String value) {
+            addCriterion("WORKER_ID not like", value, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdIn(List<String> values) {
+            addCriterion("WORKER_ID in", values, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdNotIn(List<String> values) {
+            addCriterion("WORKER_ID not in", values, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdBetween(String value1, String value2) {
+            addCriterion("WORKER_ID between", value1, value2, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIdNotBetween(String value1, String value2) {
+            addCriterion("WORKER_ID not between", value1, value2, "workerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIsNull() {
+            addCriterion("WORKER is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIsNotNull() {
+            addCriterion("WORKER is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerEqualTo(String value) {
+            addCriterion("WORKER =", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerNotEqualTo(String value) {
+            addCriterion("WORKER <>", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerGreaterThan(String value) {
+            addCriterion("WORKER >", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerGreaterThanOrEqualTo(String value) {
+            addCriterion("WORKER >=", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerLessThan(String value) {
+            addCriterion("WORKER <", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerLessThanOrEqualTo(String value) {
+            addCriterion("WORKER <=", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerLike(String value) {
+            addCriterion("WORKER like", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerNotLike(String value) {
+            addCriterion("WORKER not like", value, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerIn(List<String> values) {
+            addCriterion("WORKER in", values, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerNotIn(List<String> values) {
+            addCriterion("WORKER not in", values, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerBetween(String value1, String value2) {
+            addCriterion("WORKER between", value1, value2, "worker");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkerNotBetween(String value1, String value2) {
+            addCriterion("WORKER not between", value1, value2, "worker");
             return (Criteria) this;
         }
 
@@ -375,213 +516,613 @@ public class WorkDiaryExample {
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeIsNull() {
-            addCriterion("WORK_TYPE is null");
+        public Criteria andDepInfoIsNull() {
+            addCriterion("DEP_INFO is null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeIsNotNull() {
-            addCriterion("WORK_TYPE is not null");
+        public Criteria andDepInfoIsNotNull() {
+            addCriterion("DEP_INFO is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeEqualTo(String value) {
-            addCriterion("WORK_TYPE =", value, "workType");
+        public Criteria andDepInfoEqualTo(String value) {
+            addCriterion("DEP_INFO =", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeNotEqualTo(String value) {
-            addCriterion("WORK_TYPE <>", value, "workType");
+        public Criteria andDepInfoNotEqualTo(String value) {
+            addCriterion("DEP_INFO <>", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeGreaterThan(String value) {
-            addCriterion("WORK_TYPE >", value, "workType");
+        public Criteria andDepInfoGreaterThan(String value) {
+            addCriterion("DEP_INFO >", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("WORK_TYPE >=", value, "workType");
+        public Criteria andDepInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("DEP_INFO >=", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeLessThan(String value) {
-            addCriterion("WORK_TYPE <", value, "workType");
+        public Criteria andDepInfoLessThan(String value) {
+            addCriterion("DEP_INFO <", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeLessThanOrEqualTo(String value) {
-            addCriterion("WORK_TYPE <=", value, "workType");
+        public Criteria andDepInfoLessThanOrEqualTo(String value) {
+            addCriterion("DEP_INFO <=", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeLike(String value) {
-            addCriterion("WORK_TYPE like", value, "workType");
+        public Criteria andDepInfoLike(String value) {
+            addCriterion("DEP_INFO like", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeNotLike(String value) {
-            addCriterion("WORK_TYPE not like", value, "workType");
+        public Criteria andDepInfoNotLike(String value) {
+            addCriterion("DEP_INFO not like", value, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeIn(List<String> values) {
-            addCriterion("WORK_TYPE in", values, "workType");
+        public Criteria andDepInfoIn(List<String> values) {
+            addCriterion("DEP_INFO in", values, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeNotIn(List<String> values) {
-            addCriterion("WORK_TYPE not in", values, "workType");
+        public Criteria andDepInfoNotIn(List<String> values) {
+            addCriterion("DEP_INFO not in", values, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeBetween(String value1, String value2) {
-            addCriterion("WORK_TYPE between", value1, value2, "workType");
+        public Criteria andDepInfoBetween(String value1, String value2) {
+            addCriterion("DEP_INFO between", value1, value2, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkTypeNotBetween(String value1, String value2) {
-            addCriterion("WORK_TYPE not between", value1, value2, "workType");
+        public Criteria andDepInfoNotBetween(String value1, String value2) {
+            addCriterion("DEP_INFO not between", value1, value2, "depInfo");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursIsNull() {
-            addCriterion("WORK_HOURS is null");
+        public Criteria andDcomAuditNumIsNull() {
+            addCriterion("DCOM_AUDIT_NUM is null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursIsNotNull() {
-            addCriterion("WORK_HOURS is not null");
+        public Criteria andDcomAuditNumIsNotNull() {
+            addCriterion("DCOM_AUDIT_NUM is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursEqualTo(String value) {
-            addCriterion("WORK_HOURS =", value, "workHours");
+        public Criteria andDcomAuditNumEqualTo(BigDecimal value) {
+            addCriterion("DCOM_AUDIT_NUM =", value, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursNotEqualTo(String value) {
-            addCriterion("WORK_HOURS <>", value, "workHours");
+        public Criteria andDcomAuditNumNotEqualTo(BigDecimal value) {
+            addCriterion("DCOM_AUDIT_NUM <>", value, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursGreaterThan(String value) {
-            addCriterion("WORK_HOURS >", value, "workHours");
+        public Criteria andDcomAuditNumGreaterThan(BigDecimal value) {
+            addCriterion("DCOM_AUDIT_NUM >", value, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursGreaterThanOrEqualTo(String value) {
-            addCriterion("WORK_HOURS >=", value, "workHours");
+        public Criteria andDcomAuditNumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCOM_AUDIT_NUM >=", value, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursLessThan(String value) {
-            addCriterion("WORK_HOURS <", value, "workHours");
+        public Criteria andDcomAuditNumLessThan(BigDecimal value) {
+            addCriterion("DCOM_AUDIT_NUM <", value, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursLessThanOrEqualTo(String value) {
-            addCriterion("WORK_HOURS <=", value, "workHours");
+        public Criteria andDcomAuditNumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCOM_AUDIT_NUM <=", value, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursLike(String value) {
-            addCriterion("WORK_HOURS like", value, "workHours");
+        public Criteria andDcomAuditNumIn(List<BigDecimal> values) {
+            addCriterion("DCOM_AUDIT_NUM in", values, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursNotLike(String value) {
-            addCriterion("WORK_HOURS not like", value, "workHours");
+        public Criteria andDcomAuditNumNotIn(List<BigDecimal> values) {
+            addCriterion("DCOM_AUDIT_NUM not in", values, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursIn(List<String> values) {
-            addCriterion("WORK_HOURS in", values, "workHours");
+        public Criteria andDcomAuditNumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCOM_AUDIT_NUM between", value1, value2, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursNotIn(List<String> values) {
-            addCriterion("WORK_HOURS not in", values, "workHours");
+        public Criteria andDcomAuditNumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCOM_AUDIT_NUM not between", value1, value2, "dcomAuditNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursBetween(String value1, String value2) {
-            addCriterion("WORK_HOURS between", value1, value2, "workHours");
+        public Criteria andDcomErrorNumIsNull() {
+            addCriterion("DCOM_ERROR_NUM is null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkHoursNotBetween(String value1, String value2) {
-            addCriterion("WORK_HOURS not between", value1, value2, "workHours");
+        public Criteria andDcomErrorNumIsNotNull() {
+            addCriterion("DCOM_ERROR_NUM is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentIsNull() {
-            addCriterion("WORK_CONTENT is null");
+        public Criteria andDcomErrorNumEqualTo(BigDecimal value) {
+            addCriterion("DCOM_ERROR_NUM =", value, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentIsNotNull() {
-            addCriterion("WORK_CONTENT is not null");
+        public Criteria andDcomErrorNumNotEqualTo(BigDecimal value) {
+            addCriterion("DCOM_ERROR_NUM <>", value, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentEqualTo(String value) {
-            addCriterion("WORK_CONTENT =", value, "workContent");
+        public Criteria andDcomErrorNumGreaterThan(BigDecimal value) {
+            addCriterion("DCOM_ERROR_NUM >", value, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentNotEqualTo(String value) {
-            addCriterion("WORK_CONTENT <>", value, "workContent");
+        public Criteria andDcomErrorNumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCOM_ERROR_NUM >=", value, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentGreaterThan(String value) {
-            addCriterion("WORK_CONTENT >", value, "workContent");
+        public Criteria andDcomErrorNumLessThan(BigDecimal value) {
+            addCriterion("DCOM_ERROR_NUM <", value, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentGreaterThanOrEqualTo(String value) {
-            addCriterion("WORK_CONTENT >=", value, "workContent");
+        public Criteria andDcomErrorNumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCOM_ERROR_NUM <=", value, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentLessThan(String value) {
-            addCriterion("WORK_CONTENT <", value, "workContent");
+        public Criteria andDcomErrorNumIn(List<BigDecimal> values) {
+            addCriterion("DCOM_ERROR_NUM in", values, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentLessThanOrEqualTo(String value) {
-            addCriterion("WORK_CONTENT <=", value, "workContent");
+        public Criteria andDcomErrorNumNotIn(List<BigDecimal> values) {
+            addCriterion("DCOM_ERROR_NUM not in", values, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentLike(String value) {
-            addCriterion("WORK_CONTENT like", value, "workContent");
+        public Criteria andDcomErrorNumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCOM_ERROR_NUM between", value1, value2, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentNotLike(String value) {
-            addCriterion("WORK_CONTENT not like", value, "workContent");
+        public Criteria andDcomErrorNumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCOM_ERROR_NUM not between", value1, value2, "dcomErrorNum");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentIn(List<String> values) {
-            addCriterion("WORK_CONTENT in", values, "workContent");
+        public Criteria andDcomPassRateIsNull() {
+            addCriterion("DCOM_PASS_RATE is null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentNotIn(List<String> values) {
-            addCriterion("WORK_CONTENT not in", values, "workContent");
+        public Criteria andDcomPassRateIsNotNull() {
+            addCriterion("DCOM_PASS_RATE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentBetween(String value1, String value2) {
-            addCriterion("WORK_CONTENT between", value1, value2, "workContent");
+        public Criteria andDcomPassRateEqualTo(BigDecimal value) {
+            addCriterion("DCOM_PASS_RATE =", value, "dcomPassRate");
             return (Criteria) this;
         }
 
-        public Criteria andWorkContentNotBetween(String value1, String value2) {
-            addCriterion("WORK_CONTENT not between", value1, value2, "workContent");
+        public Criteria andDcomPassRateNotEqualTo(BigDecimal value) {
+            addCriterion("DCOM_PASS_RATE <>", value, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateGreaterThan(BigDecimal value) {
+            addCriterion("DCOM_PASS_RATE >", value, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCOM_PASS_RATE >=", value, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateLessThan(BigDecimal value) {
+            addCriterion("DCOM_PASS_RATE <", value, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCOM_PASS_RATE <=", value, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateIn(List<BigDecimal> values) {
+            addCriterion("DCOM_PASS_RATE in", values, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateNotIn(List<BigDecimal> values) {
+            addCriterion("DCOM_PASS_RATE not in", values, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCOM_PASS_RATE between", value1, value2, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcomPassRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCOM_PASS_RATE not between", value1, value2, "dcomPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumIsNull() {
+            addCriterion("DP_AUDIT_NUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumIsNotNull() {
+            addCriterion("DP_AUDIT_NUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumEqualTo(BigDecimal value) {
+            addCriterion("DP_AUDIT_NUM =", value, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumNotEqualTo(BigDecimal value) {
+            addCriterion("DP_AUDIT_NUM <>", value, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumGreaterThan(BigDecimal value) {
+            addCriterion("DP_AUDIT_NUM >", value, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DP_AUDIT_NUM >=", value, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumLessThan(BigDecimal value) {
+            addCriterion("DP_AUDIT_NUM <", value, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DP_AUDIT_NUM <=", value, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumIn(List<BigDecimal> values) {
+            addCriterion("DP_AUDIT_NUM in", values, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumNotIn(List<BigDecimal> values) {
+            addCriterion("DP_AUDIT_NUM not in", values, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DP_AUDIT_NUM between", value1, value2, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpAuditNumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DP_AUDIT_NUM not between", value1, value2, "dpAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumIsNull() {
+            addCriterion("DP_ERROR_NUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumIsNotNull() {
+            addCriterion("DP_ERROR_NUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumEqualTo(BigDecimal value) {
+            addCriterion("DP_ERROR_NUM =", value, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumNotEqualTo(BigDecimal value) {
+            addCriterion("DP_ERROR_NUM <>", value, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumGreaterThan(BigDecimal value) {
+            addCriterion("DP_ERROR_NUM >", value, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DP_ERROR_NUM >=", value, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumLessThan(BigDecimal value) {
+            addCriterion("DP_ERROR_NUM <", value, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DP_ERROR_NUM <=", value, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumIn(List<BigDecimal> values) {
+            addCriterion("DP_ERROR_NUM in", values, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumNotIn(List<BigDecimal> values) {
+            addCriterion("DP_ERROR_NUM not in", values, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DP_ERROR_NUM between", value1, value2, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpErrorNumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DP_ERROR_NUM not between", value1, value2, "dpErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateIsNull() {
+            addCriterion("DP_PASS_RATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateIsNotNull() {
+            addCriterion("DP_PASS_RATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateEqualTo(BigDecimal value) {
+            addCriterion("DP_PASS_RATE =", value, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateNotEqualTo(BigDecimal value) {
+            addCriterion("DP_PASS_RATE <>", value, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateGreaterThan(BigDecimal value) {
+            addCriterion("DP_PASS_RATE >", value, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DP_PASS_RATE >=", value, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateLessThan(BigDecimal value) {
+            addCriterion("DP_PASS_RATE <", value, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DP_PASS_RATE <=", value, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateIn(List<BigDecimal> values) {
+            addCriterion("DP_PASS_RATE in", values, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateNotIn(List<BigDecimal> values) {
+            addCriterion("DP_PASS_RATE not in", values, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DP_PASS_RATE between", value1, value2, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpPassRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DP_PASS_RATE not between", value1, value2, "dpPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumIsNull() {
+            addCriterion("DCAR_AUDIT_NUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumIsNotNull() {
+            addCriterion("DCAR_AUDIT_NUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumEqualTo(BigDecimal value) {
+            addCriterion("DCAR_AUDIT_NUM =", value, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumNotEqualTo(BigDecimal value) {
+            addCriterion("DCAR_AUDIT_NUM <>", value, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumGreaterThan(BigDecimal value) {
+            addCriterion("DCAR_AUDIT_NUM >", value, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCAR_AUDIT_NUM >=", value, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumLessThan(BigDecimal value) {
+            addCriterion("DCAR_AUDIT_NUM <", value, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCAR_AUDIT_NUM <=", value, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumIn(List<BigDecimal> values) {
+            addCriterion("DCAR_AUDIT_NUM in", values, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumNotIn(List<BigDecimal> values) {
+            addCriterion("DCAR_AUDIT_NUM not in", values, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCAR_AUDIT_NUM between", value1, value2, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarAuditNumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCAR_AUDIT_NUM not between", value1, value2, "dcarAuditNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumIsNull() {
+            addCriterion("DCAR_ERROR_NUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumIsNotNull() {
+            addCriterion("DCAR_ERROR_NUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumEqualTo(BigDecimal value) {
+            addCriterion("DCAR_ERROR_NUM =", value, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumNotEqualTo(BigDecimal value) {
+            addCriterion("DCAR_ERROR_NUM <>", value, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumGreaterThan(BigDecimal value) {
+            addCriterion("DCAR_ERROR_NUM >", value, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCAR_ERROR_NUM >=", value, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumLessThan(BigDecimal value) {
+            addCriterion("DCAR_ERROR_NUM <", value, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCAR_ERROR_NUM <=", value, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumIn(List<BigDecimal> values) {
+            addCriterion("DCAR_ERROR_NUM in", values, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumNotIn(List<BigDecimal> values) {
+            addCriterion("DCAR_ERROR_NUM not in", values, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCAR_ERROR_NUM between", value1, value2, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarErrorNumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCAR_ERROR_NUM not between", value1, value2, "dcarErrorNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateIsNull() {
+            addCriterion("DCAR_PASS_RATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateIsNotNull() {
+            addCriterion("DCAR_PASS_RATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateEqualTo(BigDecimal value) {
+            addCriterion("DCAR_PASS_RATE =", value, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateNotEqualTo(BigDecimal value) {
+            addCriterion("DCAR_PASS_RATE <>", value, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateGreaterThan(BigDecimal value) {
+            addCriterion("DCAR_PASS_RATE >", value, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCAR_PASS_RATE >=", value, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateLessThan(BigDecimal value) {
+            addCriterion("DCAR_PASS_RATE <", value, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("DCAR_PASS_RATE <=", value, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateIn(List<BigDecimal> values) {
+            addCriterion("DCAR_PASS_RATE in", values, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateNotIn(List<BigDecimal> values) {
+            addCriterion("DCAR_PASS_RATE not in", values, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCAR_PASS_RATE between", value1, value2, "dcarPassRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDcarPassRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("DCAR_PASS_RATE not between", value1, value2, "dcarPassRate");
             return (Criteria) this;
         }
 

@@ -1,21 +1,34 @@
 package com.navinfo.IMS.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class WorkDiary {
+public class MonitorInfo {
     private String id;
 
-    private String empId;
-
-    private String empName;
-
-    private Date workDate;
+    private String version;
 
     private String workType;
 
-    private String workHours;
+    private String section;
 
-    private String workContent;
+    private String workerId;
+
+    private String worker;
+
+    private Date workDate;
+
+    private BigDecimal monitorNum;
+
+    private BigDecimal mErrorNum;
+
+    private BigDecimal mPassRate;
+
+    private String monitorId;
+
+    private String monitor;
+
+    private Date monitorDate;
 
     private String remark;
 
@@ -43,28 +56,12 @@ public class WorkDiary {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getEmpId() {
-        return empId;
+    public String getVersion() {
+        return version;
     }
 
-    public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
-    }
-
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName == null ? null : empName.trim();
-    }
-
-    public Date getWorkDate() {
-        return workDate;
-    }
-
-    public void setWorkDate(Date workDate) {
-        this.workDate = workDate;
+    public void setVersion(String version) {
+        this.version = version == null ? null : version.trim();
     }
 
     public String getWorkType() {
@@ -75,20 +72,84 @@ public class WorkDiary {
         this.workType = workType == null ? null : workType.trim();
     }
 
-    public String getWorkHours() {
-        return workHours;
+    public String getSection() {
+        return section;
     }
 
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours == null ? null : workHours.trim();
+    public void setSection(String section) {
+        this.section = section == null ? null : section.trim();
     }
 
-    public String getWorkContent() {
-        return workContent;
+    public String getWorkerId() {
+        return workerId;
     }
 
-    public void setWorkContent(String workContent) {
-        this.workContent = workContent == null ? null : workContent.trim();
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId == null ? null : workerId.trim();
+    }
+
+    public String getWorker() {
+        return worker;
+    }
+
+    public void setWorker(String worker) {
+        this.worker = worker == null ? null : worker.trim();
+    }
+
+    public Date getWorkDate() {
+        return workDate;
+    }
+
+    public void setWorkDate(Date workDate) {
+        this.workDate = workDate;
+    }
+
+    public BigDecimal getMonitorNum() {
+        return monitorNum;
+    }
+
+    public void setMonitorNum(BigDecimal monitorNum) {
+        this.monitorNum = monitorNum;
+    }
+
+    public BigDecimal getmErrorNum() {
+        return mErrorNum;
+    }
+
+    public void setmErrorNum(BigDecimal mErrorNum) {
+        this.mErrorNum = mErrorNum;
+    }
+
+    public BigDecimal getmPassRate() {
+        return mPassRate;
+    }
+
+    public void setmPassRate(BigDecimal mPassRate) {
+        this.mPassRate = mPassRate;
+    }
+
+    public String getMonitorId() {
+        return monitorId;
+    }
+
+    public void setMonitorId(String monitorId) {
+        this.monitorId = monitorId == null ? null : monitorId.trim();
+    }
+
+    public String getMonitor() {
+        return monitor;
+    }
+
+    public void setMonitor(String monitor) {
+        this.monitor = monitor == null ? null : monitor.trim();
+    }
+
+    public Date getMonitorDate() {
+        return monitorDate;
+    }
+
+    public void setMonitorDate(Date monitorDate) {
+        this.monitorDate = monitorDate;
     }
 
     public String getRemark() {

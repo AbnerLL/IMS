@@ -2,20 +2,20 @@ package com.navinfo.IMS.entity;
 
 import java.util.Date;
 
-public class WorkDiary {
+public class EmpAptitude {
     private String id;
+
+    private String version;
 
     private String empId;
 
     private String empName;
 
-    private Date workDate;
+    private String professionType;
 
-    private String workType;
+    private String workAptitude;
 
-    private String workHours;
-
-    private String workContent;
+    private String auditAptitude;
 
     private String remark;
 
@@ -43,6 +43,14 @@ public class WorkDiary {
         this.id = id == null ? null : id.trim();
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version == null ? null : version.trim();
+    }
+
     public String getEmpId() {
         return empId;
     }
@@ -59,36 +67,28 @@ public class WorkDiary {
         this.empName = empName == null ? null : empName.trim();
     }
 
-    public Date getWorkDate() {
-        return workDate;
+    public String getProfessionType() {
+        return professionType;
     }
 
-    public void setWorkDate(Date workDate) {
-        this.workDate = workDate;
+    public void setProfessionType(String professionType) {
+        this.professionType = professionType == null ? null : professionType.trim();
     }
 
-    public String getWorkType() {
-        return workType;
+    public String getWorkAptitude() {
+        return workAptitude;
     }
 
-    public void setWorkType(String workType) {
-        this.workType = workType == null ? null : workType.trim();
+    public void setWorkAptitude(String workAptitude) {
+        this.workAptitude = workAptitude == null ? null : workAptitude.trim();
     }
 
-    public String getWorkHours() {
-        return workHours;
+    public String getAuditAptitude() {
+        return auditAptitude;
     }
 
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours == null ? null : workHours.trim();
-    }
-
-    public String getWorkContent() {
-        return workContent;
-    }
-
-    public void setWorkContent(String workContent) {
-        this.workContent = workContent == null ? null : workContent.trim();
+    public void setAuditAptitude(String auditAptitude) {
+        this.auditAptitude = auditAptitude == null ? null : auditAptitude.trim();
     }
 
     public String getRemark() {

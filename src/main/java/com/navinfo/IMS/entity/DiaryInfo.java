@@ -1,21 +1,38 @@
 package com.navinfo.IMS.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class WorkDiary {
+public class DiaryInfo {
     private String id;
 
     private String empId;
 
     private String empName;
 
+    private String section;
+
     private Date workDate;
+
+    private BigDecimal workHours;
+
+    private BigDecimal workLoad;
 
     private String workType;
 
-    private String workHours;
+    private String taskType;
 
-    private String workContent;
+    private String taskProvince;
+
+    private String taskLevel;
+
+    private String taskCode;
+
+    private String taskName;
+
+    private String othersItem;
+
+    private String produceProvince;
 
     private String remark;
 
@@ -59,12 +76,36 @@ public class WorkDiary {
         this.empName = empName == null ? null : empName.trim();
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section == null ? null : section.trim();
+    }
+
     public Date getWorkDate() {
         return workDate;
     }
 
     public void setWorkDate(Date workDate) {
         this.workDate = workDate;
+    }
+
+    public BigDecimal getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(BigDecimal workHours) {
+        this.workHours = workHours;
+    }
+
+    public BigDecimal getWorkLoad() {
+        return workLoad;
+    }
+
+    public void setWorkLoad(BigDecimal workLoad) {
+        this.workLoad = workLoad;
     }
 
     public String getWorkType() {
@@ -75,20 +116,60 @@ public class WorkDiary {
         this.workType = workType == null ? null : workType.trim();
     }
 
-    public String getWorkHours() {
-        return workHours;
+    public String getTaskType() {
+        return taskType;
     }
 
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours == null ? null : workHours.trim();
+    public void setTaskType(String taskType) {
+        this.taskType = taskType == null ? null : taskType.trim();
     }
 
-    public String getWorkContent() {
-        return workContent;
+    public String getTaskProvince() {
+        return taskProvince;
     }
 
-    public void setWorkContent(String workContent) {
-        this.workContent = workContent == null ? null : workContent.trim();
+    public void setTaskProvince(String taskProvince) {
+        this.taskProvince = taskProvince == null ? null : taskProvince.trim();
+    }
+
+    public String getTaskLevel() {
+        return taskLevel;
+    }
+
+    public void setTaskLevel(String taskLevel) {
+        this.taskLevel = taskLevel == null ? null : taskLevel.trim();
+    }
+
+    public String getTaskCode() {
+        return taskCode;
+    }
+
+    public void setTaskCode(String taskCode) {
+        this.taskCode = taskCode == null ? null : taskCode.trim();
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName == null ? null : taskName.trim();
+    }
+
+    public String getOthersItem() {
+        return othersItem;
+    }
+
+    public void setOthersItem(String othersItem) {
+        this.othersItem = othersItem == null ? null : othersItem.trim();
+    }
+
+    public String getProduceProvince() {
+        return produceProvince;
+    }
+
+    public void setProduceProvince(String produceProvince) {
+        this.produceProvince = produceProvince == null ? null : produceProvince.trim();
     }
 
     public String getRemark() {

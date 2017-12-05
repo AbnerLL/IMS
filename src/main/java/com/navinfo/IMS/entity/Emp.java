@@ -12,6 +12,8 @@ public class Emp {
 
     private Date empHiredate;
 
+    private String rank;
+
     private BigDecimal empEntryAge;
 
     private String empDept;
@@ -24,7 +26,21 @@ public class Emp {
 
     private String empTel;
 
+    private String empAddress;
+
+    private String remark;
+
+    private String status;
+
+    private String creatorId;
+
+    private String creator;
+
     private Date createTime;
+
+    private String updaterId;
+
+    private String updater;
 
     private Date updateTime;
 
@@ -68,6 +84,14 @@ public class Emp {
 
     public void setEmpHiredate(Date empHiredate) {
         this.empHiredate = empHiredate;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank == null ? null : rank.trim();
     }
 
     public BigDecimal getEmpEntryAge() {
@@ -118,12 +142,68 @@ public class Emp {
         this.empTel = empTel == null ? null : empTel.trim();
     }
 
+    public String getEmpAddress() {
+        return empAddress;
+    }
+
+    public void setEmpAddress(String empAddress) {
+        this.empAddress = empAddress == null ? null : empAddress.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId == null ? null : creatorId.trim();
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUpdaterId() {
+        return updaterId;
+    }
+
+    public void setUpdaterId(String updaterId) {
+        this.updaterId = updaterId == null ? null : updaterId.trim();
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater == null ? null : updater.trim();
     }
 
     public Date getUpdateTime() {
