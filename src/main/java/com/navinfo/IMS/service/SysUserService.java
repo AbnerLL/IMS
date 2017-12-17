@@ -11,15 +11,15 @@ import java.util.List;
  */
 public interface SysUserService {
 
-    public boolean getSysUser(String username,String password);
+    boolean getSysUser(String username,String password);
 
-    public List getAllUser();
+    List getAllUser();
 
-    public boolean insertUser(SysUser sysUser);
+    boolean insertUser(SysUser sysUser);
 
-    public List<SysUser> getUserById(String userId);
+    SysUser getUserById(String userId);
 
-    public boolean updateUser(SysUser user);
+    boolean updateUser(SysUser user);
 
-    public boolean deleteUser(String ids);
+    boolean deleteUser(String ids);
 }
