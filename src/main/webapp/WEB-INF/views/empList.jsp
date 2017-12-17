@@ -398,6 +398,9 @@
             },{
                 field:"empTel",
                 title:"联系方式"
+            },{
+                field:"empAddress",
+                title:"现住地址"
             }]
         });
     }
