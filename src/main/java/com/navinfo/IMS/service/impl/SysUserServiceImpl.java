@@ -21,8 +21,8 @@ public class SysUserServiceImpl implements SysUserService{
 
     /**
      * 根据用户名获取用户
-     * @param username
-     * @return
+     * @param username 用户名
+     * @return boolean
      */
     public boolean getSysUser(String username,String password){
         SysUserExample example=new SysUserExample();
@@ -33,18 +33,17 @@ public class SysUserServiceImpl implements SysUserService{
 
     /**
      * 查询所有数据
-     * @return
+     * @return list
      */
     public List getAllUser(){
         SysUserExample sysUserExample=new SysUserExample();
         sysUserExample.setOrderByClause("create_time asc");
-        List list=sysUserMapper.selectByExample(sysUserExample);
-        return list;
+        return sysUserMapper.selectByExample(sysUserExample);
     }
 
     /**
      * 新增用户
-     * @param sysUser
+     * @param sysUser 用户对象
      */
     public boolean insertUser(SysUser sysUser){
         //设置创建时间
@@ -56,26 +55,16 @@ public class SysUserServiceImpl implements SysUserService{
     /**
      * 根据主键获取用户
      * 可以根据分隔符来获取多位用户
-     * @return
+     * @return SysUser
      */
-    public List<SysUser> getUserById(String userId){
-        List<SysUser> users=new ArrayList<SysUser>();
-        if (!userId.contains(",")){
-            users.add(this.sysUserMapper.selectByPrimaryKey(userId));
-        }else{
-            List ids=Arrays.asList(userId.split(","));
-            SysUserExample example=new SysUserExample();
-            example.or().andIdIn(ids);
-            this.sysUserMapper.selectByExample(example);
-        }
-
-        return users;
+    public SysUser getUserById(String userId){
+        return this.sysUserMapper.selectByPrimaryKey(userId);
     }
 
     /**
      * 根据ID动态更新用户数据
-     * @param user
-     * @return
+     * @param user 用户对象
+     * @return boolean
      */
     public boolean updateUser(SysUser user){
         int num=sysUserMapper.updateByPrimaryKeySelective(user);
@@ -84,11 +73,11 @@ public class SysUserServiceImpl implements SysUserService{
 
     /**
      * 删除用户
-     * @param ids
-     * @return
+     * @param ids 用户的id 一个或多个
+     * @return boolean
      */
     public boolean deleteUser(String ids){
-        List list=Arrays.asList(ids.split(","));
+        List<String> list=Arrays.asList(ids.split(","));
         SysUserExample example=new SysUserExample();
         example.or().andIdIn(list);
         int num=sysUserMapper.deleteByExample(example);
