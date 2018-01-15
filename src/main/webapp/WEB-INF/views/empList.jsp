@@ -128,15 +128,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="empPost_insert_select" class="control-label col-sm-2">职务名称</label>
+                        <label for="empDep_insert_select" class="control-label col-sm-2">所属部门</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="empPost_insert_select" name="empPost">
-                                <option value="部门经理">部门经理</option>
-                                <option value="科室经理">科室经理</option>
-                                <option value="项目经理">项目经理</option>
-                                <option value="项目助理">项目助理</option>
-                                <option value="数据工程师">数据工程师</option>
-                                <option value="质量工程师">质量工程师</option>
+                            <select class="form-control" id="empDep_insert_select" name="empDept">
+                                <option value="数据库制作部">数据库制作部</option>
+                                <option value="数据库制作部西安分部">数据库制作部西安分部</option>
                             </select>
                         </div>
                     </div>
@@ -144,24 +140,27 @@
                         <label for="empSec_insert_select" class="control-label col-sm-2">所属科室</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="empSec_insert_select" name="empSec">
-                                <option value="品质管理室">品质管理室</option>
-                                <option value="项目一组">项目一组</option>
-                                <option value="项目二组">项目二组</option>
-                                <option value="项目三组">项目三组</option>
-                                <option value="项目四组">项目四组</option>
-                                <option value="项目五组">项目五组</option>
-                                <option value="项目六组">项目六组</option>
-                                <option value="武汉项目组">武汉项目组</option>
+                                <%--<option value="品质管理室">品质管理室</option>--%>
+                                <%--<option value="项目一组">项目一组</option>--%>
+                                <%--<option value="项目二组">项目二组</option>--%>
+                                <%--<option value="项目三组">项目三组</option>--%>
+                                <%--<option value="项目四组">项目四组</option>--%>
+                                <%--<option value="项目五组">项目五组</option>--%>
+                                <%--<option value="项目六组">项目六组</option>--%>
+                                <%--<option value="武汉项目组">武汉项目组</option>--%>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="empDep_insert_select" class="control-label col-sm-2">所属部门</label>
+                        <label for="empPost_insert_select" class="control-label col-sm-2">职务名称</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="empDep_insert_select" name="empDept">
-                                <option value="北京数据库制作部">北京数据库制作部</option>
-                                <option value="武汉数据库制作部">武汉数据库制作部</option>
-                                <option value="西安数据库制作部">西安数据库制作部</option>
+                            <select class="form-control" id="empPost_insert_select" name="empPost">
+                                <%--<option value="部门经理">部门经理</option>--%>
+                                <%--<option value="科室经理">科室经理</option>--%>
+                                <%--<option value="项目经理">项目经理</option>--%>
+                                <%--<option value="项目助理">项目助理</option>--%>
+                                <%--<option value="数据工程师">数据工程师</option>--%>
+                                <%--<option value="质量工程师">质量工程师</option>--%>
                             </select>
                         </div>
                     </div>
@@ -227,15 +226,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="empPost_update_select" class="control-label col-sm-2">职务名称</label>
+                        <label for="empDep_update_select" class="control-label col-sm-2">所属部门</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="empPost_update_select" name="empPost">
-                                <option value="部门经理">部门经理</option>
-                                <option value="科室经理">科室经理</option>
-                                <option value="项目经理">项目经理</option>
-                                <option value="项目助理">项目助理</option>
-                                <option value="数据工程师">数据工程师</option>
-                                <option value="质量工程师">质量工程师</option>
+                            <select class="form-control" id="empDep_update_select" name="empDept">
+                                <option value="数据库制作部">数据库制作部</option>
+                                <option value="数据库制作部西安分部">数据库制作部西安分部</option>
                             </select>
                         </div>
                     </div>
@@ -243,24 +238,27 @@
                         <label for="empSec_update_select" class="control-label col-sm-2">所属科室</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="empSec_update_select" name="empSec">
-                                <option value="品质管理室">品质管理室</option>
-                                <option value="项目一组">项目一组</option>
-                                <option value="项目二组">项目二组</option>
-                                <option value="项目三组">项目三组</option>
-                                <option value="项目四组">项目四组</option>
-                                <option value="项目五组">项目五组</option>
-                                <option value="项目六组">项目六组</option>
-                                <option value="武汉项目组">武汉项目组</option>
+                                <%--<option value="品质管理室">品质管理室</option>--%>
+                                <%--<option value="项目一组">项目一组</option>--%>
+                                <%--<option value="项目二组">项目二组</option>--%>
+                                <%--<option value="项目三组">项目三组</option>--%>
+                                <%--<option value="项目四组">项目四组</option>--%>
+                                <%--<option value="项目五组">项目五组</option>--%>
+                                <%--<option value="项目六组">项目六组</option>--%>
+                                <%--<option value="武汉项目组">武汉项目组</option>--%>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="empDep_update_select" class="control-label col-sm-2">所属部门</label>
+                        <label for="empPost_update_select" class="control-label col-sm-2">职务名称</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="empDep_update_select" name="empDept">
-                                <option value="北京数据库制作部">北京数据库制作部</option>
-                                <option value="武汉数据库制作部">武汉数据库制作部</option>
-                                <option value="西安数据库制作部">西安数据库制作部</option>
+                            <select class="form-control" id="empPost_update_select" name="empPost">
+                                <%--<option value="部门经理">部门经理</option>--%>
+                                <%--<option value="科室经理">科室经理</option>--%>
+                                <%--<option value="项目经理">项目经理</option>--%>
+                                <%--<option value="项目助理">项目助理</option>--%>
+                                <%--<option value="数据工程师">数据工程师</option>--%>
+                                <%--<option value="质量工程师">质量工程师</option>--%>
                             </select>
                         </div>
                     </div>
@@ -410,6 +408,8 @@
         $("#add_form")[0].reset();
         //2.弹出模态框
         $("#add_modal").modal();
+        //3.初始化下拉选
+        $("#empDep_insert_select").change();
     });
     //展开或收缩查询面板
     $("#search_toggle_btn").click(function(){
@@ -474,9 +474,13 @@
         $("#edit_modal input[name=empSex]").val([empInfo[0].empSex]);
         $("#empHiredate_update_input").val(dateFormatter(new Date(empInfo[0].empHiredate)));
         $("#empEntryAge_update_input").val(empInfo[0].empEntryAge);
-        $("#empPost_update_select").val(empInfo[0].empPost);
         $("#empDep_update_select").val(empInfo[0].empDept);
+        //触发部门下拉选的单击事件
+        $("#empDep_update_select").change();
         $("#empSec_update_select").val(empInfo[0].empSec);
+        //触发科室下拉选的单击事件
+        $("#empSec_update_select").change();
+        $("#empPost_update_select").val(empInfo[0].empPost);
         $("#empTel_update_select").val(empInfo[0].empTel);
         //给更新按钮添加个update-id属性用来存储主键empId
         $("#update_btn").attr("edit-id",empInfo[0].empId);
@@ -538,6 +542,75 @@
             }
         });
     }
+    //部门职位、科室、职务下拉选
+    var deptMap={
+        "数据库制作部":{
+            "部门":["部门经理","部门副经理","部门经理助理","部门行政助理"],
+            "北京项目一组":["数据工程师","项目经理助理","项目经理"],
+            "北京项目二组":["数据工程师","项目经理助理","项目经理"],
+            "北京项目三组":["数据工程师","项目经理助理","项目经理"],
+            "北京项目四组":["数据工程师","项目经理助理","项目经理"],
+            "武汉项目组":["数据工程师","项目经理助理","项目经理"],
+            "物联网小组":["数据工程师","项目经理助理","项目经理"],
+            "代理店":["数据工程师","项目经理助理","项目经理"],
+            "品质管理室（北京）":["室经理","室副经理","品质工程师"],
+            "生产管理室（北京）":["室经理","室副经理","生产管理工程师"],
+            "技术管理室（北京）":["室经理","室副经理","技术工程师"]
+        },
+        "数据库制作部西安分部":{
+            "部门":["部门经理","部门副经理","部门行政助理"],
+            "西安项目一组":["数据工程师","项目经理助理","项目经理"],
+            "西安项目二组":["数据工程师","项目经理助理","项目经理"],
+            "西安项目三组":["数据工程师","项目经理助理","项目经理"],
+            "西安项目四组":["数据工程师","项目经理助理","项目经理"],
+            "西安项目五组":["数据工程师","项目经理助理","项目经理"],
+            "西安项目六组":["数据工程师","项目经理助理","项目经理"],
+            "综合项目组":["数据工程师","项目经理助理","项目经理"],
+            "品质管理室（西安）":["室经理","室副经理","品质工程师"],
+            "生产管理室（西安）":["室经理","室副经理","生产管理工程师"],
+            "技术管理室（西安）":["室经理","室副经理","技术工程师"]
+        }
+    };
+    //部门修改关联科室下拉选（修改界面）
+    $("#empDep_update_select").change(function(){
+        $("#empSec_update_select").empty();
+        var secMap=deptMap[this.value];
+        for(var key in secMap){
+            $("#empSec_update_select").append("<option value='"+key+"'>"+key+"</option>");
+        }
+        //触发科室的单击事件
+        $("#empSec_update_select").change();
+    });
+    //科室修改关联职务下拉选（修改界面）
+    $("#empSec_update_select").change(function(){
+        $("#empPost_update_select").empty();
+        var deptSelected=$("#empDep_update_select").val();
+        var secSelected=$("#empSec_update_select").val();
+        var postArray=deptMap[deptSelected][secSelected];
+        for(var index in postArray){
+            $("#empPost_update_select").append("<option value='"+postArray[index]+"'>"+postArray[index]+"</option>")
+        }
+    });
+    //部门修改关联科室下拉选（新增界面）
+    $("#empDep_insert_select").change(function(){
+        $("#empSec_insert_select").empty();
+        var secMap=deptMap[this.value];
+        for(var key in secMap){
+            $("#empSec_insert_select").append("<option value='"+key+"'>"+key+"</option>");
+        }
+        //触发科室的单击事件
+        $("#empSec_insert_select").change();
+    });
+    //科室修改关联职务下拉选(新增界面)
+    $("#empSec_insert_select").change(function(){
+        $("#empPost_insert_select").empty();
+        var deptSelected=$("#empDep_insert_select").val();
+        var secSelected=$("#empSec_insert_select").val();
+        var postArray=deptMap[deptSelected][secSelected];
+        for(var index in postArray){
+            $("#empPost_insert_select").append("<option value='"+postArray[index]+"'>"+postArray[index]+"</option>")
+        }
+    });
 </script>
 </body>
 </html>
