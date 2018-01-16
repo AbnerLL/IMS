@@ -5,6 +5,7 @@
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="EMP_ID" jdbcType="VARCHAR" property="empId" />
     <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
     <result column="WORK_DATE" jdbcType="TIMESTAMP" property="workDate" />
     <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType" />
     <result column="WORK_HOURS" jdbcType="VARCHAR" property="workHours" />
@@ -78,8 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, EMP_ID, EMP_NAME, WORK_DATE, WORK_TYPE, WORK_HOURS, WORK_CONTENT, REMARK, STATUS, 
-    DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
+    ID, EMP_ID, EMP_NAME, SECTION, WORK_DATE, WORK_TYPE, WORK_HOURS, WORK_CONTENT, REMARK, 
+    STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.WorkDiaryExample" resultMap="BaseResultMap">
     select
@@ -113,17 +114,17 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.IMS.entity.WorkDiary">
     insert into IMS.WORK_DIARY (ID, EMP_ID, EMP_NAME, 
-      WORK_DATE, WORK_TYPE, WORK_HOURS, 
-      WORK_CONTENT, REMARK, STATUS, 
-      DEL_FLAG, CREATOR_ID, CREATOR, 
-      CREATE_TIME, UPDATER_ID, UPDATER, 
-      UPDATE_TIME)
+      SECTION, WORK_DATE, WORK_TYPE, 
+      WORK_HOURS, WORK_CONTENT, REMARK, 
+      STATUS, DEL_FLAG, CREATOR_ID, 
+      CREATOR, CREATE_TIME, UPDATER_ID, 
+      UPDATER, UPDATE_TIME)
     values (#{id,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
-      #{workDate,jdbcType=TIMESTAMP}, #{workType,jdbcType=VARCHAR}, #{workHours,jdbcType=VARCHAR}, 
-      #{workContent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{section,jdbcType=VARCHAR}, #{workDate,jdbcType=TIMESTAMP}, #{workType,jdbcType=VARCHAR}, 
+      #{workHours,jdbcType=VARCHAR}, #{workContent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.WorkDiary">
     insert into IMS.WORK_DIARY
@@ -136,6 +137,9 @@
       </if>
       <if test="empName != null">
         EMP_NAME,
+      </if>
+      <if test="section != null">
+        SECTION,
       </if>
       <if test="workDate != null">
         WORK_DATE,
@@ -186,6 +190,9 @@
       </if>
       <if test="empName != null">
         #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
       </if>
       <if test="workDate != null">
         #{workDate,jdbcType=TIMESTAMP},
@@ -246,6 +253,9 @@
       <if test="record.empName != null">
         EMP_NAME = #{record.empName,jdbcType=VARCHAR},
       </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
       <if test="record.workDate != null">
         WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
       </if>
@@ -295,6 +305,7 @@
     set ID = #{record.id,jdbcType=VARCHAR},
       EMP_ID = #{record.empId,jdbcType=VARCHAR},
       EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
       WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
       WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
       WORK_HOURS = #{record.workHours,jdbcType=VARCHAR},
@@ -320,6 +331,9 @@
       </if>
       <if test="empName != null">
         EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
       </if>
       <if test="workDate != null">
         WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
@@ -367,6 +381,7 @@
     update IMS.WORK_DIARY
     set EMP_ID = #{empId,jdbcType=VARCHAR},
       EMP_NAME = #{empName,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
       WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
       WORK_TYPE = #{workType,jdbcType=VARCHAR},
       WORK_HOURS = #{workHours,jdbcType=VARCHAR},
