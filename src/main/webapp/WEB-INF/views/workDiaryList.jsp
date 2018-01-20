@@ -138,9 +138,9 @@
                     <div class="col-sm-11">
                         <form class="form-horizontal" id="edit_form">
                             <div class="form-group form-group-sm">
-                                <label for="empId_update_input" class="col-sm-2 control-label">员工编号</label>
+                                <label for="empId_update_p" class="col-sm-2 control-label">员工编号</label>
                                 <div class="col-sm-4">
-                                    <p type="text" class="form-control-static" name="empId" id="empId_update_input"></p>
+                                    <p type="text" class="form-control-static" name="empId" id="empId_update_p"></p>
                                 </div>
                                 <label for="empName_update_input" class="col-sm-2 control-label">员工名称</label>
                                 <div class="col-sm-4">
@@ -400,7 +400,7 @@
     }
     //在修改模态框上显示对象
     function showEditDataDetail(obj){
-        $("#empId_update_input").text(obj.empId);
+        $("#empId_update_p").text(obj.empId);
         $("#empName_update_input").val(obj.empName);
         $("#section_update_select").val(obj.section);
         $("#workType_update_select").val(obj.workType);
