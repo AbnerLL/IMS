@@ -193,7 +193,14 @@
             };
         }
     }
-
+    //时间格式化参数为当前值、当前行、当前index
+    function dateFormatter(value,row,index){
+        var currentTime=new Date(value);
+        var currentYear=currentTime.getFullYear();
+        var currentMonth=currentTime.getMonth()+1;
+        var currentDate=currentTime.getDate();
+        return currentYear+"/"+currentMonth+"/"+currentDate;
+    }
     //初始化表格配置function
     function initTable(){
         $("#table_list").bootstrapTable({
@@ -227,8 +234,9 @@
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
-                field:"version",
-                title:"版本号"
+                field:"testDate",
+                title:"版本号",
+                formatter:dateFormatter
             },{
                 field:"empId",
                 title:"员工编号"

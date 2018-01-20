@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: luozhihui
-  Date: 2017/11/26
-  Time: 20:44
+  Date: 2018/1/15
+  Time: 22:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 <head>
     <%@include file="head.jsp"%>
-    <title>监察统计表</title>
+    <title>问题溯源</title>
     <%--针对手机屏幕的设置--%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -91,7 +91,7 @@
     function initTable(){
         $("#table_list").bootstrapTable({
             //获取数据的url
-            url:"${basePath}/monitorInfos",
+            url:"${basePath}/questionSources",
             method: 'get',//请求方式
             toolbar: '#toolbar',                //工具按钮用哪个容器
 //            classes:"table table-hover table-bordered",        //设置table的class属性
@@ -120,39 +120,26 @@
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
-                field:"monitorDate",
-                title:"监察日期",
-                formatter:dateFormatter
-            },{
-                field:"monitor",
-                title:"监察员"
-            },{
                 field:"version",
-                title:"作业版本"
+                title:"版本号",
             },{
-                field:"workType",
-                title:"作业类型"
+                field:"empId",
+                title:"员工ID"
+            },{
+                field:"empName",
+                title:"员工姓名"
             },{
                 field:"section",
                 title:"项目组"
             },{
-                field:"workerId",
-                title:"作业员编号",
+                field:"errorDescription",
+                title:"问题描述",
             },{
-                field:"worker",
-                title:"作业员"
+                field:"checkResult",
+                title:"问题调查结果"
             },{
-                field:"monitorNum",
-                title:"监察量"
-            },{
-                field:"mErrorNum",
-                title:"错误量"
-            },{
-                field:"mPassRate",
-                title:"合格率"
-            },{
-                field:"remark",
-                title:"备注"
+                field:"occurReason",
+                title:"问题发生原因"
             }]
         });
     }

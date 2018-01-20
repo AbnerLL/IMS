@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 员工信息的Controller
@@ -21,13 +22,14 @@ public class EmpController {
 
     /**
      * 根据分页信息和关键词来获取员工信息
-     * @param pageSize
-     * @param pageNum
+     * @param map 用来存放页面传来的参数
      * @return
      */
     @RequestMapping(value="/emps",method = RequestMethod.GET)
     @ResponseBody
-    public Msg findEmps(@RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum){
+    public Msg findEmps(@RequestParam Map<String,Object> map){
+        Integer pageSize=new Integer((String)map.get("pageSize"));
+        Integer pageNum=new Integer((String) map.get("pageNum"));
         PageHelper.startPage(pageNum,pageSize);
         List emps=empService.findAllEmp();
         PageInfo pageInfo=new PageInfo(emps);

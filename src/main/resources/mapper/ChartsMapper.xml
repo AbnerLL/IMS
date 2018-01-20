@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.ChartsMapper">
+    <select id="findEmpAddressGroup" resultType="map">
+        SELECT t.emp_address AS address ,COUNT (*) AS num FROM emp t WHERE t.emp_address IS NOT NULL GROUP BY t.emp_address
+    </select>
+    <select id="findEmpGenderGroup" resultType="map">
+        SELECT  t.emp_sex AS gender,COUNT (*) num FROM emp t WHERE t.emp_sex IS NOT NULL GROUP BY t.emp_sex
+    </select>
+    <select id="findEmpSLingStat" resultType="map">
+        SELECT t.emp_entry_age AS age ,count(*) ageNum FROM emp t WHERE t.emp_entry_age IS NOT NULL GROUP BY t.emp_entry_age
+    </select>
+    <select id="findRoadVersionTotalNum" resultType="map">
+        select t11.version,t11.audit_num,t11.audit_error_num,t222.monitor_num,t222.m_error_num
+        from (select t1.*  from (SELECT t.version,SUM (t.audit_num) AS audit_num,SUM (t.error_num) AS audit_error_num FROM road_report t GROUP BY t.version) t1 ) t11
+        inner join
+        (select t22.* from (SELECT t2.version,SUM (t2.monitor_num) AS monitor_num,SUM (t2.m_error_num) AS m_error_num FROM monitor_info t2 where t2.work_type='道路' GROUP BY t2.version) t22) t222
+        on t11.version=t222.version
+    </select>
+    <select id="findPoiVersionTotalNum" resultType="map">
+        select t11.version,t11.audit_num,t11.audit_error_num,t22.monitor_num,t22.m_error_num from
+        (select t.version,
+                sum(t.cp_audit_num)+sum(t.ca_audit_num)+sum(t.ep_audit_num)+sum(t.ea_audit_num) as audit_num,
+                sum(t.cp_error_num)+sum(t.ca_error_num)+sum(t.ep_error_num)+sum(t.ea_error_num) as audit_error_num
+        from poi_report t group by t.version) t11
+        inner join
+        (SELECT t2.version,SUM (t2.monitor_num) AS monitor_num,SUM (t2.m_error_num) AS m_error_num FROM monitor_info t2 where t2.work_type!='道路' GROUP BY t2.version) t22
+        on t11.version=t22.version
+    </select>
+
+</mapper>

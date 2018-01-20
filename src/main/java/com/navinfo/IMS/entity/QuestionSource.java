@@ -2,8 +2,10 @@ package com.navinfo.IMS.entity;
 
 import java.util.Date;
 
-public class WorkDiary {
+public class QuestionSource {
     private String id;
+
+    private String version;
 
     private String empId;
 
@@ -11,13 +13,11 @@ public class WorkDiary {
 
     private String section;
 
-    private Date workDate;
+    private String errorDescription;
 
-    private String workType;
+    private String checkResult;
 
-    private String workHours;
-
-    private String workContent;
+    private String occurReason;
 
     private String remark;
 
@@ -45,6 +45,14 @@ public class WorkDiary {
         this.id = id == null ? null : id.trim();
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version == null ? null : version.trim();
+    }
+
     public String getEmpId() {
         return empId;
     }
@@ -69,36 +77,28 @@ public class WorkDiary {
         this.section = section == null ? null : section.trim();
     }
 
-    public Date getWorkDate() {
-        return workDate;
+    public String getErrorDescription() {
+        return errorDescription;
     }
 
-    public void setWorkDate(Date workDate) {
-        this.workDate = workDate;
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription == null ? null : errorDescription.trim();
     }
 
-    public String getWorkType() {
-        return workType;
+    public String getCheckResult() {
+        return checkResult;
     }
 
-    public void setWorkType(String workType) {
-        this.workType = workType == null ? null : workType.trim();
+    public void setCheckResult(String checkResult) {
+        this.checkResult = checkResult == null ? null : checkResult.trim();
     }
 
-    public String getWorkHours() {
-        return workHours;
+    public String getOccurReason() {
+        return occurReason;
     }
 
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours == null ? null : workHours.trim();
-    }
-
-    public String getWorkContent() {
-        return workContent;
-    }
-
-    public void setWorkContent(String workContent) {
-        this.workContent = workContent == null ? null : workContent.trim();
+    public void setOccurReason(String occurReason) {
+        this.occurReason = occurReason == null ? null : occurReason.trim();
     }
 
     public String getRemark() {

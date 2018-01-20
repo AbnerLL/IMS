@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.navinfo.IMS.dao.TestGradeMapper">
-  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.TestGrade">
+<mapper namespace="com.navinfo.IMS.dao.QuestionSourceMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.QuestionSource">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="VERSION" jdbcType="VARCHAR" property="version" />
     <result column="EMP_ID" jdbcType="VARCHAR" property="empId" />
     <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
     <result column="SECTION" jdbcType="VARCHAR" property="section" />
-    <result column="PAPER_GRADE" jdbcType="DECIMAL" property="paperGrade" />
-    <result column="COM_GRADE_ROAD" jdbcType="DECIMAL" property="comGradeRoad" />
-    <result column="COM_GRADE_POI" jdbcType="DECIMAL" property="comGradePoi" />
-    <result column="TOTAL_GRADE" jdbcType="DECIMAL" property="totalGrade" />
-    <result column="TEST_DATE" jdbcType="TIMESTAMP" property="testDate" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ERROR_DESCRIPTION" jdbcType="VARCHAR" property="errorDescription" />
+    <result column="CHECK_RESULT" jdbcType="VARCHAR" property="checkResult" />
+    <result column="OCCUR_REASON" jdbcType="VARCHAR" property="occurReason" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
     <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
-    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
-    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <result column="ATTR1" jdbcType="VARCHAR" property="attr1" />
-    <result column="ATTR2" jdbcType="VARCHAR" property="attr2" />
-    <result column="ATTR3" jdbcType="VARCHAR" property="attr3" />
-    <result column="ATTR4" jdbcType="VARCHAR" property="attr4" />
-    <result column="ATTR5" jdbcType="VARCHAR" property="attr5" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,17 +79,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, VERSION, EMP_ID, EMP_NAME, SECTION, PAPER_GRADE, COM_GRADE_ROAD, COM_GRADE_POI, 
-    TOTAL_GRADE, TEST_DATE, CREATE_TIME, CREATOR_ID, CREATOR, UPDATE_TIME, UPDATER_ID, 
-    UPDATER, STATUS, ATTR1, ATTR2, ATTR3, ATTR4, ATTR5
+    ID, VERSION, EMP_ID, EMP_NAME, SECTION, ERROR_DESCRIPTION, CHECK_RESULT, OCCUR_REASON, 
+    REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, 
+    UPDATE_TIME
   </sql>
-  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.TestGradeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.QuestionSourceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from IMS.TEST_GRADE
+    from IMS.QUESTION_SOURCE
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -105,39 +100,35 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from IMS.TEST_GRADE
+    from IMS.QUESTION_SOURCE
     where ID = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from IMS.TEST_GRADE
+    delete from IMS.QUESTION_SOURCE
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.TestGradeExample">
-    delete from IMS.TEST_GRADE
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.QuestionSourceExample">
+    delete from IMS.QUESTION_SOURCE
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.navinfo.IMS.entity.TestGrade">
-    insert into IMS.TEST_GRADE (ID, VERSION, EMP_ID, 
-      EMP_NAME, SECTION, PAPER_GRADE, 
-      COM_GRADE_ROAD, COM_GRADE_POI, TOTAL_GRADE, 
-      TEST_DATE, CREATE_TIME, CREATOR_ID, 
-      CREATOR, UPDATE_TIME, UPDATER_ID, 
-      UPDATER, STATUS, ATTR1, 
-      ATTR2, ATTR3, ATTR4, 
-      ATTR5)
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.QuestionSource">
+    insert into IMS.QUESTION_SOURCE (ID, VERSION, EMP_ID, 
+      EMP_NAME, SECTION, ERROR_DESCRIPTION, 
+      CHECK_RESULT, OCCUR_REASON, REMARK, 
+      STATUS, DEL_FLAG, CREATOR_ID, 
+      CREATOR, CREATE_TIME, UPDATER_ID, 
+      UPDATER, UPDATE_TIME)
     values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
-      #{empName,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{paperGrade,jdbcType=DECIMAL}, 
-      #{comGradeRoad,jdbcType=DECIMAL}, #{comGradePoi,jdbcType=DECIMAL}, #{totalGrade,jdbcType=DECIMAL}, 
-      #{testDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
-      #{updater,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{attr1,jdbcType=VARCHAR}, 
-      #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}, #{attr4,jdbcType=VARCHAR}, 
-      #{attr5,jdbcType=VARCHAR})
+      #{empName,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{errorDescription,jdbcType=VARCHAR}, 
+      #{checkResult,jdbcType=VARCHAR}, #{occurReason,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.TestGrade">
-    insert into IMS.TEST_GRADE
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.QuestionSource">
+    insert into IMS.QUESTION_SOURCE
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         ID,
@@ -154,23 +145,23 @@
       <if test="section != null">
         SECTION,
       </if>
-      <if test="paperGrade != null">
-        PAPER_GRADE,
+      <if test="errorDescription != null">
+        ERROR_DESCRIPTION,
       </if>
-      <if test="comGradeRoad != null">
-        COM_GRADE_ROAD,
+      <if test="checkResult != null">
+        CHECK_RESULT,
       </if>
-      <if test="comGradePoi != null">
-        COM_GRADE_POI,
+      <if test="occurReason != null">
+        OCCUR_REASON,
       </if>
-      <if test="totalGrade != null">
-        TOTAL_GRADE,
+      <if test="remark != null">
+        REMARK,
       </if>
-      <if test="testDate != null">
-        TEST_DATE,
+      <if test="status != null">
+        STATUS,
       </if>
-      <if test="createTime != null">
-        CREATE_TIME,
+      <if test="delFlag != null">
+        DEL_FLAG,
       </if>
       <if test="creatorId != null">
         CREATOR_ID,
@@ -178,8 +169,8 @@
       <if test="creator != null">
         CREATOR,
       </if>
-      <if test="updateTime != null">
-        UPDATE_TIME,
+      <if test="createTime != null">
+        CREATE_TIME,
       </if>
       <if test="updaterId != null">
         UPDATER_ID,
@@ -187,23 +178,8 @@
       <if test="updater != null">
         UPDATER,
       </if>
-      <if test="status != null">
-        STATUS,
-      </if>
-      <if test="attr1 != null">
-        ATTR1,
-      </if>
-      <if test="attr2 != null">
-        ATTR2,
-      </if>
-      <if test="attr3 != null">
-        ATTR3,
-      </if>
-      <if test="attr4 != null">
-        ATTR4,
-      </if>
-      <if test="attr5 != null">
-        ATTR5,
+      <if test="updateTime != null">
+        UPDATE_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -222,23 +198,23 @@
       <if test="section != null">
         #{section,jdbcType=VARCHAR},
       </if>
-      <if test="paperGrade != null">
-        #{paperGrade,jdbcType=DECIMAL},
+      <if test="errorDescription != null">
+        #{errorDescription,jdbcType=VARCHAR},
       </if>
-      <if test="comGradeRoad != null">
-        #{comGradeRoad,jdbcType=DECIMAL},
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=VARCHAR},
       </if>
-      <if test="comGradePoi != null">
-        #{comGradePoi,jdbcType=DECIMAL},
+      <if test="occurReason != null">
+        #{occurReason,jdbcType=VARCHAR},
       </if>
-      <if test="totalGrade != null">
-        #{totalGrade,jdbcType=DECIMAL},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="testDate != null">
-        #{testDate,jdbcType=TIMESTAMP},
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
       </if>
       <if test="creatorId != null">
         #{creatorId,jdbcType=VARCHAR},
@@ -246,8 +222,8 @@
       <if test="creator != null">
         #{creator,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updaterId != null">
         #{updaterId,jdbcType=VARCHAR},
@@ -255,34 +231,19 @@
       <if test="updater != null">
         #{updater,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="attr1 != null">
-        #{attr1,jdbcType=VARCHAR},
-      </if>
-      <if test="attr2 != null">
-        #{attr2,jdbcType=VARCHAR},
-      </if>
-      <if test="attr3 != null">
-        #{attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="attr4 != null">
-        #{attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="attr5 != null">
-        #{attr5,jdbcType=VARCHAR},
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.navinfo.IMS.entity.TestGradeExample" resultType="java.lang.Long">
-    select count(*) from IMS.TEST_GRADE
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.QuestionSourceExample" resultType="java.lang.Long">
+    select count(*) from IMS.QUESTION_SOURCE
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update IMS.TEST_GRADE
+    update IMS.QUESTION_SOURCE
     <set>
       <if test="record.id != null">
         ID = #{record.id,jdbcType=VARCHAR},
@@ -299,23 +260,23 @@
       <if test="record.section != null">
         SECTION = #{record.section,jdbcType=VARCHAR},
       </if>
-      <if test="record.paperGrade != null">
-        PAPER_GRADE = #{record.paperGrade,jdbcType=DECIMAL},
+      <if test="record.errorDescription != null">
+        ERROR_DESCRIPTION = #{record.errorDescription,jdbcType=VARCHAR},
       </if>
-      <if test="record.comGradeRoad != null">
-        COM_GRADE_ROAD = #{record.comGradeRoad,jdbcType=DECIMAL},
+      <if test="record.checkResult != null">
+        CHECK_RESULT = #{record.checkResult,jdbcType=VARCHAR},
       </if>
-      <if test="record.comGradePoi != null">
-        COM_GRADE_POI = #{record.comGradePoi,jdbcType=DECIMAL},
+      <if test="record.occurReason != null">
+        OCCUR_REASON = #{record.occurReason,jdbcType=VARCHAR},
       </if>
-      <if test="record.totalGrade != null">
-        TOTAL_GRADE = #{record.totalGrade,jdbcType=DECIMAL},
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.testDate != null">
-        TEST_DATE = #{record.testDate,jdbcType=TIMESTAMP},
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
       </if>
       <if test="record.creatorId != null">
         CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
@@ -323,8 +284,8 @@
       <if test="record.creator != null">
         CREATOR = #{record.creator,jdbcType=VARCHAR},
       </if>
-      <if test="record.updateTime != null">
-        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updaterId != null">
         UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
@@ -332,23 +293,8 @@
       <if test="record.updater != null">
         UPDATER = #{record.updater,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        STATUS = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr1 != null">
-        ATTR1 = #{record.attr1,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr2 != null">
-        ATTR2 = #{record.attr2,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr3 != null">
-        ATTR3 = #{record.attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr4 != null">
-        ATTR4 = #{record.attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr5 != null">
-        ATTR5 = #{record.attr5,jdbcType=VARCHAR},
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -356,35 +302,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update IMS.TEST_GRADE
+    update IMS.QUESTION_SOURCE
     set ID = #{record.id,jdbcType=VARCHAR},
       VERSION = #{record.version,jdbcType=VARCHAR},
       EMP_ID = #{record.empId,jdbcType=VARCHAR},
       EMP_NAME = #{record.empName,jdbcType=VARCHAR},
       SECTION = #{record.section,jdbcType=VARCHAR},
-      PAPER_GRADE = #{record.paperGrade,jdbcType=DECIMAL},
-      COM_GRADE_ROAD = #{record.comGradeRoad,jdbcType=DECIMAL},
-      COM_GRADE_POI = #{record.comGradePoi,jdbcType=DECIMAL},
-      TOTAL_GRADE = #{record.totalGrade,jdbcType=DECIMAL},
-      TEST_DATE = #{record.testDate,jdbcType=TIMESTAMP},
-      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      ERROR_DESCRIPTION = #{record.errorDescription,jdbcType=VARCHAR},
+      CHECK_RESULT = #{record.checkResult,jdbcType=VARCHAR},
+      OCCUR_REASON = #{record.occurReason,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
       CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
-      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
       UPDATER = #{record.updater,jdbcType=VARCHAR},
-      STATUS = #{record.status,jdbcType=VARCHAR},
-      ATTR1 = #{record.attr1,jdbcType=VARCHAR},
-      ATTR2 = #{record.attr2,jdbcType=VARCHAR},
-      ATTR3 = #{record.attr3,jdbcType=VARCHAR},
-      ATTR4 = #{record.attr4,jdbcType=VARCHAR},
-      ATTR5 = #{record.attr5,jdbcType=VARCHAR}
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.TestGrade">
-    update IMS.TEST_GRADE
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.QuestionSource">
+    update IMS.QUESTION_SOURCE
     <set>
       <if test="version != null">
         VERSION = #{version,jdbcType=VARCHAR},
@@ -398,23 +339,23 @@
       <if test="section != null">
         SECTION = #{section,jdbcType=VARCHAR},
       </if>
-      <if test="paperGrade != null">
-        PAPER_GRADE = #{paperGrade,jdbcType=DECIMAL},
+      <if test="errorDescription != null">
+        ERROR_DESCRIPTION = #{errorDescription,jdbcType=VARCHAR},
       </if>
-      <if test="comGradeRoad != null">
-        COM_GRADE_ROAD = #{comGradeRoad,jdbcType=DECIMAL},
+      <if test="checkResult != null">
+        CHECK_RESULT = #{checkResult,jdbcType=VARCHAR},
       </if>
-      <if test="comGradePoi != null">
-        COM_GRADE_POI = #{comGradePoi,jdbcType=DECIMAL},
+      <if test="occurReason != null">
+        OCCUR_REASON = #{occurReason,jdbcType=VARCHAR},
       </if>
-      <if test="totalGrade != null">
-        TOTAL_GRADE = #{totalGrade,jdbcType=DECIMAL},
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="testDate != null">
-        TEST_DATE = #{testDate,jdbcType=TIMESTAMP},
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
       </if>
       <if test="creatorId != null">
         CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
@@ -422,8 +363,8 @@
       <if test="creator != null">
         CREATOR = #{creator,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updaterId != null">
         UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
@@ -431,50 +372,30 @@
       <if test="updater != null">
         UPDATER = #{updater,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="attr1 != null">
-        ATTR1 = #{attr1,jdbcType=VARCHAR},
-      </if>
-      <if test="attr2 != null">
-        ATTR2 = #{attr2,jdbcType=VARCHAR},
-      </if>
-      <if test="attr3 != null">
-        ATTR3 = #{attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="attr4 != null">
-        ATTR4 = #{attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="attr5 != null">
-        ATTR5 = #{attr5,jdbcType=VARCHAR},
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.TestGrade">
-    update IMS.TEST_GRADE
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.QuestionSource">
+    update IMS.QUESTION_SOURCE
     set VERSION = #{version,jdbcType=VARCHAR},
       EMP_ID = #{empId,jdbcType=VARCHAR},
       EMP_NAME = #{empName,jdbcType=VARCHAR},
       SECTION = #{section,jdbcType=VARCHAR},
-      PAPER_GRADE = #{paperGrade,jdbcType=DECIMAL},
-      COM_GRADE_ROAD = #{comGradeRoad,jdbcType=DECIMAL},
-      COM_GRADE_POI = #{comGradePoi,jdbcType=DECIMAL},
-      TOTAL_GRADE = #{totalGrade,jdbcType=DECIMAL},
-      TEST_DATE = #{testDate,jdbcType=TIMESTAMP},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ERROR_DESCRIPTION = #{errorDescription,jdbcType=VARCHAR},
+      CHECK_RESULT = #{checkResult,jdbcType=VARCHAR},
+      OCCUR_REASON = #{occurReason,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
       CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
       CREATOR = #{creator,jdbcType=VARCHAR},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
       UPDATER = #{updater,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=VARCHAR},
-      ATTR1 = #{attr1,jdbcType=VARCHAR},
-      ATTR2 = #{attr2,jdbcType=VARCHAR},
-      ATTR3 = #{attr3,jdbcType=VARCHAR},
-      ATTR4 = #{attr4,jdbcType=VARCHAR},
-      ATTR5 = #{attr5,jdbcType=VARCHAR}
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -30,7 +30,7 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in"  aria-labelledby="headingOne">
                     <div class="panel-body">
-                        <div id="empDistrDiv" style="width: 100%;height:400px;"></div>
+                        <div id="addressGroupDiv" style="width: 100%;height:400px;"></div>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <h4><a>性别统计</a></h4>
+                        <h4>
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">性别统计</a>
+                        </h4>
+                    </div>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse in"  aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div id="genderGroupDiv" style="width: 100%;height:400px;"></div>
                     </div>
                 </div>
             </div>
@@ -52,58 +59,135 @@
 <script type="text/javascript" src="${basePath}/js/ECharts/3.8.4/echarts.common.min.js"></script>
 <script type="text/javascript">
     //基于准备好的dom，初始化echarts实例
-    var empDistrChart=echarts.init(document.getElementById('empDistrDiv'));
-
-    // 指定图表的配置项和数据
-    option = {
-        title : {
-            text: '人员分布情况',
-            subtext: '纯属虚构',
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'直接访问'},
-                    {value:310, name:'邮件营销'},
-                    {value:234, name:'联盟广告'},
-                    {value:135, name:'视频广告'},
-                    {value:1548, name:'搜索引擎'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    empDistrChart.setOption(option);
+    var empAddressGroupCharts=echarts.init(document.getElementById('addressGroupDiv'));
+    //
+    var empGenderGroupCharts=echarts.init(document.getElementById('genderGroupDiv'));
     //员工分布
-    function loadEmpDistribution(){
-        $.getJSON("${basePath}/charts/empDistribution",null,function(result){
-            console.log(result.data);
+    function loadEmpAddressGroup(){
+        $.getJSON("${basePath}/charts/empAddressGroup",null,function(result){
+            console.log(result.extend.data);
+            var legendData=new Array();
+            var seriesData=new Array();
+            var addressResult=result.extend.data;
+            for(var i=0;i<addressResult.length ;i++){
+                var item=new Object();
+                item.name=addressResult[i].ADDRESS;
+                item.value=addressResult[i].NUM;
+                legendData.push(addressResult[i].ADDRESS);
+                seriesData.push(item);
+            }
+            // 指定图表的配置项和数据
+            empAddressGroupCharts.setOption({
+                title : {
+                    text: '人员分布情况',
+                    subtext: '最新统计结果',
+                    x:'right'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: legendData
+                },
+                series : [
+                    {
+                        name: '所占比例',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:seriesData,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            });
         })
     }
     //员工性别分布
-    function loadGenderDistribution(){
-
+    function loadGenderGroup(){
+        $.getJSON("${basePath}/charts/empGenderGroup",null,function(result){
+            var legendData=new Array();
+            var seriesData=new Array();
+            var addressResult=result.extend.data;
+            for(var i=0;i<addressResult.length ;i++){
+                var item=new Object();
+                item.name=addressResult[i].GENDER;
+                item.value=addressResult[i].NUM;
+                legendData.push(addressResult[i].GENDER);
+                seriesData.push(item);
+            }
+            // 指定图表的配置项和数据
+            empGenderGroupCharts.setOption({
+                title : {
+                    text: '员工性别分布情况',
+                    subtext: '最新统计结果',
+                    x:'right'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: legendData
+                },
+                series : [
+                    {
+                        name: '所占比例',
+                        type: 'pie',
+                        radius : ['35%',"55%"],
+                        center: ['50%', '60%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:seriesData,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            });
+        })
     }
     //司龄统计
     function loadSLingStat(){
@@ -112,10 +196,10 @@
     $(function(){
         //加载图形
         setTimeout(function(){
-            loadEmpDistribution();
-            loadGenderDistribution();
+            loadEmpAddressGroup();
+            loadGenderGroup();
             loadSLingStat();
-        },2000);
+        },500);
     });
 </script>
 </body>

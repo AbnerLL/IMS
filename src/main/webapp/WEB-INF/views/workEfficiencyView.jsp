@@ -175,7 +175,9 @@
                 showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                   //是否显示父子表
-                columns:[
+                columns:[{
+                    checkbox:true
+                },
                 {
                     field:"empId",
                     title:"员工编号"

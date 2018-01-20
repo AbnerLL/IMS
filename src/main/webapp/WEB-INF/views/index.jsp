@@ -423,7 +423,7 @@
         <div class="tab-content _navbox" id="boxId">
             <div class="tab-pane active" id="page_desk">
                 <!--配置首页-->
-                <iframe src="${basePath}/setting/desk" frameborder="0"></iframe>
+                <iframe src="${basePath}/setting/desk2" frameborder="0"></iframe>
             </div>
         </div>
 

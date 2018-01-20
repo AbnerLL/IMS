@@ -12,6 +12,8 @@ public class TestGrade {
 
     private String empName;
 
+    private String section;
+
     private BigDecimal paperGrade;
 
     private BigDecimal comGradeRoad;
@@ -19,6 +21,8 @@ public class TestGrade {
     private BigDecimal comGradePoi;
 
     private BigDecimal totalGrade;
+
+    private Date testDate;
 
     private Date createTime;
 
@@ -76,6 +80,14 @@ public class TestGrade {
         this.empName = empName == null ? null : empName.trim();
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section == null ? null : section.trim();
+    }
+
     public BigDecimal getPaperGrade() {
         return paperGrade;
     }
@@ -106,6 +118,14 @@ public class TestGrade {
 
     public void setTotalGrade(BigDecimal totalGrade) {
         this.totalGrade = totalGrade;
+    }
+
+    public Date getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(Date testDate) {
+        this.testDate = testDate;
     }
 
     public Date getCreateTime() {
