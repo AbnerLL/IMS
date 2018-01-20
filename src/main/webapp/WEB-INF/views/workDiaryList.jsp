@@ -362,8 +362,8 @@
                     alert("处理失败");
                 }
             },
-            error:function(){
-                alert("处理异常！");
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
             }
         });
     });
@@ -392,6 +392,9 @@
                 }else{
                    alert("请求失败");
                 }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
             }
         })
     }
@@ -463,6 +466,9 @@
                 }else{
                     alert("删除失败！");
                 }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
             }
         });
     }
