@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.FixedAssetMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.FixedAsset">
+    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
+    <result column="ASSET_NUMBER" jdbcType="VARCHAR" property="assetNumber" />
+    <result column="ASSET_NAME" jdbcType="VARCHAR" property="assetName" />
+    <result column="STANDARD" jdbcType="VARCHAR" property="standard" />
+    <result column="ASSET_CLASS" jdbcType="VARCHAR" property="assetClass" />
+    <result column="ASSET_USER" jdbcType="VARCHAR" property="assetUser" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
+    <result column="USE_STATE" jdbcType="VARCHAR" property="useState" />
+    <result column="STORE_PLACE" jdbcType="VARCHAR" property="storePlace" />
+    <result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UUID, ASSET_NUMBER, ASSET_NAME, STANDARD, ASSET_CLASS, ASSET_USER, SECTION, USE_STATE, 
+    STORE_PLACE, START_DATE, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, 
+    UPDATER_ID, UPDATER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.FixedAssetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.FIXED_ASSET
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.FIXED_ASSET
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.FIXED_ASSET
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.FixedAssetExample">
+    delete from IMS.FIXED_ASSET
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.IMS.entity.FixedAsset">
+    insert into IMS.FIXED_ASSET (UUID, ASSET_NUMBER, ASSET_NAME, 
+      STANDARD, ASSET_CLASS, ASSET_USER, 
+      SECTION, USE_STATE, STORE_PLACE, 
+      START_DATE, REMARK, STATUS, 
+      DEL_FLAG, CREATOR_ID, CREATOR, 
+      CREATE_TIME, UPDATER_ID, UPDATER, 
+      UPDATE_TIME)
+    values (#{uuid,jdbcType=VARCHAR}, #{assetNumber,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, 
+      #{standard,jdbcType=VARCHAR}, #{assetClass,jdbcType=VARCHAR}, #{assetUser,jdbcType=VARCHAR}, 
+      #{section,jdbcType=VARCHAR}, #{useState,jdbcType=VARCHAR}, #{storePlace,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.FixedAsset">
+    insert into IMS.FIXED_ASSET
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        UUID,
+      </if>
+      <if test="assetNumber != null">
+        ASSET_NUMBER,
+      </if>
+      <if test="assetName != null">
+        ASSET_NAME,
+      </if>
+      <if test="standard != null">
+        STANDARD,
+      </if>
+      <if test="assetClass != null">
+        ASSET_CLASS,
+      </if>
+      <if test="assetUser != null">
+        ASSET_USER,
+      </if>
+      <if test="section != null">
+        SECTION,
+      </if>
+      <if test="useState != null">
+        USE_STATE,
+      </if>
+      <if test="storePlace != null">
+        STORE_PLACE,
+      </if>
+      <if test="startDate != null">
+        START_DATE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="assetNumber != null">
+        #{assetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assetName != null">
+        #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null">
+        #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="assetClass != null">
+        #{assetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="assetUser != null">
+        #{assetUser,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null">
+        #{useState,jdbcType=VARCHAR},
+      </if>
+      <if test="storePlace != null">
+        #{storePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.IMS.entity.FixedAssetExample" resultType="java.lang.Long">
+    select count(*) from IMS.FIXED_ASSET
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.FIXED_ASSET
+    <set>
+      <if test="record.uuid != null">
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetNumber != null">
+        ASSET_NUMBER = #{record.assetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetName != null">
+        ASSET_NAME = #{record.assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standard != null">
+        STANDARD = #{record.standard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetClass != null">
+        ASSET_CLASS = #{record.assetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetUser != null">
+        ASSET_USER = #{record.assetUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useState != null">
+        USE_STATE = #{record.useState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storePlace != null">
+        STORE_PLACE = #{record.storePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterId != null">
+        UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        UPDATER = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.FIXED_ASSET
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      ASSET_NUMBER = #{record.assetNumber,jdbcType=VARCHAR},
+      ASSET_NAME = #{record.assetName,jdbcType=VARCHAR},
+      STANDARD = #{record.standard,jdbcType=VARCHAR},
+      ASSET_CLASS = #{record.assetClass,jdbcType=VARCHAR},
+      ASSET_USER = #{record.assetUser,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
+      USE_STATE = #{record.useState,jdbcType=VARCHAR},
+      STORE_PLACE = #{record.storePlace,jdbcType=VARCHAR},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
+      UPDATER = #{record.updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.FixedAsset">
+    update IMS.FIXED_ASSET
+    <set>
+      <if test="assetNumber != null">
+        ASSET_NUMBER = #{assetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assetName != null">
+        ASSET_NAME = #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null">
+        STANDARD = #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="assetClass != null">
+        ASSET_CLASS = #{assetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="assetUser != null">
+        ASSET_USER = #{assetUser,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null">
+        USE_STATE = #{useState,jdbcType=VARCHAR},
+      </if>
+      <if test="storePlace != null">
+        STORE_PLACE = #{storePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        START_DATE = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.FixedAsset">
+    update IMS.FIXED_ASSET
+    set ASSET_NUMBER = #{assetNumber,jdbcType=VARCHAR},
+      ASSET_NAME = #{assetName,jdbcType=VARCHAR},
+      STANDARD = #{standard,jdbcType=VARCHAR},
+      ASSET_CLASS = #{assetClass,jdbcType=VARCHAR},
+      ASSET_USER = #{assetUser,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
+      USE_STATE = #{useState,jdbcType=VARCHAR},
+      STORE_PLACE = #{storePlace,jdbcType=VARCHAR},
+      START_DATE = #{startDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

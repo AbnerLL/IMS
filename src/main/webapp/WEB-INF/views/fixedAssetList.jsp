@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: luozhihui
-  Date: 2017/11/26
-  Time: 22:26
+  Date: 2018/1/20
+  Time: 21:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 <head>
     <%@include file="head.jsp"%>
-    <title>履历信息</title>
+    <title>资产管理</title>
     <%--针对手机屏幕的设置--%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -40,60 +40,82 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加履历</h4>
+                <h4 class="modal-title" id="myModalLabel">新增</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-11">
                         <form class="form-horizontal" id="add_form">
                             <div class="form-group form-group-sm">
-                                <label for="empId_insert_input" class="col-sm-2 control-label">员工编号</label>
+                                <label for="assetNumber_insert_input" class="col-sm-2 control-label">资产编号</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
+                                    <input type="text" class="form-control" name="assetNumber" id="assetNumber_insert_input" >
                                 </div>
-                                <label for="empName_insert_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="assetName_insert_input" class="col-sm-2 control-label">资产名称</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工名称">
+                                    <input type="text" class="form-control" name="assetName" id="assetName_insert_input" >
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="speciality_insert_input" class="col-sm-2 control-label">特长</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="speciality" id="speciality_insert_input"/>
+                                <label for="standard_insert_input" class="col-sm-2 control-label">规格</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="standard" id="standard_insert_input"/>
+                                </div>
+                                <label for="assetClass_insert_input" class="col-sm-2 control-label">资产类别</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="assetClass" id="assetClass_insert_input"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="certificate_insert_textarea" class="col-sm-2 control-label">所获证书</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="certificate" id="certificate_insert_textarea"></textarea>
-                                    <label for="certificate_attach_file" class="control-label sr-only" >所获证书附件</label>
-                                    <input type="file" id="certificate_attach_file" multiple="multiple"/>
+                                <label for="assetUser_insert_input" class="col-sm-2 control-label">使用人</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="assetUser" id="assetUser_insert_input"/>
+                                </div>
+                                <label for="section_insert_select" class="col-sm-2 control-label">使用科室</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="section" id="section_insert_select">
+                                        <option value="部门">部门</option>
+                                        <option value="北京项目一组">北京项目一组</option>
+                                        <option value="北京项目二组">北京项目二组</option>
+                                        <option value="北京项目三组">北京项目三组</option>
+                                        <option value="北京项目四组">北京项目四组</option>
+                                        <option value="北京项目五组">北京项目五组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                        <option value="互联网小组">互联网小组</option>
+                                        <option value="代理店">代理店</option>
+                                        <option value="品质管理室（北京）">品质管理室（北京）</option>
+                                        <option value="生产管理室（北京）">生产管理室（北京）</option>
+                                        <option value="技术管理室（北京）">技术管理室（北京）</option>
+                                        <option value="西安项目一组">西安项目一组</option>
+                                        <option value="西安项目二组">西安项目二组</option>
+                                        <option value="西安项目三组">西安项目三组</option>
+                                        <option value="西安项目四组">西安项目四组</option>
+                                        <option value="西安项目五组">西安项目五组</option>
+                                        <option value="西安项目六组">西安项目六组</option>
+                                        <option value="综合项目组">综合项目组</option>
+                                        <option value="品质管理室（西安）">品质管理室（西安）</option>
+                                        <option value="生产管理室（西安）">生产管理室（西安）</option>
+                                        <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="award_insert_textarea" class="col-sm-2 control-label">奖励情况</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="award" id="award_insert_textarea"></textarea>
-                                    <label for="award_attach_file" class="control-label sr-only" >奖励情况附件</label>
-                                    <input type="file" id="award_attach_file" multiple="multiple"/>
+                                <label for="useState_insert_input" class="col-sm-2 control-label">使用状况</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="useState" id="useState_insert_input"/>
+                                </div>
+                                <label for="startDate_insert_input" class="col-sm-2 control-label">使用日期</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input class="form-control datepicker" name="startDate" id="startDate_insert_input"/>
+                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="training_insert_textarea" class="col-sm-2 control-label">培训情况</label>
+                                <label for="storePlace_insert_input" class="col-sm-2 control-label">存放地点</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="training" id="training_insert_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="project_insert_textarea" class="col-sm-2 control-label">项目经验</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="project" id="project_insert_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="workRecord_insert_textarea" class="col-sm-2 control-label">工作履历</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="workRecord" id="workRecord_insert_textarea"></textarea>
+                                    <input class="form-control" name="storePlace" id="storePlace_insert_input"/>
                                 </div>
                             </div>
                         </form>
@@ -113,60 +135,82 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myEditModalLabel">添加履历</h4>
+                <h4 class="modal-title" id="myEditModalLabel">修改</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-11">
                         <form class="form-horizontal" id="edit_form">
                             <div class="form-group form-group-sm">
-                                <label for="empId_update_input" class="col-sm-2 control-label">员工编号</label>
+                                <label for="assetNumber_update_input" class="col-sm-2 control-label">资产编号</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empId" id="empId_update_input" placeholder="员工编号">
+                                    <input type="text" class="form-control" name="assetNumber" id="assetNumber_update_input" >
                                 </div>
-                                <label for="empName_update_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="assetName_update_input" class="col-sm-2 control-label">资产名称</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工名称">
+                                    <input type="text" class="form-control" name="assetName" id="assetName_update_input" >
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="speciality_update_input" class="col-sm-2 control-label">特长</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="speciality" id="speciality_update_input"/>
+                                <label for="standard_update_input" class="col-sm-2 control-label">规格</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="standard" id="standard_update_input"/>
+                                </div>
+                                <label for="assetClass_update_input" class="col-sm-2 control-label">资产类别</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="assetClass" id="assetClass_update_input"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="certificate_update_textarea" class="col-sm-2 control-label">所获证书</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="certificate" id="certificate_update_textarea"></textarea>
-                                    <%--<label for="certificate_attach_file" class="control-label sr-only" >所获证书附件</label>--%>
-                                    <%--<input type="file" id="certificate_attach_file" multiple="multiple"/>--%>
+                                <label for="assetUser_update_input" class="col-sm-2 control-label">使用人</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="assetUser" id="assetUser_update_input"/>
+                                </div>
+                                <label for="section_update_select" class="col-sm-2 control-label">使用科室</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="section" id="section_update_select">
+                                        <option value="部门">部门</option>
+                                        <option value="北京项目一组">北京项目一组</option>
+                                        <option value="北京项目二组">北京项目二组</option>
+                                        <option value="北京项目三组">北京项目三组</option>
+                                        <option value="北京项目四组">北京项目四组</option>
+                                        <option value="北京项目五组">北京项目五组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                        <option value="互联网小组">互联网小组</option>
+                                        <option value="代理店">代理店</option>
+                                        <option value="品质管理室（北京）">品质管理室（北京）</option>
+                                        <option value="生产管理室（北京）">生产管理室（北京）</option>
+                                        <option value="技术管理室（北京）">技术管理室（北京）</option>
+                                        <option value="西安项目一组">西安项目一组</option>
+                                        <option value="西安项目二组">西安项目二组</option>
+                                        <option value="西安项目三组">西安项目三组</option>
+                                        <option value="西安项目四组">西安项目四组</option>
+                                        <option value="西安项目五组">西安项目五组</option>
+                                        <option value="西安项目六组">西安项目六组</option>
+                                        <option value="综合项目组">综合项目组</option>
+                                        <option value="品质管理室（西安）">品质管理室（西安）</option>
+                                        <option value="生产管理室（西安）">生产管理室（西安）</option>
+                                        <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="award_update_textarea" class="col-sm-2 control-label">奖励情况</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="award" id="award_update_textarea"></textarea>
-                                    <%--<label for="award_attach_file" class="control-label sr-only" >奖励情况附件</label>--%>
-                                    <%--<input type="file" id="award_attach_file" multiple="multiple"/>--%>
+                                <label for="useState_update_input" class="col-sm-2 control-label">使用状况</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="useState" id="useState_update_input"/>
+                                </div>
+                                <label for="startDate_update_input" class="col-sm-2 control-label">使用日期</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input class="form-control datepicker" name="startDate" id="startDate_update_input"/>
+                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="training_update_textarea" class="col-sm-2 control-label">培训情况</label>
+                                <label for="storePlace_update_input" class="col-sm-2 control-label">存放地点</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="training" id="training_update_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="project_update_textarea" class="col-sm-2 control-label">项目经验</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="project" id="project_update_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="workRecord_update_textarea" class="col-sm-2 control-label">工作履历</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="workRecord" id="workRecord_update_textarea"></textarea>
+                                    <input class="form-control" name="storePlace" id="storePlace_update_input"/>
                                 </div>
                             </div>
                         </form>
@@ -246,7 +290,7 @@
     function initTable(){
         $("#table_list").bootstrapTable({
             //获取数据的url
-            url:"${basePath}/empResumes",
+            url:"${basePath}/fixedAssets",
             method: 'get',//请求方式
             toolbar: '#toolbar',                //工具按钮用哪个容器
 //            classes:"table table-hover table-bordered",        //设置table的class属性
@@ -268,7 +312,7 @@
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
 //            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "resumeId",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "uuid",                     //每一行的唯一标识，一般为主键列
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -276,32 +320,36 @@
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
-                field:"empId",
-                title:"员工编号"
+                field:"assetNumber",
+                title:"资产编号"
             },{
-                field:"empName",
-                title:"员工姓名"
+                field:"assetName",
+                title:"资产名称"
             },{
-                field:"speciality",
-                title:"特长",
+                field:"standard",
+                title:"规格",
             },{
-                field:"certificate",
-                title:"证书"
+                field:"assetClass",
+                title:"资产类别"
             },{
-                field:"award",
-                title:"获奖情况",
+                field:"assetUser",
+                title:"使用人",
             },{
-                field:"training",
-                title:"培训情况"
+                field:"section",
+                title:"使用科室"
             },{
-                field:"project",
-                title:"项目经验"
+                field:"useState",
+                title:"使用状况"
             },{
-                field:"workRecord",
-                title:"工作履历"
+                field:"storePlace",
+                title:"存放地点"
+            },{
+                field:"startDate",
+                title:"开始使用日期",
+                formatter:dateFormatter
             }],
             formatSearch:function(){
-                return "支持编号和名称搜索";
+                return "搜索使用人或科室";
             }
         });
     }
@@ -317,7 +365,7 @@
         //1.表单数据验证
         //2.发送ajax请求
         $.ajax({
-            url:"${basePath}/empResume",
+            url:"${basePath}/fixedAsset",
             type:"POST",
             data:$("#add_form").serialize(),
             dataType:"json",
@@ -342,7 +390,7 @@
         var selections=$("#table_list").bootstrapTable("getSelections")
         if(1==selections.length){
             //初始化数据
-            initEditDataDetailById(selections[0].resumeId);
+            initEditDataDetailById(selections[0].uuid);
             //显示模态框
             $("#edit_modal").modal("toggle");
         }else{
@@ -352,7 +400,7 @@
     //根据ID查询对应数据并显示与编辑modal上
     function initEditDataDetailById(dataId){
         $.ajax({
-            url:"${basePath}/empResume/"+dataId,
+            url:"${basePath}/fixedAsset/"+dataId,
             type:"GET",
             dataType:"json",
             success:function(result){
@@ -366,22 +414,23 @@
     }
     //在修改模态框上显示对象
     function showEditDataDetail(obj){
-        $("#empId_update_input").val(obj.empId);
-        $("#empName_update_input").val(obj.empName);
-        $("#speciality_update_input").val(obj.speciality);
-        $("#certificate_update_textarea").val(obj.certificate);
-        $("#award_update_textarea").val(obj.award);
-        $("#training_update_textarea").val(obj.training);
-        $("#project_update_textarea").val(obj.project);
-        $("#workRecord_update_textarea").val(obj.workRecord);
-        $("#update_btn").attr("data-id",obj.resumeId);
+        $("#assetNumber_update_input").val(obj.assetNumber);
+        $("#assetName_update_input").val(obj.assetName);
+        $("#standard_update_input").val(obj.standard);
+        $("#assetClass_update_input").val(obj.assetClass);
+        $("#assetUser_update_input").val(obj.assetUser);
+        $("#section_update_input").val(obj.section);
+        $("#useState_update_input").val(obj.useState);
+        $("#storePlace_update_input").val(obj.storePlace);
+        $("#startDate_update_input").val(dateFormatter(obj.startDate));
+        $("#update_btn").attr("data-id",obj.uuid);
     }
     //更新按钮
     $("#update_btn").click(function(){
         //1.表单数据验证
         //2.发送请求
         $.ajax({
-            url:"${basePath}/empResume/"+$(this).attr("data-id"),
+            url:"${basePath}/fixedAsset/"+$(this).attr("data-id"),
             type:"PUT",
             data:$("#edit_form").serialize(),
             dataType:"json",
@@ -409,7 +458,7 @@
                 //删除数据
                 var ids="";
                 $(selects).each(function(){
-                    ids+=this.resumeId+",";
+                    ids+=this.uuid+",";
                 })
                 //去除多余的分隔符
                 ids=ids.substring(0,ids.length-1);
@@ -422,7 +471,7 @@
     //删除指定数据
     function deleteDataFun(ids){
         $.ajax({
-            url:"${basePath}/empResume/"+ids,
+            url:"${basePath}/fixedAsset/"+ids,
             type:"DELETE",
             dataType:"json",
             success:function(result){
