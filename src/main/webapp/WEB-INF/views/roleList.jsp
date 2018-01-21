@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>角色列表</title>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css"  rel="stylesheet" />
     <link herf="${basePath}/css/zTree/zTreeStyle.css" rel="stylesheet" />

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <meta charset="utf-8" />
     <title>角色管理</title>
     <meta http-equiv="x-ua-compatible" content="IE=edeg,chrom=1"/>

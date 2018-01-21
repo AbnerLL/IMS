@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: luozhihui
-  Date: 2017/11/26
-  Time: 22:26
+  Date: 2018/1/21
+  Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,8 +10,7 @@
 <html>
 <head>
     <%@include file="common/head.jsp"%>
-    <title>履历信息</title>
-    <%--针对手机屏幕的设置--%>
+    <title>菜单列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <%--基础css--%>
@@ -20,8 +19,6 @@
     <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
     <%--字体和图标的css--%>
     <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-    <%--日期插件的css--%>
-    <link href="${basePath}/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -40,60 +37,36 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加履历</h4>
+                <h4 class="modal-title" id="myModalLabel"><span class="fa fa-plus fa-lg"></span> 新增</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-11">
                         <form class="form-horizontal" id="add_form">
                             <div class="form-group form-group-sm">
-                                <label for="empId_insert_input" class="col-sm-2 control-label">员工编号</label>
+                                <label for="id_insert_input" class="col-sm-2 control-label">模块ID</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
+                                    <input type="text" class="form-control" name="id" id="id_insert_input" >
                                 </div>
-                                <label for="empName_insert_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="name_insert_input" class="col-sm-2 control-label">模块名称</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工名称">
+                                    <input type="text" class="form-control" name="name" id="name_insert_input" >
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="speciality_insert_input" class="col-sm-2 control-label">特长</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="speciality" id="speciality_insert_input"/>
+                                <label for="pid_insert_input" class="col-sm-2 control-label">父模块ID</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="pid" id="pid_insert_input"/>
+                                </div>
+                                <label for="sourceUrl_insert_input" class="col-sm-2 control-label">模块URL</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="sourceUrl" id="sourceUrl_insert_input"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="certificate_insert_textarea" class="col-sm-2 control-label">所获证书</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="certificate" id="certificate_insert_textarea"></textarea>
-                                    <label for="certificate_attach_file" class="control-label sr-only" >所获证书附件</label>
-                                    <input type="file" id="certificate_attach_file" multiple="multiple"/>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="award_insert_textarea" class="col-sm-2 control-label">奖励情况</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="award" id="award_insert_textarea"></textarea>
-                                    <label for="award_attach_file" class="control-label sr-only" >奖励情况附件</label>
-                                    <input type="file" id="award_attach_file" multiple="multiple"/>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="training_insert_textarea" class="col-sm-2 control-label">培训情况</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="training" id="training_insert_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="project_insert_textarea" class="col-sm-2 control-label">项目经验</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="project" id="project_insert_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="workRecord_insert_textarea" class="col-sm-2 control-label">工作履历</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="workRecord" id="workRecord_insert_textarea"></textarea>
+                                <label for="clsName_insert_input" class="col-sm-2 control-label">模块样式</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="clsName" id="clsName_insert_input"/>
                                 </div>
                             </div>
                         </form>
@@ -113,60 +86,37 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myEditModalLabel">修改履历</h4>
+                <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o fa-lg"></span> 修改</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-11">
-                        <form class="form-horizontal" id="edit_form">
+                        <form class="form-horizontal" id="edit_modal_form">
                             <div class="form-group form-group-sm">
-                                <label for="empId_update_input" class="col-sm-2 control-label">员工编号</label>
+                                <label for="id_update_input" class="col-sm-2 control-label">模块ID</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empId" id="empId_update_input" placeholder="员工编号">
+                                    <input type="text" class="form-control" name="id" id="id_update_input" >
+                                    <p class="form-control-static"></p>
                                 </div>
-                                <label for="empName_update_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="name_update_input" class="col-sm-2 control-label">模块名称</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工名称">
+                                    <input type="text" class="form-control" name="name" id="name_update_input" >
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="speciality_update_input" class="col-sm-2 control-label">特长</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="speciality" id="speciality_update_input"/>
+                                <label for="pid_update_input" class="col-sm-2 control-label">父模块ID</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="pid" id="pid_update_input"/>
+                                </div>
+                                <label for="sourceUrl_update_input" class="col-sm-2 control-label">模块URL</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="sourceUrl" id="sourceUrl_update_input"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="certificate_update_textarea" class="col-sm-2 control-label">所获证书</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="certificate" id="certificate_update_textarea"></textarea>
-                                    <%--<label for="certificate_attach_file" class="control-label sr-only" >所获证书附件</label>--%>
-                                    <%--<input type="file" id="certificate_attach_file" multiple="multiple"/>--%>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="award_update_textarea" class="col-sm-2 control-label">奖励情况</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="award" id="award_update_textarea"></textarea>
-                                    <%--<label for="award_attach_file" class="control-label sr-only" >奖励情况附件</label>--%>
-                                    <%--<input type="file" id="award_attach_file" multiple="multiple"/>--%>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="training_update_textarea" class="col-sm-2 control-label">培训情况</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="training" id="training_update_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="project_update_textarea" class="col-sm-2 control-label">项目经验</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="project" id="project_update_textarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="workRecord_update_textarea" class="col-sm-2 control-label">工作履历</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="workRecord" id="workRecord_update_textarea"></textarea>
+                                <label for="clsName_update_input" class="col-sm-2 control-label">模块样式</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="clsName" id="clsName_update_input"/>
                                 </div>
                             </div>
                         </form>
@@ -187,9 +137,6 @@
 <script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
 <%--本地化文件要放在bootstrap文件下--%>
 <script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-<%--日期插件js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -201,12 +148,6 @@
     function initTableStyle(){
 
     }
-    //设置日期
-    $(".datepicker").datepicker({
-        autoclose:true,
-        format:"yyyy/mm/dd",
-        language:"zh-CN"
-    });
 
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
@@ -246,7 +187,7 @@
     function initTable(){
         $("#table_list").bootstrapTable({
             //获取数据的url
-            url:"${basePath}/empResumes",
+            url:"${basePath}/menus",
             method: 'get',//请求方式
             toolbar: '#toolbar',                //工具按钮用哪个容器
 //            classes:"table table-hover table-bordered",        //设置table的class属性
@@ -268,7 +209,7 @@
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
 //            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "resumeId",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -276,32 +217,23 @@
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
-                field:"empId",
-                title:"员工编号"
+                field:"id",
+                title:"模块ID"
             },{
-                field:"empName",
-                title:"员工姓名"
+                field:"name",
+                title:"模块名称"
             },{
-                field:"speciality",
-                title:"特长",
+                field:"pid",
+                title:"父模块ID",
             },{
-                field:"certificate",
-                title:"证书"
+                field:"sourceUrl",
+                title:"模块链接"
             },{
-                field:"award",
-                title:"获奖情况",
-            },{
-                field:"training",
-                title:"培训情况"
-            },{
-                field:"project",
-                title:"项目经验"
-            },{
-                field:"workRecord",
-                title:"工作履历"
+                field:"claName",
+                title:"模块样式",
             }],
             formatSearch:function(){
-                return "支持编号和名称搜索";
+                return "搜索:模块名、父模块ID";
             }
         });
     }
@@ -317,7 +249,7 @@
         //1.表单数据验证
         //2.发送ajax请求
         $.ajax({
-            url:"${basePath}/empResume",
+            url:"${basePath}/menu",
             type:"POST",
             data:$("#add_form").serialize(),
             dataType:"json",
@@ -342,7 +274,7 @@
         var selections=$("#table_list").bootstrapTable("getSelections")
         if(1==selections.length){
             //初始化数据
-            initEditDataDetailById(selections[0].resumeId);
+            initEditDataDetailById(selections[0].id);
             //显示模态框
             $("#edit_modal").modal("toggle");
         }else{
@@ -352,7 +284,7 @@
     //根据ID查询对应数据并显示与编辑modal上
     function initEditDataDetailById(dataId){
         $.ajax({
-            url:"${basePath}/empResume/"+dataId,
+            url:"${basePath}/menu/"+dataId,
             type:"GET",
             dataType:"json",
             success:function(result){
@@ -366,22 +298,19 @@
     }
     //在修改模态框上显示对象
     function showEditDataDetail(obj){
-        $("#empId_update_input").val(obj.empId);
-        $("#empName_update_input").val(obj.empName);
-        $("#speciality_update_input").val(obj.speciality);
-        $("#certificate_update_textarea").val(obj.certificate);
-        $("#award_update_textarea").val(obj.award);
-        $("#training_update_textarea").val(obj.training);
-        $("#project_update_textarea").val(obj.project);
-        $("#workRecord_update_textarea").val(obj.workRecord);
-        $("#update_btn").attr("data-id",obj.resumeId);
+        $("#id_update_input").text(obj.id);
+        $("#name_update_input").val(obj.name);
+        $("#pid_update_input").val(obj.pid);
+        $("#sourceUrl_update_input").val(obj.sourceUrl);
+        $("#clsName_update_input").val(obj.clsName);
+        $("#update_btn").attr("data-id",obj.id);
     }
     //更新按钮
     $("#update_btn").click(function(){
         //1.表单数据验证
         //2.发送请求
         $.ajax({
-            url:"${basePath}/empResume/"+$(this).attr("data-id"),
+            url:"${basePath}/menu/"+$(this).attr("data-id"),
             type:"PUT",
             data:$("#edit_form").serialize(),
             dataType:"json",
@@ -409,7 +338,7 @@
                 //删除数据
                 var ids="";
                 $(selects).each(function(){
-                    ids+=this.resumeId+",";
+                    ids+=this.uuid+",";
                 })
                 //去除多余的分隔符
                 ids=ids.substring(0,ids.length-1);
@@ -422,7 +351,7 @@
     //删除指定数据
     function deleteDataFun(ids){
         $.ajax({
-            url:"${basePath}/empResume/"+ids,
+            url:"${basePath}/menu/"+ids,
             type:"DELETE",
             dataType:"json",
             success:function(result){

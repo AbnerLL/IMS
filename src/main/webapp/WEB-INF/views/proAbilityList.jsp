@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>业务能力统计表</title>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
     <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>

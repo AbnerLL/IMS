@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <title>员工列表</title>
     <%--IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame--%>
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />

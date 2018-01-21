@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <title>作业功效</title>
     <%--针对手机屏幕的设置--%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">

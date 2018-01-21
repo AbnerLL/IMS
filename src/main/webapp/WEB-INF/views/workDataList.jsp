@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>作业信息表</title>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <%--IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame--%>
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />
     <%--针对手机屏幕的设置--%>

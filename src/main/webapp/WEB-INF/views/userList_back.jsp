@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>用户列表</title>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <meta http-equiv="x-ua-compatible" content="IE=edeg,chrom=1">
     <%--禁止用户缩放user-scalable=no--%>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">

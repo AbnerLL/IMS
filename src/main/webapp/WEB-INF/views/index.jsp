@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>人员综合信息管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />

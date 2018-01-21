@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <%@include file="common/head.jsp"%>
     <title>工作日志</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
