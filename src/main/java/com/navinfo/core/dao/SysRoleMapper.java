@@ -3,6 +3,8 @@ package com.navinfo.core.dao;
 import com.navinfo.core.entity.SysRole;
 import com.navinfo.core.entity.SysRoleExample;
 import java.util.List;
+
+import com.navinfo.core.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysRoleMapper {
@@ -29,4 +31,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKey(SysRole record);
 
     String getMaxIdByParentId(String parentId);
+
+    List<SysRole> findSysRoleByUsername(String username);
 }

@@ -233,4 +233,21 @@
         </if>
       </where>
   </select>
+
+  <select id="findSysRoleByUsername" parameterType="string" resultMap="initRolePermissionMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM IMS.SYS_ROLE
+    WHERE ROLE_ID IN (SELECT a.ROLE_ID FROM USER_ROLE_REL a WHERE a.USERNAME=#{username})
+  </select>
+  <resultMap id="initRolePermissionMap" type="com.navinfo.core.entity.SysRole">
+    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="SORT_INDEX" jdbcType="VARCHAR" property="sortIndex" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <collection property="permissions" column="ROLE_ID"
+                select="com.navinfo.core.dao.SysPermissionMapper.findPermissionByRoleId" ofType="com.navinfo.core.entity.SysPermission"></collection>
+  </resultMap>
 </mapper>

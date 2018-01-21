@@ -1,14 +1,21 @@
 package com.navinfo.IMS.base.shiro;
 
+import com.navinfo.core.entity.SysPermission;
+import com.navinfo.core.entity.SysRole;
 import com.navinfo.core.entity.SysUser;
 import com.navinfo.core.service.SysPermissionService;
 import com.navinfo.core.service.SysRoleService;
 import com.navinfo.core.service.SysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * 自定义的realm类
@@ -30,8 +37,24 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("shrio授权doGetAuthorizationInfo......");
         String userName=(String)principalCollection.getPrimaryPrincipal();
-
-        return null;
+        //角色集合
+        Set<String> roleSet=new HashSet<String>();
+        //权限集合
+        Set<String> permissionSet=new HashSet<String>();
+        //获取角色(已经初始化权限)
+        Set<SysRole> sysRoleSet=this.sysRoleService.findSysRoleByUsername(userName);
+        Iterator<SysRole> it=sysRoleSet.iterator();
+        while (it.hasNext()){
+            SysRole sysRole=it.next();
+            roleSet.add(sysRole.getRoleId());
+            for(SysPermission sysPermission:sysRole.getPermissions()){
+                permissionSet.add(sysPermission.getPermissionName());
+            }
+        }
+        SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addRoles(roleSet);
+        simpleAuthorizationInfo.addStringPermissions(permissionSet);
+        return simpleAuthorizationInfo;
     }
 
     /**

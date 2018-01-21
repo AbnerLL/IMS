@@ -70,4 +70,33 @@ public class SysPermission {
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SysPermission that = (SysPermission) o;
+
+        if (permissionId != null ? !permissionId.equals(that.permissionId) : that.permissionId != null) return false;
+        if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null) return false;
+        if (permissionName != null ? !permissionName.equals(that.permissionName) : that.permissionName != null)
+            return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (moduleId != null ? !moduleId.equals(that.moduleId) : that.moduleId != null) return false;
+        if (sortIndex != null ? !sortIndex.equals(that.sortIndex) : that.sortIndex != null) return false;
+        return status != null ? status.equals(that.status) : that.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = permissionId != null ? permissionId.hashCode() : 0;
+        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
+        result = 31 * result + (permissionName != null ? permissionName.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
+        result = 31 * result + (sortIndex != null ? sortIndex.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }

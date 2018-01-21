@@ -1,6 +1,9 @@
 package com.navinfo.core.service;
 
+import com.navinfo.core.entity.SysPermission;
+
 import java.util.List;
+import java.util.Set;
 
 /**
  * 权限业务层接口
@@ -8,4 +11,9 @@ import java.util.List;
  */
 public interface SysPermissionService {
     List findPermissionAll();
+    /**
+     *根据角色ID获取相应的权限对象集合
+     * @return
+     */
+    Set<SysPermission> findPermissionByRoleId(String roleId);
 }

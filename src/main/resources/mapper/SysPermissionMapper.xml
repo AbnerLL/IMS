@@ -240,4 +240,9 @@
       STATUS = #{status,jdbcType=VARCHAR}
     where PERMISSION_ID = #{permissionId,jdbcType=VARCHAR}
   </update>
+  <select id="findPermissionByRoleId" parameterType="string" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM IMS.SYS_PERMISSION
+    WHERE PERMISSION_ID IN
+    (SELECT a.PERMISSION_ID FROM ROLE_PERMISSION_REL a WHERE a.ROLE_ID=#{roleId})
+  </select>
 </mapper>

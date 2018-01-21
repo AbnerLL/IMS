@@ -2,7 +2,9 @@ package com.navinfo.core.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.navinfo.IMS.utils.ListUtils;
 import com.navinfo.core.dao.SysRoleMapper;
+import com.navinfo.core.dao.UserRoleRelMapper;
 import com.navinfo.core.entity.SysRole;
 import com.navinfo.core.entity.SysRoleExample;
 import com.navinfo.core.service.SysRoleService;
@@ -10,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 角色业务层实现类
@@ -21,6 +25,8 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Autowired
     private SysRoleMapper sysRoleMapper;
+    @Autowired
+    private UserRoleRelMapper userRoleRelMapper;
 
     /**
      * 根据角色名模糊查询
@@ -92,4 +98,14 @@ public class SysRoleServiceImpl implements SysRoleService {
         int num=sysRoleMapper.deleteByExample(sysRoleExample);
         return num!=0;
     }
+
+    /**
+     * 根据用户ID获取用户名下的角色
+     * @return
+     */
+    public Set<SysRole> findSysRoleByUsername(String username){
+        List<SysRole> sysRoleList= this.sysRoleMapper.findSysRoleByUsername(username);
+        return ListUtils.ListToSet(sysRoleList);
+    }
+
 }
