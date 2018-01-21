@@ -161,11 +161,11 @@
 
     }
     //设置日期
-    $(".datepicker").datepicker({
-        autoclose:true,
-        format:"yyyy/mm/dd",
-        language:"zh-CN"
-    });
+//    $(".datepicker").datepicker({
+//        autoclose:true,
+//        format:"yyyy/mm/dd",
+//        language:"zh-CN"
+//    });
 
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
@@ -231,9 +231,6 @@
                 field:"id",
                 title:"用户名"
             },{
-                field:"password",
-                title:"密码"
-            },{
                 field:"nickname",
                 title:"昵称"
             },{
@@ -242,7 +239,10 @@
                 formatter:dateFormatter
             },{
                 field:"status",
-                title:"状态"
+                title:"状态",
+                formatter:function(value,row,index){
+                    return 1==value?"有效":"无效";
+                }
             }]
         });
     }
