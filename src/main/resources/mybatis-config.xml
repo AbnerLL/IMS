@@ -11,6 +11,7 @@
     <typeAliases>
         <!-- 配置别名 -->
         <package name="com.navinfo.IMS.entity"/>
+        <!--<package name="com.navinfo.core.entity"/>-->
     </typeAliases>
 
     <!--配置分页插件-->

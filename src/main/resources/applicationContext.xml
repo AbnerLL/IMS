@@ -16,7 +16,7 @@
     </bean>
 
     <!--扫描所有注解（不包括Controller）-->
-    <context:component-scan base-package="com.navinfo.IMS">
+    <context:component-scan base-package="com.navinfo">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
@@ -41,8 +41,8 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定sqlSessionFactoryBeanName的名称-->
         <property name="sqlSessionFactoryBeanName" value="sqlSession"/>
-        <!--指定接口文件所在的包名-->
-        <property name="basePackage" value="com.navinfo.IMS.dao"/>
+        <!--指定接口文件所在的包名(您可以使用分号或逗号作为分隔符来设置多个包)-->
+        <property name="basePackage" value="com.navinfo.IMS.dao,com.navinfo.core.dao"/>
     </bean>
 
     <!--声明式事务的配置-->
@@ -53,7 +53,7 @@
     <!--配置事务的控制-->
     <aop:config>
         <!--切入点，指示事务作用到哪个对象上去-->
-        <aop:pointcut id="txPoint" expression="execution(* com.navinfo.IMS.service..*.*(..))"/>
+        <aop:pointcut id="txPoint" expression="execution(* com.navinfo.*.service..*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
     </aop:config>
 

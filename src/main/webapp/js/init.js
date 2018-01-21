@@ -297,7 +297,7 @@ $(window).ready(function () {
 
 //生成导航菜单
 $.ajax({
-    url: baseUrl+'/menus',
+    url: baseUrl+'/initMenus',
     type: 'get',
     dataType: 'json',
     success: function (data) {

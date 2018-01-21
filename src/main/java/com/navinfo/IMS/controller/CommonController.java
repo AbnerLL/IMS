@@ -23,4 +23,8 @@ public class CommonController {
     public String openPage(@PathVariable String page){
         return page;
     }
+    @RequestMapping("/setting/core/{page}")
+    public String openCorePage(@PathVariable String page){
+        return  "core/"+page;
+    }
 }
