@@ -1,6 +1,6 @@
-package com.navinfo.IMS.service.impl;
+package com.navinfo.core.service.impl;
 
-import com.navinfo.IMS.service.RolePermissionService;
+import com.navinfo.core.service.RolePermissionService;
 import org.springframework.stereotype.Service;
 
 /**

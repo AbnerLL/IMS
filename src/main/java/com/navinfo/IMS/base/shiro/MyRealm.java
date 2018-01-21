@@ -1,17 +1,14 @@
 package com.navinfo.IMS.base.shiro;
 
-import com.navinfo.IMS.entity.SysRole;
-import com.navinfo.IMS.entity.SysUser;
-import com.navinfo.IMS.service.SysPermissionService;
-import com.navinfo.IMS.service.SysRoleService;
-import com.navinfo.IMS.service.SysUserService;
+import com.navinfo.core.entity.SysUser;
+import com.navinfo.core.service.SysPermissionService;
+import com.navinfo.core.service.SysRoleService;
+import com.navinfo.core.service.SysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * 自定义的realm类
@@ -32,7 +29,8 @@ public class MyRealm extends AuthorizingRealm {
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("shrio授权doGetAuthorizationInfo......");
-        Object user=principalCollection.getPrimaryPrincipal();
+        String userName=(String)principalCollection.getPrimaryPrincipal();
+
         return null;
     }
 

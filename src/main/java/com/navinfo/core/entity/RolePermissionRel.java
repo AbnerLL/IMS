@@ -1,11 +1,11 @@
-package com.navinfo.IMS.entity;
+package com.navinfo.core.entity;
 
-public class UserRoleRel {
+public class RolePermissionRel {
     private String relId;
 
-    private String username;
-
     private String roleId;
+
+    private String permissionId;
 
     public String getRelId() {
         return relId;
@@ -15,19 +15,19 @@ public class UserRoleRel {
         this.relId = relId == null ? null : relId.trim();
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
     public String getRoleId() {
         return roleId;
     }
 
     public void setRoleId(String roleId) {
         this.roleId = roleId == null ? null : roleId.trim();
+    }
+
+    public String getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(String permissionId) {
+        this.permissionId = permissionId == null ? null : permissionId.trim();
     }
 }

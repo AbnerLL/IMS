@@ -1,4 +1,4 @@
-package com.navinfo.IMS.service;
+package com.navinfo.core.service;
 
 import java.util.List;
 

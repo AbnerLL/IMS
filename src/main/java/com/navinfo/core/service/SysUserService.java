@@ -1,7 +1,7 @@
-package com.navinfo.IMS.service;
+package com.navinfo.core.service;
 
 
-import com.navinfo.IMS.entity.SysUser;
+import com.navinfo.core.entity.SysUser;
 
 import java.util.List;
 

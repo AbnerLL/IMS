@@ -1,18 +1,15 @@
-package com.navinfo.IMS.service.impl;
+package com.navinfo.core.service.impl;
 
-import com.alibaba.fastjson.serializer.LongCodec;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.navinfo.IMS.dao.SysRoleMapper;
-import com.navinfo.IMS.entity.SysRole;
-import com.navinfo.IMS.entity.SysRoleExample;
-import com.navinfo.IMS.service.SysRoleService;
+import com.navinfo.core.dao.SysRoleMapper;
+import com.navinfo.core.entity.SysRole;
+import com.navinfo.core.entity.SysRoleExample;
+import com.navinfo.core.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**

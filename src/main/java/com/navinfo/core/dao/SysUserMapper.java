@@ -1,7 +1,7 @@
-package com.navinfo.IMS.dao;
+package com.navinfo.core.dao;
 
-import com.navinfo.IMS.entity.SysUser;
-import com.navinfo.IMS.entity.SysUserExample;
+import com.navinfo.core.entity.SysUser;
+import com.navinfo.core.entity.SysUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

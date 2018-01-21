@@ -1,7 +1,7 @@
-package com.navinfo.IMS.dao;
+package com.navinfo.core.dao;
 
-import com.navinfo.IMS.entity.UserRoleRel;
-import com.navinfo.IMS.entity.UserRoleRelExample;
+import com.navinfo.core.entity.UserRoleRel;
+import com.navinfo.core.entity.UserRoleRelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

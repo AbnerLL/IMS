@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.navinfo.IMS.dao.UserRoleRelMapper">
-  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.UserRoleRel">
+<mapper namespace="com.navinfo.core.dao.UserRoleRelMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.core.entity.UserRoleRel">
     <id column="REL_ID" jdbcType="VARCHAR" property="relId" />
     <result column="USERNAME" jdbcType="VARCHAR" property="username" />
     <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     REL_ID, USERNAME, ROLE_ID
   </sql>
-  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.UserRoleRelExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.navinfo.core.entity.UserRoleRelExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,19 +91,19 @@
     delete from IMS.USER_ROLE_REL
     where REL_ID = #{relId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.UserRoleRelExample">
+  <delete id="deleteByExample" parameterType="com.navinfo.core.entity.UserRoleRelExample">
     delete from IMS.USER_ROLE_REL
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.navinfo.IMS.entity.UserRoleRel">
+  <insert id="insert" parameterType="com.navinfo.core.entity.UserRoleRel">
     insert into IMS.USER_ROLE_REL (REL_ID, USERNAME, ROLE_ID
       )
     values (#{relId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.UserRoleRel">
+  <insert id="insertSelective" parameterType="com.navinfo.core.entity.UserRoleRel">
     insert into IMS.USER_ROLE_REL
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="relId != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.navinfo.IMS.entity.UserRoleRelExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.navinfo.core.entity.UserRoleRelExample" resultType="java.lang.Long">
     select count(*) from IMS.USER_ROLE_REL
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.UserRoleRel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.core.entity.UserRoleRel">
     update IMS.USER_ROLE_REL
     <set>
       <if test="username != null">
@@ -172,7 +172,7 @@
     </set>
     where REL_ID = #{relId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.UserRoleRel">
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.core.entity.UserRoleRel">
     update IMS.USER_ROLE_REL
     set USERNAME = #{username,jdbcType=VARCHAR},
       ROLE_ID = #{roleId,jdbcType=VARCHAR}

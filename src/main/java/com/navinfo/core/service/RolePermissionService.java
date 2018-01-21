@@ -1,4 +1,4 @@
-package com.navinfo.IMS.service;
+package com.navinfo.core.service;
 
 /**
  * 角色权限业务层接口

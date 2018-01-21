@@ -1,8 +1,7 @@
-package com.navinfo.IMS.service.impl;
+package com.navinfo.core.service.impl;
 
-import com.navinfo.IMS.dao.SysPermissionMapper;
-import com.navinfo.IMS.entity.SysPermission;
-import com.navinfo.IMS.service.SysPermissionService;
+import com.navinfo.core.dao.SysPermissionMapper;
+import com.navinfo.core.service.SysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

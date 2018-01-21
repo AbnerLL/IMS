@@ -1,7 +1,7 @@
-package com.navinfo.IMS.dao;
+package com.navinfo.core.dao;
 
-import com.navinfo.IMS.entity.SysPermission;
-import com.navinfo.IMS.entity.SysPermissionExample;
+import com.navinfo.core.entity.SysPermission;
+import com.navinfo.core.entity.SysPermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

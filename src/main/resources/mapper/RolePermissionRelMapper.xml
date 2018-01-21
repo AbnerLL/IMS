@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.navinfo.IMS.dao.RolePermissionRelMapper">
-  <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.RolePermissionRel">
+<mapper namespace="com.navinfo.core.dao.RolePermissionRelMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.core.entity.RolePermissionRel">
     <id column="REL_ID" jdbcType="VARCHAR" property="relId" />
     <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
     <result column="PERMISSION_ID" jdbcType="VARCHAR" property="permissionId" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     REL_ID, ROLE_ID, PERMISSION_ID
   </sql>
-  <select id="selectByExample" parameterType="com.navinfo.IMS.entity.RolePermissionRelExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.navinfo.core.entity.RolePermissionRelExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,19 +91,19 @@
     delete from IMS.ROLE_PERMISSION_REL
     where REL_ID = #{relId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.RolePermissionRelExample">
+  <delete id="deleteByExample" parameterType="com.navinfo.core.entity.RolePermissionRelExample">
     delete from IMS.ROLE_PERMISSION_REL
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.navinfo.IMS.entity.RolePermissionRel">
+  <insert id="insert" parameterType="com.navinfo.core.entity.RolePermissionRel">
     insert into IMS.ROLE_PERMISSION_REL (REL_ID, ROLE_ID, PERMISSION_ID
       )
     values (#{relId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{permissionId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.RolePermissionRel">
+  <insert id="insertSelective" parameterType="com.navinfo.core.entity.RolePermissionRel">
     insert into IMS.ROLE_PERMISSION_REL
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="relId != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.navinfo.IMS.entity.RolePermissionRelExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.navinfo.core.entity.RolePermissionRelExample" resultType="java.lang.Long">
     select count(*) from IMS.ROLE_PERMISSION_REL
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.RolePermissionRel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.core.entity.RolePermissionRel">
     update IMS.ROLE_PERMISSION_REL
     <set>
       <if test="roleId != null">
@@ -172,7 +172,7 @@
     </set>
     where REL_ID = #{relId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.RolePermissionRel">
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.core.entity.RolePermissionRel">
     update IMS.ROLE_PERMISSION_REL
     set ROLE_ID = #{roleId,jdbcType=VARCHAR},
       PERMISSION_ID = #{permissionId,jdbcType=VARCHAR}

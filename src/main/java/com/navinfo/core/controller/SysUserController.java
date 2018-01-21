@@ -1,16 +1,15 @@
-package com.navinfo.IMS.controller;
+package com.navinfo.core.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
-import com.navinfo.IMS.entity.SysUser;
-import com.navinfo.IMS.service.SysUserService;
+import com.navinfo.core.entity.SysUser;
+import com.navinfo.core.service.SysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.navinfo.IMS.entity;
+package com.navinfo.core.entity;
 
 import java.util.Date;
 

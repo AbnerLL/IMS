@@ -1,6 +1,6 @@
-package com.navinfo.IMS.service.impl;
+package com.navinfo.core.service.impl;
 
-import com.navinfo.IMS.service.UserRoleRelService;
+import com.navinfo.core.service.UserRoleRelService;
 import org.springframework.stereotype.Service;
 
 /**

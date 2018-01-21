@@ -1,8 +1,8 @@
-package com.navinfo.IMS.controller;
+package com.navinfo.core.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.navinfo.IMS.dto.Msg;
-import com.navinfo.IMS.service.SysPermissionService;
+import com.navinfo.core.service.SysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

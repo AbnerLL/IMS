@@ -1,9 +1,9 @@
-package com.navinfo.IMS.service.impl;
+package com.navinfo.core.service.impl;
 
-import com.navinfo.IMS.dao.SysUserMapper;
-import com.navinfo.IMS.entity.SysUser;
-import com.navinfo.IMS.entity.SysUserExample;
-import com.navinfo.IMS.service.SysUserService;
+import com.navinfo.core.dao.SysUserMapper;
+import com.navinfo.core.entity.SysUser;
+import com.navinfo.core.entity.SysUserExample;
+import com.navinfo.core.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

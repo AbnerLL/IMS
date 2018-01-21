@@ -1,7 +1,7 @@
-package com.navinfo.IMS.service;
+package com.navinfo.core.service;
 
 import com.github.pagehelper.PageInfo;
-import com.navinfo.IMS.entity.SysRole;
+import com.navinfo.core.entity.SysRole;
 
 /**
  * 角色的业务层接口
