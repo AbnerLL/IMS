@@ -87,9 +87,9 @@ public class SysUserController {
     @ResponseBody
     @RequestMapping(value="/user/{id}",method=RequestMethod.GET )
     public Msg getUser(@PathVariable("id") String userId){
-        SysUser user=sysUserService.getUserById(userId);
-        if(user!=null){
-            return Msg.success().add("users",user);
+        List<SysUser> sysUsers=sysUserService.getUserById(userId);
+        if(sysUsers!=null){
+            return Msg.success().add("entities",sysUsers);
         }else{
             return Msg.failure();
         }
@@ -125,5 +125,57 @@ public class SysUserController {
         }else{
             return Msg.failure();
         }
+    }
+
+    /**
+     * 获取当前会话用户
+     * @return
+     */
+    @RequestMapping(value="/user/currentUser",method=RequestMethod.GET)
+    @ResponseBody
+    public Msg getCurrentUser(){
+        Subject subject=SecurityUtils.getSubject();
+        String username=subject.getPrincipal().toString();
+        List<SysUser> sysRoleList=this.sysUserService.getUserById(username);
+        return Msg.success().add("entities",sysRoleList);
+    }
+
+    /**
+     * 修改密码
+     * @param oldPwd
+     * @param newPwdOne
+     * @param newPwdTwo
+     * @return
+     */
+    @RequestMapping(value="/user/changePwd",method = RequestMethod.POST)
+    @ResponseBody
+    public Msg changePwd(@RequestParam String oldPwd,@RequestParam String newPwdOne,@RequestParam String newPwdTwo){
+        try{
+            if(oldPwd==null||""==oldPwd){
+                return Msg.failure().add("error","原始密码为空！");
+            }
+            if(newPwdOne==null||newPwdTwo==null){
+                return Msg.failure().add("error","新密码为空！");
+            }
+            if(!newPwdOne.equals(newPwdTwo)){
+                return Msg.failure().add("error","新密码不一致！");
+            }
+            Subject subject=SecurityUtils.getSubject();
+            String username=subject.getPrincipal().toString();
+            List<SysUser> sysUserList=this.sysUserService.getUserById(username);
+            if(sysUserList!=null&&sysUserList.size()>0){
+                SysUser sysUser=sysUserList.get(0);
+                if(oldPwd.equals(sysUser.getPassword())){
+                    sysUser.setPassword(newPwdOne);
+                    boolean flag=this.sysUserService.updateUser(sysUser);
+                    return flag ? Msg.success():Msg.failure();
+                }else{
+                    return Msg.failure().add("error","原始密码错误！");
+                }
+            }
+        }catch (Exception e){
+            return Msg.failure();
+        }
+        return Msg.success();
     }
 }

@@ -57,8 +57,11 @@ public class SysUserServiceImpl implements SysUserService{
      * 可以根据分隔符来获取多位用户
      * @return SysUser
      */
-    public SysUser getUserById(String userId){
-        return this.sysUserMapper.selectByPrimaryKey(userId);
+    public List<SysUser> getUserById(String userId){
+        List<String> idList=Arrays.asList(userId.split(","));
+        SysUserExample example=new SysUserExample();
+        example.createCriteria().andIdIn(idList);
+        return this.sysUserMapper.selectByExample(example);
     }
 
     /**

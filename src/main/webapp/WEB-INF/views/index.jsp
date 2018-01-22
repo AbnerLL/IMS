@@ -182,7 +182,7 @@
                         </li>
 
                         <li class="dropdown-footer">
-                            <a href="inbox.html">
+                            <a href="#">
                                 查看全部<i class="ace-icon fa fa-arrow-right"></i>
                             </a>
                         </li>
@@ -195,7 +195,6 @@
                         <img class="nav-user-photo" src="${requestScope.basePath}/images/photo.jpg" alt="头像" />
                         <span class="user-info">
                                 <small>Welcome,</small>
-                                系统管理员
                             </span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
@@ -208,8 +207,8 @@
                         <%--<li><a href="#"><i class="ace-icon fa fa-wechat green"></i>关注公众号</a></li>--%>
                         <%--<li><a href="#"><i class="ace-icon fa fa-apple"></i>App下载</a></li>--%>
                         <%--<li class="divider"></li>--%>
-                        <li><a href="#"><i class="ace-icon fa fa-edit orange"></i>修改密码</a></li>
-                        <li><a href="#"><i class="ace-icon fa fa-lock orange"></i>锁住屏幕</a></li>
+                        <li><a href="#" id="edit_pwd_a"><i class="ace-icon fa fa-edit orange"></i>修改密码</a></li>
+                        <%--<li><a href="#"><i class="ace-icon fa fa-lock orange"></i>锁住屏幕</a></li>--%>
                         <li class="divider"></li>
                         <li><a href="${requestScope.basePath}/logout" onclick="javascript:window._logout=true"><i class="ace-icon fa fa-power-off red"></i>安全退出</a></li>
                     </ul>
@@ -435,7 +434,47 @@
 
     </div>
 </div>
-
+<%--模态框（修改密码）--%>
+<div class="modal fade" id="edit_pwd_modal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myEditModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-horizontal" id="edit_pwd_from">
+                            <div class="form-group">
+                                <label for="oldPwd_update_input" class="col-sm-2 control-label">旧密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="oldPwd" id="oldPwd_update_input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd_update_input1" class="col-sm-2 control-label">新密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="newPwdOne" id="newPwd_update_input1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd_update_input2" class="col-sm-2 control-label">新密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="newPwdTwo" id="newPwd_update_input2">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="update_btn" type="button" class="btn btn-primary">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="${requestScope.basePath}/js/jquery/3.2.1/jquery.min.js"></script>
 <script src="${requestScope.basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
@@ -447,3 +486,42 @@
 
 <!--框架首页初始化-->
 <script src="${requestScope.basePath}/js/init.js"></script>
+<script type="text/javascript">
+    $("#edit_pwd_a").click(function(){
+        //1.清空表单
+        $("#edit_pwd_from")[0].reset();
+        //2.弹出模态框
+        $("#edit_pwd_modal").modal("toggle");
+    });
+    $("#update_btn").click(function(){
+        var oldPwd=$("#oldPwd_update_input").val();
+        var newPwd1=$("#newPwd_update_input1").val();
+        var newPwd2=$("#newPwd_update_input2").val();
+        if(!oldPwd||!newPwd1||!newPwd2){
+            alert("密码不能为空！");
+            return;
+        }
+        if(newPwd1!=newPwd2){
+            alert("新密码不一致！");
+            return;
+        }
+        $.ajax({
+            url:baseUrl+"/user/changePwd",
+            type:"POST",
+            data:$("#edit_pwd_from").serialize(),
+            dataType:"json",
+            success:function(result){
+                if(1==result.code){
+                    alert("修改成功！即将返回登录界面");
+                    //返回登录界面
+                    window.location=baseUrl+"/logout";
+                }else{
+                    alert("修改失败！"+result.extend.error);
+                }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
+            }
+        });
+    });
+</script>

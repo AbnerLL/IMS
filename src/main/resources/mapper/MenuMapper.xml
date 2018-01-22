@@ -189,7 +189,7 @@
     SELECT * FROM MENU WHERE PID=#{pid} ORDER BY id
   </select>
   <select id="selectByPid" resultMap="MenuAndSubMenuMap">
-    SELECT * FROM MENU WHERE PID=#{pid} ORDER BY id
+    SELECT * FROM MENU WHERE PID=#{pid} AND attr1 !='-1' ORDER BY id
   </select>
   <resultMap id="MenuAndSubMenuMap" type="com.navinfo.IMS.utils.MenuUtil">
     <result column="id" property="id" javaType="String"/>

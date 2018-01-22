@@ -303,7 +303,7 @@
             dataType:"json",
             success:function (result) {
                 if(result.code==1){
-                    show_user_update_info(result.extend.users);
+                    show_user_update_info(result.extend.entities[0]);
                 }else{
                     alert("请求失败！");
                 }

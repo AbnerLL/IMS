@@ -294,7 +294,20 @@ $(window).ready(function () {
     !isPC() && $('#footer').css('height', 0);
     IframeAuto();
 }).resize(IframeAuto);
-
+//获取当前用户的名称
+setTimeout(function(){
+    $.ajax({
+       url:baseUrl+"/user/currentUser",
+       type:"GET",
+       dataType:"json",
+       success:function(result){
+           $(".user-info").append(result.extend.entities[0].nickname);
+       } ,
+       error:function(){
+           $(".user-info").append("请求失败！");
+    }
+    });
+},60);
 //生成导航菜单
 $.ajax({
     url: baseUrl+'/initMenus',

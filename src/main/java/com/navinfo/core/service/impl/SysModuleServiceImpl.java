@@ -30,12 +30,17 @@ public class SysModuleServiceImpl implements SysModuleService {
     public PageInfo findSysModuleByPage(Map map){
         Integer pageNum=Integer.valueOf((String) map.get("pageNum"));
         Integer pageSize=Integer.valueOf((String) map.get("pageSize"));
+//        String sort=(String) map.get("sort");
+//        String order=(String) map.get("order");
         String keyword=(String) map.get("keyword");
         SysModuleExample example=new SysModuleExample();
         if(keyword!=null&&!"".equals(keyword)){
             example.createCriteria().andModuleNameLike("%"+keyword+"%");
             example.or().andModulePidLike("%"+keyword+"%");
         }
+//        if(sort!=null&&!"".equals(sort)){
+//            example.setOrderByClause(sort+" "+order);
+//        }
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(this.sysModuleMapper.selectByExample(example));
     }

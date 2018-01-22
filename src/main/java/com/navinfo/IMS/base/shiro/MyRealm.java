@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -70,9 +71,9 @@ public class MyRealm extends AuthorizingRealm {
         //2.根据token来获取用户名
         String username=token.getUsername();
         //3.查询出数据库中的该对象
-        SysUser user=sysUserService.getUserById(username);
-        if(user!=null){
-            return new SimpleAuthenticationInfo(user.getId(),user.getPassword(),this.getName());
+        List<SysUser> users=sysUserService.getUserById(username);
+        if(users!=null&&users.size()>0){
+            return new SimpleAuthenticationInfo(users.get(0).getId(),users.get(0).getPassword(),this.getName());
         }
         return null;
     }

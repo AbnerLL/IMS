@@ -17,7 +17,7 @@ public interface SysUserService {
 
     boolean insertUser(SysUser sysUser);
 
-    SysUser getUserById(String userId);
+    List<SysUser> getUserById(String userId);
 
     boolean updateUser(SysUser user);
 

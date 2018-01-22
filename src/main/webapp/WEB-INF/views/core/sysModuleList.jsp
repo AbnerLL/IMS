@@ -183,6 +183,8 @@
         return {
             pageSize:this.pageSize,       //每页的记录行数
             pageNum:this.pageNumber,     //当前页数
+            sort:params.sort,
+            order:params.order,
             keyword:params.search
         };
     }
@@ -222,7 +224,7 @@
             striped: true,                      //是否显示行间隔色
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true,                   //是否显示分页（*）
-            sortable: false,                     //是否启用排序
+            sortable: true,                     //是否启用排序
             sortOrder: "asc",                   //排序方式
             queryParams: myQueryParams,         //传递参数（*）
             responseHandler:myResponseHandler,  //设置解析服务器返回的数据
@@ -264,7 +266,9 @@
                 }
             },{
                 field:"modulePid",
-                title:"父模块ID"
+                title:"父模块ID",
+                sortable:true,
+                sortName:"module_pid"
             },{
                 field:"moduleUrl",
                 title:"模块URL"
