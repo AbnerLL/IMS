@@ -6,9 +6,12 @@ import com.navinfo.core.dao.SysModuleMapper;
 import com.navinfo.core.entity.SysModule;
 import com.navinfo.core.entity.SysModuleExample;
 import com.navinfo.core.service.SysModuleService;
+import com.navinfo.core.vo.ModuleVO;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Security;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,27 @@ public class SysModuleServiceImpl implements SysModuleService {
     @Autowired
     private SysModuleMapper sysModuleMapper;
 
+    /**
+     * 获取菜单模块
+     * @return
+     */
+    public List<ModuleVO> getModuleVOS(){
+        //获取当前用户名
+        String username=(String) SecurityUtils.getSubject().getPrincipal();
+        //根据用户名获取父模块
+        List<ModuleVO> parentModuleVO=this.sysModuleMapper.getParentModuleVOByUser(username);
+        //根据用户名获取子模块
+        List<SysModule> childModule=this.sysModuleMapper.getModuleByUser(username);
+        //将子模块装填进父模块的子属性中
+        for(ModuleVO moduleVO:parentModuleVO){
+            for (SysModule sysModule:childModule){
+                if(moduleVO.getModuleId().equals(sysModule.getModulePid())){
+                    moduleVO.getChildren().add(sysModule);
+                }
+            }
+        }
+        return parentModuleVO;
+    }
     /**
      * 分页查询
      * @param map
