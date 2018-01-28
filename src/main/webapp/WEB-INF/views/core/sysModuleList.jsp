@@ -61,11 +61,9 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="urlTarget_insert_select" class="col-sm-2 control-label">跳转目标</label>
+                                <label for="sortIndex_insert_input" class="col-sm-2 control-label">排序</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" name="urlTarget" id="urlTarget_insert_select">
-                                        <option value="mainFrame">mainFrame</option>
-                                    </select>
+                                    <input class="form-control" type="text" name="sortIndex" id="sortIndex_insert_input"/>
                                 </div>
                                 <label for="iconClass_insert_input" class="col-sm-2 control-label">图标类名</label>
                                 <div class="col-sm-4">
@@ -131,11 +129,9 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="urlTarget_update_select" class="col-sm-2 control-label">跳转目标</label>
+                                <label for="sortIndex_update_input" class="col-sm-2 control-label">排序</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" name="urlTarget" id="urlTarget_update_select">
-                                        <option value="mainFrame">mainFrame</option>
-                                    </select>
+                                    <input class="form-control" type="text" name="sortIndex" id="sortIndex_update_input"/>
                                 </div>
                                 <label for="iconClass_update_input" class="col-sm-2 control-label">图标类名</label>
                                 <div class="col-sm-4">
@@ -273,14 +269,14 @@
                 field:"moduleUrl",
                 title:"模块URL"
             },{
-                field:"urlTarget",
-                title:"跳转目标"
-            },{
                 field:"iconClass",
                 title:"图标类名"
             },{
                 field:"moduleRemark",
                 title:"模块备注"
+            },{
+                field:"sortIndex",
+                title:"排序"
             }],
             formatSearch:function(){
                 return "搜索:模块名、父模块ID";
@@ -353,7 +349,7 @@
         $("#isShow_update_input").val(obj.isShow);
         $("#modulePid_update_input").val(obj.modulePid);
         $("#moduleUrl_update_input").val(obj.moduleUrl);
-        $("#urlTarget_update_input").val(obj.urlTarget);
+        $("#sortIndex_update_input").val(obj.sortIndex);
         $("#iconClass_update_input").val(obj.iconClass);
         $("#moduleRemark_update_textarea").val(obj.moduleRemark);
         $("#update_btn").attr("data-id",obj.moduleId);
