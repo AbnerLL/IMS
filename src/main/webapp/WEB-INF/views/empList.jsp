@@ -29,7 +29,7 @@
 <div class="container-fluid">
     <%--查询面板--%>
     <div class="collapse" id="search_collapse">
-        <form class="form-inline">
+        <form class="form-inline" id="search_form">
             <div class="form-group">
                 <label for="empIdSearch" class="control-label">编号</label>
                 <input type="text" class="form-control" id="empIdSearch" name="empId"/>
@@ -54,16 +54,38 @@
                 <input type="number" class="form-control" id="empEntryageSearch" name="empEntryage"/>
             </div>
             <div class="form-group">
-                <label for="empPostSearch" class="control-label">职务</label>
-                <select class="form-control" id="empPostSearch" name="empPost"></select>
+                <label for="empSecSearch" class="control-label">所属部门</label>
+                <select class="form-control" id="empSecSearch" name="empDep">
+                    <option value=""></option>
+                    <option value="数据库制作部">数据库制作部</option>
+                    <option value="数据库制作部西安分部">数据库制作部西安分部</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="empDepSearch" class="control-label">科室</label>
-                <select class="form-control" id="empDepSearch" name="empDep"></select>
+                <select class="form-control" id="empDepSearch" name="empSec">
+                    <option value=""></option>
+                    <option value="品质管理室">品质管理室</option>
+                    <option value="项目一组">项目一组</option>
+                    <option value="项目二组">项目二组</option>
+                    <option value="项目三组">项目三组</option>
+                    <option value="项目四组">项目四组</option>
+                    <option value="项目五组">项目五组</option>
+                    <option value="项目六组">项目六组</option>
+                    <option value="武汉项目组">武汉项目组</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="empSecSearch" class="control-label">所属部门</label>
-                <select class="form-control" id="empSecSearch" name="empSec"></select>
+                <label for="empPostSearch" class="control-label">职务</label>
+                <select class="form-control" id="empPostSearch" name="empPost">
+                    <option value=""></option>
+                    <option value="部门经理">部门经理</option>
+                    <option value="科室经理">科室经理</option>
+                    <option value="项目经理">项目经理</option>
+                    <option value="项目助理">项目助理</option>
+                    <option value="数据工程师">数据工程师</option>
+                    <option value="质量工程师">质量工程师</option>
+                </select>
             </div>
             <div class="btn btn-success" id="search_btn">查询</div>
             <div class="btn btn-default" id="search_reset_btn">清空</div>
@@ -155,12 +177,6 @@
                         <label for="empPost_insert_select" class="control-label col-sm-2">职务名称</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="empPost_insert_select" name="empPost">
-                                <%--<option value="部门经理">部门经理</option>--%>
-                                <%--<option value="科室经理">科室经理</option>--%>
-                                <%--<option value="项目经理">项目经理</option>--%>
-                                <%--<option value="项目助理">项目助理</option>--%>
-                                <%--<option value="数据工程师">数据工程师</option>--%>
-                                <%--<option value="质量工程师">质量工程师</option>--%>
                             </select>
                         </div>
                     </div>
@@ -238,14 +254,6 @@
                         <label for="empSec_update_select" class="control-label col-sm-2">所属科室</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="empSec_update_select" name="empSec">
-                                <%--<option value="品质管理室">品质管理室</option>--%>
-                                <%--<option value="项目一组">项目一组</option>--%>
-                                <%--<option value="项目二组">项目二组</option>--%>
-                                <%--<option value="项目三组">项目三组</option>--%>
-                                <%--<option value="项目四组">项目四组</option>--%>
-                                <%--<option value="项目五组">项目五组</option>--%>
-                                <%--<option value="项目六组">项目六组</option>--%>
-                                <%--<option value="武汉项目组">武汉项目组</option>--%>
                             </select>
                         </div>
                     </div>
@@ -287,6 +295,8 @@
 <%--日期插件js文件及本地化文件--%>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/tableExport.js"></script>
+<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/bootstrap-table-export.js"></script>
 <script>
     $(function(){
         //初始化表格
@@ -308,11 +318,13 @@
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber,     //当前页数
-            keyword:params.search
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber,     //当前页数
+//            keyword:params.search
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -366,6 +378,9 @@
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
+            searchOnEnterKey:true,               //按entry键搜索
+            showExport:true,                    //显示导出
+            exportDataType:"all",               //导出方式selected、all、basic
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
@@ -610,6 +625,13 @@
         for(var index in postArray){
             $("#empPost_insert_select").append("<option value='"+postArray[index]+"'>"+postArray[index]+"</option>")
         }
+    });
+    //查询按钮
+    $("#search_btn").click(function () {
+        $("#table_list").bootstrapTable("refresh");
+    });
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
     });
 </script>
 </body>

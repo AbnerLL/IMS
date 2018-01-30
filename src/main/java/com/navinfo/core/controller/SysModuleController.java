@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
 import com.navinfo.core.entity.SysModule;
 import com.navinfo.core.service.SysModuleService;
-import com.navinfo.core.vo.ModuleVO;
+import com.navinfo.core.vo.MenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +28,8 @@ public class SysModuleController {
     @RequestMapping(value="initModule",method=RequestMethod.GET)
     @ResponseBody
     public Msg initModule(){
-        List<ModuleVO> moduleVOS=this.sysModuleService.getModuleVOS();
-        return Msg.success().add("modules",moduleVOS);
+        List<MenuVO> menuVOS=this.sysModuleService.getModuleVOS();
+        return Msg.success().add("menu",menuVOS);
     }
     /**
      * 查询

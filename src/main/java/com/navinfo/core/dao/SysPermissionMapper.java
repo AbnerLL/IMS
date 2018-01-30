@@ -29,4 +29,6 @@ public interface SysPermissionMapper {
     int updateByPrimaryKey(SysPermission record);
 
     List<SysPermission> findPermissionByRoleId(String roleId);
+
+    List<SysPermission> findPermissionByModuleId(String moduleId);
 }

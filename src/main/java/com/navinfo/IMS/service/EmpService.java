@@ -1,8 +1,12 @@
 package com.navinfo.IMS.service;
 
+import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.entity.Emp;
+import com.navinfo.IMS.so.EmpSearch;
+import com.navinfo.IMS.utils.PageObject;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -10,13 +14,15 @@ import java.util.List;
  */
 public interface EmpService {
 
-    public List findAllEmp();
+    List findAllEmp();
 
-    public boolean insertEmp(Emp emp);
+    boolean insertEmp(Emp emp);
 
-    public List<Emp> getEmpById(String empId);
+    List<Emp> getEmpById(String empId);
 
-    public boolean updateEmp(Emp emp);
+    boolean updateEmp(Emp emp);
 
-    public boolean deleteEmp(String empId);
+    boolean deleteEmp(String empId);
+
+    PageInfo findEmpByPage(EmpSearch empSearch, PageObject pageObject);
 }

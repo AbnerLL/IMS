@@ -303,4 +303,59 @@
       IS_SHOW = #{isShow,jdbcType=VARCHAR}
     where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
   </update>
+  <select id="getModuleByUser" parameterType="string" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM IMS.SYS_MODULE
+    WHERE IS_SHOW!='0'
+    AND MODULE_ID IN
+    (select distinct m.module_id
+    from sys_user                   u,
+    user_role_rel              r,
+    sys_role                   t,
+    role_module_permission_rel a,
+    module_permission_rel      b,
+    sys_module                 m
+    where u.id = #{username}
+    AND u.id = r.username
+    and r.role_id = t.role_id
+    and t.role_id = a.role_id
+    AND a.module_permission_id = b.rel_id
+    and b.module_id=m.module_id)
+    ORDER BY SORT_INDEX
+  </select>
+  <select id="getParentModuleVOByUser" parameterType="string" resultMap="ModuleVOResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM IMS.SYS_MODULE
+    WHERE MODULE_PID ='-1'
+    AND IS_SHOW!='0'
+    AND MODULE_ID IN
+    (select distinct m.module_pid
+    from sys_user                   u,
+    user_role_rel              r,
+    sys_role                   t,
+    role_module_permission_rel a,
+    module_permission_rel      b,
+    sys_module                 m
+    where u.id = #{username}
+    AND u.id = r.username
+    and r.role_id = t.role_id
+    and t.role_id = a.role_id
+    AND a.module_permission_id = b.rel_id
+    and b.module_id=m.module_id
+    )
+    ORDER BY SORT_INDEX
+  </select>
+  <resultMap id="ModuleVOResultMap" type="com.navinfo.core.vo.MenuVO">
+    <id column="MODULE_ID" jdbcType="VARCHAR" property="moduleId" />
+    <result column="SYSTEM_ID" jdbcType="VARCHAR" property="systemId" />
+    <result column="MODULE_CODE" jdbcType="VARCHAR" property="moduleCode" />
+    <result column="MODULE_NAME" jdbcType="VARCHAR" property="moduleName" />
+    <result column="SORT_INDEX" jdbcType="VARCHAR" property="sortIndex" />
+    <result column="MODULE_REMARK" jdbcType="VARCHAR" property="moduleRemark" />
+    <result column="MODULE_PID" jdbcType="VARCHAR" property="modulePid" />
+    <result column="MODULE_URL" jdbcType="VARCHAR" property="moduleUrl" />
+    <result column="URL_TARGET" jdbcType="VARCHAR" property="urlTarget" />
+    <result column="ICON_CLASS" jdbcType="VARCHAR" property="iconClass" />
+    <result column="IS_SHOW" jdbcType="VARCHAR" property="isShow" />
+  </resultMap>
 </mapper>

@@ -28,8 +28,6 @@ public class MyRealm extends AuthorizingRealm {
     private SysUserService sysUserService;
     @Autowired
     private SysRoleService sysRoleService;
-    @Autowired
-    private SysPermissionService sysPermissionService;
     /**
      * 授权（第二步）
      * @param principalCollection

@@ -2,7 +2,7 @@ package com.navinfo.core.service;
 
 import com.github.pagehelper.PageInfo;
 import com.navinfo.core.entity.SysModule;
-import com.navinfo.core.vo.ModuleVO;
+import com.navinfo.core.vo.MenuVO;
 
 import java.util.List;
 import java.util.Map;
@@ -21,5 +21,5 @@ public interface SysModuleService {
 
     boolean updateSysModule(SysModule sysModule);
 
-    List<ModuleVO> getModuleVOS();
+    List<MenuVO> getModuleVOS();
 }

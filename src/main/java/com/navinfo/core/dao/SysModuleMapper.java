@@ -3,6 +3,8 @@ package com.navinfo.core.dao;
 import com.navinfo.core.entity.SysModule;
 import com.navinfo.core.entity.SysModuleExample;
 import java.util.List;
+
+import com.navinfo.core.vo.MenuVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysModuleMapper {
@@ -27,4 +29,8 @@ public interface SysModuleMapper {
     int updateByPrimaryKeySelective(SysModule record);
 
     int updateByPrimaryKey(SysModule record);
+
+    List<MenuVO> getParentModuleVOByUser(String username);
+
+    List<SysModule> getModuleByUser(String username);
 }

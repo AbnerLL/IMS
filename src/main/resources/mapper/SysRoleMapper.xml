@@ -250,4 +250,38 @@
     <collection property="permissions" column="ROLE_ID"
                 select="com.navinfo.core.dao.SysPermissionMapper.findPermissionByRoleId" ofType="com.navinfo.core.entity.SysPermission"></collection>
   </resultMap>
+
+  <select id="loadModuleTree" parameterType="string" resultMap="PermissionTreeMap">
+    SELECT DISTINCT s.module_id as id ,s.module_pid as pid,s.module_name as name FROM
+    role_module_permission_rel a,
+    module_permission_rel b,
+    sys_module s
+    WHERE a.role_id=#{roleId}
+    AND a.module_permission_id=b.rel_id
+    AND b.module_id=s.module_id
+    UNION
+    SELECT s1.permission_id as id,b1.module_id as pid,s1.description as name FROM
+    role_module_permission_rel a1,
+    module_permission_rel b1,
+    sys_permission s1
+    WHERE a1.role_id=#{roleId}
+    AND a1.module_permission_id=b1.rel_id
+    AND b1.permission_id=s1.permission_id
+  </select>
+  <resultMap id="PermissionTreeMap" type="com.navinfo.core.vo.PermissionTreeVO">
+    <id property="id" column="id"></id>
+    <result property="pid" column="pid"></result>
+    <result property="name" column="name"></result>
+  </resultMap>
+  <select id="loadAllModuleTree" resultMap="PermissionTreeMap">
+    SELECT DISTINCT s.module_id as id ,s.module_pid as pid,s.module_name as name FROM
+    module_permission_rel b,
+    sys_module s
+    WHERE b.module_id=s.module_id
+    UNION
+    SELECT s1.permission_id as id,b1.module_id as pid,s1.description as name FROM
+    module_permission_rel b1,
+    sys_permission s1
+    WHERE b1.permission_id=s1.permission_id
+  </select>
 </mapper>

@@ -28,8 +28,8 @@
       <property name="forceBigDecimals" value="true" />
     </javaTypeResolver>
 	<!-- 指定对象生成的位置以及参数 -->
-    <javaModelGenerator targetPackage="com.navinfo.IMS.entity" 
-    					targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem">
+    <javaModelGenerator targetPackage="com.navinfo.core.entity"
+    					targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem2">
         <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
       <property name="enableSubPackages" value="false" />
       <property name="trimStrings" value="true" />
@@ -40,13 +40,13 @@
       <!--<property name="enableSubPackages" value="true" />-->
     <!--</sqlMapGenerator>-->
       <sqlMapGenerator targetPackage="mapper"
-                       targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem">
+                       targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem2">
           <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
           <property name="enableSubPackages" value="false" />
       </sqlMapGenerator>
 	<!-- 设置dao接口的位置 -->
     <javaClientGenerator type="XMLMAPPER"
-    targetPackage="com.navinfo.IMS.dao"  targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem">
+    targetPackage="com.navinfo.core.dao"  targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem2">
         <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
       <property name="enableSubPackages" value="false" />
     </javaClientGenerator>
@@ -58,7 +58,7 @@
 	<!--<table schema="ims" tableName="pre_grade" domainObjectName="PreGrade"></table>-->
 	<!--<table schema="ims" tableName="test_grade" domainObjectName="TestGrade"></table>-->
 	<!--<table schema="ims" tableName="pro_ability" domainObjectName="ProAbility"></table>-->
-	<table schema="ims" tableName="sys_user" domainObjectName="SysUser"></table>
+	<!--<table schema="ims" tableName="sys_user" domainObjectName="SysUser"></table>-->
 	<!--<table schema="ims" tableName="work_diary" domainObjectName="WorkDiary"></table>-->
 	<!--<table tableName="work_stat" domainObjectName="WorkStat"></table>-->
       <!--<table schema="ims" tableName="sys_role" domainObjectName="SysRole"></table>-->
@@ -66,6 +66,17 @@
       <!--<table schema="ims" tableName="user_role_rel" domainObjectName="UserRoleRel"></table>-->
       <!--<table schema="ims" tableName="role_permission_rel" domainObjectName="RolePermissionRel"></table>-->
       <!--<table schema="ims" tableName="work_data" domainObjectName="WorkData"></table>-->
+      <!--<table schema="ims" tableName="diary_info" domainObjectName="DiaryInfo"></table>-->
+      <!--<table schema="ims" tableName="road_report" domainObjectName="RoadReport"></table>-->
+      <!--<table schema="ims" tableName="poi_report" domainObjectName="PoiReport"></table>-->
+      <!--<table schema="ims" tableName="depinfo_report" domainObjectName="DepInfoReport"></table>-->
+      <!--<table schema="ims" tableName="road_question" domainObjectName="RoadQuestion"></table>-->
+      <!--<table schema="ims" tableName="poi_question" domainObjectName="PoiQuestion"></table>-->
+      <!--<table schema="ims" tableName="monitor_info" domainObjectName="MonitorInfo"></table>-->
+      <!--<table schema="ims" tableName="question_source" domainObjectName="QuestionSource"></table>-->
+      <!--<table schema="ims" tableName="fixed_asset" domainObjectName="FixedAsset"></table>-->
+    <table schema="ims" tableName="module_permission_rel" domainObjectName="ModulePermissionRel"></table>
+    <table schema="ims" tableName="role_module_permission_rel" domainObjectName="RoleModulePermissionRel"></table>
 
   </context>
 </generatorConfiguration>

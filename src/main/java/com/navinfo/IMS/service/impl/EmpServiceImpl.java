@@ -1,15 +1,17 @@
 package com.navinfo.IMS.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dao.EmpMapper;
 import com.navinfo.IMS.entity.Emp;
 import com.navinfo.IMS.entity.EmpExample;
 import com.navinfo.IMS.service.EmpService;
+import com.navinfo.IMS.so.EmpSearch;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.IMS.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 员工的业务层实现类
@@ -21,6 +23,57 @@ public class EmpServiceImpl implements EmpService{
     @Autowired
     private EmpMapper empMapper;
 
+    /**
+     * 根据页面的查询参数生成查询Example
+     * @return
+     */
+    private EmpExample createSearchExample(EmpSearch empSearch){
+        EmpExample empExample=new EmpExample();
+        empExample.createCriteria();
+        if(StringUtil.notNull(empSearch.getEmpId())){
+            empExample.getOredCriteria().get(0).andEmpIdEqualTo(empSearch.getEmpId());
+        }
+        if(StringUtil.notNull(empSearch.getEmpName())){
+            empExample.getOredCriteria().get(0).andEmpNameEqualTo(empSearch.getEmpName());
+        }
+        if(empSearch.getEmpEntryAge()!=null){
+            empExample.getOredCriteria().get(0).andEmpEntryAgeEqualTo(empSearch.getEmpEntryAge());
+        }
+        if (StringUtil.notNull(empSearch.getEmpDept())){
+            empExample.getOredCriteria().get(0).andEmpDeptEqualTo(empSearch.getEmpDept());
+        }
+        if (StringUtil.notNull(empSearch.getEmpSec())){
+            empExample.getOredCriteria().get(0).andEmpSecEqualTo(empSearch.getEmpSec());
+        }
+        if (StringUtil.notNull(empSearch.getEmpPost())) {
+            empExample.getOredCriteria().get(0).andEmpPostEqualTo(empSearch.getEmpPost());
+        }
+        if (empSearch.getEmpHiredateStart()!=null){
+            empExample.getOredCriteria().get(0).andEmpHiredateGreaterThanOrEqualTo(empSearch.getEmpHiredateStart());
+        }
+        if (empSearch.getEmpHiredateEnd()!=null){
+            empExample.getOredCriteria().get(0).andEmpHiredateLessThanOrEqualTo(empSearch.getEmpHiredateEnd());
+        }
+        //关键词部分
+        if (StringUtil.notNull(empSearch.getKeyword())){
+            empExample.or().andEmpNameLike("%"+empSearch.getKeyword()+"%");
+            empExample.or().andEmpSecLike("%"+empSearch.getKeyword()+"%");
+        }
+        return empExample;
+    }
+
+    /**
+     * 分页查询
+     * @param empSearch 表单的查询参数
+     * @param pageObject 页面的分页参数
+     * @return PageInfo 分页信息类，包含数据和详细的分页信息
+     */
+    public PageInfo findEmpByPage(EmpSearch empSearch, PageObject pageObject){
+        EmpExample empExample=this.createSearchExample(empSearch);
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
+        List<Emp> empList=this.empMapper.selectByExample(empExample);
+        return new PageInfo(empList);
+    }
     public List findAllEmp() {
         return empMapper.selectByExample(null);
     }

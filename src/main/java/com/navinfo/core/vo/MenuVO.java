@@ -9,7 +9,7 @@ import java.util.List;
  * 菜单模块的数据展示类
  * Created by luozhihui on 2018/1/22.
  */
-public class ModuleVO extends SysModule{
+public class MenuVO extends SysModule{
 
     //子模块对象
     private List<SysModule> children=new ArrayList<SysModule>();

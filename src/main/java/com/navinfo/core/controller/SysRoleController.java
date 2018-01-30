@@ -4,11 +4,13 @@ import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
 import com.navinfo.core.entity.SysRole;
 import com.navinfo.core.service.SysRoleService;
+import com.navinfo.core.vo.PermissionTreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -99,5 +101,39 @@ public class SysRoleController {
         }else{
             return Msg.failure();
         }
+    }
+
+    /**
+     * 根据角色ID获取相应的权限
+     * @return
+     */
+    @RequestMapping(value="/rolePermission/{roleId}",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg loadRolePermission(@PathVariable String roleId){
+        List<PermissionTreeVO> treeNodes=this.sysRoleService.findRolePermissionTree(roleId);
+        return Msg.success().add("treeNodes",treeNodes);
+    }
+
+    /**
+     * 加载所有权限
+     * 用于页面编辑权限
+     * @return
+     */
+    @RequestMapping(value="/rolePermissionAll/{roleId}",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg loadAllModulePermission(@PathVariable String roleId){
+        List<PermissionTreeVO> treeNodesAll=this.sysRoleService.findAllPermissionTree(roleId);
+        return Msg.success().add("treeNodes",treeNodesAll);
+    }
+
+    /**
+     * 保存用户权限
+     * @return
+     */
+    @RequestMapping(value = "/rolePermission/{roleId}",method=RequestMethod.POST)
+    @ResponseBody
+    public Msg saveRolePermission(@PathVariable String roleId,@RequestBody PermissionTreeVO[] permissionTreeVOS){
+        boolean flag=this.sysRoleService.saveSelectedRolePermission(roleId,permissionTreeVOS);
+        return flag ? Msg.success() : Msg.failure();
     }
 }

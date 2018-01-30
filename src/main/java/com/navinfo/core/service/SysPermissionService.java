@@ -16,4 +16,12 @@ public interface SysPermissionService {
      * @return
      */
     Set<SysPermission> findPermissionByRoleId(String roleId);
+
+    List<SysPermission> findPermissionByModuleId(String moduleId);
+
+    boolean savePermission(SysPermission sysPermission);
+
+    boolean updatePermission(SysPermission sysPermission);
+
+    boolean deletePermissionById(String permissionId);
 }

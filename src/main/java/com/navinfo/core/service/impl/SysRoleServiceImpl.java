@@ -3,18 +3,17 @@ package com.navinfo.core.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.utils.ListUtils;
+import com.navinfo.core.dao.ModulePermissionRelMapper;
+import com.navinfo.core.dao.RoleModulePermissionRelMapper;
 import com.navinfo.core.dao.SysRoleMapper;
 import com.navinfo.core.dao.UserRoleRelMapper;
-import com.navinfo.core.entity.SysRole;
-import com.navinfo.core.entity.SysRoleExample;
+import com.navinfo.core.entity.*;
 import com.navinfo.core.service.SysRoleService;
+import com.navinfo.core.vo.PermissionTreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 角色业务层实现类
@@ -27,7 +26,10 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleMapper sysRoleMapper;
     @Autowired
     private UserRoleRelMapper userRoleRelMapper;
-
+    @Autowired
+    private RoleModulePermissionRelMapper roleModulePermissionRelMapper;
+    @Autowired
+    private ModulePermissionRelMapper modulePermissionRelMapper;
     /**
      * 根据角色名模糊查询
      * @param roleName
@@ -107,5 +109,98 @@ public class SysRoleServiceImpl implements SysRoleService {
         List<SysRole> sysRoleList= this.sysRoleMapper.findSysRoleByUsername(username);
         return ListUtils.ListToSet(sysRoleList);
     }
+    /**
+     * 根据角色ID获取权限树
+     * @param roleId
+     * @return
+     */
+    public List<PermissionTreeVO> findRolePermissionTree(String roleId){
+        return this.sysRoleMapper.loadModuleTree(roleId);
+    }
+    /**
+     * 获取所有权限的树
+     * @return
+     */
+    public List<PermissionTreeVO> findAllPermissionTree(String roleId){
+        //获取所有权限
+        List<PermissionTreeVO> treeNodes=this.sysRoleMapper.loadAllModuleTree();
+        //获取当前角色的所有权限
+        List<PermissionTreeVO> checkedNodes=this.sysRoleMapper.loadModuleTree(roleId);
+        //将所有权限中当前角色已有的权限的checked值改为true
+        for(PermissionTreeVO checkedNode:checkedNodes){
+            for(PermissionTreeVO treeNode:treeNodes){
+                if(checkedNode.equals(treeNode)){
+                    treeNode.setChecked(true);
+                    break;
+                }
+            }
+        }
+        return treeNodes;
+    }
 
+    /**
+     * 根据角色名添加选中的权限
+     * @param roleId
+     * @param permissionTreeVOS
+     * @return
+     */
+    public boolean saveSelectedRolePermission(String roleId, PermissionTreeVO[] permissionTreeVOS){
+        //1.先删除该角色下的权限关联
+        RoleModulePermissionRelExample roleModulePermissionRelExample=new RoleModulePermissionRelExample();
+        roleModulePermissionRelExample.createCriteria().andRoleIdEqualTo(roleId);
+        this.roleModulePermissionRelMapper.deleteByExample(roleModulePermissionRelExample);
+        //2.再根据permissionVOS添加角色的权限
+        //一级权限模块
+        List<PermissionTreeVO> levelOneModule=new ArrayList<PermissionTreeVO>();
+        //二级权限模块
+        List<PermissionTreeVO> levelTwoModule=new ArrayList<PermissionTreeVO>();
+        //三级权限模块
+        List<PermissionTreeVO> modulePermission=new ArrayList<PermissionTreeVO>();
+        //用于存放一级权限模块的ID
+        List<String> levelOneModuleIds=new ArrayList<String>();
+        //用于存放三级权限模块的ID
+        List<String> modulePermissionIds=new ArrayList<String>();
+        //查找出一级权限模块
+        for(PermissionTreeVO permissionTreeVO:permissionTreeVOS){
+            if(permissionTreeVO!=null&&permissionTreeVO.getPid()==null){
+                levelOneModule.add(permissionTreeVO);
+                levelOneModuleIds.add(permissionTreeVO.getId());
+            }
+        }
+        //根据一级权限模块查找二级权限模块
+        for(PermissionTreeVO permissionTreeVO:permissionTreeVOS){
+            for (PermissionTreeVO levelOne:levelOneModule) {
+                if(permissionTreeVO.getPid()!=null&&permissionTreeVO.getPid().equals(levelOne.getId())){
+                    levelTwoModule.add(permissionTreeVO);
+                }
+            }
+        }
+        //根据二级权限模块查找三级权限模块
+        for(PermissionTreeVO permissionTreeVO:permissionTreeVOS){
+            for (PermissionTreeVO levelTwo:levelTwoModule) {
+                if(permissionTreeVO.getPid()!=null&&permissionTreeVO.getPid().equals(levelTwo.getId())){
+                    modulePermission.add(permissionTreeVO);
+                    modulePermissionIds.add(permissionTreeVO.getId());
+                }
+            }
+        }
+        //用来存放要插入的角色权限关联表
+        List<RoleModulePermissionRel> roleModulePermissionRelList=new ArrayList<RoleModulePermissionRel>();
+        //根据权限查询出模块权限表中的主键
+        ModulePermissionRelExample modulePermissionRelExample=new ModulePermissionRelExample();
+        modulePermissionRelExample.createCriteria().andModuleIdIn(levelOneModuleIds);
+        modulePermissionRelExample.or().andPermissionIdIn(modulePermissionIds);
+        List<ModulePermissionRel> modulePermissionRelList=this.modulePermissionRelMapper.selectByExample(modulePermissionRelExample);
+        for (ModulePermissionRel permissionRel:modulePermissionRelList){
+            RoleModulePermissionRel roleModulePermissionRel=new RoleModulePermissionRel();
+            roleModulePermissionRel.setRelId(UUID.randomUUID().toString());
+            roleModulePermissionRel.setRoleId(roleId);
+            roleModulePermissionRel.setModulePermissionId(permissionRel.getRelId());
+            roleModulePermissionRelList.add(roleModulePermissionRel);
+        }
+        for(RoleModulePermissionRel roleModulePermissionRel:roleModulePermissionRelList){
+            this.roleModulePermissionRelMapper.insert(roleModulePermissionRel);
+        }
+        return true;
+    }
 }

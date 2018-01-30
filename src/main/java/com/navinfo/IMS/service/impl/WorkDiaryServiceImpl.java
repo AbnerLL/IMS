@@ -26,6 +26,7 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
     public PageInfo findWorkDiaryByPage(Map map){
         Integer pageSize=Integer.valueOf((String) map.get("pageSize")) ;
         Integer pageNum=Integer.valueOf((String) map.get("pageNum"));
+        String keyword=(String) map.get("keyword");
         PageHelper.startPage(pageNum,pageSize);
         WorkDiaryExample example=new WorkDiaryExample();
         if (map.get("empId")!=null){
@@ -39,6 +40,10 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
         }
         if (map.get("workDateEnd")!=null){
             example.createCriteria().andWorkDateLessThanOrEqualTo((Date) map.get("workDateEnd"));
+        }
+        if(keyword!=null&&!"".equals(keyword)){
+            example.or().andEmpNameLike("%"+keyword+"%");
+            example.or().andSectionLike("%"+keyword+"%");
         }
         List list=workDiaryMapper.selectByExample(example);
         return new PageInfo(list);

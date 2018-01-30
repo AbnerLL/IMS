@@ -13,7 +13,7 @@
     <%@include file="common/head.jsp"%>
     <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css"  rel="stylesheet" />
-    <link herf="${basePath}/css/zTree/zTreeStyle.css" rel="stylesheet" />
+    <link href="${basePath}/css/zTree/zTreeStyle.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container-fluid">
@@ -116,8 +116,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close">取消</button>
-                    <button type="button" class="btn btn-primary btn-sm" id="permission_save_btn" aria-label="save">保存</button>
+                    <div id="permission_update_div">
+                        <button type="button" class="btn btn-primary btn-sm" id="permission_update_btn" aria-label="save">编辑权限</button>
+                    </div>
+                    <div id="permission_save_div" style="display: none">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close">取消</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="permission_save_btn" aria-label="save">保存</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -333,39 +338,126 @@
         }
         //权限配置按钮
         $("#permission_set_btn").click(function(){
-            $("#permission_set_modal").modal("toggle");
+            var selections=$("#table_list").bootstrapTable("getSelections");
+            if(selections.length==1){
+                //1.获取角色信息
+                getRoleById(selections[0].roleId);
+                //
+                $("#permission_save_div").hide();
+                $("#permission_update_div").show();
+                //2.弹出权限框
+                $("#permission_set_modal").modal("toggle");
+            }else{
+                alert("请选择单条数据");
+                return;
+            }
         });
-        //给权限设置模态框绑定事件（show.bs.modal事件：在模态框出来之前）
-        $("#permission_set_modal").on("show.bs.modal",function(){
-            //加载树
-            requestPermissionData();
-        });
-        //请求权限数据
-        function requestPermissionData() {
-            $.ajax({
-                url:"${basePath}/permissions?pageSize=&pageNum=",
-                type:"GET",
-                dataType:"json",
-                success:function(result){
-                    if(result.code==1){
-                        alert("处理成功");
-
-                    }
-                }
-            });
-        }
+        //树对象
+        var zTreeObj;
+        //树的设置
         var treeSet={
             data:{
                 simpleData:{
                     enable:true,
-                    idKey:"permissionId",
-                    pIdKey:"parentId",
+                    idKey:"id",
+                    pIdKey:"pid",
                 }
             }
+        };
+        //树的设置(带复选框)
+        var treeSet2={
+            check:{
+                enable:true,
+                chkStyle: "checkbox"
+            },
+            data:{
+                simpleData:{
+                    enable:true,
+                    idKey:"id",
+                    pIdKey:"pid",
+                }
+            }
+        };
+        //给权限设置模态框绑定事件（show.bs.modal事件：在模态框出来之前）
+        $("#permission_set_modal").on("show.bs.modal",function(){
+            var roleId=$("#table_list").bootstrapTable("getSelections")[0].roleId;
+            //加载树
+            requestPermissionData(roleId);
+        });
+        //请求权限数据
+        function requestPermissionData(roleId) {
+            $.ajax({
+                url:"${basePath}/rolePermission/"+roleId+"?pageSize=&pageNum=",
+                type:"GET",
+                dataType:"json",
+                success:function(result){
+                    if(result.code==1){
+                        loadPermissionTree(result.extend.treeNodes,treeSet);
+                    }
+                }
+            });
         }
         //加载权限树
-        function loadPermissionTree(data){
-
+        function loadPermissionTree(treeNodes,treeSet){
+            zTreeObj= $.fn.zTree.init($("#permissionTree"),treeSet,treeNodes);
+        }
+        //编辑权限
+        $("#permission_update_btn").click(function(){
+            //当前选中角色
+            var roleId=$("#table_list").bootstrapTable("getSelections")[0].roleId;
+            requestAllPermissionData(roleId);
+            //隐藏编辑按钮
+            $(this).parent("div").hide();
+            //显示保存按钮
+            $("#permission_save_div").show();
+        });
+        //请求权限数据
+        function requestAllPermissionData(roleId,treeSet) {
+            $.ajax({
+                url:"${basePath}/rolePermissionAll/"+roleId+"?pageSize=&pageNum=",
+                type:"GET",
+                dataType:"json",
+                success:function(result){
+                    if(result.code==1){
+                        loadPermissionTree(result.extend.treeNodes,treeSet2);
+                    }
+                }
+            });
+        }
+        //保存按钮
+        $("#permission_save_btn").click(function(){
+            //1.获取选中的权限数据
+            var selected=zTreeObj.getCheckedNodes(true);
+            //获取当前角色
+            //当前选中角色
+            var roleId=$("#table_list").bootstrapTable("getSelections")[0].roleId;
+            //2.发送请求
+            saveRolePermission(selected,roleId);
+            //3.切换按钮
+            $(this).parent("div").hide();
+            $(this).parent("div").prev().show();
+            //4.返回到权限列表
+            var roleId=$("#table_list").bootstrapTable("getSelections")[0].roleId;
+            //加载树
+            requestPermissionData(roleId);
+        });
+        function saveRolePermission(data,roleId){
+            $.ajax({
+                url:"${basePath}/rolePermission/"+roleId+"?pageSize=&pageNum=",
+                type:"POST",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                dataType:"json",
+                async:false,
+                success:function(result){
+                    if(result.code==1){
+                        loadPermissionTree(result.extend.treeNodes,treeSet2);
+                    }
+                },
+                error:function(e){
+                    alert("处理异常！异常代码："+e.status);
+                }
+            });
         }
     </script>
 </body>

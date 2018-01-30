@@ -227,6 +227,8 @@
 <%--日期插件js文件及本地化文件--%>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/tableExport.js"></script>
+<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/bootstrap-table-export.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -306,6 +308,8 @@
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
+            showExport:true,                    //显示导出
+            exportDataType:"all",               //导出方式selected、all、basic
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
@@ -333,7 +337,10 @@
             },{
                 field:"remark",
                 title:"备注"
-            }]
+            }],
+            formatSearch:function(){
+                return "搜索:姓名或项目组";
+            }
         });
     }
     //显示新增模态框

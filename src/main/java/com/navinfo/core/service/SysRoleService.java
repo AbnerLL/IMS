@@ -2,7 +2,9 @@ package com.navinfo.core.service;
 
 import com.github.pagehelper.PageInfo;
 import com.navinfo.core.entity.SysRole;
+import com.navinfo.core.vo.PermissionTreeVO;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,4 +37,19 @@ public interface SysRoleService {
      * @return
      */
     Set<SysRole> findSysRoleByUsername(String username);
+
+    /**
+     * 根据角色ID获取权限树
+     * @param roleId
+     * @return
+     */
+    List<PermissionTreeVO> findRolePermissionTree(String roleId);
+
+    /**
+     * 获取所有权限的树
+     * @return
+     */
+    List<PermissionTreeVO> findAllPermissionTree(String roleId);
+
+    boolean saveSelectedRolePermission(String roleId, PermissionTreeVO[] permissionTreeVOS);
 }

@@ -1,5 +1,7 @@
 package com.navinfo.core.entity;
 
+import java.util.List;
+
 public class SysModule {
     private String moduleId;
 
@@ -22,6 +24,8 @@ public class SysModule {
     private String iconClass;
 
     private String isShow;
+
+    private List<SysPermission> permissionList;
 
     public String getModuleId() {
         return moduleId;
@@ -109,5 +113,13 @@ public class SysModule {
 
     public void setIsShow(String isShow) {
         this.isShow = isShow == null ? null : isShow.trim();
+    }
+
+    public List<SysPermission> getPermissionList() {
+        return permissionList;
+    }
+
+    public void setPermissionList(List<SysPermission> permissionList) {
+        this.permissionList = permissionList;
     }
 }
