@@ -4,9 +4,16 @@ import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
 import com.navinfo.IMS.entity.WorkDiary;
 import com.navinfo.IMS.service.WorkDiaryService;
+import com.navinfo.IMS.so.WorkDiarySearch;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.core.controller.BaseController;
+import com.navinfo.core.entity.SysUser;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +23,7 @@ import java.util.Map;
  * Created by luozhihui on 2017/9/21.
  */
 @Controller
-public class WorkDiaryController {
+public class WorkDiaryController extends BaseController{
     @Autowired
     private WorkDiaryService workDiaryService;
 
@@ -26,8 +33,13 @@ public class WorkDiaryController {
      */
     @RequestMapping(value="/workDiaries",method = RequestMethod.GET)
     @ResponseBody
-    public Msg search(@RequestParam Map map){
-        PageInfo pageInfo=workDiaryService.findWorkDiaryByPage(map);
+    public Msg search(WorkDiarySearch workDiarySearch, PageObject pageObject){
+        Subject subject= SecurityUtils.getSubject();
+        SysUser currentUser=super.getCurrentUser();
+        if(!subject.isPermitted("workDiary:view")){
+            workDiarySearch.setEmpId(currentUser.getId());
+        }
+        PageInfo pageInfo=workDiaryService.findWorkDiaryByPage(workDiarySearch,pageObject);
         return Msg.success().add("pageInfo",pageInfo);
     }
 
@@ -87,5 +99,20 @@ public class WorkDiaryController {
         }else{
             return Msg.failure();
         }
+    }
+
+    /**
+     * 根据查询条件导出excel
+     * 不分页
+     * @param workDiarySearch
+     * @return
+     */
+    @RequestMapping(value = "/workDiaryExcel")
+    public ModelAndView exportExcel(WorkDiarySearch workDiarySearch){
+        ModelAndView modelAndView=new ModelAndView();
+        List<WorkDiary> workDiaryList=this.workDiaryService.findWorkDiaryBySearch(workDiarySearch);
+        modelAndView.addObject("workDiaryList",workDiaryList);
+        modelAndView.setViewName("export/workDiaryExcel");
+        return modelAndView;
     }
 }

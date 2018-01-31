@@ -3,13 +3,17 @@ package com.navinfo.core.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.utils.ListUtils;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.IMS.utils.StringUtil;
 import com.navinfo.core.dao.ModulePermissionRelMapper;
 import com.navinfo.core.dao.RoleModulePermissionRelMapper;
 import com.navinfo.core.dao.SysRoleMapper;
 import com.navinfo.core.dao.UserRoleRelMapper;
 import com.navinfo.core.entity.*;
 import com.navinfo.core.service.SysRoleService;
+import com.navinfo.core.so.SysRoleSearch;
 import com.navinfo.core.vo.PermissionTreeVO;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,24 +34,55 @@ public class SysRoleServiceImpl implements SysRoleService {
     private RoleModulePermissionRelMapper roleModulePermissionRelMapper;
     @Autowired
     private ModulePermissionRelMapper modulePermissionRelMapper;
+
     /**
-     * 根据角色名模糊查询
-     * @param roleName
-     * @param pageNum
-     * @param pageSize
+     * 根据页面的查询参数生成example
+     * @param sysRoleSearch
      * @return
      */
-    public PageInfo getRolesByPage(String roleName,int pageNum,int pageSize){
-        SysRoleExample sysRoleExample=new SysRoleExample();
-        if(roleName!=null&&!"".equals(roleName)){
-            sysRoleExample.or().andRoleNameLike("%"+roleName+"%");
+    private SysRoleExample createSearchExample(SysRoleSearch sysRoleSearch){
+        SysRoleExample example=new SysRoleExample();
+        example.createCriteria();
+        if (StringUtil.notNull(sysRoleSearch.getRoleId())){
+            example.getOredCriteria().get(0).andRoleIdEqualTo(sysRoleSearch.getRoleId());
         }
+        if (StringUtil.notNull(sysRoleSearch.getRoleName())){
+            example.getOredCriteria().get(0).andRoleNameEqualTo(sysRoleSearch.getRoleName());
+        }
+        if (StringUtil.notNull(sysRoleSearch.getDescription())){
+            example.getOredCriteria().get(0).andDescriptionLike("%"+sysRoleSearch.getDescription()+"%");
+        }
+        if (StringUtil.notNull(sysRoleSearch.getKeyword())){
+            example.or().andRoleNameLike("%"+sysRoleSearch.getKeyword()+"%");
+            example.or().andDescriptionLike("%"+sysRoleSearch.getKeyword()+"%");
+        }
+        return example;
+    }
+    /**
+     * 根据角色名模糊查询
+     * @return
+     */
+    public PageInfo findRolesByPage(SysRoleSearch sysRoleSearch, PageObject pageObject){
+        SysRoleExample sysRoleExample=this.createSearchExample(sysRoleSearch);
         //增序排序
-        PageHelper.startPage(pageNum,pageSize);
-        List list=sysRoleMapper.selectByExample(sysRoleExample);
+        sysRoleExample.setOrderByClause("sort_index");
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
+        List<SysRole> list=sysRoleMapper.selectByExample(sysRoleExample);
         return new PageInfo(list);
     }
 
+    /**
+     * 根据查询条件获取对象
+     * 不分页
+     * @param sysRoleSearch
+     * @return List<SysRole>
+     */
+    public List<SysRole> findRoleBySearch(SysRoleSearch sysRoleSearch){
+        SysRoleExample sysRoleExample=this.createSearchExample(sysRoleSearch);
+        //增序排序
+        sysRoleExample.setOrderByClause("sort_index");
+        return sysRoleMapper.selectByExample(sysRoleExample);
+    }
     /**
      * 根据主键获取角色
      * @param roleId
@@ -202,5 +237,58 @@ public class SysRoleServiceImpl implements SysRoleService {
             this.roleModulePermissionRelMapper.insert(roleModulePermissionRel);
         }
         return true;
+    }
+    /**
+     * 添加用户的角色（支持多个用户多个角色）
+     * @param users
+     * @param roles
+     * @return
+     */
+    public boolean saveUserRoles(String[] users, String[] roles){
+        if(users==null||users.length==0||roles==null||roles.length==0){
+            return false;
+        }
+        List<String> usersId=Arrays.asList(users);
+        List<String> rolesId=Arrays.asList(roles);
+        //先查询出这些用户的所有角色
+        for (String userId:usersId){
+            if (!StringUtil.notNull(userId)){
+                continue;
+            }
+            UserRoleRelExample userRoleRelExample=new UserRoleRelExample();
+            userRoleRelExample.or().andUsernameEqualTo(userId);
+            List<UserRoleRel> userRoleRels=this.userRoleRelMapper.selectByExample(userRoleRelExample);
+            List<String> saveRoleIdList=new ArrayList<String>();
+            saveRoleIdList.addAll(rolesId);
+            //过滤已有的角色
+            for (UserRoleRel userRoleRel:userRoleRels){
+                if (rolesId.contains(userRoleRel.getRoleId())){
+                    saveRoleIdList.remove(userRoleRel.getRoleId());
+                }
+            }
+            //插入新的用户角色关联数据
+            for (String saveRoleId:saveRoleIdList){
+                if (!StringUtil.notNull(saveRoleId)){
+                    continue;
+                }
+                UserRoleRel insertRel=new UserRoleRel();
+                insertRel.setRelId(UUID.randomUUID().toString());
+                insertRel.setUsername(userId);
+                insertRel.setRoleId(saveRoleId);
+                this.userRoleRelMapper.insert(insertRel);
+            }
+        }
+        return true;
+    }
+    /**
+     * 删除用户角色关联
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    public boolean deleteUserRoleRel(String userId, String roleId){
+        UserRoleRelExample userRoleRelExample=new UserRoleRelExample();
+        userRoleRelExample.createCriteria().andUsernameEqualTo(userId).andRoleIdEqualTo(roleId);
+        return this.userRoleRelMapper.deleteByExample(userRoleRelExample)!=0;
     }
 }

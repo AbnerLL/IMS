@@ -7,13 +7,14 @@ import com.navinfo.IMS.service.EmpService;
 import com.navinfo.IMS.so.EmpSearch;
 import com.navinfo.IMS.utils.PageObject;
 import com.navinfo.core.controller.BaseController;
-import com.navinfo.core.entity.SysRole;
 import com.navinfo.core.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 /**
@@ -104,5 +105,19 @@ public class EmpController extends BaseController{
         }else{
             return Msg.failure();
         }
+    }
+
+    /**
+     * 根据查询条件导出excel
+     * 不分页
+     * @return
+     */
+    @RequestMapping(value = "/empExcel")
+    public ModelAndView exportExcel(EmpSearch empSearch){
+        ModelAndView modelAndView=new ModelAndView();
+        List<Emp> empList=this.empService.findEmpBySearch(empSearch);
+        modelAndView.addObject("empList",empList);
+        modelAndView.setViewName("export/empExcel");
+        return modelAndView;
     }
 }

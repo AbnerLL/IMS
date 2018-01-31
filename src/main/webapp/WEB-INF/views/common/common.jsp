@@ -5,6 +5,10 @@
   Time: 15:18
   To change this template use File | Settings | File Templates.
 --%>
+<%--IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame--%>
+<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />
+<%--针对手机屏幕的设置--%>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <%--基础css--%>
 <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
 <%--bootstrap表格的css--%>

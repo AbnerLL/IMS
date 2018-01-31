@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface EmpService {
 
-    List findAllEmp();
+    List<Emp> findEmpBySearch(EmpSearch empSearch);
 
     boolean insertEmp(Emp emp);
 

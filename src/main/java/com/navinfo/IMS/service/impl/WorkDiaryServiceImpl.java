@@ -6,6 +6,9 @@ import com.navinfo.IMS.dao.WorkDiaryMapper;
 import com.navinfo.IMS.entity.WorkDiary;
 import com.navinfo.IMS.entity.WorkDiaryExample;
 import com.navinfo.IMS.service.WorkDiaryService;
+import com.navinfo.IMS.so.WorkDiarySearch;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.IMS.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,31 +23,43 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
     private WorkDiaryMapper workDiaryMapper;
 
     /**
+     * 根据页面参数生成一个查询的example
+     * @return
+     */
+    private WorkDiaryExample createSearchExample(WorkDiarySearch workDiarySearch){
+        WorkDiaryExample example=new WorkDiaryExample();
+        example.createCriteria();
+        if(StringUtil.notNull(workDiarySearch.getEmpId())){
+            example.getOredCriteria().get(0).andEmpIdEqualTo(workDiarySearch.getEmpId());
+        }
+        if (StringUtil.notNull(workDiarySearch.getEmpName())){
+            example.getOredCriteria().get(0).andEmpNameEqualTo(workDiarySearch.getEmpName());
+        }
+        if (StringUtil.notNull(workDiarySearch.getSection())){
+            example.getOredCriteria().get(0).andSectionEqualTo(workDiarySearch.getSection());
+        }
+        if (StringUtil.notNull(workDiarySearch.getWorkType())){
+            example.getOredCriteria().get(0).andWorkTypeEqualTo(workDiarySearch.getWorkType());
+        }
+        if (workDiarySearch.getWorkDateStart()!=null){
+            example.getOredCriteria().get(0).andWorkDateGreaterThanOrEqualTo(workDiarySearch.getWorkDateStart());
+        }
+        if (workDiarySearch.getWorkDateEnd()!=null){
+            example.getOredCriteria().get(0).andWorkDateLessThanOrEqualTo(workDiarySearch.getWorkDateEnd());
+        }
+        if (StringUtil.notNull(workDiarySearch.getKeyword())){
+            example.or().andEmpNameLike("%"+workDiarySearch.getKeyword()+"%");
+            example.or().andSectionLike("%"+workDiarySearch.getKeyword()+"%");
+        }
+        return example;
+    }
+    /**
      * 分页查询
      * @return
      */
-    public PageInfo findWorkDiaryByPage(Map map){
-        Integer pageSize=Integer.valueOf((String) map.get("pageSize")) ;
-        Integer pageNum=Integer.valueOf((String) map.get("pageNum"));
-        String keyword=(String) map.get("keyword");
-        PageHelper.startPage(pageNum,pageSize);
-        WorkDiaryExample example=new WorkDiaryExample();
-        if (map.get("empId")!=null){
-            example.createCriteria().andEmpIdEqualTo((String)map.get("empId"));
-        }
-        if (map.get("empName")!=null){
-            example.createCriteria().andEmpNameEqualTo((String) map.get("empName"));
-        }
-        if (map.get("workDateStart")!=null){
-            example.createCriteria().andWorkDateGreaterThanOrEqualTo((Date) map.get("workDateStart"));
-        }
-        if (map.get("workDateEnd")!=null){
-            example.createCriteria().andWorkDateLessThanOrEqualTo((Date) map.get("workDateEnd"));
-        }
-        if(keyword!=null&&!"".equals(keyword)){
-            example.or().andEmpNameLike("%"+keyword+"%");
-            example.or().andSectionLike("%"+keyword+"%");
-        }
+    public PageInfo findWorkDiaryByPage(WorkDiarySearch workDiarySearch, PageObject pageObject){
+        WorkDiaryExample example=createSearchExample(workDiarySearch);
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List list=workDiaryMapper.selectByExample(example);
         return new PageInfo(list);
     }
@@ -93,5 +108,15 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
         WorkDiaryExample example=new WorkDiaryExample();
         example.createCriteria().andIdIn(idList);
         return workDiaryMapper.deleteByExample(example)!=0;
+    }
+
+    /**
+     * 根据查询条件获取对象
+     * @param workDiarySearch
+     * @return
+     */
+    public List<WorkDiary> findWorkDiaryBySearch(WorkDiarySearch workDiarySearch){
+        WorkDiaryExample example=this.createSearchExample(workDiarySearch);
+        return this.workDiaryMapper.selectByExample(example);
     }
 }

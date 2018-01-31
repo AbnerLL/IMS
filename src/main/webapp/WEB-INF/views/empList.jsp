@@ -29,67 +29,97 @@
 <div class="container-fluid">
     <%--查询面板--%>
     <div class="collapse" id="search_collapse">
-        <form class="form-inline" id="search_form">
-            <div class="form-group">
-                <label for="empIdSearch" class="control-label">编号</label>
-                <input type="text" class="form-control" id="empIdSearch" name="empId"/>
-            </div>
-            <div class="form-group">
-                <label for="empNameSearch" class="control-label">姓名</label>
-                <input type="text" class="form-control" id="empNameSearch" name="empName"/>
-            </div>
-            <div class="form-group">
-                <label for="empHiredateStartSearch" class="control-label">入职时间</label>
-                <div class="input-group" >
-                    <input type="text" class="form-control datepicker"  id="empHiredateStartSearch" name="empHiredateStart"/>
-                    <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-                </div> -
-                <div class="input-group">
-                    <input type="text" class="form-control datepicker" id="empHiredateEndSearch" name="empHiredateEnd" aria-label="入职时间止"/>
-                    <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-11">
+                    <form class="form-horizontal" id="search_form">
+                        <div class="form-group form-group-sm">
+                            <div class="col-sm-4">
+                                    <label for="empIdSearch" class="control-label col-sm-4">员工编号:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="empIdSearch" name="empId"/>
+                                    </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="empNameSearch" class="control-label col-sm-4">员工姓名:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="empNameSearch" name="empName"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="empEntryageSearch" class="control-label col-sm-4">司龄:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="empEntryageSearch" name="empEntryage"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <div class="col-sm-4">
+                                <label for="empSec_search_select" class="control-label col-sm-4">部门:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="empSec_search_select" name="empDep">
+                                        <option value="">---选择部门---</option>
+                                        <option value="数据库制作部">数据库制作部</option>
+                                        <option value="数据库制作部西安分部">数据库制作部西安分部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="empDep_search_select" class="control-label col-sm-4">科室:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="empDep_search_select" name="empSec">
+                                        <option value="">---选择科室---</option>
+                                        <option value="品质管理室">品质管理室</option>
+                                        <option value="项目一组">项目一组</option>
+                                        <option value="项目二组">项目二组</option>
+                                        <option value="项目三组">项目三组</option>
+                                        <option value="项目四组">项目四组</option>
+                                        <option value="项目五组">项目五组</option>
+                                        <option value="项目六组">项目六组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="empPost_search_select" class="control-label col-sm-4">职务:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="empPost_search_select" name="empPost">
+                                        <option value="">---选择职务---</option>
+                                        <option value="部门经理">部门经理</option>
+                                        <option value="科室经理">科室经理</option>
+                                        <option value="项目经理">项目经理</option>
+                                        <option value="项目助理">项目助理</option>
+                                        <option value="数据工程师">数据工程师</option>
+                                        <option value="质量工程师">质量工程师</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <div class="col-sm-8">
+                                <label for="empHiredateStartSearch" class="control-label col-sm-2">入职时间:</label>
+                                <div class="form-inline col-sm-9">
+                                    <div class="input-group col-sm-4" >
+                                        <input type="text" class="form-control datepicker"  id="empHiredateStartSearch" name="empHiredateStart"/>
+                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                    </div> -
+                                    <div class="input-group col-sm-4">
+                                        <input type="text" class="form-control datepicker" id="empHiredateEndSearch" name="empHiredateEnd" aria-label="入职时间止"/>
+                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-5 col-sm-offset-7" >
+                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="empEntryageSearch" class="control-label">司龄</label>
-                <input type="number" class="form-control" id="empEntryageSearch" name="empEntryage"/>
-            </div>
-            <div class="form-group">
-                <label for="empSecSearch" class="control-label">所属部门</label>
-                <select class="form-control" id="empSecSearch" name="empDep">
-                    <option value=""></option>
-                    <option value="数据库制作部">数据库制作部</option>
-                    <option value="数据库制作部西安分部">数据库制作部西安分部</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="empDepSearch" class="control-label">科室</label>
-                <select class="form-control" id="empDepSearch" name="empSec">
-                    <option value=""></option>
-                    <option value="品质管理室">品质管理室</option>
-                    <option value="项目一组">项目一组</option>
-                    <option value="项目二组">项目二组</option>
-                    <option value="项目三组">项目三组</option>
-                    <option value="项目四组">项目四组</option>
-                    <option value="项目五组">项目五组</option>
-                    <option value="项目六组">项目六组</option>
-                    <option value="武汉项目组">武汉项目组</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="empPostSearch" class="control-label">职务</label>
-                <select class="form-control" id="empPostSearch" name="empPost">
-                    <option value=""></option>
-                    <option value="部门经理">部门经理</option>
-                    <option value="科室经理">科室经理</option>
-                    <option value="项目经理">项目经理</option>
-                    <option value="项目助理">项目助理</option>
-                    <option value="数据工程师">数据工程师</option>
-                    <option value="质量工程师">质量工程师</option>
-                </select>
-            </div>
-            <div class="btn btn-success" id="search_btn">查询</div>
-            <div class="btn btn-default" id="search_reset_btn">清空</div>
-        </form>
+        </div>
     </div>
 
     <%--自定义表格工具栏--%>
@@ -97,6 +127,7 @@
         <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
         <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
         <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
         <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
@@ -116,7 +147,6 @@
                         <label for="empId_insert_input" class="col-sm-2 control-label">员工编号</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
-                            <%--<span class="help-block"></span>--%>
                         </div>
                     </div>
                     <div class="form-group">
@@ -162,14 +192,6 @@
                         <label for="empSec_insert_select" class="control-label col-sm-2">所属科室</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="empSec_insert_select" name="empSec">
-                                <%--<option value="品质管理室">品质管理室</option>--%>
-                                <%--<option value="项目一组">项目一组</option>--%>
-                                <%--<option value="项目二组">项目二组</option>--%>
-                                <%--<option value="项目三组">项目三组</option>--%>
-                                <%--<option value="项目四组">项目四组</option>--%>
-                                <%--<option value="项目五组">项目五组</option>--%>
-                                <%--<option value="项目六组">项目六组</option>--%>
-                                <%--<option value="武汉项目组">武汉项目组</option>--%>
                             </select>
                         </div>
                     </div>
@@ -261,12 +283,6 @@
                         <label for="empPost_update_select" class="control-label col-sm-2">职务名称</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="empPost_update_select" name="empPost">
-                                <%--<option value="部门经理">部门经理</option>--%>
-                                <%--<option value="科室经理">科室经理</option>--%>
-                                <%--<option value="项目经理">项目经理</option>--%>
-                                <%--<option value="项目助理">项目助理</option>--%>
-                                <%--<option value="数据工程师">数据工程师</option>--%>
-                                <%--<option value="质量工程师">质量工程师</option>--%>
                             </select>
                         </div>
                     </div>
@@ -632,6 +648,10 @@
     });
     $("#search_reset_btn").click(function () {
         $("#search_form")[0].reset();
+    });
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/empExcel?"+$("#search_form").serialize();
     });
 </script>
 </body>

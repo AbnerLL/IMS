@@ -2,15 +2,19 @@ package com.navinfo.core.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
+import com.navinfo.IMS.utils.PageObject;
 import com.navinfo.core.entity.SysRole;
 import com.navinfo.core.service.SysRoleService;
+import com.navinfo.core.so.SysRoleSearch;
 import com.navinfo.core.vo.PermissionTreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.RequestWrapper;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -24,15 +28,14 @@ public class SysRoleController {
 
     /**
      * 根据关键词获取角色
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param sysRoleSearch
+     * @param pageObject
+     * @return Msg
      */
     @ResponseBody
     @RequestMapping(value = "/roles",method= RequestMethod.GET)
-    public Msg findRoles(HttpServletRequest request, @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue="10") Integer pageSize){
-        String roleName=request.getParameter("keyword");
-        PageInfo pageInfo=sysRoleService.getRolesByPage(roleName,pageNum,pageSize);
+    public Msg search(SysRoleSearch sysRoleSearch, PageObject pageObject){
+        PageInfo pageInfo=sysRoleService.findRolesByPage(sysRoleSearch,pageObject);
         if(pageInfo!=null){
             return Msg.success().add("pageInfo",pageInfo);
         }else{
@@ -65,26 +68,18 @@ public class SysRoleController {
     @RequestMapping(value="role/{roleId}",method=RequestMethod.PUT)
     public Msg updateRole(SysRole sysRole){
         boolean flag=sysRoleService.updateRole(sysRole);
-        if(flag){
-            return Msg.success();
-        }else{
-            return Msg.failure();
-        }
+        return flag ? Msg.success():Msg.failure();
     }
 
     /**
-     * 根据主键获取用户
+     * 根据主键获取角色
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "role/{roleId}", method = RequestMethod.GET)
     public Msg findRoleById(@PathVariable("roleId") String roleId) {
         SysRole role=sysRoleService.findRoleById(roleId);
-        if(role!=null){
-            return Msg.success().add("roles",role);
-        }else{
-            return Msg.failure();
-        }
+        return role!=null ?Msg.success().add("roles",role):Msg.failure();
     }
 
     /**
@@ -96,11 +91,7 @@ public class SysRoleController {
     @RequestMapping(value="/role/{roleId}",method = RequestMethod.DELETE)
     public Msg DeleteRoles(@PathVariable("roleId") String ids){
         boolean flag=sysRoleService.deleteRoles(ids);
-        if(flag){
-            return Msg.success();
-        }else{
-            return Msg.failure();
-        }
+        return flag ? Msg.success():Msg.failure();
     }
 
     /**
@@ -134,6 +125,56 @@ public class SysRoleController {
     @ResponseBody
     public Msg saveRolePermission(@PathVariable String roleId,@RequestBody PermissionTreeVO[] permissionTreeVOS){
         boolean flag=this.sysRoleService.saveSelectedRolePermission(roleId,permissionTreeVOS);
+        return flag ? Msg.success() : Msg.failure();
+    }
+
+    /**
+     * 获取所有的角色
+     * @return
+     */
+    @RequestMapping(value = "/roleAll",method=RequestMethod.GET)
+    @ResponseBody
+    public Msg loadAllRole(){
+        List<SysRole> sysRoleList=this.sysRoleService.findRoleBySearch(new SysRoleSearch());
+        return Msg.success().add("roles",sysRoleList);
+    }
+
+    /**
+     * 添加用户的角色
+     * 可以添加多个用户的多个角色
+     * @param users 用户Id集合
+     * @param roles 角色id集合
+     * @return
+     */
+    @RequestMapping(value = "/addUserRole",method=RequestMethod.POST)
+    @ResponseBody
+    public Msg addUserRole(@RequestParam String users,@RequestParam String roles){
+        boolean flag=this.sysRoleService.saveUserRoles(users.split(","),roles.split(","));
+        return flag ?Msg.success() :Msg.failure();
+    }
+
+    /**
+     * 根据用户名获取角色
+     * @param username
+     * @return
+     */
+    @RequestMapping(value = "/role/userRole/{username}")
+    @ResponseBody
+    public Msg findRoleByUsername(@PathVariable String username){
+        Set<SysRole> sysRoleSet=this.sysRoleService.findSysRoleByUsername(username);
+        return Msg.success().add("entities",sysRoleSet);
+    }
+
+    /**
+     * 根据用户id和角色id删除用户角色关联
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    @RequestMapping(value = "/roleRel",method = RequestMethod.DELETE)
+    @ResponseBody
+    public Msg deleteUserRoleRel(String userId,String roleId){
+        boolean flag=this.sysRoleService.deleteUserRoleRel(userId,roleId);
         return flag ? Msg.success() : Msg.failure();
     }
 }

@@ -24,11 +24,105 @@
 </head>
 <body>
 <div class="container-fluid">
+    <%--查询框--%>
+    <div class="collapse" id="search_collapse">
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-11">
+                    <form id="search_form" class="form-horizontal" role="form">
+                        <div class="form-group form-group-sm">
+                            <div class="col-sm-4">
+                                <label for="empId_search_input" class="control-label col-sm-4">员工编号:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="empId_search_input" name="empId"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="empName_search_input" class="control-label col-sm-4">员工姓名:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="empName_search_input" name="empName"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="section_search_select" class="control-label col-sm-4">项目组:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="section" id="section_search_select">
+                                        <option value="">---请选择项目组---</option>
+                                        <option value="部门">部门</option>
+                                        <option value="北京项目一组">北京项目一组</option>
+                                        <option value="北京项目二组">北京项目二组</option>
+                                        <option value="北京项目三组">北京项目三组</option>
+                                        <option value="北京项目四组">北京项目四组</option>
+                                        <option value="北京项目五组">北京项目五组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                        <option value="互联网小组">互联网小组</option>
+                                        <option value="代理店">代理店</option>
+                                        <option value="品质管理室（北京）">品质管理室（北京）</option>
+                                        <option value="生产管理室（北京）">生产管理室（北京）</option>
+                                        <option value="技术管理室（北京）">技术管理室（北京）</option>
+                                        <option value="西安项目一组">西安项目一组</option>
+                                        <option value="西安项目二组">西安项目二组</option>
+                                        <option value="西安项目三组">西安项目三组</option>
+                                        <option value="西安项目四组">西安项目四组</option>
+                                        <option value="西安项目五组">西安项目五组</option>
+                                        <option value="西安项目六组">西安项目六组</option>
+                                        <option value="综合项目组">综合项目组</option>
+                                        <option value="品质管理室（西安）">品质管理室（西安）</option>
+                                        <option value="生产管理室（西安）">生产管理室（西安）</option>
+                                        <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <div class="col-sm-4">
+                                <label for="workType_search_select" class="control-label col-sm-4">工作类型:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="workType" id="workType_search_select">
+                                        <option value="">---选择工作类型---</option>
+                                        <option value="正常上班">正常上班</option>
+                                        <option value="延时加班">延时加班</option>
+                                        <option value="公休加班">公休加班</option>
+                                        <option value="节假日加班">节假日加班</option>
+                                        <option value="出差">出差</option>
+                                        <option value="待工">待工</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                    <label for="empId_search_input" class="control-label col-sm-2">工作日期:</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-inline">
+                                            <div class="input-group col-sm-4">
+                                                <input type="text" class="form-control datepicker" name="workDateStart" id="workDateStart_search_input" />
+                                                <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                            </div>-
+                                            <div class="input-group col-sm-4">
+                                                <input type="text" class="form-control datepicker" name="workDateEnd" id="workDateEnd_search_input" />
+                                                <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                                <div class="col-sm-2 col-sm-offset-10" >
+                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <%--自定义表格工具栏--%>
     <div id="toolbar" class="btn-group">
         <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
         <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
         <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
     <table id="table_list"></table>
@@ -250,11 +344,13 @@
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber,     //当前页数
-            keyword:params.search
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber,     //当前页数
+//            keyword:params.search
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -478,7 +574,23 @@
                 alert("处理异常！异常代码："+e.status);
             }
         });
-    }
+    };
+    //控制collapse
+    $("#search_toggle_btn").click(function(){
+        $("#search_collapse").collapse("toggle");
+    });
+    //查询
+    $("#search_btn").click(function(){
+        $("#table_list").bootstrapTable("refresh")
+    });
+    //清空
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
+    });
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/workDiaryExcel?"+$("#search_form").serialize();
+    });
 </script>
 </body>
 </html>

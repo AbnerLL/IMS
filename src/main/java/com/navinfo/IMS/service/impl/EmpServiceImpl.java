@@ -74,8 +74,15 @@ public class EmpServiceImpl implements EmpService{
         List<Emp> empList=this.empMapper.selectByExample(empExample);
         return new PageInfo(empList);
     }
-    public List findAllEmp() {
-        return empMapper.selectByExample(null);
+
+    /**
+     * 根据查询条件查出对应的对象
+     * @param empSearch
+     * @return
+     */
+    public List<Emp> findEmpBySearch(EmpSearch empSearch) {
+        EmpExample empExample=this.createSearchExample(empSearch);
+        return empMapper.selectByExample(empExample);
     }
 
     /**
