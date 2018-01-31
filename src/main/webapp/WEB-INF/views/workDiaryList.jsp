@@ -10,17 +10,8 @@
 <html>
 <head>
     <%@include file="common/head.jsp"%>
+    <%@include file="common/common.jsp"%>
     <title>工作日志</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <%--基础css--%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <%--bootstrap表格的css--%>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <%--字体和图标的css--%>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-    <%--日期插件的css--%>
-    <link href="${basePath}/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -118,10 +109,18 @@
     </div>
     <%--自定义表格工具栏--%>
     <div id="toolbar" class="btn-group">
-        <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
-        <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
-        <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
-        <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        <shrio:hasPermission name="workDiary:add">
+            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="workDiary:edit">
+                <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="workDiary:delete">
+            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="workDiary:export">
+            <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        </shrio:hasPermission>
         <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
@@ -311,18 +310,6 @@
         </div>
     </div>
 </div>
-<%--基础js文件--%>
-<script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-<script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-<%--bootstrap表格的js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-<%--本地化文件要放在bootstrap文件下--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-<%--日期插件js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
-<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/tableExport.js"></script>
-<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/bootstrap-table-export.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -404,7 +391,7 @@
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
-            showExport:true,                    //显示导出
+            showExport:false,                    //显示导出
             exportDataType:"all",               //导出方式selected、all、basic
             columns:[{                          //配置各列的属性
                 checkbox:true
