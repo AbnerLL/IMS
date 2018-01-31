@@ -326,7 +326,7 @@
   <select id="getParentModuleVOByUser" parameterType="string" resultMap="ModuleVOResultMap">
     SELECT <include refid="Base_Column_List"/>
     FROM IMS.SYS_MODULE
-    WHERE MODULE_PID ='-1'
+    WHERE MODULE_PID ='0'
     AND IS_SHOW!='0'
     AND MODULE_ID IN
     (select distinct m.module_pid
