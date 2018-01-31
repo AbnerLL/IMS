@@ -1,3 +1,4 @@
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: luozhihui
@@ -124,10 +125,18 @@
 
     <%--自定义表格工具栏--%>
     <div id="toolbar" class="btn-group">
-        <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
-        <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
-        <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
-        <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        <shrio:hasPermission name="emp:add">
+            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="emp:edit">
+            <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="emp:delete">
+            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="emp:export">
+            <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        </shrio:hasPermission>
         <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
@@ -395,7 +404,7 @@
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
             searchOnEnterKey:true,               //按entry键搜索
-            showExport:true,                    //显示导出
+            showExport:false,                    //显示导出
             exportDataType:"all",               //导出方式selected、all、basic
             columns:[{                          //配置各列的属性
                 checkbox:true
