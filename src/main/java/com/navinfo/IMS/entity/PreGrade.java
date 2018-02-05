@@ -12,9 +12,13 @@ public class PreGrade {
 
     private String empName;
 
+    private String section;
+
     private BigDecimal grade;
 
     private BigDecimal secGrade;
+
+    private Date testDate;
 
     private Date createTime;
 
@@ -30,15 +34,15 @@ public class PreGrade {
 
     private String status;
 
+    private String remark;
+
+    private String delFlag;
+
     private String attr1;
 
     private String attr2;
 
     private String attr3;
-
-    private String attr4;
-
-    private String attr5;
 
     public String getId() {
         return id;
@@ -72,6 +76,14 @@ public class PreGrade {
         this.empName = empName == null ? null : empName.trim();
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section == null ? null : section.trim();
+    }
+
     public BigDecimal getGrade() {
         return grade;
     }
@@ -86,6 +98,14 @@ public class PreGrade {
 
     public void setSecGrade(BigDecimal secGrade) {
         this.secGrade = secGrade;
+    }
+
+    public Date getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(Date testDate) {
+        this.testDate = testDate;
     }
 
     public Date getCreateTime() {
@@ -144,6 +164,22 @@ public class PreGrade {
         this.status = status == null ? null : status.trim();
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag == null ? null : delFlag.trim();
+    }
+
     public String getAttr1() {
         return attr1;
     }
@@ -166,21 +202,5 @@ public class PreGrade {
 
     public void setAttr3(String attr3) {
         this.attr3 = attr3 == null ? null : attr3.trim();
-    }
-
-    public String getAttr4() {
-        return attr4;
-    }
-
-    public void setAttr4(String attr4) {
-        this.attr4 = attr4 == null ? null : attr4.trim();
-    }
-
-    public String getAttr5() {
-        return attr5;
-    }
-
-    public void setAttr5(String attr5) {
-        this.attr5 = attr5 == null ? null : attr5.trim();
     }
 }

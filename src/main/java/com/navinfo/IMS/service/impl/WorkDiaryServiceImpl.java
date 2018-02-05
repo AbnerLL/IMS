@@ -41,6 +41,9 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
         if (StringUtil.notNull(workDiarySearch.getWorkType())){
             example.getOredCriteria().get(0).andWorkTypeEqualTo(workDiarySearch.getWorkType());
         }
+        if (StringUtil.notNull(workDiarySearch.getWorkModule())){
+            example.getOredCriteria().get(0).andWorkModuleEqualTo(workDiarySearch.getWorkModule());
+        }
         if (workDiarySearch.getWorkDateStart()!=null){
             example.getOredCriteria().get(0).andWorkDateGreaterThanOrEqualTo(workDiarySearch.getWorkDateStart());
         }
@@ -58,7 +61,7 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
      * @return
      */
     public PageInfo findWorkDiaryByPage(WorkDiarySearch workDiarySearch, PageObject pageObject){
-        WorkDiaryExample example=createSearchExample(workDiarySearch);
+        WorkDiaryExample example=this.createSearchExample(workDiarySearch);
         PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List list=workDiaryMapper.selectByExample(example);
         return new PageInfo(list);

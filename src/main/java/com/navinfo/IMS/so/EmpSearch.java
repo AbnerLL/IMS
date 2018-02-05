@@ -2,6 +2,7 @@ package com.navinfo.IMS.so;
 
 import com.navinfo.IMS.entity.Emp;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -10,6 +11,8 @@ import java.util.Date;
  */
 public class EmpSearch extends Emp {
     private String keyword;
+    private BigDecimal empEntryAgeStart;
+    private BigDecimal empEntryAgeEnd;
     private Date empHiredateStart;
     private Date empHiredateEnd;
 
@@ -19,6 +22,22 @@ public class EmpSearch extends Emp {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public BigDecimal getEmpEntryAgeStart() {
+        return empEntryAgeStart;
+    }
+
+    public void setEmpEntryAgeStart(BigDecimal empEntryAgeStart) {
+        this.empEntryAgeStart = empEntryAgeStart;
+    }
+
+    public BigDecimal getEmpEntryAgeEnd() {
+        return empEntryAgeEnd;
+    }
+
+    public void setEmpEntryAgeEnd(BigDecimal empEntryAgeEnd) {
+        this.empEntryAgeEnd = empEntryAgeEnd;
     }
 
     public Date getEmpHiredateStart() {

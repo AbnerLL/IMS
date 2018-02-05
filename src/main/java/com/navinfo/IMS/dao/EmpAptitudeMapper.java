@@ -10,13 +10,21 @@ public interface EmpAptitudeMapper {
 
     int deleteByExample(EmpAptitudeExample example);
 
+    int deleteByPrimaryKey(String id);
+
     int insert(EmpAptitude record);
 
     int insertSelective(EmpAptitude record);
 
     List<EmpAptitude> selectByExample(EmpAptitudeExample example);
 
+    EmpAptitude selectByPrimaryKey(String id);
+
     int updateByExampleSelective(@Param("record") EmpAptitude record, @Param("example") EmpAptitudeExample example);
 
     int updateByExample(@Param("record") EmpAptitude record, @Param("example") EmpAptitudeExample example);
+
+    int updateByPrimaryKeySelective(EmpAptitude record);
+
+    int updateByPrimaryKey(EmpAptitude record);
 }

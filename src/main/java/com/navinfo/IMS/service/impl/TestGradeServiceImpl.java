@@ -1,9 +1,14 @@
 package com.navinfo.IMS.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dao.TestGradeMapper;
 import com.navinfo.IMS.entity.TestGrade;
 import com.navinfo.IMS.entity.TestGradeExample;
 import com.navinfo.IMS.service.TestGradeService;
+import com.navinfo.IMS.so.TestGradeSearch;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.IMS.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +25,80 @@ public class TestGradeServiceImpl implements TestGradeService{
     private TestGradeMapper testGradeMapper;
 
     /**
-     * 分页查询
+     * 根据查询构建查询参数example
+     * @param search
      * @return
      */
-    public List findTestGrades(){
-        return testGradeMapper.selectByExample(null);
+    private TestGradeExample createSearchExample(TestGradeSearch search){
+        TestGradeExample example=new TestGradeExample();
+        example.createCriteria();
+        if (StringUtil.notNull(search.getEmpId())){
+            example.getOredCriteria().get(0).andEmpIdEqualTo(search.getEmpId());
+        }
+        if (StringUtil.notNull(search.getEmpName())){
+            example.getOredCriteria().get(0).andEmpNameEqualTo(search.getEmpName());
+        }
+        if (StringUtil.notNull(search.getSection())){
+            example.getOredCriteria().get(0).andSectionEqualTo(search.getSection());
+        }
+        if (search.getTestDateStart()!=null){
+            example.getOredCriteria().get(0).andTestDateGreaterThanOrEqualTo(search.getTestDateStart());
+        }
+        if (search.getTestDateEnd()!=null){
+            example.getOredCriteria().get(0).andTestDateLessThanOrEqualTo(search.getTestDateEnd());
+        }
+        if (search.getPaperGradeStart()!=null){
+            example.getOredCriteria().get(0).andPaperGradeGreaterThanOrEqualTo(search.getPaperGradeStart());
+        }
+        if (search.getPaperGradeEnd()!=null){
+            example.getOredCriteria().get(0).andPaperGradeLessThanOrEqualTo(search.getPaperGradeEnd());
+        }
+        if (search.getComGradeRoadStart()!=null){
+            example.getOredCriteria().get(0).andComGradeRoadGreaterThanOrEqualTo(search.getComGradeRoadStart());
+        }
+        if (search.getComGradeRoadEnd()!=null){
+            example.getOredCriteria().get(0).andComGradeRoadLessThanOrEqualTo(search.getComGradeRoadEnd());
+        }
+        if (search.getComGradePoiStart()!=null){
+            example.getOredCriteria().get(0).andComGradePoiGreaterThanOrEqualTo(search.getComGradePoiStart());
+        }
+        if (search.getComGradePoiEnd()!=null){
+            example.getOredCriteria().get(0).andComGradePoiLessThanOrEqualTo(search.getComGradePoiEnd());
+        }
+        if (search.getTotalGradeStart()!=null){
+            example.getOredCriteria().get(0).andTotalGradeGreaterThanOrEqualTo(search.getTotalGradeStart());
+        }
+        if (search.getTotalGradeEnd()!=null){
+            example.getOredCriteria().get(0).andTotalGradeLessThanOrEqualTo(search.getTotalGradeEnd());
+        }
+        if (StringUtil.notNull(search.getKeyword())){
+            example.or().andEmpIdLike("%"+search.getKeyword()+"%");
+            example.or().andEmpNameLike("%"+search.getKeyword()+"%");
+        }
+        return example;
+    }
+    /**
+     * 根据条件分页查询
+     * @param search
+     * @param pageObject
+     * @return
+     */
+    public PageInfo findTestGradeByPage(TestGradeSearch search, PageObject pageObject) {
+        TestGradeExample example=this.createSearchExample(search);
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
+        List<TestGrade> testGradeList=this.testGradeMapper.selectByExample(example);
+        return new PageInfo(testGradeList);
+    }
+
+    /**
+     *不分页查询
+     * @param search
+     * @return
+     */
+    public List<TestGrade> findTestGradeBySearch(TestGradeSearch search) {
+        TestGradeExample example=this.createSearchExample(search);
+        List<TestGrade> testGradeList=this.testGradeMapper.selectByExample(example);
+        return testGradeList;
     }
 
     /**
@@ -32,8 +106,11 @@ public class TestGradeServiceImpl implements TestGradeService{
      * @param id
      * @return
      */
-    public TestGrade getTestGradeById(String id){
-        return testGradeMapper.selectByPrimaryKey(id);
+    public List<TestGrade> getTestGradeById(String id){
+        List idList= Arrays.asList(id.split(","));
+        TestGradeExample example=new TestGradeExample();
+        example.or().andIdIn(idList);
+        return this.testGradeMapper.selectByExample(example);
     }
 
     /**

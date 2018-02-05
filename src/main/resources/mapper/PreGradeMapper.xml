@@ -6,8 +6,10 @@
     <result column="VERSION" jdbcType="VARCHAR" property="version" />
     <result column="EMP_ID" jdbcType="VARCHAR" property="empId" />
     <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
     <result column="GRADE" jdbcType="DECIMAL" property="grade" />
     <result column="SEC_GRADE" jdbcType="DECIMAL" property="secGrade" />
+    <result column="TEST_DATE" jdbcType="TIMESTAMP" property="testDate" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
@@ -15,11 +17,11 @@
     <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
     <result column="ATTR1" jdbcType="VARCHAR" property="attr1" />
     <result column="ATTR2" jdbcType="VARCHAR" property="attr2" />
     <result column="ATTR3" jdbcType="VARCHAR" property="attr3" />
-    <result column="ATTR4" jdbcType="VARCHAR" property="attr4" />
-    <result column="ATTR5" jdbcType="VARCHAR" property="attr5" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -80,8 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, VERSION, EMP_ID, EMP_NAME, GRADE, SEC_GRADE, CREATE_TIME, CREATOR_ID, CREATOR, 
-    UPDATE_TIME, UPDATER_ID, UPDATER, STATUS, ATTR1, ATTR2, ATTR3, ATTR4, ATTR5
+    ID, VERSION, EMP_ID, EMP_NAME, SECTION, GRADE, SEC_GRADE, TEST_DATE, CREATE_TIME, 
+    CREATOR_ID, CREATOR, UPDATE_TIME, UPDATER_ID, UPDATER, STATUS, REMARK, DEL_FLAG, 
+    ATTR1, ATTR2, ATTR3
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.PreGradeExample" resultMap="BaseResultMap">
     select
@@ -115,19 +118,19 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.IMS.entity.PreGrade">
     insert into IMS.PRE_GRADE (ID, VERSION, EMP_ID, 
-      EMP_NAME, GRADE, SEC_GRADE, 
-      CREATE_TIME, CREATOR_ID, CREATOR, 
-      UPDATE_TIME, UPDATER_ID, UPDATER, 
-      STATUS, ATTR1, ATTR2, 
-      ATTR3, ATTR4, ATTR5
-      )
+      EMP_NAME, SECTION, GRADE, 
+      SEC_GRADE, TEST_DATE, CREATE_TIME, 
+      CREATOR_ID, CREATOR, UPDATE_TIME, 
+      UPDATER_ID, UPDATER, STATUS, 
+      REMARK, DEL_FLAG, ATTR1, 
+      ATTR2, ATTR3)
     values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
-      #{empName,jdbcType=VARCHAR}, #{grade,jdbcType=DECIMAL}, #{secGrade,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, 
-      #{attr3,jdbcType=VARCHAR}, #{attr4,jdbcType=VARCHAR}, #{attr5,jdbcType=VARCHAR}
-      )
+      #{empName,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{grade,jdbcType=DECIMAL}, 
+      #{secGrade,jdbcType=DECIMAL}, #{testDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{attr1,jdbcType=VARCHAR}, 
+      #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.PreGrade">
     insert into IMS.PRE_GRADE
@@ -144,11 +147,17 @@
       <if test="empName != null">
         EMP_NAME,
       </if>
+      <if test="section != null">
+        SECTION,
+      </if>
       <if test="grade != null">
         GRADE,
       </if>
       <if test="secGrade != null">
         SEC_GRADE,
+      </if>
+      <if test="testDate != null">
+        TEST_DATE,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -171,6 +180,12 @@
       <if test="status != null">
         STATUS,
       </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
       <if test="attr1 != null">
         ATTR1,
       </if>
@@ -179,12 +194,6 @@
       </if>
       <if test="attr3 != null">
         ATTR3,
-      </if>
-      <if test="attr4 != null">
-        ATTR4,
-      </if>
-      <if test="attr5 != null">
-        ATTR5,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -200,11 +209,17 @@
       <if test="empName != null">
         #{empName,jdbcType=VARCHAR},
       </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
       <if test="grade != null">
         #{grade,jdbcType=DECIMAL},
       </if>
       <if test="secGrade != null">
         #{secGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="testDate != null">
+        #{testDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -227,6 +242,12 @@
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
       <if test="attr1 != null">
         #{attr1,jdbcType=VARCHAR},
       </if>
@@ -235,12 +256,6 @@
       </if>
       <if test="attr3 != null">
         #{attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="attr4 != null">
-        #{attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="attr5 != null">
-        #{attr5,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -265,11 +280,17 @@
       <if test="record.empName != null">
         EMP_NAME = #{record.empName,jdbcType=VARCHAR},
       </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
       <if test="record.grade != null">
         GRADE = #{record.grade,jdbcType=DECIMAL},
       </if>
       <if test="record.secGrade != null">
         SEC_GRADE = #{record.secGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="record.testDate != null">
+        TEST_DATE = #{record.testDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createTime != null">
         CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
@@ -292,6 +313,12 @@
       <if test="record.status != null">
         STATUS = #{record.status,jdbcType=VARCHAR},
       </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
       <if test="record.attr1 != null">
         ATTR1 = #{record.attr1,jdbcType=VARCHAR},
       </if>
@@ -300,12 +327,6 @@
       </if>
       <if test="record.attr3 != null">
         ATTR3 = #{record.attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr4 != null">
-        ATTR4 = #{record.attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr5 != null">
-        ATTR5 = #{record.attr5,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -318,8 +339,10 @@
       VERSION = #{record.version,jdbcType=VARCHAR},
       EMP_ID = #{record.empId,jdbcType=VARCHAR},
       EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
       GRADE = #{record.grade,jdbcType=DECIMAL},
       SEC_GRADE = #{record.secGrade,jdbcType=DECIMAL},
+      TEST_DATE = #{record.testDate,jdbcType=TIMESTAMP},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
@@ -327,11 +350,11 @@
       UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
       UPDATER = #{record.updater,jdbcType=VARCHAR},
       STATUS = #{record.status,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
       ATTR1 = #{record.attr1,jdbcType=VARCHAR},
       ATTR2 = #{record.attr2,jdbcType=VARCHAR},
-      ATTR3 = #{record.attr3,jdbcType=VARCHAR},
-      ATTR4 = #{record.attr4,jdbcType=VARCHAR},
-      ATTR5 = #{record.attr5,jdbcType=VARCHAR}
+      ATTR3 = #{record.attr3,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -348,11 +371,17 @@
       <if test="empName != null">
         EMP_NAME = #{empName,jdbcType=VARCHAR},
       </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
       <if test="grade != null">
         GRADE = #{grade,jdbcType=DECIMAL},
       </if>
       <if test="secGrade != null">
         SEC_GRADE = #{secGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="testDate != null">
+        TEST_DATE = #{testDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
@@ -375,6 +404,12 @@
       <if test="status != null">
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
       <if test="attr1 != null">
         ATTR1 = #{attr1,jdbcType=VARCHAR},
       </if>
@@ -384,12 +419,6 @@
       <if test="attr3 != null">
         ATTR3 = #{attr3,jdbcType=VARCHAR},
       </if>
-      <if test="attr4 != null">
-        ATTR4 = #{attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="attr5 != null">
-        ATTR5 = #{attr5,jdbcType=VARCHAR},
-      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -398,8 +427,10 @@
     set VERSION = #{version,jdbcType=VARCHAR},
       EMP_ID = #{empId,jdbcType=VARCHAR},
       EMP_NAME = #{empName,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
       GRADE = #{grade,jdbcType=DECIMAL},
       SEC_GRADE = #{secGrade,jdbcType=DECIMAL},
+      TEST_DATE = #{testDate,jdbcType=TIMESTAMP},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
       CREATOR = #{creator,jdbcType=VARCHAR},
@@ -407,11 +438,11 @@
       UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
       UPDATER = #{updater,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
       ATTR1 = #{attr1,jdbcType=VARCHAR},
       ATTR2 = #{attr2,jdbcType=VARCHAR},
-      ATTR3 = #{attr3,jdbcType=VARCHAR},
-      ATTR4 = #{attr4,jdbcType=VARCHAR},
-      ATTR5 = #{attr5,jdbcType=VARCHAR}
+      ATTR3 = #{attr3,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

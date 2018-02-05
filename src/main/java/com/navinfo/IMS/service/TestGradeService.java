@@ -1,6 +1,9 @@
 package com.navinfo.IMS.service;
 
+import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.entity.TestGrade;
+import com.navinfo.IMS.so.TestGradeSearch;
+import com.navinfo.IMS.utils.PageObject;
 
 import java.util.List;
 
@@ -9,13 +12,15 @@ import java.util.List;
  */
 public interface TestGradeService {
 
-    public List findTestGrades();
-
-    public TestGrade getTestGradeById(String id);
+    List<TestGrade> getTestGradeById(String id);
 
     public boolean insertTestGrade(TestGrade testGrade);
 
     public boolean updateTestGrade(TestGrade testGrade);
 
     public boolean deleteTestGradeById(String ids);
+
+    PageInfo findTestGradeByPage(TestGradeSearch search, PageObject pageObject);
+
+    List<TestGrade> findTestGradeBySearch(TestGradeSearch search);
 }

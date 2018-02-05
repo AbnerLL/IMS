@@ -11,21 +11,101 @@
 <head>
     <title>全要素考核成绩表</title>
     <%@include file="common/head.jsp"%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-
+    <%@include file="common/common.jsp"%>
 </head>
 <body>
     <div class="container-fluid">
+        <%--查询面板--%>
+        <div class="collapse" id="search_collapse">
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-inline" id="search_form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="empId_search_input" class="control-label">员工编号</label>
+                                        <input class="form-control" type="week" name="empId" id="empId_search_input">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="empName_search_input" class="control-label">员工姓名</label>
+                                        <input class="form-control" type="text" name="empName" id="empName_search_input">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="section_search_select" class="control-label">所属科室</label>
+                                        <select class="form-control" name="section" id="section_search_select">
+                                            <option value="">----选择作业组----</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5px;"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="version_search_input" class="control-label">版本号&nbsp;&nbsp;&nbsp;</label>
+                                        <input class="form-control" type="text" name="version" id="version_search_input"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">考试成绩</label>
+                                        <span>
+                                            <input class="form-control" type="text" name="gradeStart" style="width: 36%;" placeholder="成绩区间"/>
+                                            <input class="form-control" type="text" name="gradeEnd" style="width: 36%;" placeholder="成绩区间"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">补考成绩</label>
+                                        <span>
+                                            <input class="form-control" type="text" name="secGradeStart" style="width: 36%;" placeholder="成绩区间"/>
+                                            <input class="form-control" type="text" name="secGradeEnd" style="width: 36%;" placeholder="成绩区间"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5px;"></div>
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-offset-10">
+                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <%--自定义表格工具栏--%>
         <div id="toolbar" class="btn-group">
-            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
-            <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
-            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
-            <button id="import_btn" class="btn btn-info"><span class="fa fa-file-excel-o"></span>导入excel</button>
-            <button id="export_btn" class="btn btn-info"><span class="fa fa-file-excel-o"></span>导出excel</button>
-            <%--<button id="search_toggle_btn" class="btn btn-default"><span class="fa fa-search"></span>综合查询</button>--%>
+            <shrio:hasPermission name="preGrade:add">
+                <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+            </shrio:hasPermission>
+            <shrio:hasPermission name="preGrade:edit">
+                <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+            </shrio:hasPermission>
+            <shrio:hasPermission name="preGrade:delete">
+                <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+            </shrio:hasPermission>
+            <shrioDiy:hasAnyPermission name="preGrade:export,preGrade:export:section,preGrade:export:dept">
+                <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+            </shrioDiy:hasAnyPermission>
+            <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
         </div>
         <%--表格数据--%>
         <table id="table_list"></table>
@@ -128,13 +208,7 @@
             </div>
         </div>
     </div>
-    <%--js文件--%>
-    <script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-    <script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-    <script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-</body>
-</html>
+  </body>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -149,10 +223,12 @@
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber     //当前页数
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber     //当前页数
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -198,6 +274,7 @@
             uniqueId: "id",                     //每一行的唯一标识，一般为主键列
 //            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
+            searchOnEnterKey:true,               //按entry键搜索
             detailView: false,                   //是否显示父子表
             columns:[{                          //配置各列的属性
                 checkbox:true
@@ -348,5 +425,22 @@
                 }
             },
         });
-    }
+    };
+    //控制collapse
+    $("#search_toggle_btn").click(function(){
+        $("#search_collapse").collapse("toggle");
+    });
+    //查询
+    $("#search_btn").click(function(){
+        $("#table_list").bootstrapTable("refresh")
+    });
+    //清空
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
+    });
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/preGradeExcel?"+$("#search_form").serialize();
+    });
 </script>
+</html>

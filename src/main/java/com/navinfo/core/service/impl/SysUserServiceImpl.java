@@ -1,9 +1,14 @@
 package com.navinfo.core.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.IMS.utils.StringUtil;
 import com.navinfo.core.dao.SysUserMapper;
 import com.navinfo.core.entity.SysUser;
 import com.navinfo.core.entity.SysUserExample;
 import com.navinfo.core.service.SysUserService;
+import com.navinfo.core.so.SysUserSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +25,32 @@ public class SysUserServiceImpl implements SysUserService{
     private SysUserMapper sysUserMapper;
 
     /**
+     *
+     * @param sysUserSearch
+     * @return
+     */
+    private SysUserExample createSearchExample(SysUserSearch sysUserSearch){
+        SysUserExample example=new SysUserExample();
+        example.createCriteria();
+        if (StringUtil.notNull(sysUserSearch.getId())){
+            example.getOredCriteria().get(0).andIdEqualTo(sysUserSearch.getId());
+        }
+        if (StringUtil.notNull(sysUserSearch.getNickname())){
+            example.getOredCriteria().get(0).andNicknameEqualTo(sysUserSearch.getNickname());
+        }
+        if (StringUtil.notNull(sysUserSearch.getStatus())){
+            example.getOredCriteria().get(0).andStatusEqualTo(sysUserSearch.getStatus());
+        }
+        if (sysUserSearch.getCreateTime()!=null){
+            example.getOredCriteria().get(0).andCreateTimeGreaterThanOrEqualTo(sysUserSearch.getCreateTime());
+        }
+        if (StringUtil.notNull(sysUserSearch.getKeyword())){
+            example.or().andIdLike("%"+sysUserSearch.getKeyword()+"%");
+            example.or().andNicknameLike("%"+sysUserSearch.getKeyword()+"%");
+        }
+        return example;
+    }
+    /**
      * 根据用户名获取用户
      * @param username 用户名
      * @return boolean
@@ -30,7 +61,16 @@ public class SysUserServiceImpl implements SysUserService{
         List<SysUser> users=sysUserMapper.selectByExample(example);
         return users.size()!=0;
     }
-
+    /**
+     * 根据查询条件分页查询
+     * @return
+     */
+    public PageInfo findSysUserByPage(SysUserSearch sysUserSearch, PageObject pageObject){
+        SysUserExample sysUserExample=this.createSearchExample(sysUserSearch);
+        sysUserExample.setOrderByClause("create_time asc");
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
+        return new PageInfo(this.sysUserMapper.selectByExample(sysUserExample));
+    }
     /**
      * 查询所有数据
      * @return list

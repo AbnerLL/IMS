@@ -1,35 +1,42 @@
 package com.navinfo.IMS.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
+import com.navinfo.IMS.entity.Emp;
 import com.navinfo.IMS.entity.TestGrade;
 import com.navinfo.IMS.service.TestGradeService;
+import com.navinfo.IMS.so.TestGradeSearch;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.core.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 /**
+ * 全要素考核的Controller
  * Created by luozhihui on 2017/9/21.
  */
 @Controller
-public class TestGradeController {
+public class TestGradeController extends BaseController{
     @Autowired
     private TestGradeService testGradeService;
     /**
      * 分页查询
-     * @param pageSize
-     * @param pageNum
+     * @param search
+     * @param pageObject
      * @return
      */
     @RequestMapping(value = "/testGrades",method = RequestMethod.GET)
     @ResponseBody
-    public Msg findTestGrades(@RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum){
-        PageHelper.startPage(pageNum,pageSize);
-        List testGrades=testGradeService.findTestGrades();
-        PageInfo pageInfo=new PageInfo(testGrades);
+    public Msg search(TestGradeSearch search, PageObject pageObject){
+        Emp currentEmp=super.getCurrentEmp();
+        if (!hasPermission("testGrade:view")){
+            search.setEmpId(currentEmp.getEmpId());
+        }
+        PageInfo pageInfo=this.testGradeService.findTestGradeByPage(search,pageObject);
         return Msg.success().add("pageInfo",pageInfo);
     }
 
@@ -41,12 +48,8 @@ public class TestGradeController {
     @ResponseBody
     @RequestMapping(value="/testGrade/{id}",method=RequestMethod.GET)
     public Msg findTestGradeById(@PathVariable("id") String id){
-        TestGrade testGrade=testGradeService.getTestGradeById(id);
-        if(testGrade!=null){
-            return Msg.success().add("data",testGrade);
-        }else{
-            return Msg.failure();
-        }
+        List<TestGrade> testGradeList=testGradeService.getTestGradeById(id);
+        return Msg.success().add("entities",testGradeList);
     }
     /**
      * 新增数据
@@ -57,11 +60,7 @@ public class TestGradeController {
     @RequestMapping(value ="/testGrade",method = RequestMethod.POST)
     public Msg addTestGrade(TestGrade testGrade){
         boolean flag=testGradeService.insertTestGrade(testGrade);
-        if(flag){
-            return Msg.success();
-        }else{
-            return Msg.failure();
-        }
+        return flag ?Msg.success():Msg.failure();
     }
 
     /**
@@ -73,11 +72,7 @@ public class TestGradeController {
     @RequestMapping(value="/testGrade/{id}",method=RequestMethod.PUT)
     public Msg editTestGrade(TestGrade testGrade){
         boolean flag=testGradeService.updateTestGrade(testGrade);
-        if(flag){
-            return Msg.success();
-        }else{
-            return Msg.failure();
-        }
+        return flag ?Msg.success():Msg.failure();
     }
 
     /**
@@ -89,11 +84,23 @@ public class TestGradeController {
     @RequestMapping(value="/testGrade/{id}",method=RequestMethod.DELETE)
     public Msg deleteTestGrade(@PathVariable("id") String ids){
         boolean flag=testGradeService.deleteTestGradeById(ids);
-        if (flag){
-            return Msg.success();
-        }else {
-            return Msg.failure();
-        }
+        return flag ?Msg.success():Msg.failure();
     }
-
+    /**
+     * 根据查询条件导出数据
+     * @param search
+     * @return
+     */
+    @RequestMapping(value = "/testGradeExcel")
+    public ModelAndView exportExcel(TestGradeSearch search){
+        ModelAndView modelAndView=new ModelAndView();
+        Emp currentEmp=super.getCurrentEmp();
+        if (!hasPermission("monitorInfo:export")){
+            search.setEmpId(currentEmp.getEmpId());
+        }
+        List<TestGrade> monitorInfoList=this.testGradeService.findTestGradeBySearch(search);
+        modelAndView.addObject("monitorInfoList",monitorInfoList);
+        modelAndView.setViewName("export/testGradeExcel");
+        return modelAndView;
+    }
 }

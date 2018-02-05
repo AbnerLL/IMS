@@ -6,6 +6,9 @@ import com.navinfo.IMS.dao.EmpResumeMapper;
 import com.navinfo.IMS.entity.EmpResume;
 import com.navinfo.IMS.entity.EmpResumeExample;
 import com.navinfo.IMS.service.EmpResumeService;
+import com.navinfo.IMS.so.EmpResumeSearch;
+import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.IMS.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,24 +27,47 @@ public class EmpResumeServiceImpl implements EmpResumeService {
     private EmpResumeMapper empResumeMapper;
 
     /**
-     * 根据条件进行分页查询
-     * @param map
+     * 根据查询条件构建查询的example
+     * @param search
      * @return
      */
-    public PageInfo findEmpResumeByPage(Map map){
-        Integer pageSize=new Integer((String)map.get("pageSize"));
-        Integer pageNum=new Integer((String) map.get("pageNum"));
-        String keyword=(String) map.get("keyword");
+    private EmpResumeExample createSearchExample(EmpResumeSearch search){
         EmpResumeExample example=new EmpResumeExample();
-        if(keyword!=null&&!"".equals(keyword)){
-            example.createCriteria().andEmpIdLike("%"+keyword+"%");
-            example.or().andEmpNameLike("%"+keyword+"%");
+        example.createCriteria();
+        if (StringUtil.notNull(search.getEmpId())){
+            example.getOredCriteria().get(0).andEmpIdEqualTo(search.getEmpId());
         }
-        PageHelper.startPage(pageNum,pageSize);
+        if (StringUtil.notNull(search.getEmpName())){
+            example.getOredCriteria().get(0).andEmpNameEqualTo(search.getEmpName());
+        }
+        if (StringUtil.notNull(search.getKeyword())){
+            example.or().andEmpIdLike("%"+search.getKeyword()+"%");
+            example.or().andEmpNameLike("%"+search.getKeyword()+"%");
+        }
+        return example;
+    }
+    /**
+     * 根据条件进行分页查询
+     * @param pageObject
+     * @param resumeSearch
+     * @return
+     */
+    public PageInfo findEmpResumeByPage(EmpResumeSearch resumeSearch, PageObject pageObject){
+        EmpResumeExample example=this.createSearchExample(resumeSearch);
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List empResumes=empResumeMapper.selectByExample(example);
         return new PageInfo(empResumes);
     }
-
+    /**
+     * 根据条件进行不分页查询
+     * @param resumeSearch
+     * @return
+     */
+    public List<EmpResume> findEmpResumeBySearch(EmpResumeSearch resumeSearch){
+        EmpResumeExample example=this.createSearchExample(resumeSearch);
+        List empResumes=empResumeMapper.selectByExample(example);
+        return empResumes;
+    }
     /**
      * 根据id获取对象
      * @return

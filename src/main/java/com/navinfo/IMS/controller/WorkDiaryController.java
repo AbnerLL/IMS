@@ -109,6 +109,11 @@ public class WorkDiaryController extends BaseController{
      */
     @RequestMapping(value = "/workDiaryExcel")
     public ModelAndView exportExcel(WorkDiarySearch workDiarySearch){
+        Subject subject= SecurityUtils.getSubject();
+        SysUser currentUser=super.getCurrentUser();
+        if(!subject.isPermitted("workDiary:export")){
+            workDiarySearch.setEmpId(currentUser.getId());
+        }
         ModelAndView modelAndView=new ModelAndView();
         List<WorkDiary> workDiaryList=this.workDiaryService.findWorkDiaryBySearch(workDiarySearch);
         modelAndView.addObject("workDiaryList",workDiaryList);

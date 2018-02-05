@@ -1,7 +1,10 @@
 package com.navinfo.core.service;
 
 
+import com.github.pagehelper.PageInfo;
+import com.navinfo.IMS.utils.PageObject;
 import com.navinfo.core.entity.SysUser;
+import com.navinfo.core.so.SysUserSearch;
 
 import java.util.List;
 
@@ -22,4 +25,10 @@ public interface SysUserService {
     boolean updateUser(SysUser user);
 
     boolean deleteUser(String ids);
+
+    /**
+     * 根据查询条件分页查询
+     * @return
+     */
+    PageInfo findSysUserByPage(SysUserSearch sysUserSearch,PageObject pageObject);
 }

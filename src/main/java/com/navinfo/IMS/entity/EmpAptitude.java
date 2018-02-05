@@ -11,6 +11,8 @@ public class EmpAptitude {
 
     private String empName;
 
+    private String section;
+
     private String professionType;
 
     private String workAptitude;
@@ -65,6 +67,14 @@ public class EmpAptitude {
 
     public void setEmpName(String empName) {
         this.empName = empName == null ? null : empName.trim();
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section == null ? null : section.trim();
     }
 
     public String getProfessionType() {

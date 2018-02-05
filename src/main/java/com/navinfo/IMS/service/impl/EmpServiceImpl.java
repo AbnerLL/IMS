@@ -48,6 +48,12 @@ public class EmpServiceImpl implements EmpService{
         if (StringUtil.notNull(empSearch.getEmpPost())) {
             empExample.getOredCriteria().get(0).andEmpPostEqualTo(empSearch.getEmpPost());
         }
+        if (empSearch.getEmpEntryAgeStart()!=null){
+            empExample.getOredCriteria().get(0).andEmpEntryAgeGreaterThanOrEqualTo(empSearch.getEmpEntryAgeStart());
+        }
+        if (empSearch.getEmpEntryAgeEnd()!=null){
+            empExample.getOredCriteria().get(0).andEmpEntryAgeLessThanOrEqualTo(empSearch.getEmpEntryAgeEnd());
+        }
         if (empSearch.getEmpHiredateStart()!=null){
             empExample.getOredCriteria().get(0).andEmpHiredateGreaterThanOrEqualTo(empSearch.getEmpHiredateStart());
         }

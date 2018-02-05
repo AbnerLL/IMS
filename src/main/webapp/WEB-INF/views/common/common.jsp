@@ -5,6 +5,8 @@
   Time: 15:18
   To change this template use File | Settings | File Templates.
 --%>
+<%@taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
+<%@taglib prefix="shrioDiy" uri="WEB-INF/views/common/tld/shiro-diy.tld" %>
 <%--IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame--%>
 <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />
 <%--针对手机屏幕的设置--%>

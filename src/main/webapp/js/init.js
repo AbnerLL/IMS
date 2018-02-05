@@ -246,12 +246,18 @@ function TreeEach(json) {
 
     for (var i = 0; i < json.length; i++) {
         //遍历对象
-        var id = json[i]["id"] || '',
-            text = json[i]["name"] || '',
-            url =json[i]["sourceUrl"] || '',
-            icon = json[i]['clsName'] || '',
+        // var id = json[i]["id"] || '',
+        //     text = json[i]["name"] || '',
+        //     url =json[i]["sourceUrl"] || '',
+        //     icon = json[i]['clsName'] || '',
+        //     subs = json[i]["children"] || [],
+        //     pid = parseInt(json[i]["pid"]) || 0;
+        var id = json[i]["moduleId"] || '',
+            text = json[i]["moduleName"] || '',
+            url =json[i]["moduleUrl"] || '',
+            icon = json[i]['iconClass'] || '',
             subs = json[i]["children"] || [],
-            pid = parseInt(json[i]["pid"]) || 0;
+            pid = parseInt(json[i]["modulePid"]) || 0;
         url=url==''?'':baseUrl+url;
         icon != '' && (icon = "fa " + icon);
         //有下级
@@ -310,12 +316,12 @@ setTimeout(function(){
 },60);
 //生成导航菜单
 $.ajax({
-    url: baseUrl+'/initMenus',
+    url: baseUrl+'/initModule',
     type: 'get',
     dataType: 'json',
     success: function (data) {
-        $('#ulnav').data('nav', data);
-        $('#ulnav').append(TreeEach(data));
+        $('#ulnav').data('nav', data.extend.menu);
+        $('#ulnav').append(TreeEach(data.extend.menu));
     },
     error: function () {
         alert("加载菜单出错");

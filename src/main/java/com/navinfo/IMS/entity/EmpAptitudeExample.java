@@ -385,6 +385,76 @@ public class EmpAptitudeExample {
             return (Criteria) this;
         }
 
+        public Criteria andSectionIsNull() {
+            addCriterion("SECTION is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionIsNotNull() {
+            addCriterion("SECTION is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionEqualTo(String value) {
+            addCriterion("SECTION =", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotEqualTo(String value) {
+            addCriterion("SECTION <>", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionGreaterThan(String value) {
+            addCriterion("SECTION >", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionGreaterThanOrEqualTo(String value) {
+            addCriterion("SECTION >=", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionLessThan(String value) {
+            addCriterion("SECTION <", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionLessThanOrEqualTo(String value) {
+            addCriterion("SECTION <=", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionLike(String value) {
+            addCriterion("SECTION like", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotLike(String value) {
+            addCriterion("SECTION not like", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionIn(List<String> values) {
+            addCriterion("SECTION in", values, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotIn(List<String> values) {
+            addCriterion("SECTION not in", values, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionBetween(String value1, String value2) {
+            addCriterion("SECTION between", value1, value2, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotBetween(String value1, String value2) {
+            addCriterion("SECTION not between", value1, value2, "section");
+            return (Criteria) this;
+        }
+
         public Criteria andProfessionTypeIsNull() {
             addCriterion("PROFESSION_TYPE is null");
             return (Criteria) this;

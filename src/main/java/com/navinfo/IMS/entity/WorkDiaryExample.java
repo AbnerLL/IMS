@@ -515,6 +515,76 @@ public class WorkDiaryExample {
             return (Criteria) this;
         }
 
+        public Criteria andWorkModuleIsNull() {
+            addCriterion("WORK_MODULE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleIsNotNull() {
+            addCriterion("WORK_MODULE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleEqualTo(String value) {
+            addCriterion("WORK_MODULE =", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleNotEqualTo(String value) {
+            addCriterion("WORK_MODULE <>", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleGreaterThan(String value) {
+            addCriterion("WORK_MODULE >", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleGreaterThanOrEqualTo(String value) {
+            addCriterion("WORK_MODULE >=", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleLessThan(String value) {
+            addCriterion("WORK_MODULE <", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleLessThanOrEqualTo(String value) {
+            addCriterion("WORK_MODULE <=", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleLike(String value) {
+            addCriterion("WORK_MODULE like", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleNotLike(String value) {
+            addCriterion("WORK_MODULE not like", value, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleIn(List<String> values) {
+            addCriterion("WORK_MODULE in", values, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleNotIn(List<String> values) {
+            addCriterion("WORK_MODULE not in", values, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleBetween(String value1, String value2) {
+            addCriterion("WORK_MODULE between", value1, value2, "workModule");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkModuleNotBetween(String value1, String value2) {
+            addCriterion("WORK_MODULE not between", value1, value2, "workModule");
+            return (Criteria) this;
+        }
+
         public Criteria andWorkHoursIsNull() {
             addCriterion("WORK_HOURS is null");
             return (Criteria) this;

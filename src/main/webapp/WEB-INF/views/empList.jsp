@@ -11,20 +11,8 @@
 <html>
 <head>
     <%@include file="common/head.jsp"%>
+    <%@include file="common/common.jsp"%>
     <title>员工列表</title>
-    <%--IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame--%>
-    <%--<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />--%>
-    <%--针对手机屏幕的设置--%>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <%--基础css--%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <%--bootstrap表格的css--%>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <%--字体和图标的css--%>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-    <%--日期插件的css--%>
-    <link href="${basePath}/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -33,32 +21,36 @@
         <div class="well">
             <div class="row">
                 <div class="col-sm-11">
-                    <form class="form-horizontal" id="search_form">
-                        <div class="form-group form-group-sm">
+                    <form class="form-inline" id="search_form">
+                        <div class="row">
                             <div class="col-sm-4">
-                                    <label for="empIdSearch" class="control-label col-sm-4">员工编号:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="empIdSearch" name="empId"/>
-                                    </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="empIdSearch" class="control-label">员工编号:</label>
+                                    <input type="text" class="form-control" id="empIdSearch" name="empId"/>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="empNameSearch" class="control-label col-sm-4">员工姓名:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group  form-group-sm">
+                                    <label for="empNameSearch" class="control-label">员工姓名:</label>
                                     <input type="text" class="form-control" id="empNameSearch" name="empName"/>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="empEntryageSearch" class="control-label col-sm-4">司龄:</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="empEntryageSearch" name="empEntryage"/>
+                                <div class="form-group  form-group-sm">
+                                <label for="empEntryAge_search_input1" class="control-label">员工司龄:</label>
+                                <span>
+                                    <input type="text" class="form-control" id="empEntryAge_search_input1" name="empEntryAgeStart" style="width:37%" placeholder="司龄区间"/>&nbsp;
+                                    <input type="text" class="form-control" id="empEntryAge_search_input2" name="empEntryAgeEnd" style="width:37%" placeholder="司龄区间"/>
+                                </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group form-group-sm">
+                        <div class="row" style="height: 5px"></div>
+                        <div class="row">
                             <div class="col-sm-4">
-                                <label for="empSec_search_select" class="control-label col-sm-4">部门:</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" id="empSec_search_select" name="empDep">
+                                <div class="form-group  form-group-sm">
+                                    <label for="empSec_search_select" class="control-label">所属部门:</label>
+                                    <select class="form-control" id="empSec_search_select" name="empDept">
                                         <option value="">---选择部门---</option>
                                         <option value="数据库制作部">数据库制作部</option>
                                         <option value="数据库制作部西安分部">数据库制作部西安分部</option>
@@ -66,10 +58,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="empDep_search_select" class="control-label col-sm-4">科室:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group  form-group-sm">
+                                    <label for="empDep_search_select" class="control-label">所属科室:</label>
                                     <select class="form-control" id="empDep_search_select" name="empSec">
-                                        <option value="">---选择科室---</option>
+                                        <option value="">---选择所属科室---</option>
                                         <option value="品质管理室">品质管理室</option>
                                         <option value="项目一组">项目一组</option>
                                         <option value="项目二组">项目二组</option>
@@ -82,10 +74,26 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="empPost_search_select" class="control-label col-sm-4">职务:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group  form-group-sm">
+                                    <label for="empHiredateStartSearch" class="control-label">入职时间:</label>
+                                    <span>
+                                        <div class="input-group input-group-sm" style="width: 77%;">
+                                            <input type="text" class="form-control datepicker"  id="empHiredateStartSearch" name="empHiredateStart"/>
+                                            <div class="input-group-addon"><span class="fa fa-calendar fa-sm"></span></div>
+                                            <input type="text" class="form-control datepicker" id="empHiredateEndSearch" name="empHiredateEnd" aria-label="入职时间止"/>
+                                            <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 5px"></div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group  form-group-sm">
+                                    <label for="empPost_search_select" class="control-label">职务名称:</label>
                                     <select class="form-control" id="empPost_search_select" name="empPost">
-                                        <option value="">---选择职务---</option>
+                                        <option value="">---选择职务名称---</option>
                                         <option value="部门经理">部门经理</option>
                                         <option value="科室经理">科室经理</option>
                                         <option value="项目经理">项目经理</option>
@@ -95,30 +103,27 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <div class="col-sm-8">
-                                <label for="empHiredateStartSearch" class="control-label col-sm-2">入职时间:</label>
-                                <div class="form-inline col-sm-9">
-                                    <div class="input-group col-sm-4" >
-                                        <input type="text" class="form-control datepicker"  id="empHiredateStartSearch" name="empHiredateStart"/>
-                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-                                    </div> -
-                                    <div class="input-group col-sm-4">
-                                        <input type="text" class="form-control datepicker" id="empHiredateEndSearch" name="empHiredateEnd" aria-label="入职时间止"/>
-                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-                                    </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="empSex_search_select" class="control-label">员工性别:</label>
+                                    <select class="form-control" id="empSex_search_select" name="empSex">
+                                        <option value="">---选择员工性别---</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="col-sm-5 col-sm-offset-7" >
-                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
-                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                <div class="form-group  form-group-sm">
+                                    <div >
+                                        <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                        <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                </form>
+            </div>
             </div>
         </div>
     </div>
@@ -134,9 +139,9 @@
         <shrio:hasPermission name="emp:delete">
             <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
         </shrio:hasPermission>
-        <shrio:hasPermission name="emp:export">
+        <shrioDiy:hasAnyPermission name="emp:export,emp:export:section,emp:export:dept">
             <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
-        </shrio:hasPermission>
+        </shrioDiy:hasAnyPermission>
         <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
@@ -310,18 +315,6 @@
         </div>
     </div>
 </div>
-<%--基础js文件--%>
-<script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-<script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-<%--bootstrap表格的js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-<%--本地化文件要放在bootstrap文件下--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-<%--日期插件js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
-<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/tableExport.js"></script>
-<script src="${basePath}/js/bootstrapTable/1.2.4/extensions/export/bootstrap-table-export.js"></script>
 <script>
     $(function(){
         //初始化表格

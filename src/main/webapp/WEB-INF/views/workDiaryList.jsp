@@ -20,23 +20,23 @@
         <div class="well">
             <div class="row">
                 <div class="col-sm-11">
-                    <form id="search_form" class="form-horizontal" role="form">
-                        <div class="form-group form-group-sm">
+                    <form id="search_form" class="form-inline" role="form">
+                        <div class="row">
                             <div class="col-sm-4">
-                                <label for="empId_search_input" class="control-label col-sm-4">员工编号:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group form-group-sm">
+                                    <label for="empId_search_input" class="control-label">员工编号:</label>
                                     <input type="text" class="form-control" id="empId_search_input" name="empId"/>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="empName_search_input" class="control-label col-sm-4">员工姓名:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group form-group-sm">
+                                    <label for="empName_search_input" class="control-label">员工姓名:</label>
                                     <input type="text" class="form-control" id="empName_search_input" name="empName"/>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="section_search_select" class="control-label col-sm-4">项目组:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group form-group-sm">
+                                    <label for="section_search_select" class="control-label">项目组:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                     <select class="form-control" name="section" id="section_search_select">
                                         <option value="">---请选择项目组---</option>
                                         <option value="部门">部门</option>
@@ -65,10 +65,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group form-group-sm">
+                        <div class="row" style="height: 5px;"></div>
+                        <div class="row">
                             <div class="col-sm-4">
-                                <label for="workType_search_select" class="control-label col-sm-4">工作类型:</label>
-                                <div class="col-sm-8">
+                                <div class="form-group form-group-sm">
+                                    <label for="workType_search_select" class="control-label">工作类型:</label>
                                     <select class="form-control" name="workType" id="workType_search_select">
                                         <option value="">---选择工作类型---</option>
                                         <option value="正常上班">正常上班</option>
@@ -80,27 +81,50 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-8">
-                                    <label for="empId_search_input" class="control-label col-sm-2">工作日期:</label>
-                                    <div class="col-sm-9">
-                                        <div class="form-inline">
-                                            <div class="input-group col-sm-4">
-                                                <input type="text" class="form-control datepicker" name="workDateStart" id="workDateStart_search_input" />
-                                                <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-                                            </div>-
-                                            <div class="input-group col-sm-4">
-                                                <input type="text" class="form-control datepicker" name="workDateEnd" id="workDateEnd_search_input" />
-                                                <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-                                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="workModule_search_select" class="control-label">工作模块</label>
+                                    <select class="form-control" name="workModule" id="workModule_search_select">
+                                        <option value="">---选择工作模块---</option>
+                                        <option value="统计差分">统计差分</option>
+                                        <option value="重点工作确认">重点工作确认</option>
+                                        <option value="数据监察">数据监察</option>
+                                        <option value="问题调查">问题调查</option>
+                                        <option value="出品判断">出品判断</option>
+                                        <option value="质量体系">质量体系</option>
+                                        <option value="周报分析">周报分析</option>
+                                        <option value="KPI">KPI</option>
+                                        <option value="质量成本">质量成本</option>
+                                        <option value="风险管理">风险管理</option>
+                                        <option value="良品条件">良品条件</option>
+                                        <option value="项目组品质管理">项目组品质管理</option>
+                                        <option value="问联管理">问联管理</option>
+                                        <option value="会议">会议</option>
+                                        <option value="培训">培训</option>
+                                        <option value="临时工作">临时工作</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="empId_search_input" class="control-label">工作日期:</label>
+                                    <span>
+                                        <div class="input-group input-group-sm" style="width: 77%;">
+                                            <input type="text" class="form-control datepicker" name="workDateStart" id="workDateStart_search_input" />
+                                            <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                            <input type="text" class="form-control datepicker" name="workDateEnd" id="workDateEnd_search_input" />
+                                            <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
                                         </div>
-                                    </div>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group form-group-sm">
-                                <div class="col-sm-2 col-sm-offset-10" >
-                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
-                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
-                                </div>
+                        <div class="row" style="height: 5px;"></div>
+                        <div class="row">
+                            <div class="col-sm-2 col-sm-offset-10">
+                                <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -202,9 +226,39 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
+                                <label for="workModule_insert_select" class="control-label col-sm-2">工作模块</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="workModule" id="workModule_insert_select">
+                                        <option value="">---选择工作模块---</option>
+                                        <option value="统计差分">统计差分</option>
+                                        <option value="重点工作确认">重点工作确认</option>
+                                        <option value="数据监察">数据监察</option>
+                                        <option value="问题调查">问题调查</option>
+                                        <option value="出品判断">出品判断</option>
+                                        <option value="质量体系">质量体系</option>
+                                        <option value="周报分析">周报分析</option>
+                                        <option value="KPI">KPI</option>
+                                        <option value="质量成本">质量成本</option>
+                                        <option value="风险管理">风险管理</option>
+                                        <option value="良品条件">良品条件</option>
+                                        <option value="项目组品质管理">项目组品质管理</option>
+                                        <option value="问联管理">问联管理</option>
+                                        <option value="会议">会议</option>
+                                        <option value="培训">培训</option>
+                                        <option value="临时工作">临时工作</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
                                 <label for="workContent_insert_textarea" class="col-sm-2 control-label">工作内容</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="4" name="workContent" id="workContent_insert_textarea"></textarea>
+                                    <textarea class="form-control" rows="3" name="workContent" id="workContent_insert_textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="remark_insert_textarea" class="col-sm-2 control-label">备注</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" name="remark" id="remark_insert_textarea"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -294,9 +348,39 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
+                                <label for="workModule_update_select" class="control-label col-sm-2">工作模块</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="workModule" id="workModule_update_select">
+                                        <option value="">---选择工作模块---</option>
+                                        <option value="统计差分">统计差分</option>
+                                        <option value="重点工作确认">重点工作确认</option>
+                                        <option value="数据监察">数据监察</option>
+                                        <option value="问题调查">问题调查</option>
+                                        <option value="出品判断">出品判断</option>
+                                        <option value="质量体系">质量体系</option>
+                                        <option value="周报分析">周报分析</option>
+                                        <option value="KPI">KPI</option>
+                                        <option value="质量成本">质量成本</option>
+                                        <option value="风险管理">风险管理</option>
+                                        <option value="良品条件">良品条件</option>
+                                        <option value="项目组品质管理">项目组品质管理</option>
+                                        <option value="问联管理">问联管理</option>
+                                        <option value="会议">会议</option>
+                                        <option value="培训">培训</option>
+                                        <option value="临时工作">临时工作</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
                                 <label for="workContent_update_textarea" class="col-sm-2 control-label">工作内容</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="4" name="workContent" id="workContent_update_textarea"></textarea>
+                                    <textarea class="form-control" rows="3" name="workContent" id="workContent_update_textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="remark_update_textarea" class="col-sm-2 control-label">备注</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" name="remark" id="remark_update_textarea"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -415,6 +499,9 @@
                 field:"workHours",
                 title:"工作用时"
             },{
+                field:"workModule",
+                title:"工作模块"
+            },{
                 field:"workContent",
                 title:"工作内容"
             },{
@@ -430,9 +517,29 @@
     $("#add_btn").click(function(){
         //1.清空表单
         $("#add_form")[0].reset();
-        //2.弹出模态框并清空表单
+        //2.初始化用户的基本数据
+        initUserInfo();
+        //3.弹出模态框并清空表单
         $("#add_modal").modal("show");
     });
+    //初始化用户的基本数据
+    function initUserInfo(){
+        $.ajax({
+            url:"${basePath}/currentEmp",
+            type:"GET",
+            dataType:"json",
+            success:function (result) {
+                if (1==result.code){
+                    loadUserInfo(result.extend.entities[0]);
+                }
+            }
+        });
+    }
+    function loadUserInfo(user) {
+        $("#empId_insert_input").val(user.empId);
+        $("#empName_insert_input").val(user.empName);
+        $("#section_insert_select").val(user.empSec);
+    }
     //保存数据
     $("#save_btn").click(function(){
         //1.表单数据验证
@@ -487,16 +594,18 @@
                 alert("处理异常！异常代码："+e.status);
             }
         })
-    }
+    };
     //在修改模态框上显示对象
     function showEditDataDetail(obj){
         $("#empId_update_p").text(obj.empId);
         $("#empName_update_input").val(obj.empName);
         $("#section_update_select").val(obj.section);
         $("#workType_update_select").val(obj.workType);
+        $("#workModule_update_select").val(obj.workModule);
         $("#workDate_update_input").val(dateFormatter(obj.workDate));
         $("#workHours_update_input").val(obj.workHours);
         $("#workContent_update_textarea").val(obj.workContent);
+        $("#remark_update_textarea").val(obj.remark);
         $("#update_btn").attr("data-id",obj.id);
     }
     //更新按钮

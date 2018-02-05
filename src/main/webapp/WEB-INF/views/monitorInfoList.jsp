@@ -10,34 +10,307 @@
 <html>
 <head>
     <%@include file="common/head.jsp"%>
-    <title>监察统计表</title>
-    <%--针对手机屏幕的设置--%>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <%--基础css--%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <%--bootstrap表格的css--%>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <%--字体和图标的css--%>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-    <%--日期插件的css--%>
-    <link href="${basePath}/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+    <%@include file="common/common.jsp"%>
+    <title>监察信息</title>
 </head>
 <body>
 <div class="container-fluid">
+    <%--查询面板--%>
+    <div class="collapse" id="search_collapse">
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-11">
+                    <form class="form-inline" id="search_form">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="worker_search_input" class="control-label">作业员:</label>
+                                    <input class="form-control" type="text" name="worker" id="worker_search_input"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="version_search_input" class="control-label">作业版本:</label>
+                                    <input class="form-control" type="text" name="version" id="version_search_input"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="workType_search_select" class="control-label">作业类型:</label>
+                                    <select class="form-control" name="workType" id="workType_search_select">
+                                        <option value="">---选择作业类型---</option>
+                                        <option value="道路图标">道路图标</option>
+                                        <option value="中文名称">中文名称</option>
+                                        <option value="中文地址">中文地址</option>
+                                        <option value="英文">英文</option>
+                                        <option value="深度信息">深度信息</option>
+                                        <option value="代理店">代理店</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 5px;"></div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="section_search_select" class="control-label">项目组:</label>
+                                    <select class="form-control" name="section" id="section_search_select">
+                                        <option value="">----选择作业组----</option>
+                                        <option value="品质管理室">品质管理室</option>
+                                        <option value="项目一组">项目一组</option>
+                                        <option value="项目二组">项目二组</option>
+                                        <option value="项目三组">项目三组</option>
+                                        <option value="项目四组">项目四组</option>
+                                        <option value="项目五组">项目五组</option>
+                                        <option value="项目六组">项目六组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="monitorDateStart_search_input" class="control-label">监察日期:</label>
+                                    <span>
+                                        <div class="input-group input-group-sm" style="width: 77%;">
+                                            <input type="text" class="form-control datepicker" name="monitorDateStart" id="monitorDateStart_search_input" />
+                                            <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                            <input type="text" class="form-control datepicker" name="monitorDateEnd" id="monitorDateEnd_search_input" />
+                                            <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group  form-group-sm">
+                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--自定义表格工具栏--%>
+    <div id="toolbar" class="btn-group">
+        <shrio:hasPermission name="monitorInfo:add">
+            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="monitorInfo:edit">
+            <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="monitorInfo:delete">
+            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        </shrio:hasPermission>
+        <shrioDiy:hasAnyPermission name="monitorInfo:export,monitorInfo:export:section,monitorInfo:export:dept">
+            <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        </shrioDiy:hasAnyPermission>
+        <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
+    </div>
     <%--表格数据--%>
     <table id="table_list"></table>
 </div>
-<%--基础js文件--%>
-<script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-<script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-<%--bootstrap表格的js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-<%--本地化文件要放在bootstrap文件下--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-<%--日期插件js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
+<%--modal模态框(添加)--%>
+<div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myAddModalLabel"><span class="fa fa-plus fa-lg"></span>&nbsp;新增</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-horizontal" id="add_form">
+                            <div class="form-group form-group-sm">
+                                <label for="workerId_insert_input" class="control-label col-sm-2">作业员编号</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="workerId" id="workerId_insert_input">
+                                </div>
+                                <label for="worker_insert_input" class="control-label col-sm-2">作业员名称</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="worker" id="worker_insert_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="version_insert_input" class="control-label col-sm-2">作业版本</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="version" id="version_insert_input">
+                                </div>
+                                <label for="workType_insert_select" class="control-label col-sm-2">作业类型</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="workType" id="workType_insert_select">
+                                        <option value="">---选择作业类型---</option>
+                                        <option value="道路图标">道路图标</option>
+                                        <option value="中文名称">中文名称</option>
+                                        <option value="中文地址">中文地址</option>
+                                        <option value="英文">英文</option>
+                                        <option value="深度信息">深度信息</option>
+                                        <option value="代理店">代理店</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="section_insert_select" class="control-label col-sm-2">项目组</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="section" id="section_insert_select">
+                                        <option value="">----选择作业组----</option>
+                                        <option value="品质管理室">品质管理室</option>
+                                        <option value="项目一组">项目一组</option>
+                                        <option value="项目二组">项目二组</option>
+                                        <option value="项目三组">项目三组</option>
+                                        <option value="项目四组">项目四组</option>
+                                        <option value="项目五组">项目五组</option>
+                                        <option value="项目六组">项目六组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                    </select>
+                                </div>
+                                <label for="monitorDate_insert_input" class="control-label col-sm-2">监察日期</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input class="form-control datepicker" type="text" name="monitorDate" id="monitorDate_insert_input"/>
+                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="monitorNum_insert_input" class="control-label col-sm-2">监察数量</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="monitorNum" id="monitorNum_insert_input">
+                                </div>
+                                <label for="mErrorNum_insert_input" class="control-label col-sm-2">监察错误量</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="mErrorNum" id="mErrorNum_insert_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="monitorId_insert_input" class="control-label col-sm-2">监察员ID</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="monitorId" id="monitorId_insert_input">
+                                </div>
+                                <label for="monitor_insert_input" class="control-label col-sm-2">监察员名称</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="monitor" id="monitor_insert_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="remark_insert_textarea" class="control-label col-sm-2">备注</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="remark" id="remark_insert_textarea" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="save_btn" type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--modal模态框(修改)--%>
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o"></span>&nbsp;修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-horizontal" id="edit_form">
+                            <div class="form-group form-group-sm">
+                                <label for="workerId_update_input" class="control-label col-sm-2">作业员编号</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="workerId" id="workerId_update_input">
+                                </div>
+                                <label for="worker_update_input" class="control-label col-sm-2">作业员名称</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="worker" id="worker_update_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="version_update_input" class="control-label col-sm-2">作业版本</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="version" id="version_update_input">
+                                </div>
+                                <label for="workType_update_select" class="control-label col-sm-2">作业类型</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="workType" id="workType_update_select">
+                                        <option value="">---选择作业类型---</option>
+                                        <option value="道路图标">道路图标</option>
+                                        <option value="中文名称">中文名称</option>
+                                        <option value="中文地址">中文地址</option>
+                                        <option value="英文">英文</option>
+                                        <option value="深度信息">深度信息</option>
+                                        <option value="代理店">代理店</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="section_update_select" class="control-label col-sm-2">项目组</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="section" id="section_update_select">
+                                        <option value="">----选择作业组----</option>
+                                        <option value="品质管理室">品质管理室</option>
+                                        <option value="项目一组">项目一组</option>
+                                        <option value="项目二组">项目二组</option>
+                                        <option value="项目三组">项目三组</option>
+                                        <option value="项目四组">项目四组</option>
+                                        <option value="项目五组">项目五组</option>
+                                        <option value="项目六组">项目六组</option>
+                                        <option value="武汉项目组">武汉项目组</option>
+                                    </select>
+                                </div>
+                                <label for="monitorDate_update_input" class="control-label col-sm-2">监察日期</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input class="form-control datepicker" type="text" name="monitorDate" id="monitorDate_update_input"/>
+                                        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="monitorNum_update_input" class="control-label col-sm-2">监察数量</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="monitorNum" id="monitorNum_update_input">
+                                </div>
+                                <label for="mErrorNum_update_input" class="control-label col-sm-2">监察错误量</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="mErrorNum" id="mErrorNum_update_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="monitorId_update_input" class="control-label col-sm-2">监察员ID</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="monitorId" id="monitorId_update_input">
+                                </div>
+                                <label for="monitor_update_input" class="control-label col-sm-2">监察员名称</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="monitor" id="monitor_update_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="remark_update_textarea" class="control-label col-sm-2">备注</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="remark" id="remark_update_textarea" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="update_btn" type="button" class="btn btn-primary">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -59,11 +332,13 @@
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber,     //当前页数
-            keyword:params.search
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber,     //当前页数
+//            keyword:params.search
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -155,7 +430,165 @@
                 title:"备注"
             }]
         });
-    }
+    };
+    //显示新增模态框
+    $("#add_btn").click(function(){
+        //1.清空表单
+        $("#add_form")[0].reset();
+//        //2.初始化用户的基本数据
+//        initUserInfo();
+        //3.弹出模态框并清空表单
+        $("#add_modal").modal("show");
+    });
+    //保存数据
+    $("#save_btn").click(function(){
+        //1.表单数据验证
+        //2.发送ajax请求
+        $.ajax({
+            url:"${basePath}/monitorInfo",
+            type:"POST",
+            data:$("#add_form").serialize(),
+            dataType:"json",
+            success:function(result){
+                if(result.code==1){
+                    alert("处理成功");
+                    $("#add_modal").modal("hide");
+                    //刷新数据
+                    $("#table_list").bootstrapTable("refresh");
+                }else{
+                    alert("处理失败");
+                }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
+            }
+        });
+    });
+    //显示修改模态框
+    $("#edit_btn").click(function(){
+        //判断是否选择了一条记录
+        var selections=$("#table_list").bootstrapTable("getSelections")
+        if(1==selections.length){
+            //初始化数据
+            initEditDataDetailById(selections[0].id);
+            //显示模态框
+            $("#edit_modal").modal("toggle");
+        }else{
+            alert("选择单独一条记录");
+        }
+    });
+    //根据ID查询对应数据并显示与编辑modal上
+    function initEditDataDetailById(dataId){
+        $.ajax({
+            url:"${basePath}/monitorInfo/"+dataId,
+            type:"GET",
+            dataType:"json",
+            success:function(result){
+                if(1==result.code){
+                    showEditDataDetail(result.extend.entities[0]);
+                }else{
+                    alert("请求失败");
+                }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
+            }
+        })
+    };
+    //在修改模态框上显示对象
+    function showEditDataDetail(obj){
+        $("#version_update_input").val(obj.version);
+        $("#workType_update_select").val(obj.workType);
+        $("#section_update_select").val(obj.section);
+        $("#workerId_update_input").val(obj.workerId);
+        $("#worker_update_input").val(obj.worker);
+        $("#monitorDate_update_input").val(dateFormatter(obj.monitorDate));
+        $("#monitorNum_update_input").val(obj.monitorNum);
+        $("#mErrorNum_update_input").val(obj.mErrorNum);
+        $("#monitorId_update_input").val(obj.monitorId);
+        $("#monitor_update_input").val(obj.monitor);
+        $("#remark_update_textarea").val(obj.remark);
+        $("#update_btn").attr("data-id",obj.id);
+    };
+    //更新按钮
+    $("#update_btn").click(function(){
+        //1.表单数据验证
+        //2.发送请求
+        $.ajax({
+            url:"${basePath}/monitorInfo/"+$(this).attr("data-id"),
+            type:"PUT",
+            data:$("#edit_form").serialize(),
+            dataType:"json",
+            success:function(result){
+                if(1==result.code){
+                    alert("更新成功");
+                    //隐藏模态框
+                    $("#edit_modal").modal("hide");
+                    //刷新列表
+                    $("#table_list").bootstrapTable("refresh");
+                }else{
+                    alert("更新失败！");
+                }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
+            }
+        });
+    });
+    //删除按钮
+    $("#del_btn").click(function(){
+        var selects=$("#table_list").bootstrapTable("getSelections")
+        if(selects.length>0){
+            if(confirm("是否删除"+selects.length+"条数据")){
+                //删除数据
+                var ids="";
+                $(selects).each(function(){
+                    ids+=this.id+",";
+                })
+                //去除多余的分隔符
+                ids=ids.substring(0,ids.length-1);
+                deleteDataFun(ids);
+            }
+        }else{
+            alert("请至少选择一条数据");
+        }
+    });
+    //删除指定数据
+    function deleteDataFun(ids){
+        $.ajax({
+            url:"${basePath}/monitorInfo/"+ids,
+            type:"DELETE",
+            dataType:"json",
+            success:function(result){
+                if(1==result.code){
+                    alert("删除成功！");
+                    //刷新页面
+                    $("#table_list").bootstrapTable("refresh");
+                }else{
+                    alert("删除失败！");
+                }
+            },
+            error:function(e){
+                alert("处理异常！异常代码："+e.status);
+            }
+        });
+    };
+    //展开或收缩查询面板
+    $("#search_toggle_btn").click(function(){
+        $("#search_collapse").collapse('toggle');
+    });
+    //查询
+    $("#search_btn").click(function(){
+        $("#table_list").bootstrapTable("refresh")
+    });
+    //清空
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
+    });
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/monitorInfoExcel?"+$("#search_form").serialize();
+    });
 </script>
 </body>
 </html>

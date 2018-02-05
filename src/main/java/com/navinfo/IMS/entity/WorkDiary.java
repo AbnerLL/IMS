@@ -15,6 +15,8 @@ public class WorkDiary {
 
     private String workType;
 
+    private String workModule;
+
     private String workHours;
 
     private String workContent;
@@ -83,6 +85,14 @@ public class WorkDiary {
 
     public void setWorkType(String workType) {
         this.workType = workType == null ? null : workType.trim();
+    }
+
+    public String getWorkModule() {
+        return workModule;
+    }
+
+    public void setWorkModule(String workModule) {
+        this.workModule = workModule == null ? null : workModule.trim();
     }
 
     public String getWorkHours() {

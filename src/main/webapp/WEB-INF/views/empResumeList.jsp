@@ -10,26 +10,25 @@
 <html>
 <head>
     <%@include file="common/head.jsp"%>
+    <%@include file="common/common.jsp"%>
     <title>履历信息</title>
-    <%--针对手机屏幕的设置--%>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <%--基础css--%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <%--bootstrap表格的css--%>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <%--字体和图标的css--%>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-    <%--日期插件的css--%>
-    <link href="${basePath}/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container-fluid">
     <%--自定义表格工具栏--%>
     <div id="toolbar" class="btn-group">
-        <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
-        <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
-        <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        <shrio:hasPermission name="empResume:add">
+            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="empResume:edit">
+            <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+        </shrio:hasPermission>
+        <shrio:hasPermission name="empResume:delete">
+            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        </shrio:hasPermission>
+        <shrioDiy:hasAnyPermission name="empResume:export,empResume:export:dept,empResume:export:section">
+            <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+        </shrioDiy:hasAnyPermission>
     </div>
     <%--表格数据--%>
     <table id="table_list"></table>
@@ -51,7 +50,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
                                 </div>
-                                <label for="empName_insert_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="empName_insert_input" class="col-sm-2 control-label">员工姓名</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工名称">
                                 </div>
@@ -124,7 +123,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="empId" id="empId_update_input" placeholder="员工编号">
                                 </div>
-                                <label for="empName_update_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="empName_update_input" class="col-sm-2 control-label">员工姓名</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工名称">
                                 </div>
@@ -180,16 +179,6 @@
         </div>
     </div>
 </div>
-<%--基础js文件--%>
-<script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-<script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-<%--bootstrap表格的js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-<%--本地化文件要放在bootstrap文件下--%>
-<script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-<%--日期插件js文件及本地化文件--%>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
-<script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -309,9 +298,28 @@
     $("#add_btn").click(function(){
         //1.清空表单
         $("#add_form")[0].reset();
-        //2.弹出模态框并清空表单
+        //2.初始化用户信息
+        initUserInfo();
+        //3.弹出模态框并清空表单
         $("#add_modal").modal("toggle");
     });
+    //初始化用户的基本数据
+    function initUserInfo(){
+        $.ajax({
+            url:"${basePath}/currentEmp",
+            type:"GET",
+            dataType:"json",
+            success:function (result) {
+                if (1==result.code){
+                    loadUserInfo(result.extend.entities[0]);
+                }
+            }
+        });
+    }
+    function loadUserInfo(user) {
+        $("#empId_insert_input").val(user.empId);
+        $("#empName_insert_input").val(user.empName);
+    }
     //保存数据
     $("#save_btn").click(function(){
         //1.表单数据验证
@@ -438,7 +446,11 @@
                 alert("处理异常！异常代码："+e.status);
             }
         });
-    }
+    };
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/empResumeExcel?"+$("#search_form").serialize();
+    });
 </script>
 </body>
 </html>

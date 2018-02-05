@@ -11,22 +11,130 @@
 <head>
     <title>版本前考核成绩表</title>
     <%@include file="common/head.jsp"%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-
+    <%@include file="common/common.jsp"%>
 </head>
 <body>
     <div class="container-fluid">
-        <%--自定义表格工具栏--%>
-        <div id="toolbar" class="btn-group">
-            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
-            <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
-            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
-            <button id="import_btn" class="btn btn-info"><span class="fa fa-file-excel-o"></span>导入excel</button>
-            <button id="export_btn" class="btn btn-info"><span class="fa fa-file-excel-o"></span>导出excel</button>
-            <%--<button id="search_toggle_btn" class="btn btn-default"><span class="fa fa-search"></span>综合查询</button>--%>
+        <%--查询面板--%>
+        <div class="collapse" id="search_collapse">
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-inline" id="search_form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="empId_search_input" class="control-label">员工编号</label>
+                                        <input class="form-control" type="week" name="empId" id="empId_search_input">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="empName_search_input" class="control-label">员工姓名</label>
+                                        <input class="form-control" type="text" name="empName" id="empName_search_input">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="section_search_select" class="control-label">所属科室</label>
+                                        <select class="form-control" name="section" id="section_search_select">
+                                            <option value="">----选择作业组----</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5px;"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">笔试成绩</label>
+                                        <span>
+                                            <input class="form-control" type="text" name="paperGradeStart" style="width: 36%;" placeholder="成绩区间"/>
+                                            <input class="form-control" type="text" name="paperGradeEnd" style="width: 36%;" placeholder="成绩区间"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">道路成绩</label>
+                                        <span>
+                                            <input class="form-control" type="text" name="comGradeRoadStart" style="width: 36%;" placeholder="成绩区间"/>
+                                            <input class="form-control" type="text" name="comGradeRoadEnd" style="width: 36%;" placeholder="成绩区间"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">设施成绩</label>
+                                        <span>
+                                            <input class="form-control" type="text" name="comGradePoiStart" style="width: 36%;" placeholder="成绩区间"/>
+                                            <input class="form-control" type="text" name="comGradePoiEnd" style="width: 36%;" placeholder="成绩区间"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5px;"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">综合成绩</label>
+                                        <span>
+                                            <input class="form-control" type="text" name="totalGradeStart" style="width: 36%;" placeholder="成绩区间"/>
+                                            <input class="form-control" type="text" name="totalGradeEnd" style="width: 36%;" placeholder="成绩区间"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label">考试日期</label>
+                                        <span>
+                                        <div class="input-group input-group-sm" style="width: 77%;">
+                                            <input type="text" class="form-control datepicker" name="testDateStart"/>
+                                            <div class="input-group-addon"><span class="fa fa-calendar fa-sm"></span></div>
+                                            <input type="text" class="form-control datepicker" name="testDateEnd" aria-label="考试日期"/>
+                                            <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                                        </div>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group  form-group-sm">
+                                        <div >
+                                            <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                            <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+            <%--自定义表格工具栏--%>
+            <div id="toolbar" class="btn-group">
+                <shrio:hasPermission name="testGrade:add">
+                    <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+                </shrio:hasPermission>
+                <shrio:hasPermission name="testGrade:edit">
+                    <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+                </shrio:hasPermission>
+                <shrio:hasPermission name="testGrade:delete">
+                    <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+                </shrio:hasPermission>
+                <shrioDiy:hasAnyPermission name="testGrade:export,testGrade:export:section,testGrade:export:dept">
+                    <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+                </shrioDiy:hasAnyPermission>
+                <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
+            </div>
         <%--表格数据--%>
         <table id="table_list"></table>
     </div>
@@ -152,12 +260,6 @@
             </div>
         </div>
     </div>
-    <%--js文件--%>
-    <script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-    <script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-    <script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
-
 </body>
 </html>
 <script type="text/javascript">
@@ -171,13 +273,21 @@
     function initTableStyle(){
 
     }
+    //设置日期
+    $(".datepicker").datepicker({
+        autoclose:true,
+        format:"yyyy/mm/dd",
+        language:"zh-CN"
+    });
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber     //当前页数
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber     //当前页数
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -230,12 +340,13 @@
             uniqueId: "id",                     //每一行的唯一标识，一般为主键列
 //            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
+            searchOnEnterKey:true,               //按entry键搜索
             detailView: false,                   //是否显示父子表
             columns:[{                          //配置各列的属性
                 checkbox:true
             },{
                 field:"testDate",
-                title:"版本号",
+                title:"考核日期",
                 formatter:dateFormatter
             },{
                 field:"empId",
@@ -312,7 +423,7 @@
             success:function(result){
                 if(result.code==1){
                     //1.编辑数据回显
-                    edit_data_echo(result.extend.data);
+                    edit_data_echo(result.extend.entities[0]);
                 }else{
 
                 }
@@ -387,5 +498,21 @@
                 }
             },
         });
-    }
+    };
+    //控制collapse
+    $("#search_toggle_btn").click(function(){
+        $("#search_collapse").collapse("toggle");
+    });
+    //查询
+    $("#search_btn").click(function(){
+        $("#table_list").bootstrapTable("refresh")
+    });
+    //清空
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
+    });
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/testGradeExcel?"+$("#search_form").serialize();
+    });
 </script>

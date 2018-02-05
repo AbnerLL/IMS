@@ -35,10 +35,18 @@ public class EmpController extends BaseController{
     @RequestMapping(value="/emps",method = RequestMethod.GET)
     @ResponseBody
     public Msg search(EmpSearch empSearch, PageObject pageObject){
-        Subject currentSubject= SecurityUtils.getSubject();
-        SysUser currentUser=this.getCurrentUser();
-        if (!currentSubject.isPermitted("emp:view")){//如果没有emp:view权限则只能看自己的数据
-            empSearch.setEmpId(currentUser.getId());
+        //获取当前用户对应的员工信息
+        List<Emp> currentEmps=this.empService.getEmpById(getCurrentUser().getId());
+        //如果没有对应的用户则不显示数据
+        if (!hasPermission("emp:view")){//如果没有emp:view权限则只能看自己的数据
+            //只能查看自己所在科室、部门或自己的数据
+            if (hasPermission("emp:view:dept")){
+                empSearch.setEmpDept(currentEmps.get(0).getEmpDept());
+            }else if (hasPermission("emp:view:section")){
+                empSearch.setEmpSec(currentEmps.get(0).getEmpSec());
+            }else{
+                empSearch.setEmpId(currentEmps.get(0).getEmpId());
+            }
         }
         PageInfo pageInfo=this.empService.findEmpByPage(empSearch,pageObject);
         return Msg.success().add("pageInfo",pageInfo);
@@ -52,7 +60,7 @@ public class EmpController extends BaseController{
     @ResponseBody
     @RequestMapping(value="/emp/{empId}",method=RequestMethod.GET)
     public Msg findEmpById(@PathVariable("empId")  String empId){
-        List emps=empService.getEmpById(empId);
+        List<Emp> emps=empService.getEmpById(empId);
         if(emps!=null&&emps.size()!=0){
             return Msg.success().add("emps",emps);
         }else {
@@ -114,10 +122,32 @@ public class EmpController extends BaseController{
      */
     @RequestMapping(value = "/empExcel")
     public ModelAndView exportExcel(EmpSearch empSearch){
+        List<Emp> currentEmps=this.empService.getEmpById(super.getCurrentUser().getId());
+        if (!hasPermission("emp:export")){//如果没有emp:export权限则只能看自己的数据
+            if (hasPermission("emp:export:dept")){
+                empSearch.setEmpDept(currentEmps.get(0).getEmpDept());
+            }else if (hasPermission("emp:export:section")){
+                empSearch.setEmpSec(currentEmps.get(0).getEmpSec());
+            }else{
+                empSearch.setEmpId(currentEmps.get(0).getEmpId());
+            }
+        }
         ModelAndView modelAndView=new ModelAndView();
         List<Emp> empList=this.empService.findEmpBySearch(empSearch);
         modelAndView.addObject("empList",empList);
         modelAndView.setViewName("export/empExcel");
         return modelAndView;
+    }
+
+    /**
+     * 获取当前会话用户的员工信息
+     * @return
+     */
+    @RequestMapping(value = "/currentEmp",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg findCurrentEmp(){
+        Subject currentSubject= SecurityUtils.getSubject();
+        List<Emp> emps=this.empService.getEmpById((String) currentSubject.getPrincipal());
+        return Msg.success().add("entities",emps);
     }
 }

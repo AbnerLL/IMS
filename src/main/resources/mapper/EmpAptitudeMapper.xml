@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.navinfo.IMS.dao.EmpAptitudeMapper">
   <resultMap id="BaseResultMap" type="com.navinfo.IMS.entity.EmpAptitude">
-    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="VERSION" jdbcType="VARCHAR" property="version" />
     <result column="EMP_ID" jdbcType="VARCHAR" property="empId" />
     <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
+    <result column="SECTION" jdbcType="VARCHAR" property="section" />
     <result column="PROFESSION_TYPE" jdbcType="VARCHAR" property="professionType" />
     <result column="WORK_APTITUDE" jdbcType="VARCHAR" property="workAptitude" />
     <result column="AUDIT_APTITUDE" jdbcType="VARCHAR" property="auditAptitude" />
@@ -78,8 +79,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, VERSION, EMP_ID, EMP_NAME, PROFESSION_TYPE, WORK_APTITUDE, AUDIT_APTITUDE, REMARK, 
-    STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
+    ID, VERSION, EMP_ID, EMP_NAME, SECTION, PROFESSION_TYPE, WORK_APTITUDE, AUDIT_APTITUDE, 
+    REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, 
+    UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.EmpAptitudeExample" resultMap="BaseResultMap">
     select
@@ -95,6 +97,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.EMP_APTITUDE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.EMP_APTITUDE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.navinfo.IMS.entity.EmpAptitudeExample">
     delete from IMS.EMP_APTITUDE
     <if test="_parameter != null">
@@ -103,17 +115,17 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.IMS.entity.EmpAptitude">
     insert into IMS.EMP_APTITUDE (ID, VERSION, EMP_ID, 
-      EMP_NAME, PROFESSION_TYPE, WORK_APTITUDE, 
-      AUDIT_APTITUDE, REMARK, STATUS, 
-      DEL_FLAG, CREATOR_ID, CREATOR, 
-      CREATE_TIME, UPDATER_ID, UPDATER, 
-      UPDATE_TIME)
+      EMP_NAME, SECTION, PROFESSION_TYPE, 
+      WORK_APTITUDE, AUDIT_APTITUDE, REMARK, 
+      STATUS, DEL_FLAG, CREATOR_ID, 
+      CREATOR, CREATE_TIME, UPDATER_ID, 
+      UPDATER, UPDATE_TIME)
     values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
-      #{empName,jdbcType=VARCHAR}, #{professionType,jdbcType=VARCHAR}, #{workAptitude,jdbcType=VARCHAR}, 
-      #{auditAptitude,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{empName,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{professionType,jdbcType=VARCHAR}, 
+      #{workAptitude,jdbcType=VARCHAR}, #{auditAptitude,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.EmpAptitude">
     insert into IMS.EMP_APTITUDE
@@ -129,6 +141,9 @@
       </if>
       <if test="empName != null">
         EMP_NAME,
+      </if>
+      <if test="section != null">
+        SECTION,
       </if>
       <if test="professionType != null">
         PROFESSION_TYPE,
@@ -179,6 +194,9 @@
       </if>
       <if test="empName != null">
         #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
       </if>
       <if test="professionType != null">
         #{professionType,jdbcType=VARCHAR},
@@ -239,6 +257,9 @@
       <if test="record.empName != null">
         EMP_NAME = #{record.empName,jdbcType=VARCHAR},
       </if>
+      <if test="record.section != null">
+        SECTION = #{record.section,jdbcType=VARCHAR},
+      </if>
       <if test="record.professionType != null">
         PROFESSION_TYPE = #{record.professionType,jdbcType=VARCHAR},
       </if>
@@ -286,6 +307,7 @@
       VERSION = #{record.version,jdbcType=VARCHAR},
       EMP_ID = #{record.empId,jdbcType=VARCHAR},
       EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      SECTION = #{record.section,jdbcType=VARCHAR},
       PROFESSION_TYPE = #{record.professionType,jdbcType=VARCHAR},
       WORK_APTITUDE = #{record.workAptitude,jdbcType=VARCHAR},
       AUDIT_APTITUDE = #{record.auditAptitude,jdbcType=VARCHAR},
@@ -301,5 +323,79 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.IMS.entity.EmpAptitude">
+    update IMS.EMP_APTITUDE
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        EMP_ID = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        SECTION = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="professionType != null">
+        PROFESSION_TYPE = #{professionType,jdbcType=VARCHAR},
+      </if>
+      <if test="workAptitude != null">
+        WORK_APTITUDE = #{workAptitude,jdbcType=VARCHAR},
+      </if>
+      <if test="auditAptitude != null">
+        AUDIT_APTITUDE = #{auditAptitude,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.IMS.entity.EmpAptitude">
+    update IMS.EMP_APTITUDE
+    set VERSION = #{version,jdbcType=VARCHAR},
+      EMP_ID = #{empId,jdbcType=VARCHAR},
+      EMP_NAME = #{empName,jdbcType=VARCHAR},
+      SECTION = #{section,jdbcType=VARCHAR},
+      PROFESSION_TYPE = #{professionType,jdbcType=VARCHAR},
+      WORK_APTITUDE = #{workAptitude,jdbcType=VARCHAR},
+      AUDIT_APTITUDE = #{auditAptitude,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

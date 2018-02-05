@@ -19,11 +19,11 @@
     <result column="UPDATER_ID" jdbcType="VARCHAR" property="updaterId" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
     <result column="ATTR1" jdbcType="VARCHAR" property="attr1" />
     <result column="ATTR2" jdbcType="VARCHAR" property="attr2" />
     <result column="ATTR3" jdbcType="VARCHAR" property="attr3" />
-    <result column="ATTR4" jdbcType="VARCHAR" property="attr4" />
-    <result column="ATTR5" jdbcType="VARCHAR" property="attr5" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -86,7 +86,7 @@
   <sql id="Base_Column_List">
     ID, VERSION, EMP_ID, EMP_NAME, SECTION, PAPER_GRADE, COM_GRADE_ROAD, COM_GRADE_POI, 
     TOTAL_GRADE, TEST_DATE, CREATE_TIME, CREATOR_ID, CREATOR, UPDATE_TIME, UPDATER_ID, 
-    UPDATER, STATUS, ATTR1, ATTR2, ATTR3, ATTR4, ATTR5
+    UPDATER, STATUS, REMARK, DEL_FLAG, ATTR1, ATTR2, ATTR3
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.TestGradeExample" resultMap="BaseResultMap">
     select
@@ -124,17 +124,17 @@
       COM_GRADE_ROAD, COM_GRADE_POI, TOTAL_GRADE, 
       TEST_DATE, CREATE_TIME, CREATOR_ID, 
       CREATOR, UPDATE_TIME, UPDATER_ID, 
-      UPDATER, STATUS, ATTR1, 
-      ATTR2, ATTR3, ATTR4, 
-      ATTR5)
+      UPDATER, STATUS, REMARK, 
+      DEL_FLAG, ATTR1, ATTR2, 
+      ATTR3)
     values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
       #{empName,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{paperGrade,jdbcType=DECIMAL}, 
       #{comGradeRoad,jdbcType=DECIMAL}, #{comGradePoi,jdbcType=DECIMAL}, #{totalGrade,jdbcType=DECIMAL}, 
       #{testDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=VARCHAR}, 
       #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
-      #{updater,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{attr1,jdbcType=VARCHAR}, 
-      #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}, #{attr4,jdbcType=VARCHAR}, 
-      #{attr5,jdbcType=VARCHAR})
+      #{updater,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, 
+      #{attr3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.TestGrade">
     insert into IMS.TEST_GRADE
@@ -190,6 +190,12 @@
       <if test="status != null">
         STATUS,
       </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
       <if test="attr1 != null">
         ATTR1,
       </if>
@@ -198,12 +204,6 @@
       </if>
       <if test="attr3 != null">
         ATTR3,
-      </if>
-      <if test="attr4 != null">
-        ATTR4,
-      </if>
-      <if test="attr5 != null">
-        ATTR5,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -258,6 +258,12 @@
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
       <if test="attr1 != null">
         #{attr1,jdbcType=VARCHAR},
       </if>
@@ -266,12 +272,6 @@
       </if>
       <if test="attr3 != null">
         #{attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="attr4 != null">
-        #{attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="attr5 != null">
-        #{attr5,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -335,6 +335,12 @@
       <if test="record.status != null">
         STATUS = #{record.status,jdbcType=VARCHAR},
       </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
       <if test="record.attr1 != null">
         ATTR1 = #{record.attr1,jdbcType=VARCHAR},
       </if>
@@ -343,12 +349,6 @@
       </if>
       <if test="record.attr3 != null">
         ATTR3 = #{record.attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr4 != null">
-        ATTR4 = #{record.attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attr5 != null">
-        ATTR5 = #{record.attr5,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -374,11 +374,11 @@
       UPDATER_ID = #{record.updaterId,jdbcType=VARCHAR},
       UPDATER = #{record.updater,jdbcType=VARCHAR},
       STATUS = #{record.status,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
       ATTR1 = #{record.attr1,jdbcType=VARCHAR},
       ATTR2 = #{record.attr2,jdbcType=VARCHAR},
-      ATTR3 = #{record.attr3,jdbcType=VARCHAR},
-      ATTR4 = #{record.attr4,jdbcType=VARCHAR},
-      ATTR5 = #{record.attr5,jdbcType=VARCHAR}
+      ATTR3 = #{record.attr3,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -434,6 +434,12 @@
       <if test="status != null">
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
       <if test="attr1 != null">
         ATTR1 = #{attr1,jdbcType=VARCHAR},
       </if>
@@ -442,12 +448,6 @@
       </if>
       <if test="attr3 != null">
         ATTR3 = #{attr3,jdbcType=VARCHAR},
-      </if>
-      <if test="attr4 != null">
-        ATTR4 = #{attr4,jdbcType=VARCHAR},
-      </if>
-      <if test="attr5 != null">
-        ATTR5 = #{attr5,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
@@ -470,11 +470,11 @@
       UPDATER_ID = #{updaterId,jdbcType=VARCHAR},
       UPDATER = #{updater,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
       ATTR1 = #{attr1,jdbcType=VARCHAR},
       ATTR2 = #{attr2,jdbcType=VARCHAR},
-      ATTR3 = #{attr3,jdbcType=VARCHAR},
-      ATTR4 = #{attr4,jdbcType=VARCHAR},
-      ATTR5 = #{attr5,jdbcType=VARCHAR}
+      ATTR3 = #{attr3,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
