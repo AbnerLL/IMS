@@ -116,8 +116,8 @@ public class PreGradeController extends BaseController{
         if (!hasPermission("preGrade:export")){
             search.setEmpId(currentEmp.getEmpId());
         }
-        List<PreGrade> monitorInfoList=this.preGradeService.findTestGradeBySearch(search);
-        modelAndView.addObject("monitorInfoList",monitorInfoList);
+        List<PreGrade> preGradeList=this.preGradeService.findTestGradeBySearch(search);
+        modelAndView.addObject("preGradeList",preGradeList);
         modelAndView.setViewName("export/preGradeExcel");
         return modelAndView;
     }

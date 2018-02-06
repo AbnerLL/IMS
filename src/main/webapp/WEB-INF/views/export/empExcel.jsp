@@ -823,6 +823,10 @@
             font-weight:700;
             mso-font-charset:134;
             border:.5pt solid windowtext;}
+        .xl67
+        {mso-style-parent:style0;
+            mso-number-format:"\@";
+            mso-font-charset:134;}
         .xl68
         {mso-style-parent:style0;
             mso-number-format:"\@";
@@ -848,6 +852,10 @@
         .xl72
         {mso-style-parent:style0;
             mso-number-format:"\@";
+            mso-font-charset:134;}
+        .xl77
+        {mso-style-parent:style0;
+            mso-number-format:"yyyy/m/d\;\@";
             mso-font-charset:134;}
         -->  </style>
     <!--[if gte mso 9]>
@@ -916,17 +924,17 @@
     </tr>
     <c:forEach var="emp" items="${requestScope.empList}">
         <tr>
-            <td class="x171">${emp.empId}</td>
+            <td class="xl67">${emp.empId}</td>
             <td class="x171">${emp.empName}</td>
             <td class="x171">${emp.empSex}</td>
-            <td class="x171"><fmt:formatDate value="${emp.empHiredate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+            <td class="xl77"><fmt:formatDate value="${emp.empHiredate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
             <td>${emp.empEntryAge}</td>
             <td class="x171">${emp.rank}</td>
             <td class="x171">${emp.empDept}</td>
             <td class="x171">${emp.empSec}</td>
             <td class="x171">${emp.empPost}</td>
             <td class="x171">${emp.empEmail}</td>
-            <td class="x171">${emp.empTel}</td>
+            <td class="xl67">${emp.empTel}</td>
             <td class="x171">${emp.empAddress}</td>
         </tr>
     </c:forEach>

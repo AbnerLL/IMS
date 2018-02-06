@@ -95,11 +95,11 @@ public class TestGradeController extends BaseController{
     public ModelAndView exportExcel(TestGradeSearch search){
         ModelAndView modelAndView=new ModelAndView();
         Emp currentEmp=super.getCurrentEmp();
-        if (!hasPermission("monitorInfo:export")){
+        if (!hasPermission("testGrade:export")){
             search.setEmpId(currentEmp.getEmpId());
         }
-        List<TestGrade> monitorInfoList=this.testGradeService.findTestGradeBySearch(search);
-        modelAndView.addObject("monitorInfoList",monitorInfoList);
+        List<TestGrade> testGradeList=this.testGradeService.findTestGradeBySearch(search);
+        modelAndView.addObject("testGradeList",testGradeList);
         modelAndView.setViewName("export/testGradeExcel");
         return modelAndView;
     }

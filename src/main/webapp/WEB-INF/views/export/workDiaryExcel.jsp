@@ -823,6 +823,10 @@
             font-weight:700;
             mso-font-charset:134;
             border:.5pt solid windowtext;}
+        .xl67
+        {mso-style-parent:style0;
+            mso-number-format:"\@";
+            mso-font-charset:134;}
         .xl68
         {mso-style-parent:style0;
             mso-number-format:"\@";
@@ -911,11 +915,11 @@
     </tr>
     <c:forEach var="workDiary" items="${requestScope.workDiaryList}">
         <tr>
-            <td class="x172">${workDiary.empId}</td>
+            <td class="xl67">${workDiary.empId}</td>
             <td class="x172">${workDiary.empName}</td>
             <td class="x172">${workDiary.section}</td>
             <td class="x172">${workDiary.workType}</td>
-            <td class="x171"><fmt:formatDate value="${workDiary.workDate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+            <td class="xl71"><fmt:formatDate value="${workDiary.workDate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
             <td class="x172">${workDiary.workHours}</td>
             <td class="x172">${workDiary.workContent}</td>
         </tr>
