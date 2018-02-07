@@ -10,7 +10,7 @@ public interface ProAbilityMapper {
 
     int deleteByExample(ProAbilityExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(String uuid);
 
     int insert(ProAbility record);
 
@@ -18,7 +18,7 @@ public interface ProAbilityMapper {
 
     List<ProAbility> selectByExample(ProAbilityExample example);
 
-    ProAbility selectByPrimaryKey(String id);
+    ProAbility selectByPrimaryKey(String uuid);
 
     int updateByExampleSelective(@Param("record") ProAbility record, @Param("example") ProAbilityExample example);
 

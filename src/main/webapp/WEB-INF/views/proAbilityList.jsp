@@ -11,32 +11,311 @@
 <head>
     <title>业务能力统计表</title>
     <%@include file="common/head.jsp"%>
-    <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css" rel="stylesheet"/>
-    <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
-
+    <%@include file="common/common.jsp"%>
 </head>
 <body>
     <div class="container-fluid">
+        <%--查询面板--%>
+        <div class="collapse" id="search_collapse">
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-inline" id="search_form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="empId_search_input" class="control-label">员工编号:</label>
+                                        <input class="form-control" type="text" name="empId" id="empId_search_input"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="empName_search_input" class="control-label">员工姓名:</label>
+                                        <input class="form-control" type="text" name="empName" id="empName_search_input"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="version_search_input" class="control-label">发生版本:</label>
+                                        <input class="form-control" type="text" name="version" id="version_search_input"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5px;"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="section_search_select" class="control-label">所属科室:</label>
+                                        <select class="form-control" name="section" id="section_search_select">
+                                            <option value="">---选择所属科室---</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <div class="form-group form-group-sm">
+                                            <label for="proStage_search_select" class="control-label">业务阶段:</label>
+                                            <select class="form-control" name="proStage" id="proStage_search_select">
+                                                <option value="">---选择业务阶段---</option>
+                                                <option value="前期">前期</option>
+                                                <option value="后期">后期</option>
+                                                <option value="出品">出品</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="proType_search_select" class="control-label">业务类型:</label>
+                                        <select class="form-control" name="proType" id="proType_search_select">
+                                            <option value="">---选择业务类型---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5px;"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="logAbility_search_select" class="control-label">录入能力:</label>
+                                        <select class="form-control" name="logAbility" id="logAbility_search_select">
+                                            <option value="">---选择录入能力---</option>
+                                            <option value="1">被指导下完成</option>
+                                            <option value="2">独立完成</option>
+                                            <option value="3">熟练掌握</option>
+                                            <option value="4">精通</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-sm">
+                                        <label for="testAbility_search_select" class="control-label">检验能力:</label>
+                                        <select class="form-control" name="testAbility" id="testAbility_search_select">
+                                            <option value="">---选择业务类型---</option>
+                                            <option value="有">有</option>
+                                            <option value="无">无</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                    <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <%--自定义表格工具栏--%>
         <div id="toolbar" class="btn-group">
-            <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
-            <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
-            <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
-            <button id="import_btn" class="btn btn-info"><span class="fa fa-file-excel-o"></span>导入excel</button>
-            <button id="export_btn" class="btn btn-info"><span class="fa fa-file-excel-o"></span>导出excel</button>
-            <button id="search_toggle_btn" class="btn btn-primary"><span class="fa fa-search"></span>综合查询</button>
+            <shrio:hasPermission name="proAbility:add">
+                <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
+            </shrio:hasPermission>
+            <shrio:hasPermission name="proAbility:edit">
+                <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
+            </shrio:hasPermission>
+            <shrio:hasPermission name="proAbility:delete">
+                <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+            </shrio:hasPermission>
+            <shrioDiy:hasAnyPermission name="proAbility:export,proAbility:export:section,proAbility:export:dept">
+                <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
+            </shrioDiy:hasAnyPermission>
+            <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
         </div>
         <%--表格数据--%>
         <table id="table_list"></table>
     </div>
-    <%--js文件--%>
-    <script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
-    <script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script src="${basePath}/js/bootstrapTable/1.2.4/bootstrap-table.min.js"></script>
-    <script src="${basePath}/js/bootstrapTable/1.2.4/locale/bootstrap-table-zh-CN.min.js"></script>
+    <%--modal模态框(添加)--%>
+    <div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myAddModalLabel"><span class="fa fa-plus fa-lg"></span>&nbsp;新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <form class="form-horizontal" id="add_form">
+                                <div class="form-group form-group-sm">
+                                    <label for="empId_insert_input" class="control-label col-sm-2" >员工编号:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="empId" id="empId_insert_input"/>
+                                    </div>
+                                    <label for="empName_insert_input" class="control-label col-sm-2">员工姓名:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" name="empName" id="empName_insert_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="version_insert_input" class="control-label col-sm-2" >发生版本:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="version" id="version_insert_input"/>
+                                    </div>
+                                    <label for="section_insert_select" class="control-label col-sm-2" >所属科室:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="section" id="section_insert_select">
+                                            <option value="">---选择所属科室---</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="proStage_insert_select" class="control-label col-sm-2">业务阶段:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="proStage" id="proStage_insert_select">
+                                            <option value="">---选择业务阶段---</option>
+                                            <option value="前期">前期</option>
+                                            <option value="后期">后期</option>
+                                            <option value="出品">出品</option>
+                                        </select>
+                                    </div>
+                                    <label for="proType_insert_select" class="control-label col-sm-2">业务类型:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="proType" id="proType_insert_select">
+                                            <option value="">---选择业务类型---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="logAbility_insert_select" class="control-label col-sm-2">录入能力:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="logAbility" id="logAbility_insert_select">
+                                            <option value="">---选择录入能力---</option>
+                                            <option value="1">被指导下完成</option>
+                                            <option value="2">独立完成</option>
+                                            <option value="3">熟练掌握</option>
+                                            <option value="4">精通</option>
+                                        </select>
+                                    </div>
+                                    <label for="testAbility_insert_select" class="control-label col-sm-2">检验能力:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="testAbility" id="testAbility_insert_select">
+                                            <option value="">---选择业务类型---</option>
+                                            <option value="有">有</option>
+                                            <option value="无">无</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button id="save_btn" type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--modal模态框(修改)--%>
+    <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o"></span>&nbsp;修改</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <form class="form-horizontal" id="edit_form">
+                                <div class="form-group form-group-sm">
+                                    <label for="empId_update_input" class="control-label col-sm-2" >员工编号:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="empId" id="empId_update_input"/>
+                                    </div>
+                                    <label for="empName_update_input" class="control-label col-sm-2">员工姓名:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" name="empName" id="empName_update_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="version_update_input" class="control-label col-sm-2" >发生版本:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="version" id="version_update_input"/>
+                                    </div>
+                                    <label for="section_update_select" class="control-label col-sm-2" >所属科室:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="section" id="section_update_select">
+                                            <option value="">---选择所属科室---</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="proStage_update_select" class="control-label col-sm-2">业务阶段:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="proStage" id="proStage_update_select">
+                                            <option value="">---选择业务阶段---</option>
+                                            <option value="前期">前期</option>
+                                            <option value="后期">后期</option>
+                                            <option value="出品">出品</option>
+                                        </select>
+                                    </div>
+                                    <label for="proType_update_select" class="control-label col-sm-2">业务类型:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="proType" id="proType_update_select">
+                                            <option value="">---选择业务类型---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="logAbility_update_select" class="control-label col-sm-2">录入能力:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="logAbility" id="logAbility_update_select">
+                                            <option value="">---选择录入能力---</option>
+                                            <option value="1">被指导下完成</option>
+                                            <option value="2">独立完成</option>
+                                            <option value="3">熟练掌握</option>
+                                            <option value="4">精通</option>
+                                        </select>
+                                    </div>
+                                    <label for="testAbility_update_select" class="control-label col-sm-2">检验能力:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="testAbility" id="testAbility_update_select">
+                                            <option value="">---选择业务类型---</option>
+                                            <option value="有">有</option>
+                                            <option value="无">无</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button id="update_btn" type="button" class="btn btn-primary">更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -51,10 +330,12 @@
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber     //当前页数
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber     //当前页数
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -97,7 +378,7 @@
             minimumCountColumns: 2,             //最少允许的列数
 //            clickToSelect: true,                //是否启用点击选中行
 //            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "uuid",                     //每一行的唯一标识，一般为主键列
 //            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -113,53 +394,20 @@
                 field:"empName",
                 title:"员工姓名"
             },{
-                field:"rMarkLog",
-                title:"道路前期录入能力"
+                field:"section",
+                title:"项目组"
             },{
-                field:"rMarkTest",
-                title:"道路前期检验能力"
+                field:"proStage",
+                title:"业务阶段"
             },{
-                field:"chPoiLog",
-                title:"设施（中文）录入能力"
+                field:"proType",
+                title:"业务类型"
             },{
-                field:"chPoiTest",
-                title:"设施（中文）检验能力"
+                field:"logAbility",
+                title:"录入能力"
             },{
-                field:"enPoiLog",
-                title:"设施（英文）录入能力"
-            },{
-                field:"enPoiTest",
-                title:"设施（英文）检验能力"
-            },{
-                field:"roadItemLog",
-                title:"道路后期录入能力"
-            },{
-                field:"roadItemTest",
-                title:"道路后期检验能力"
-            },{
-                field:"poiItemLog",
-                title:"设施后期录入能力"
-            },{
-                field:"poiItemTest",
-                title:"设施后期检验能力"
-            },{
-                field:"depthInfoLog",
-                title:"深度信息录入能力"
-            },{
-                field:"depthInfoTest",
-                title:"深度信息检验能力"
-            },{
-                field:"pointLog",
-                title:"点位录入能力"
-            },{
-                field:"pointTest",
-                title:"点位检验能力"
-            },{
-                field:"agencyLog",
-                title:"代理店录入能力"
-            },{
-                field:"agencyTest",
-                title:"代理店检验能力"
+                field:"testAbility",
+                title:"检验能力"
             }]
         });
     }
@@ -172,7 +420,7 @@
         //1.表单验证
         //2.发送请求
         $.ajax({
-            url:"${basePath}/workData",
+            url:"${basePath}/proAbility",
             type:"POST",
             data:$("#add_form").serialize(),
             dataType:"json",
@@ -197,7 +445,7 @@
         var selections=$("#table_list").bootstrapTable("getSelections")
         if(selections.length==1){
             //2.查询选中的数据并回显至编辑模态框
-            getSelectedInfo(selections[0].dataId);
+            getSelectedInfo(selections[0].uuid);
             //3.显示模态框
             $("#edit_modal").modal("toggle");
         }else{
@@ -206,15 +454,15 @@
         }
     });
     //根据id获取当前对象的信息
-    function getSelectedInfo(id){
+    function getSelectedInfo(uuid){
         $.ajax({
-            url:"${basePath}/workData/"+id,
+            url:"${basePath}/proAbility/"+uuid,
             type:"GET",
             dataType:"json",
             success:function(result){
                 if(result.code==1){
                     //1.编辑数据回显
-                    edit_data_echo(result.extend.workDatas);
+                    edit_data_echo(result.extend.entities[0]);
                 }else{
 
                 }
@@ -223,29 +471,23 @@
     }
     //将查询出来的数据进行回显
     function edit_data_echo(obj){
-        console.log(obj);
         $("#version_update_input").val(obj.version);
         $("#empId_update_input").val(obj.empId);
         $("#empName_update_input").val(obj.empName);
-        $("#workType_update_select").val([obj.workType]);
-        $("#quantity_update_input").val(obj.quantity);
-        $("#quality_update_input").val(obj.quality);
-        $("#qError_update_input").val(obj.qError);
-        $("#monitor_update_input").val(obj.monitor);
-        $("#mError_update_input").val(obj.mError);
-        $("#majorError_update_input").val(obj.majorError);
-        $("#efficiency_update_input").val(obj.efficiency);
-        $("#qEfficiency_update_input").val(obj.qEfficiency);
-
+        $("#section_update_select").val(obj.section);
+        $("#proStage_update_select").val(obj.proStage);
+        $("#proType_update_select").val(obj.proType);
+        $("#logAbility_update_select").val(obj.logAbility);
+        $("#testAbility_update_select").val(obj.testAbility);
         //在更新按钮上绑定主键
-        $("#update_btn").attr("edit-id",obj.dataId);
+        $("#update_btn").attr("edit-id",obj.uuid);
     }
     //更新按钮
     $("#update_btn").click(function(){
         //1.表单校验
         //2.发送请求
         $.ajax({
-            url:"${basePath}/workData/"+$(this).attr("edit-id"),
+            url:"${basePath}/proAbility/"+$(this).attr("edit-id"),
             type:"PUT",
             data:$("#edit_form").serialize(),
             dataType:"json",
@@ -270,7 +512,7 @@
                 //删除数据
                 var ids="";
                 $(selects).each(function(){
-                    ids+=this.dataId+",";
+                    ids+=this.uuid+",";
                 })
                 //去除多余的分隔符
                 ids=ids.substring(0,ids.length-1);
@@ -283,7 +525,7 @@
     //列表中的数据
     function del_data(id){
         $.ajax({
-            url:"${basePath}/workData/"+id,
+            url:"${basePath}/proAbility/"+id,
             type:"DELETE",
             dataType:"json",
             success:function (result) {
@@ -296,5 +538,44 @@
                 }
             },
         });
+    };
+    var selectJson={
+        "前期":["道路图标","中文名称","中文地址","英文名称","英文地址","深度信息","代理店"],
+        "后期":["道路后期","设施后期"],
+        "出品":["报表分析"]
     }
+    /**
+     * 关联下拉选
+     */
+    function linkSelect(parentSelect,subSelect,linkJson){
+        //1.清空子下拉选中value不为空的option
+        var defaultOption=subSelect.children("[value='']");
+        //清空子下拉选
+        subSelect.empty();
+        subSelect.append(defaultOption);
+        var optionArray=linkJson[parentSelect.value];
+        for(var index in optionArray){
+            subSelect.append("<option value='"+optionArray[index]+"'>"+optionArray[index]+"</option>");
+        }
+    }
+    $("#proStage_search_select").change(function () {
+        linkSelect(this,$("#proType_search_select"),selectJson);
+    });
+    //展开或收缩查询面板
+    $("#search_toggle_btn").click(function(){
+        $("#search_collapse").collapse('toggle');
+    });
+    //查询
+    $("#search_btn").click(function(){
+        $("#table_list").bootstrapTable("refresh")
+    });
+    //清空
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
+    });
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/proAbilityExcel?"+$("#search_form").serialize();
+    });
 </script>
+</html>

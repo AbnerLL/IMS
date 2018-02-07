@@ -3,7 +3,7 @@ package com.navinfo.IMS.entity;
 import java.util.Date;
 
 public class ProAbility {
-    private String id;
+    private String uuid;
 
     private String version;
 
@@ -11,68 +11,40 @@ public class ProAbility {
 
     private String empName;
 
-    private String rMarkLog;
+    private String section;
 
-    private String rMarkTest;
+    private String proStage;
 
-    private String chPoiLog;
+    private String proType;
 
-    private String chPoiTest;
+    private String logAbility;
 
-    private String enPoiLog;
+    private String testAbility;
 
-    private String enPoiTest;
+    private String remark;
 
-    private String roadItemLog;
+    private String status;
 
-    private String roadItemTest;
-
-    private String poiItemLog;
-
-    private String poiItemTest;
-
-    private String depthInfoLog;
-
-    private String depthInfoTest;
-
-    private String pointLog;
-
-    private String pointTest;
-
-    private String agencyLog;
-
-    private String agencyTest;
-
-    private Date createTime;
+    private String delFlag;
 
     private String creatorId;
 
     private String creator;
 
-    private Date updateTime;
+    private Date createTime;
 
     private String updaterId;
 
     private String updater;
 
-    private String status;
+    private Date updateTime;
 
-    private String attr1;
-
-    private String attr2;
-
-    private String attr3;
-
-    private String attr4;
-
-    private String attr5;
-
-    public String getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setUuid(String uuid) {
+        this.uuid = uuid == null ? null : uuid.trim();
     }
 
     public String getVersion() {
@@ -99,140 +71,68 @@ public class ProAbility {
         this.empName = empName == null ? null : empName.trim();
     }
 
-    public String getrMarkLog() {
-        return rMarkLog;
+    public String getSection() {
+        return section;
     }
 
-    public void setrMarkLog(String rMarkLog) {
-        this.rMarkLog = rMarkLog == null ? null : rMarkLog.trim();
+    public void setSection(String section) {
+        this.section = section == null ? null : section.trim();
     }
 
-    public String getrMarkTest() {
-        return rMarkTest;
+    public String getProStage() {
+        return proStage;
     }
 
-    public void setrMarkTest(String rMarkTest) {
-        this.rMarkTest = rMarkTest == null ? null : rMarkTest.trim();
+    public void setProStage(String proStage) {
+        this.proStage = proStage == null ? null : proStage.trim();
     }
 
-    public String getChPoiLog() {
-        return chPoiLog;
+    public String getProType() {
+        return proType;
     }
 
-    public void setChPoiLog(String chPoiLog) {
-        this.chPoiLog = chPoiLog == null ? null : chPoiLog.trim();
+    public void setProType(String proType) {
+        this.proType = proType == null ? null : proType.trim();
     }
 
-    public String getChPoiTest() {
-        return chPoiTest;
+    public String getLogAbility() {
+        return logAbility;
     }
 
-    public void setChPoiTest(String chPoiTest) {
-        this.chPoiTest = chPoiTest == null ? null : chPoiTest.trim();
+    public void setLogAbility(String logAbility) {
+        this.logAbility = logAbility == null ? null : logAbility.trim();
     }
 
-    public String getEnPoiLog() {
-        return enPoiLog;
+    public String getTestAbility() {
+        return testAbility;
     }
 
-    public void setEnPoiLog(String enPoiLog) {
-        this.enPoiLog = enPoiLog == null ? null : enPoiLog.trim();
+    public void setTestAbility(String testAbility) {
+        this.testAbility = testAbility == null ? null : testAbility.trim();
     }
 
-    public String getEnPoiTest() {
-        return enPoiTest;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setEnPoiTest(String enPoiTest) {
-        this.enPoiTest = enPoiTest == null ? null : enPoiTest.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getRoadItemLog() {
-        return roadItemLog;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRoadItemLog(String roadItemLog) {
-        this.roadItemLog = roadItemLog == null ? null : roadItemLog.trim();
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
-    public String getRoadItemTest() {
-        return roadItemTest;
+    public String getDelFlag() {
+        return delFlag;
     }
 
-    public void setRoadItemTest(String roadItemTest) {
-        this.roadItemTest = roadItemTest == null ? null : roadItemTest.trim();
-    }
-
-    public String getPoiItemLog() {
-        return poiItemLog;
-    }
-
-    public void setPoiItemLog(String poiItemLog) {
-        this.poiItemLog = poiItemLog == null ? null : poiItemLog.trim();
-    }
-
-    public String getPoiItemTest() {
-        return poiItemTest;
-    }
-
-    public void setPoiItemTest(String poiItemTest) {
-        this.poiItemTest = poiItemTest == null ? null : poiItemTest.trim();
-    }
-
-    public String getDepthInfoLog() {
-        return depthInfoLog;
-    }
-
-    public void setDepthInfoLog(String depthInfoLog) {
-        this.depthInfoLog = depthInfoLog == null ? null : depthInfoLog.trim();
-    }
-
-    public String getDepthInfoTest() {
-        return depthInfoTest;
-    }
-
-    public void setDepthInfoTest(String depthInfoTest) {
-        this.depthInfoTest = depthInfoTest == null ? null : depthInfoTest.trim();
-    }
-
-    public String getPointLog() {
-        return pointLog;
-    }
-
-    public void setPointLog(String pointLog) {
-        this.pointLog = pointLog == null ? null : pointLog.trim();
-    }
-
-    public String getPointTest() {
-        return pointTest;
-    }
-
-    public void setPointTest(String pointTest) {
-        this.pointTest = pointTest == null ? null : pointTest.trim();
-    }
-
-    public String getAgencyLog() {
-        return agencyLog;
-    }
-
-    public void setAgencyLog(String agencyLog) {
-        this.agencyLog = agencyLog == null ? null : agencyLog.trim();
-    }
-
-    public String getAgencyTest() {
-        return agencyTest;
-    }
-
-    public void setAgencyTest(String agencyTest) {
-        this.agencyTest = agencyTest == null ? null : agencyTest.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag == null ? null : delFlag.trim();
     }
 
     public String getCreatorId() {
@@ -251,12 +151,12 @@ public class ProAbility {
         this.creator = creator == null ? null : creator.trim();
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getUpdaterId() {
@@ -275,51 +175,11 @@ public class ProAbility {
         this.updater = updater == null ? null : updater.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
-
-    public String getAttr1() {
-        return attr1;
-    }
-
-    public void setAttr1(String attr1) {
-        this.attr1 = attr1 == null ? null : attr1.trim();
-    }
-
-    public String getAttr2() {
-        return attr2;
-    }
-
-    public void setAttr2(String attr2) {
-        this.attr2 = attr2 == null ? null : attr2.trim();
-    }
-
-    public String getAttr3() {
-        return attr3;
-    }
-
-    public void setAttr3(String attr3) {
-        this.attr3 = attr3 == null ? null : attr3.trim();
-    }
-
-    public String getAttr4() {
-        return attr4;
-    }
-
-    public void setAttr4(String attr4) {
-        this.attr4 = attr4 == null ? null : attr4.trim();
-    }
-
-    public String getAttr5() {
-        return attr5;
-    }
-
-    public void setAttr5(String attr5) {
-        this.attr5 = attr5 == null ? null : attr5.trim();
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

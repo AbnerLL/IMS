@@ -57,7 +57,7 @@
 	<!--<table tableName="menu" domainObjectName="Menu"></table>-->
 	<!--<table schema="ims" tableName="pre_grade" domainObjectName="PreGrade"></table>-->
 	<!--<table schema="ims" tableName="test_grade" domainObjectName="TestGrade"></table>-->
-	<!--<table schema="ims" tableName="pro_ability" domainObjectName="ProAbility"></table>-->
+	<table schema="ims" tableName="pro_ability" domainObjectName="ProAbility"></table>
 	<!--<table schema="ims" tableName="sys_user" domainObjectName="SysUser"></table>-->
 	<!--<table schema="ims" tableName="work_diary" domainObjectName="WorkDiary"></table>-->
 	<!--<table tableName="work_stat" domainObjectName="WorkStat"></table>-->
@@ -77,7 +77,7 @@
       <!--<table schema="ims" tableName="fixed_asset" domainObjectName="FixedAsset"></table>-->
     <!--<table schema="ims" tableName="module_permission_rel" domainObjectName="ModulePermissionRel"></table>-->
     <!--<table schema="ims" tableName="role_module_permission_rel" domainObjectName="RoleModulePermissionRel"></table>-->
-      <table schema="ims" tableName="emp_aptitude" domainObjectName="EmpAptitude"></table>
+      <!--<table schema="ims" tableName="emp_aptitude" domainObjectName="EmpAptitude"></table>-->
 
   </context>
 </generatorConfiguration>
