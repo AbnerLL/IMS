@@ -167,9 +167,9 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
                                 </div>
-                                <label for="empName_insert_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="empName_insert_input" class="col-sm-2 control-label">员工姓名</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工名称">
+                                    <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工姓名">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -289,9 +289,9 @@
                                 <div class="col-sm-4">
                                     <p type="text" class="form-control-static" name="empId" id="empId_update_p"></p>
                                 </div>
-                                <label for="empName_update_input" class="col-sm-2 control-label">员工名称</label>
+                                <label for="empName_update_input" class="col-sm-2 control-label">员工姓名</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工名称">
+                                    <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工姓名">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
