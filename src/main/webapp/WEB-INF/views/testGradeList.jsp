@@ -147,50 +147,71 @@
                     <h4 class="modal-title" id="myModalLabel1">新增成绩</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" id="add_form">
-                        <div class="form-group">
-                            <label for="version_insert_input" class="control-label col-sm-2">版本号</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="version" id="version_insert_input"/>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <form class="form-horizontal" id="add_form">
+                                <div class="form-group form-group-sm">
+                                    <label for="version_insert_input" class="control-label col-sm-2">版本号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="version" id="version_insert_input"/>
+                                    </div>
+                                    <label for="testDate_insert_input" class="control-label col-sm-2">考核日期</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group ">
+                                            <input type="text" class="form-control datepicker" name="testDate" id="testDate_insert_input"/>
+                                            <div class="input-group-addon"><span class="fa fa-calendar fa-sm"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="empId_insert_input" class="control-label col-sm-2">员工编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="empId" id="empId_insert_input"/>
+                                    </div>
+                                    <label for="empName_insert_input" class="control-label col-sm-2">员工姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="empName" id="empName_insert_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="section_insert_input" class="control-label col-sm-2">项目组</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="section" id="section_insert_input">
+                                            <option value="">----选择作业组----</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                    <label for="paperGrade_insert_input" class="control-label col-sm-2">笔试成绩</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="paperGrade" id="paperGrade_insert_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="comGradeRoad_insert_input" class="control-label col-sm-2">道路成绩</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="comGradeRoad" id="comGradeRoad_insert_input"/>
+                                    </div>
+                                    <label for="comGradePoi_insert_input" class="control-label col-sm-2">设施成绩</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="comGradePoi" id="comGradePoi_insert_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="totalGrade_insert_input" class="control-label col-sm-2">综合成绩</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="totalGrade" id="totalGrade_insert_input"/>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label for="empId_insert_input" class="control-label col-sm-2">员工编号</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="empId" id="empId_insert_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="empName_insert_input" class="control-label col-sm-2">员工姓名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="empName" id="empName_insert_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="paperGrade_insert_input" class="control-label col-sm-2">笔试成绩</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="paperGrade" id="paperGrade_insert_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="comGradeRoad_insert_input" class="control-label col-sm-2">道路成绩（机试）</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="comGradeRoad" id="comGradeRoad_insert_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="comGradePoi_insert_input" class="control-label col-sm-2">道路成绩（机试）</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="comGradePoi" id="comGradePoi_insert_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="totalGrade_insert_input" class="control-label col-sm-2">综合成绩</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="totalGrade" id="totalGrade_insert_input"/>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -200,62 +221,84 @@
         </div>
     </div>
     <%--修改模态框--%>
-    <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <%--新增模态框--%>
+    <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel2">修改成绩</h4>
+                    <h4 class="modal-title" id="myEditModalLabel1"><span class="fa fa-pencil-square-o"></span>&nbsp;修改</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" id="edit_form">
-                        <div class="form-group">
-                            <label for="version_update_input" class="control-label col-sm-2">版本号</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="version" id="version_update_input"/>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <form class="form-horizontal" id="edit_form">
+                                <div class="form-group form-group-sm">
+                                    <label for="version_update_input" class="control-label col-sm-2">版本号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="version" id="version_update_input"/>
+                                    </div>
+                                    <label for="testDate_update_input" class="control-label col-sm-2">考核日期</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group ">
+                                            <input type="text" class="form-control datepicker" name="testDate" id="testDate_update_input"/>
+                                            <div class="input-group-addon"><span class="fa fa-calendar fa-sm"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="empId_update_input" class="control-label col-sm-2">员工编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="empId" id="empId_update_input"/>
+                                    </div>
+                                    <label for="empName_update_input" class="control-label col-sm-2">员工姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="empName" id="empName_update_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="section_update_input" class="control-label col-sm-2">项目组</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="section" id="section_update_input">
+                                            <option value="">----选择作业组----</option>
+                                            <option value="品质管理室">品质管理室</option>
+                                            <option value="项目一组">项目一组</option>
+                                            <option value="项目二组">项目二组</option>
+                                            <option value="项目三组">项目三组</option>
+                                            <option value="项目四组">项目四组</option>
+                                            <option value="项目五组">项目五组</option>
+                                            <option value="项目六组">项目六组</option>
+                                            <option value="武汉项目组">武汉项目组</option>
+                                        </select>
+                                    </div>
+                                    <label for="paperGrade_update_input" class="control-label col-sm-2">笔试成绩</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="paperGrade" id="paperGrade_update_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="comGradeRoad_update_input" class="control-label col-sm-2">道路成绩</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="comGradeRoad" id="comGradeRoad_update_input"/>
+                                    </div>
+                                    <label for="comGradePoi_update_input" class="control-label col-sm-2">设施成绩</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="comGradePoi" id="comGradePoi_update_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="totalGrade_update_input" class="control-label col-sm-2">综合成绩</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="totalGrade" id="totalGrade_update_input"/>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label for="empId_update_input" class="control-label col-sm-2">员工编号</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="empId" id="empId_update_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="empName_update_input" class="control-label col-sm-2">员工姓名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="empName" id="empName_update_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="paperGrade_update_input" class="control-label col-sm-2">笔试成绩</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="paperGrade" id="paperGrade_update_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="comGradeRoad_update_input" class="control-label col-sm-2">道路成绩（机试）</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="comGradeRoad" id="comGradeRoad_update_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="comGradePoi_update_input" class="control-label col-sm-2">道路成绩（机试）</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="comGradePoi" id="comGradePoi_update_input"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="totalGrade_update_input" class="control-label col-sm-2">综合成绩</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="totalGrade" id="totalGrade_update_input"/>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" id="update_btn">保存</button>
+                    <button type="button" class="btn btn-primary" id="update_btn">更新</button>
                 </div>
             </div>
         </div>
@@ -355,6 +398,9 @@
                 field:"empName",
                 title:"员工姓名"
             },{
+                field:"section",
+                title:"项目组"
+            },{
                 field:"paperGrade",
                 title:"笔试成绩"
             },{
@@ -439,6 +485,7 @@
         $("#comGradeRoad_update_input").val(obj.comGradeRoad);
         $("#comGradePoi_update_input").val(obj.comGradePoi);
         $("#totalGrade_update_input").val(obj.totalGrade);
+        $("#testDate_update_input").val(dateFormatter(obj.testDate));
         //在更新按钮上绑定主键
         $("#update_btn").attr("edit-id",obj.id);
     }
