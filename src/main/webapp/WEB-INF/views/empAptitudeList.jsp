@@ -67,6 +67,9 @@
                                     <label for="workAptitude_search_select" class="control-label">作业资质:</label>
                                     <select class="form-control" type="text" name="workAptitude" id="workAptitude_search_select">
                                         <option value="">---选择作业资质---</option>
+                                        <option value="免检">免检</option>
+                                        <option value="抽检">抽检</option>
+                                        <option value="全检">全检</option>
                                     </select>
                                 </div>
                             </div>
@@ -161,7 +164,10 @@
                                 <label for="workAptitude_insert_select" class="control-label col-sm-2">作业资质</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" type="text" name="workAptitude" id="workAptitude_insert_select">
-
+                                        <option value="">---选择作业资质---</option>
+                                        <option value="免检">免检</option>
+                                        <option value="抽检">抽检</option>
+                                        <option value="全检">全检</option>
                                     </select>
                                 </div>
                             </div>
@@ -233,7 +239,10 @@
                                 <label for="workAptitude_update_select" class="control-label col-sm-2">作业资质</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" type="text" name="workAptitude" id="workAptitude_update_select">
-
+                                        <option value="">---选择作业资质---</option>
+                                        <option value="免检">免检</option>
+                                        <option value="抽检">抽检</option>
+                                        <option value="全检">全检</option>
                                     </select>
                                 </div>
                             </div>
