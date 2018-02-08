@@ -413,8 +413,31 @@
     }
     //显示模态框
     $("#add_btn").click(function(){
+        //1.清空表单
+        $("#add_form")[0].reset();
+        //2.加载员工信息
+        initUserInfo();
+        //3.
         $("#add_modal").modal("toggle");
     });
+    //初始化用户的基本数据
+    function initUserInfo(){
+        $.ajax({
+            url:"${basePath}/currentEmp",
+            type:"GET",
+            dataType:"json",
+            success:function (result) {
+                if (1==result.code){
+                    loadUserInfo(result.extend.entities[0]);
+                }
+            }
+        });
+    }
+    function loadUserInfo(user) {
+        $("#empId_insert_input").val(user.empId);
+        $("#empName_insert_input").val(user.empName);
+        $("#section_insert_select").val(user.section);
+    }
     //保存按钮
     $("#save_btn").click(function(){
         //1.表单验证
@@ -476,6 +499,7 @@
         $("#empName_update_input").val(obj.empName);
         $("#section_update_select").val(obj.section);
         $("#proStage_update_select").val(obj.proStage);
+        $("#proStage_update_select").change();
         $("#proType_update_select").val(obj.proType);
         $("#logAbility_update_select").val(obj.logAbility);
         $("#testAbility_update_select").val(obj.testAbility);
@@ -560,6 +584,12 @@
     }
     $("#proStage_search_select").change(function () {
         linkSelect(this,$("#proType_search_select"),selectJson);
+    });
+    $("#proStage_insert_select").change(function () {
+        linkSelect(this,$("#proType_insert_select"),selectJson);
+    });
+    $("#proStage_update_select").change(function () {
+        linkSelect(this,$("#proType_update_select"),selectJson);
     });
     //展开或收缩查询面板
     $("#search_toggle_btn").click(function(){
