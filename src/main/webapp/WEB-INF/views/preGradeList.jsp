@@ -139,6 +139,22 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="section_insert_select" class="control-label col-sm-2">所属科室</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="section" id="section_insert_select">
+                                    <option value="">----选择所属科室----</option>
+                                    <option value="品质管理室">品质管理室</option>
+                                    <option value="项目一组">项目一组</option>
+                                    <option value="项目二组">项目二组</option>
+                                    <option value="项目三组">项目三组</option>
+                                    <option value="项目四组">项目四组</option>
+                                    <option value="项目五组">项目五组</option>
+                                    <option value="项目六组">项目六组</option>
+                                    <option value="武汉项目组">武汉项目组</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="grade_insert_input" class="control-label col-sm-2">考核成绩</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="grade" id="grade_insert_input"/>
@@ -185,6 +201,22 @@
                             <label for="empName_update_input" class="control-label col-sm-2">员工姓名</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="empName" id="empName_update_input"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="section_update_select" class="control-label col-sm-2">所属科室</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="section" id="section_update_select">
+                                    <option value="">----选择所属科室----</option>
+                                    <option value="品质管理室">品质管理室</option>
+                                    <option value="项目一组">项目一组</option>
+                                    <option value="项目二组">项目二组</option>
+                                    <option value="项目三组">项目三组</option>
+                                    <option value="项目四组">项目四组</option>
+                                    <option value="项目五组">项目五组</option>
+                                    <option value="项目六组">项目六组</option>
+                                    <option value="武汉项目组">武汉项目组</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -288,6 +320,9 @@
                 field:"empName",
                 title:"员工姓名"
             },{
+                field:"section",
+                title:"项目组"
+            },{
                 field:"grade",
                 title:"考核成绩"
             },{
@@ -363,6 +398,7 @@
         $("#version_update_input").val(obj.version);
         $("#empId_update_input").val(obj.empId);
         $("#empName_update_input").val(obj.empName);
+        $("#section_update_select").val(obj.section);
         $("#grade_update_input").val(obj.grade);
         $("#secGrade_update_input").val(obj.secGrade);
 
