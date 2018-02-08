@@ -128,7 +128,7 @@
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="workerId" id="workerId_insert_input">
                                 </div>
-                                <label for="worker_insert_input" class="control-label col-sm-2">作业员名称</label>
+                                <label for="worker_insert_input" class="control-label col-sm-2">作业员</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="worker" id="worker_insert_input"/>
                                 </div>
@@ -189,7 +189,7 @@
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="monitorId" id="monitorId_insert_input">
                                 </div>
-                                <label for="monitor_insert_input" class="control-label col-sm-2">监察员名称</label>
+                                <label for="monitor_insert_input" class="control-label col-sm-2">监察员</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="monitor" id="monitor_insert_input"/>
                                 </div>
@@ -228,7 +228,7 @@
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="workerId" id="workerId_update_input">
                                 </div>
-                                <label for="worker_update_input" class="control-label col-sm-2">作业员名称</label>
+                                <label for="worker_update_input" class="control-label col-sm-2">作业员</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="worker" id="worker_update_input"/>
                                 </div>
@@ -289,7 +289,7 @@
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="monitorId" id="monitorId_update_input">
                                 </div>
-                                <label for="monitor_update_input" class="control-label col-sm-2">监察员名称</label>
+                                <label for="monitor_update_input" class="control-label col-sm-2">监察员</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" type="text" name="monitor" id="monitor_update_input"/>
                                 </div>
