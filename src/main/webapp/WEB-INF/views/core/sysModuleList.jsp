@@ -420,10 +420,10 @@
             columns:[                         //配置各列的属性
             {
                 field:"permissionName",
-                title:"模块ID"
+                title:"权限ID"
             },{
                 field:"description",
-                title:"模块名称"
+                title:"权限名称"
             },{
                 field:"status",
                 title:"状态",
