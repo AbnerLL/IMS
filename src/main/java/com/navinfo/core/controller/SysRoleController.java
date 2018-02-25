@@ -50,7 +50,7 @@ public class SysRoleController {
      */
     @ResponseBody
     @RequestMapping(value = "/role",method=RequestMethod.POST)
-    public Msg saveRole(SysRole sysRole){
+    public Msg addRole(SysRole sysRole){
         boolean flag=sysRoleService.saveRole(sysRole);
         if(flag){
             return Msg.success();
@@ -66,7 +66,7 @@ public class SysRoleController {
      */
     @ResponseBody
     @RequestMapping(value="role/{roleId}",method=RequestMethod.PUT)
-    public Msg updateRole(SysRole sysRole){
+    public Msg editRole(SysRole sysRole){
         boolean flag=sysRoleService.updateRole(sysRole);
         return flag ? Msg.success():Msg.failure();
     }
@@ -89,7 +89,7 @@ public class SysRoleController {
      */
     @ResponseBody
     @RequestMapping(value="/role/{roleId}",method = RequestMethod.DELETE)
-    public Msg DeleteRoles(@PathVariable("roleId") String ids){
+    public Msg deleteRoles(@PathVariable("roleId") String ids){
         boolean flag=sysRoleService.deleteRoles(ids);
         return flag ? Msg.success():Msg.failure();
     }
