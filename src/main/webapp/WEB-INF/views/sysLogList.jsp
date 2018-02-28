@@ -110,6 +110,9 @@
                 field:"optContent",
                 title:"操作内容"
             },{
+                field:"clientIp",
+                title:"用户IP"
+            },{
                 field:"createTime",
                 title:"操作时间",
                 formatter:dateFormatter
