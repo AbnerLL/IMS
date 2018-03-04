@@ -70,7 +70,7 @@
       <!--<table schema="ims" tableName="road_report" domainObjectName="RoadReport"></table>-->
       <!--<table schema="ims" tableName="poi_report" domainObjectName="PoiReport"></table>-->
       <!--<table schema="ims" tableName="depinfo_report" domainObjectName="DepInfoReport"></table>-->
-      <!--<table schema="ims" tableName="road_question" domainObjectName="RoadQuestion"></table>-->
+      <!--<table schema="ims" tableName="road_question" domainObjectName="RoadQuestionView"></table>-->
       <!--<table schema="ims" tableName="poi_question" domainObjectName="PoiQuestion"></table>-->
       <!--<table schema="ims" tableName="monitor_info" domainObjectName="MonitorInfo"></table>-->
       <!--<table schema="ims" tableName="question_source" domainObjectName="QuestionSource"></table>-->
@@ -78,6 +78,7 @@
     <!--<table schema="ims" tableName="module_permission_rel" domainObjectName="ModulePermissionRel"></table>-->
     <!--<table schema="ims" tableName="role_module_permission_rel" domainObjectName="RoleModulePermissionRel"></table>-->
       <!--<table schema="ims" tableName="emp_aptitude" domainObjectName="EmpAptitude"></table>-->
-      <table schema="ims" tableName="sys_log" domainObjectName="SysLog"></table>
+      <!--<table schema="ims" tableName="sys_log" domainObjectName="SysLog"></table>-->
+      <table schema="ims" tableName="file_info" domainObjectName="FileInfo"></table>
   </context>
 </generatorConfiguration>

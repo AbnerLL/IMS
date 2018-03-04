@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.view.WorkQuestionMapper">
+    <select id="selectRoadQuestion" resultMap="RoadQuestionResultMap">
+        SELECT 1 FROM dual
+    </select>
+    <resultMap id="RoadQuestionResultMap" type="com.navinfo.IMS.dto.view.RoadQuestionView">
+
+    </resultMap>
+    <select id="selectPoiQuestion" resultMap="PoiQuestionResultMap">
+      SELECT 1 FROM dual
+    </select>
+    <resultMap id="PoiQuestionResultMap" type="com.navinfo.IMS.dto.view.PoiQuestionView">
+
+    </resultMap>
+</mapper>

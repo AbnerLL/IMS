@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.IMS.dao.view.WorkQualityMapper">
+    <resultMap id="RoadQualityResultMap" type="com.navinfo.IMS.dto.view.RoadQuality">
+        <result column="version" jdbcType="VARCHAR" property="version"></result>
+        <result column="worker_id" jdbcType="VARCHAR" property="workerId"></result>
+        <result column="worker" jdbcType="VARCHAR" property="worker"></result>
+        <result column="work_type" jdbcType="VARCHAR" property="workType"></result>
+        <result column="work_total_num" jdbcType="DECIMAL" property="workTotalNum"></result>
+        <result column="audit_total_num" jdbcType="DECIMAL" property="auditTotalNum"></result>
+        <result column="error_total_num" jdbcType="DECIMAL" property="errorTotalNum"></result>
+        <result column="question_num" jdbcType="DECIMAL" property="questionNum"></result>
+        <result column="big_error_num" jdbcType="DECIMAL" property="bigErrorNum"></result>
+    </resultMap>
+    <select id="selectRoadQuality" resultMap="RoadQualityResultMap">
+        SELECT t.version,t.worker_id,t.worker,t.section,'道路图标' as work_type,
+        SUM (t.work_num) as work_total_num ,
+        SUM (t.audit_num) as audit_total_num ,
+        SUM (CASE WHEN m.question_type='错误' THEN 1 ELSE 0 END ) as error_total_num,
+        SUM (CASE WHEN m.question_type='疑问' THEN 1 ELSE 0 END ) as question_num,
+        SUM (CASE WHEN m.big_error_flag='是' THEN 1 ELSE 0 END ) AS big_error_num
+        FROM road_report t ,road_question m
+        WHERE t.task_name=m.task_name(+)
+        GROUP BY t.version,t.worker_id,t.worker,t.section
+    </select>
+
+    <select id="selectPoiQuality" resultMap="PoiQualityResultMap">
+      SELECT t.version,t.worker_id,t.worker,t.section,
+      SUM (t.cp_audit_num) AS cp_audit_num,
+      SUM (t.cp_error_num) AS cp_error_num,
+      SUM (t.ca_audit_num) AS ca_audit_num,
+      SUM (t.ca_error_num) AS ca_error_num,
+      SUM (t.ep_audit_num) AS ep_audit_num,
+      SUM (t.ep_error_num) AS ep_error_num,
+      SUM (t.ea_audit_num) AS ea_audit_num,
+      SUM (t.ea_error_num) AS ea_error_num
+      FROM poi_report t
+      GROUP BY t.version,t.worker_id,t.worker,t.section
+    </select>
+    <resultMap id="PoiQualityResultMap" type="com.navinfo.IMS.dto.view.PoiQuality">
+        <result column="version" jdbcType="VARCHAR" property="version"></result>
+        <result column="worker_id" jdbcType="VARCHAR" property="workerId"></result>
+        <result column="worker" jdbcType="VARCHAR" property="worker"></result>
+        <result column="section" jdbcType="VARCHAR" property="section"></result>
+        <result column="cp_audit_num" jdbcType="DECIMAL" property="cpAuditNum"></result>
+        <result column="cp_error_num" jdbcType="DECIMAL" property="cpErrorNum"></result>
+        <result column="ca_audit_num" jdbcType="DECIMAL" property="caAuditNum"></result>
+        <result column="ca_error_num" jdbcType="DECIMAL" property="caErrorNum"></result>
+        <result column="ep_audit_num" jdbcType="DECIMAL" property="epAuditNum"></result>
+        <result column="ep_error_num" jdbcType="DECIMAL" property="epErrorNum"></result>
+        <result column="ea_audit_num" jdbcType="DECIMAL" property="eaAuditNum"></result>
+        <result column="ea_error_num" jdbcType="DECIMAL" property="eaErrorNum"></result>
+    </resultMap>
+
+    <select id="selectChPoiQuality" resultMap="ChPoiQualityResultMap">
+        SELECT 1 FROM dual
+    </select>
+    <resultMap id="ChPoiQualityResultMap" type="com.navinfo.IMS.dto.view.ChPoiQuality">
+
+    </resultMap>
+
+    <select id="selectDeepInfoQuality" resultMap="DeepInfoQualityResultMap">
+        SELECT 1 FROM dual
+    </select>
+    <resultMap id="DeepInfoQualityResultMap" type="com.navinfo.IMS.dto.view.DeepInfoQuality">
+
+    </resultMap>
+
+    <select id="selectDeepInfoGenQuality" resultMap="DeepInfoGenQualityResultMap">
+        SELECT 1 FROM dual
+    </select>
+    <resultMap id="DeepInfoGenQualityResultMap" type="com.navinfo.IMS.dto.view.DeepInfoGenQuality">
+
+    </resultMap>
+</mapper>

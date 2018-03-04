@@ -12,6 +12,8 @@
     <%@include file="common/head.jsp"%>
     <%@include file="common/common.jsp"%>
     <title>履历信息</title>
+    <%--引入文件上传插件--%>
+    <%--<link rel="stylesheet" href="${basePath}/css/webuploader/0.1.5/webuploader.css">--%>
 </head>
 <body>
 <div class="container-fluid">
@@ -65,7 +67,7 @@
                                 <label for="certificate_insert_textarea" class="col-sm-2 control-label">所获证书</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" rows="3" name="certificate" id="certificate_insert_textarea"></textarea>
-                                    <label for="certificate_attach_file" class="control-label sr-only" >所获证书附件</label>
+                                    <label for="certificate_attach_file" class="control-label sr-only" >奖励情况附件</label>
                                     <input type="file" id="certificate_attach_file" multiple="multiple"/>
                                 </div>
                             </div>
@@ -179,6 +181,8 @@
         </div>
     </div>
 </div>
+<%--<script type="text/javascript" src="${basePath}/js/webuploader/0.1.5/webuploader.nolog.min.js"></script>--%>
+<script type="text/javascript" src="${basePath}/js/webuploader/powerWebUploader.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -294,6 +298,15 @@
             }
         });
     }
+    //初始化文件上传组件
+    $("#add_modal").on('shown.bs.modal',function(){
+        //重置附件
+
+        $("#uploader").powerWebUpload({auto:false ,fileNumLimit:5})
+    });
+    $("#add_modal").on('hidden.bs.modal',function(){
+        //销毁webuploader对象
+    });
     //显示新增模态框
     $("#add_btn").click(function(){
         //1.清空表单
@@ -317,6 +330,9 @@
         });
     }
     function loadUserInfo(user) {
+        if (!user){
+            return;
+        }
         $("#empId_insert_input").val(user.empId);
         $("#empName_insert_input").val(user.empName);
     }
@@ -452,5 +468,6 @@
         window.location.href="${basePath}/empResumeExcel?"+$("#search_form").serialize();
     });
 </script>
+<script type="text/javascript" src="${basePath}/js/webuploader/powerWebUploader.js"></script>
 </body>
 </html>

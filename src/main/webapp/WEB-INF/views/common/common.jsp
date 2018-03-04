@@ -29,3 +29,6 @@
 <%--日期插件js文件及本地化文件--%>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript">
+    var appPath='${basePath}';
+</script>
