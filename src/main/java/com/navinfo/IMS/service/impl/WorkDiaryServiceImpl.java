@@ -54,6 +54,7 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
             example.or().andEmpNameLike("%"+workDiarySearch.getKeyword()+"%");
             example.or().andSectionLike("%"+workDiarySearch.getKeyword()+"%");
         }
+        example.setOrderByClause("work_date desc");
         return example;
     }
     /**
