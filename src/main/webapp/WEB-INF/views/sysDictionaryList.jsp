@@ -336,7 +336,7 @@
         //删除指定数据
         function deleteDataFun(ids){
             $.ajax({
-                url:"${basePath}//dictionary/delete?ids="+ids,
+                url:"${basePath}/dictionary/delete?ids="+ids,
                 type:"DELETE",
                 dataType:"json",
                 success:function(result){
