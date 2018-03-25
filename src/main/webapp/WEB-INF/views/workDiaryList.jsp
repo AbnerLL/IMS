@@ -72,12 +72,6 @@
                                     <label for="workType_search_select" class="control-label">工作类型:</label>
                                     <select class="form-control" name="workType" id="workType_search_select">
                                         <option value="">---选择工作类型---</option>
-                                        <option value="正常上班">正常上班</option>
-                                        <option value="延时加班">延时加班</option>
-                                        <option value="公休加班">公休加班</option>
-                                        <option value="节假日加班">节假日加班</option>
-                                        <option value="出差">出差</option>
-                                        <option value="待工">待工</option>
                                     </select>
                                 </div>
                             </div>
@@ -86,22 +80,6 @@
                                     <label for="workModule_search_select" class="control-label">工作模块</label>
                                     <select class="form-control" name="workModule" id="workModule_search_select">
                                         <option value="">---选择工作模块---</option>
-                                        <option value="统计差分">统计差分</option>
-                                        <option value="重点工作确认">重点工作确认</option>
-                                        <option value="数据监察">数据监察</option>
-                                        <option value="问题调查">问题调查</option>
-                                        <option value="出品判断">出品判断</option>
-                                        <option value="质量体系">质量体系</option>
-                                        <option value="周报分析">周报分析</option>
-                                        <option value="KPI">KPI</option>
-                                        <option value="质量成本">质量成本</option>
-                                        <option value="风险管理">风险管理</option>
-                                        <option value="良品条件">良品条件</option>
-                                        <option value="项目组品质管理">项目组品质管理</option>
-                                        <option value="问联管理">问联管理</option>
-                                        <option value="会议">会议</option>
-                                        <option value="培训">培训</option>
-                                        <option value="临时工作">临时工作</option>
                                     </select>
                                 </div>
                             </div>
@@ -203,12 +181,6 @@
                                 <label for="workType_insert_select" class="col-sm-2 control-label">工作类型</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="workType" id="workType_insert_select">
-                                        <option value="正常上班">正常上班</option>
-                                        <option value="延时加班">延时加班</option>
-                                        <option value="公休加班">公休加班</option>
-                                        <option value="节假日加班">节假日加班</option>
-                                        <option value="出差">出差</option>
-                                        <option value="待工">待工</option>
                                     </select>
                                 </div>
                             </div>
@@ -229,23 +201,7 @@
                                 <label for="workModule_insert_select" class="control-label col-sm-2">工作模块</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="workModule" id="workModule_insert_select">
-                                        <option value="">---选择工作模块---</option>
-                                        <option value="统计差分">统计差分</option>
-                                        <option value="重点工作确认">重点工作确认</option>
-                                        <option value="数据监察">数据监察</option>
-                                        <option value="问题调查">问题调查</option>
-                                        <option value="出品判断">出品判断</option>
-                                        <option value="质量体系">质量体系</option>
-                                        <option value="周报分析">周报分析</option>
-                                        <option value="KPI">KPI</option>
-                                        <option value="质量成本">质量成本</option>
-                                        <option value="风险管理">风险管理</option>
-                                        <option value="良品条件">良品条件</option>
-                                        <option value="项目组品质管理">项目组品质管理</option>
-                                        <option value="问联管理">问联管理</option>
-                                        <option value="会议">会议</option>
-                                        <option value="培训">培训</option>
-                                        <option value="临时工作">临时工作</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -325,12 +281,6 @@
                                 <label for="workType_update_select" class="col-sm-2 control-label">工作类型</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="workType" id="workType_update_select">
-                                        <option value="正常上班">正常上班</option>
-                                        <option value="延时加班">延时加班</option>
-                                        <option value="公休加班">公休加班</option>
-                                        <option value="节假日加班">节假日加班</option>
-                                        <option value="出差">出差</option>
-                                        <option value="待工">待工</option>
                                     </select>
                                 </div>
                             </div>
@@ -351,23 +301,7 @@
                                 <label for="workModule_update_select" class="control-label col-sm-2">工作模块</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="workModule" id="workModule_update_select">
-                                        <option value="">---选择工作模块---</option>
-                                        <option value="统计差分">统计差分</option>
-                                        <option value="重点工作确认">重点工作确认</option>
-                                        <option value="数据监察">数据监察</option>
-                                        <option value="问题调查">问题调查</option>
-                                        <option value="出品判断">出品判断</option>
-                                        <option value="质量体系">质量体系</option>
-                                        <option value="周报分析">周报分析</option>
-                                        <option value="KPI">KPI</option>
-                                        <option value="质量成本">质量成本</option>
-                                        <option value="风险管理">风险管理</option>
-                                        <option value="良品条件">良品条件</option>
-                                        <option value="项目组品质管理">项目组品质管理</option>
-                                        <option value="问联管理">问联管理</option>
-                                        <option value="会议">会议</option>
-                                        <option value="培训">培训</option>
-                                        <option value="临时工作">临时工作</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -394,6 +328,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -687,6 +622,10 @@
     $("#export_btn").click(function () {
         window.location.href="${basePath}/workDiaryExcel?"+$("#search_form").serialize();
     });
+    //初始化下拉选
+    $("#workType_search_select,#workType_insert_select,#workType_update_select").weboption({search:"工作类型",append:true});
+    //工作模块下拉选初始化
+    $("#workModule_search_select,#workModule_insert_select,#workModule_update_select").weboption({search:"工作模块",append:true});
 </script>
 </body>
 </html>
