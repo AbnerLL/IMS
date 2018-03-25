@@ -454,6 +454,7 @@
         $("#add_form")[0].reset();
         //2.初始化用户的基本数据
         initUserInfo();
+        initCurrentDate();
         //3.弹出模态框并清空表单
         $("#add_modal").modal("show");
     });
@@ -474,6 +475,16 @@
         $("#empId_insert_input").val(user.empId);
         $("#empName_insert_input").val(user.empName);
         $("#section_insert_select").val(user.empSec);
+    }
+    /**
+     * 初始化当前日期
+     */
+    function initCurrentDate(){
+        var  currentTime = new Date();
+        var currentYear=currentTime.getFullYear();
+        var currentMonth=currentTime.getMonth()+1;
+        var currentDate=currentTime.getDate();
+        $("#workDate_insert_input").val(currentYear+"/"+currentMonth+"/"+currentDate);
     }
     //保存数据
     $("#save_btn").click(function(){
