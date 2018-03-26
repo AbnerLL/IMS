@@ -23,7 +23,7 @@ public class DateUtil implements Converter {
             {"^\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}[.]?\\d{1,2}","yyyy-MM-dd HH:mm:ss"},
             {"\\d{8}", "yyyyMMdd"},
             {"\\d{6}", "yyMMdd"},
-            {"^\\d{4}年\\d{1,2}月\\d{1,2}日$", "yyyy年MM月dd日"},
+//            {"^\\d{4}年\\d{1,2}月\\d{1,2}日$", "yyyy年MM月dd日"},
             {"^\\d{4}-\\d{1,2}-\\d{1,2}$", "yyyy-MM-dd"},
             {"^[a-zA-Z]{3} [a-zA-Z]{3} \\d{1,2} \\d{1,2}:\\d{1,2}:d{1,2}[.]?\\d{1,2} [a-zA-Z]{3} \\d{4}$","EEE MMM dd hh:mm:ss zzz yyyy"},
             {"^\\d{4}/\\d{1,2}/\\d{1,2}$", "yyyy/MM/dd"},
