@@ -12,8 +12,7 @@
     <%@include file="common/head.jsp"%>
     <%@include file="common/common.jsp"%>
     <title>履历信息</title>
-    <%--引入文件上传插件--%>
-    <%--<link rel="stylesheet" href="${basePath}/css/webuploader/0.1.5/webuploader.css">--%>
+    <link href="${basePath}/js/bootstrap-fileInput/css/fileinput.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -28,6 +27,7 @@
         <shrio:hasPermission name="empResume:delete">
             <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
         </shrio:hasPermission>
+        <button id="attachment_btn" class="btn btn-primary"><span class="fa fa-file"></span>&nbsp;添加附件</button>
         <shrioDiy:hasAnyPermission name="empResume:export,empResume:export:dept,empResume:export:section">
             <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
         </shrioDiy:hasAnyPermission>
@@ -181,8 +181,28 @@
         </div>
     </div>
 </div>
-<%--<script type="text/javascript" src="${basePath}/js/webuploader/0.1.5/webuploader.nolog.min.js"></script>--%>
-<script type="text/javascript" src="${basePath}/js/webuploader/powerWebUploader.js"></script>
+<%--modal模态框(添加附件)--%>
+<div class="modal fade" id="attachment_modal" tabindex="-1" role="dialog" aria-labelledby="myAttachmentModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myAttachmentModalLabel">添加附件</h4>
+            </div>
+            <div class="modal-body" >
+                <div class="file-loading">
+                    <input id="attach_file" name="attachFile" multiple type="file">
+                </div>
+                <div id="file-upload-errors"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="upload_btn" type="button" class="btn btn-primary">开始上传</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${basePath}/js/bootstrap-fileInput/js/fileinput.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -264,7 +284,7 @@
             uniqueId: "resumeId",                     //每一行的唯一标识，一般为主键列
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
-            detailView: false,                   //是否显示父子表
+            detailView: true,                   //是否显示父子表
             searchOnEnterKey:true,                 //设置为true，则按回车键进行搜索，否则自动搜索
             columns:[{                          //配置各列的属性
                 checkbox:true
@@ -295,9 +315,83 @@
             }],
             formatSearch:function(){
                 return "支持编号和名称搜索";
+            },
+            onExpandRow:function(index,row,$detail){
+                initSubTable(index,row,$detail);
             }
         });
     }
+
+    //初始化子表
+    function initSubTable(index,row,$detail){
+        var resumeId=row.resumeId;//履历表主键，用来获取履历数据的附件
+        var cur_table = $detail.html('<table></table>').find('table');
+        $(cur_table).bootstrapTable({
+            //获取数据的url
+            url:"${basePath}/fileInfos?moduleId="+resumeId,
+            method: 'get',//请求方式
+//            toolbar: '#toolbar',                //工具按钮用哪个容器
+//            classes:"table table-hover table-bordered",        //设置table的class属性
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+//            pagination: true,                   //是否显示分页（*）
+//            sortable: true,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: myQueryParams,         //传递参数（*）
+            responseHandler:myResponseHandler,  //设置解析服务器返回的数据
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+//            search: true,                       //是否显示表格搜索
+//            strictSearch: true,
+//            showColumns: true,                  //是否显示所有的列
+//            showRefresh: true,                  //是否显示刷新按钮
+//            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+//            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "permissionId",                     //每一行的唯一标识，一般为主键列
+            showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+//            detailView: true,                   //是否显示父子表
+//            searchOnEnterKey:true,                 //设置为true，则按回车键进行搜索，否则自动搜索
+            columns:[                         //配置各列的属性
+                {
+                    field:"oldFileName",
+                    title:"文件名"
+                },{
+                    field:"fileExname",
+                    title:"文件类型"
+                },{
+                    field:"uploadDate",
+                    title:"上传日期",
+                    formatter:dateFormatter
+                },{
+                    field:"resumeId",
+                    title:"操作",
+                    align:"center",
+                    width:"20%",
+                    events:operateEvents,
+                    formatter:operateFormatter
+                }]
+        });
+    }
+    //子表的操作按钮
+    function operateFormatter(value,row,index){
+        //当前行的主键
+        var editBtn="<button id='attachFile_download_btn' class='btn btn-primary'>下载</button>";
+        var deleteBtn="<button id='attachFile_del_btn' class='btn btn-danger'>删除</button>";
+        return editBtn+"&nbsp;"+deleteBtn;
+    }
+    //重写操作监听
+    window.operateEvents={
+        'click #attachFile_download_btn':function(e,value,row,index){
+            showEditPermissionModal(row);
+        },
+        'click #attachFile_del_btn':function(e,value,row,index){
+            deletePermission(row);
+        }
+    };
     //初始化文件上传组件
     $("#add_modal").on('shown.bs.modal',function(){
         //重置附件
@@ -467,7 +561,29 @@
     $("#export_btn").click(function () {
         window.location.href="${basePath}/empResumeExcel?"+$("#search_form").serialize();
     });
+    //添加附件按钮
+    $("#attachment_btn").click(function () {
+        $("#attachment_modal").modal("toggle");
+    });
+    $("#attach_file").fileinput({
+        showPreview: false,
+        showUpload: false,
+        language:'zh',
+        elErrorContainer: '#file-upload-errors',
+        allowedFileExtensions: ["jpg", "png", "gif","txt"],
+        uploadUrl: '${basePath}/file/fileUpload',
+        uploadExtraData:getExtraParameter
+    });
+    //上传文件是添加的额外参数
+    function getExtraParameter(previewId,index){
+        console.log('previewId:'+previewId);
+        console.log('index:'+index);
+        return {};
+    }
+    //上传按钮
+    $("#upload_btn").on("click",function () {
+        $("#attach_file").fileinput("upload");
+    });
 </script>
-<script type="text/javascript" src="${basePath}/js/webuploader/powerWebUploader.js"></script>
 </body>
 </html>

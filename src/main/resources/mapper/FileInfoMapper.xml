@@ -4,12 +4,16 @@
   <resultMap id="BaseResultMap" type="com.navinfo.core.entity.FileInfo">
     <id column="UUID" jdbcType="VARCHAR" property="uuid" />
     <result column="OBJECT_ID" jdbcType="VARCHAR" property="objectId" />
+    <result column="MODULE_ID" jdbcType="VARCHAR" property="moduleId" />
     <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+    <result column="OLD_FILE_NAME" jdbcType="VARCHAR" property="oldFileName" />
     <result column="FILE_EXNAME" jdbcType="VARCHAR" property="fileExname" />
     <result column="FILE_TYPE" jdbcType="VARCHAR" property="fileType" />
     <result column="FILE_SIZE" jdbcType="VARCHAR" property="fileSize" />
     <result column="UPLOAD_DATE" jdbcType="TIMESTAMP" property="uploadDate" />
     <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
     <result column="SORT_INDEX" jdbcType="VARCHAR" property="sortIndex" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
@@ -73,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UUID, OBJECT_ID, FILE_NAME, FILE_EXNAME, FILE_TYPE, FILE_SIZE, UPLOAD_DATE, FILE_PATH, 
-    SORT_INDEX, STATUS, DEL_FLAG
+    UUID, OBJECT_ID, MODULE_ID, FILE_NAME, OLD_FILE_NAME, FILE_EXNAME, FILE_TYPE, FILE_SIZE, 
+    UPLOAD_DATE, FILE_PATH, DESCRIPTION, REMARK, SORT_INDEX, STATUS, DEL_FLAG
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.core.entity.FileInfoExample" resultMap="BaseResultMap">
     select
@@ -107,14 +111,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.navinfo.core.entity.FileInfo">
-    insert into IMS.FILE_INFO (UUID, OBJECT_ID, FILE_NAME, 
-      FILE_EXNAME, FILE_TYPE, FILE_SIZE, 
-      UPLOAD_DATE, FILE_PATH, SORT_INDEX, 
-      STATUS, DEL_FLAG)
-    values (#{uuid,jdbcType=VARCHAR}, #{objectId,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileExname,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, 
-      #{uploadDate,jdbcType=TIMESTAMP}, #{filePath,jdbcType=VARCHAR}, #{sortIndex,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR})
+    insert into IMS.FILE_INFO (UUID, OBJECT_ID, MODULE_ID, 
+      FILE_NAME, OLD_FILE_NAME, FILE_EXNAME, 
+      FILE_TYPE, FILE_SIZE, UPLOAD_DATE, 
+      FILE_PATH, DESCRIPTION, REMARK, 
+      SORT_INDEX, STATUS, DEL_FLAG
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{objectId,jdbcType=VARCHAR}, #{moduleId,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{oldFileName,jdbcType=VARCHAR}, #{fileExname,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, #{uploadDate,jdbcType=TIMESTAMP}, 
+      #{filePath,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{sortIndex,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.core.entity.FileInfo">
     insert into IMS.FILE_INFO
@@ -125,8 +133,14 @@
       <if test="objectId != null">
         OBJECT_ID,
       </if>
+      <if test="moduleId != null">
+        MODULE_ID,
+      </if>
       <if test="fileName != null">
         FILE_NAME,
+      </if>
+      <if test="oldFileName != null">
+        OLD_FILE_NAME,
       </if>
       <if test="fileExname != null">
         FILE_EXNAME,
@@ -142,6 +156,12 @@
       </if>
       <if test="filePath != null">
         FILE_PATH,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="remark != null">
+        REMARK,
       </if>
       <if test="sortIndex != null">
         SORT_INDEX,
@@ -160,8 +180,14 @@
       <if test="objectId != null">
         #{objectId,jdbcType=VARCHAR},
       </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=VARCHAR},
+      </if>
       <if test="fileName != null">
         #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldFileName != null">
+        #{oldFileName,jdbcType=VARCHAR},
       </if>
       <if test="fileExname != null">
         #{fileExname,jdbcType=VARCHAR},
@@ -177,6 +203,12 @@
       </if>
       <if test="filePath != null">
         #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="sortIndex != null">
         #{sortIndex,jdbcType=VARCHAR},
@@ -204,8 +236,14 @@
       <if test="record.objectId != null">
         OBJECT_ID = #{record.objectId,jdbcType=VARCHAR},
       </if>
+      <if test="record.moduleId != null">
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
       <if test="record.fileName != null">
         FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldFileName != null">
+        OLD_FILE_NAME = #{record.oldFileName,jdbcType=VARCHAR},
       </if>
       <if test="record.fileExname != null">
         FILE_EXNAME = #{record.fileExname,jdbcType=VARCHAR},
@@ -221,6 +259,12 @@
       </if>
       <if test="record.filePath != null">
         FILE_PATH = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.sortIndex != null">
         SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR},
@@ -240,12 +284,16 @@
     update IMS.FILE_INFO
     set UUID = #{record.uuid,jdbcType=VARCHAR},
       OBJECT_ID = #{record.objectId,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
       FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      OLD_FILE_NAME = #{record.oldFileName,jdbcType=VARCHAR},
       FILE_EXNAME = #{record.fileExname,jdbcType=VARCHAR},
       FILE_TYPE = #{record.fileType,jdbcType=VARCHAR},
       FILE_SIZE = #{record.fileSize,jdbcType=VARCHAR},
       UPLOAD_DATE = #{record.uploadDate,jdbcType=TIMESTAMP},
       FILE_PATH = #{record.filePath,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
       SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR},
       STATUS = #{record.status,jdbcType=VARCHAR},
       DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR}
@@ -259,8 +307,14 @@
       <if test="objectId != null">
         OBJECT_ID = #{objectId,jdbcType=VARCHAR},
       </if>
+      <if test="moduleId != null">
+        MODULE_ID = #{moduleId,jdbcType=VARCHAR},
+      </if>
       <if test="fileName != null">
         FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldFileName != null">
+        OLD_FILE_NAME = #{oldFileName,jdbcType=VARCHAR},
       </if>
       <if test="fileExname != null">
         FILE_EXNAME = #{fileExname,jdbcType=VARCHAR},
@@ -277,6 +331,12 @@
       <if test="filePath != null">
         FILE_PATH = #{filePath,jdbcType=VARCHAR},
       </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="sortIndex != null">
         SORT_INDEX = #{sortIndex,jdbcType=VARCHAR},
       </if>
@@ -292,12 +352,16 @@
   <update id="updateByPrimaryKey" parameterType="com.navinfo.core.entity.FileInfo">
     update IMS.FILE_INFO
     set OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+      MODULE_ID = #{moduleId,jdbcType=VARCHAR},
       FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      OLD_FILE_NAME = #{oldFileName,jdbcType=VARCHAR},
       FILE_EXNAME = #{fileExname,jdbcType=VARCHAR},
       FILE_TYPE = #{fileType,jdbcType=VARCHAR},
       FILE_SIZE = #{fileSize,jdbcType=VARCHAR},
       UPLOAD_DATE = #{uploadDate,jdbcType=TIMESTAMP},
       FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
       SORT_INDEX = #{sortIndex,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
       DEL_FLAG = #{delFlag,jdbcType=VARCHAR}

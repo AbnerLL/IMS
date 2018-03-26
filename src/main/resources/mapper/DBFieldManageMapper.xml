@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.core.dao.DBFieldManageMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.core.entity.DBFieldManage">
+    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
+    <result column="FIELD_NAME" jdbcType="VARCHAR" property="fieldName" />
+    <result column="FIELD_DESCRIPT" jdbcType="VARCHAR" property="fieldDescript" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="FIELD_CLASS" jdbcType="VARCHAR" property="fieldClass" />
+    <result column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
+    <result column="COLUMN_DESCRIPT" jdbcType="VARCHAR" property="columnDescript" />
+    <result column="COLUMN_TYPE" jdbcType="VARCHAR" property="columnType" />
+    <result column="SORT_INDEX" jdbcType="VARCHAR" property="sortIndex" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UUID, FIELD_NAME, FIELD_DESCRIPT, TABLE_NAME, FIELD_CLASS, COLUMN_NAME, COLUMN_DESCRIPT, 
+    COLUMN_TYPE, SORT_INDEX
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.core.entity.DBFieldManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.BASE_TABLE_COL_DEFINE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.BASE_TABLE_COL_DEFINE
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.BASE_TABLE_COL_DEFINE
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.core.entity.DBFieldManageExample">
+    delete from IMS.BASE_TABLE_COL_DEFINE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.core.entity.DBFieldManage">
+    insert into IMS.BASE_TABLE_COL_DEFINE (UUID, FIELD_NAME, FIELD_DESCRIPT, 
+      TABLE_NAME, FIELD_CLASS, COLUMN_NAME, 
+      COLUMN_DESCRIPT, COLUMN_TYPE, SORT_INDEX
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, #{fieldDescript,jdbcType=VARCHAR}, 
+      #{tableName,jdbcType=VARCHAR}, #{fieldClass,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, 
+      #{columnDescript,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR}, #{sortIndex,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.core.entity.DBFieldManage">
+    insert into IMS.BASE_TABLE_COL_DEFINE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        UUID,
+      </if>
+      <if test="fieldName != null">
+        FIELD_NAME,
+      </if>
+      <if test="fieldDescript != null">
+        FIELD_DESCRIPT,
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME,
+      </if>
+      <if test="fieldClass != null">
+        FIELD_CLASS,
+      </if>
+      <if test="columnName != null">
+        COLUMN_NAME,
+      </if>
+      <if test="columnDescript != null">
+        COLUMN_DESCRIPT,
+      </if>
+      <if test="columnType != null">
+        COLUMN_TYPE,
+      </if>
+      <if test="sortIndex != null">
+        SORT_INDEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDescript != null">
+        #{fieldDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldClass != null">
+        #{fieldClass,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnDescript != null">
+        #{columnDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null">
+        #{sortIndex,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.core.entity.DBFieldManageExample" resultType="java.lang.Long">
+    select count(*) from IMS.BASE_TABLE_COL_DEFINE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.BASE_TABLE_COL_DEFINE
+    <set>
+      <if test="record.uuid != null">
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldName != null">
+        FIELD_NAME = #{record.fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldDescript != null">
+        FIELD_DESCRIPT = #{record.fieldDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null">
+        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldClass != null">
+        FIELD_CLASS = #{record.fieldClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnName != null">
+        COLUMN_NAME = #{record.columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnDescript != null">
+        COLUMN_DESCRIPT = #{record.columnDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnType != null">
+        COLUMN_TYPE = #{record.columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortIndex != null">
+        SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.BASE_TABLE_COL_DEFINE
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      FIELD_NAME = #{record.fieldName,jdbcType=VARCHAR},
+      FIELD_DESCRIPT = #{record.fieldDescript,jdbcType=VARCHAR},
+      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      FIELD_CLASS = #{record.fieldClass,jdbcType=VARCHAR},
+      COLUMN_NAME = #{record.columnName,jdbcType=VARCHAR},
+      COLUMN_DESCRIPT = #{record.columnDescript,jdbcType=VARCHAR},
+      COLUMN_TYPE = #{record.columnType,jdbcType=VARCHAR},
+      SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.core.entity.DBFieldManage">
+    update IMS.BASE_TABLE_COL_DEFINE
+    <set>
+      <if test="fieldName != null">
+        FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDescript != null">
+        FIELD_DESCRIPT = #{fieldDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldClass != null">
+        FIELD_CLASS = #{fieldClass,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnDescript != null">
+        COLUMN_DESCRIPT = #{columnDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        COLUMN_TYPE = #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null">
+        SORT_INDEX = #{sortIndex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.core.entity.DBFieldManage">
+    update IMS.BASE_TABLE_COL_DEFINE
+    set FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      FIELD_DESCRIPT = #{fieldDescript,jdbcType=VARCHAR},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      FIELD_CLASS = #{fieldClass,jdbcType=VARCHAR},
+      COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
+      COLUMN_DESCRIPT = #{columnDescript,jdbcType=VARCHAR},
+      COLUMN_TYPE = #{columnType,jdbcType=VARCHAR},
+      SORT_INDEX = #{sortIndex,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

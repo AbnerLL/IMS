@@ -79,6 +79,8 @@
     <!--<table schema="ims" tableName="role_module_permission_rel" domainObjectName="RoleModulePermissionRel"></table>-->
       <!--<table schema="ims" tableName="emp_aptitude" domainObjectName="EmpAptitude"></table>-->
       <!--<table schema="ims" tableName="sys_log" domainObjectName="SysLog"></table>-->
-      <table schema="ims" tableName="file_info" domainObjectName="FileInfo"></table>
+      <!--<table schema="ims" tableName="file_info" domainObjectName="FileInfo"></table>-->
+      <!--<table schema="ims" tableName="base_table_col_define" domainObjectName="DBFieldManage"></table>-->
+    <table schema="ims" tableName="sys_dictionary" domainObjectName="SysDictionary"></table>
   </context>
 </generatorConfiguration>

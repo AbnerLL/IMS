@@ -59,6 +59,7 @@ public class WorkQualityServiceImpl implements WorkQualityService {
         PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List<ChPoiQuality> chPoiQualityList=this.workQualityMapper.selectChPoiQuality(search);
         //计算率
+        this.calCHPQPassRate(chPoiQualityList);
         return new PageInfo(chPoiQualityList);
     }
 
@@ -72,6 +73,7 @@ public class WorkQualityServiceImpl implements WorkQualityService {
         PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List<DeepInfoQuality> deepInfoQualityList=this.workQualityMapper.selectDeepInfoQuality(search);
         //计算率
+        this.calDIPassRate(deepInfoQualityList);
         return new PageInfo(deepInfoQualityList);
     }
 
@@ -85,7 +87,7 @@ public class WorkQualityServiceImpl implements WorkQualityService {
         PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List<DeepInfoGenQuality> deepInfoGenQualityList=this.workQualityMapper.selectDeepInfoGenQuality(search);
         //计算率
-
+        this.calDIGPassRate(deepInfoGenQualityList);
         return new PageInfo(deepInfoGenQualityList);
     }
 
@@ -115,16 +117,17 @@ public class WorkQualityServiceImpl implements WorkQualityService {
      */
     private void calRQPassRate(List<RoadQuality> roadQualityList){
         for (RoadQuality roadQuality:roadQualityList){
-            if (roadQuality.getAuditTotalNum().compareTo(new BigDecimal(0))==0){
+            if (roadQuality.getAuditTotalNum().compareTo(BigDecimal.ZERO)==0){
                 roadQuality.setPassRate("100%");
             }
-            BigDecimal passRate=new BigDecimal(1).subtract(roadQuality.getErrorTotalNum().divide(roadQuality.getAuditTotalNum().multiply(new BigDecimal(3)),3,BigDecimal.ROUND_HALF_UP));
-            String passRateStr=new BigDecimal(1).subtract(passRate).multiply(new BigDecimal(100))+"%";
+            BigDecimal passRate=BigDecimal.ONE.subtract(roadQuality.getErrorTotalNum().divide(roadQuality.getAuditTotalNum().multiply(new BigDecimal(3)),3,BigDecimal.ROUND_HALF_UP));
+            String passRateStr=BigDecimal.ONE.subtract(passRate).multiply(new BigDecimal(100))+"%";
             roadQuality.setPassRate(passRateStr);
         }
     }
     /**
-     * 计算合格率(道路品质)
+     * 计算合格率(设施品质)
+     * 合格率=1-中文地址错误量/中文地址质检量
      * @return
      */
     private void calPQPassRate(List<PoiQuality> poiQualityList){
@@ -154,5 +157,61 @@ public class WorkQualityServiceImpl implements WorkQualityService {
                 poiQuality.setEaPassRate("0.00%");
             }
         }
+    }
+
+    /**
+     * 计算合格率（中文名称）
+     * 合格率=1-错误量/质检量
+     * @param chPoiQualityList
+     */
+    private void calCHPQPassRate(List<ChPoiQuality> chPoiQualityList) {
+        for (ChPoiQuality chPoiQuality : chPoiQualityList){
+            if (chPoiQuality.getAuditTotalNum().compareTo(BigDecimal.ZERO)==1){
+                BigDecimal passRate=chPoiQuality.getErrorTotalNum().divide(chPoiQuality.getAuditTotalNum(),5,BigDecimal.ROUND_HALF_UP);
+                String passRateString=BigDecimal.valueOf(100).subtract(passRate.multiply(new BigDecimal(100)))+"%";
+                chPoiQuality.setPassRate(passRateString);
+            }else {
+                chPoiQuality.setPassRate("0.00%");
+            }
+        }
+    }
+
+    /**
+     * 计算合格率（深度信息品质）
+     * 合格率=1-通用错误量/（通用质检量*4）
+     * 合格率=1-停车场错误量/（停车场质检量*6）
+     * 合格率=1-汽车租赁错误量/（汽车租赁质检量*3）
+     */
+    private void calDIPassRate(List<DeepInfoQuality> deepInfoQualityList){
+        for (DeepInfoQuality deepInfoQuality : deepInfoQualityList){
+            if (deepInfoQuality.getComAuditNum().compareTo(BigDecimal.ZERO)==1){
+                BigDecimal comRate=deepInfoQuality.getComErrorNum().divide(deepInfoQuality.getComAuditNum().multiply(new BigDecimal(4)),5,BigDecimal.ROUND_HALF_UP);
+                String comRateString=BigDecimal.valueOf(100).subtract(comRate.multiply(new BigDecimal(100)))+"%";
+                deepInfoQuality.setComRate(comRateString);
+            }else {
+                deepInfoQuality.setComRate("0.00%");
+            }
+            if (deepInfoQuality.getParkAuditNum().compareTo(BigDecimal.ZERO)==1){
+                BigDecimal parkRate=deepInfoQuality.getParkErrorNum().divide(deepInfoQuality.getParkAuditNum().multiply(new BigDecimal(6)),5,BigDecimal.ROUND_HALF_UP);
+                String parkRateString=BigDecimal.valueOf(100).subtract(parkRate.multiply(new BigDecimal(100)))+"%";
+                deepInfoQuality.setParkRate(parkRateString);
+            }else{
+                deepInfoQuality.setParkRate("0.00%");
+            }
+            if (deepInfoQuality.getRentAuditNum().compareTo(BigDecimal.ZERO)==1){
+                BigDecimal rentRate=deepInfoQuality.getRentErrorNum().divide(deepInfoQuality.getRentAuditNum().multiply(new BigDecimal(3)),5,BigDecimal.ROUND_HALF_UP);
+                String rentRateString=BigDecimal.valueOf(100).subtract(rentRate.multiply(new BigDecimal(100)))+"%";
+                deepInfoQuality.setRentRate(rentRateString);
+            }else{
+                deepInfoQuality.setRentRate("0.00%");
+            }
+        }
+    }
+
+    /**
+     * 计算合格率（深度信息通用品质）
+     */
+    private void calDIGPassRate(List<DeepInfoGenQuality> deepInfoGenQualityList){
+
     }
 }

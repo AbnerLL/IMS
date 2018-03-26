@@ -7,7 +7,11 @@ public class FileInfo {
 
     private String objectId;
 
+    private String moduleId;
+
     private String fileName;
+
+    private String oldFileName;
 
     private String fileExname;
 
@@ -18,6 +22,10 @@ public class FileInfo {
     private Date uploadDate;
 
     private String filePath;
+
+    private String description;
+
+    private String remark;
 
     private String sortIndex;
 
@@ -41,12 +49,28 @@ public class FileInfo {
         this.objectId = objectId == null ? null : objectId.trim();
     }
 
+    public String getModuleId() {
+        return moduleId;
+    }
+
+    public void setModuleId(String moduleId) {
+        this.moduleId = moduleId == null ? null : moduleId.trim();
+    }
+
     public String getFileName() {
         return fileName;
     }
 
     public void setFileName(String fileName) {
         this.fileName = fileName == null ? null : fileName.trim();
+    }
+
+    public String getOldFileName() {
+        return oldFileName;
+    }
+
+    public void setOldFileName(String oldFileName) {
+        this.oldFileName = oldFileName == null ? null : oldFileName.trim();
     }
 
     public String getFileExname() {
@@ -87,6 +111,22 @@ public class FileInfo {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath == null ? null : filePath.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public String getSortIndex() {
