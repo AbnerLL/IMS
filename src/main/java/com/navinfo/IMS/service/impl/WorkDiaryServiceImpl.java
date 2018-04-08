@@ -12,6 +12,7 @@ import com.navinfo.IMS.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -49,6 +50,12 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
         }
         if (workDiarySearch.getWorkDateEnd()!=null){
             example.getOredCriteria().get(0).andWorkDateLessThanOrEqualTo(workDiarySearch.getWorkDateEnd());
+        }
+        if (StringUtil.notNull(workDiarySearch.getWorkTimeStart())){
+            example.getOredCriteria().get(0).andWorkTimeStartGreaterThanOrEqualTo(workDiarySearch.getWorkTimeStart());
+        }
+        if (StringUtil.notNull(workDiarySearch.getWorkTimeEnd())){
+            example.getOredCriteria().get(0).andWorkTimeEndLessThanOrEqualTo(workDiarySearch.getWorkTimeEnd());
         }
         if (StringUtil.notNull(workDiarySearch.getKeyword())){
             example.or().andEmpNameLike("%"+workDiarySearch.getKeyword()+"%");
@@ -88,6 +95,16 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
     public boolean saveWorkDiary(WorkDiary workDiary){
         //生成主键
         workDiary.setId(UUID.randomUUID().toString());
+        //计算工作时间
+        if ( StringUtil.notNull(workDiary.getWorkTimeStart(),workDiary.getWorkTimeEnd())){
+            Integer hourEnd = Integer.valueOf(workDiary.getWorkTimeEnd().substring(0,workDiary.getWorkTimeEnd().indexOf(":")));
+            Integer hourStart = Integer.valueOf(workDiary.getWorkTimeStart().substring(0,workDiary.getWorkTimeStart().indexOf(":")));
+            Integer minutesEnd = Integer.valueOf(workDiary.getWorkTimeEnd().substring(workDiary.getWorkTimeEnd().indexOf(":")+1));
+            Integer minutesStart = Integer.valueOf(workDiary.getWorkTimeStart().substring(workDiary.getWorkTimeStart().indexOf(":")+1));
+            BigDecimal diffHour = new BigDecimal(hourEnd - hourStart) ;
+            BigDecimal diffMinutes = new BigDecimal(minutesEnd).subtract(new BigDecimal(minutesStart)).divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_UP);
+            workDiary.setWorkHours(diffHour.add(diffMinutes).toString());
+        }
         //初始化创建人和时间(略)
         return workDiaryMapper.insertSelective(workDiary)!=0;
     }
@@ -98,6 +115,16 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
      * @return
      */
     public boolean updateWorkDiary(WorkDiary workDiary){
+        //计算工作时间
+        if ( StringUtil.notNull(workDiary.getWorkTimeStart(),workDiary.getWorkTimeEnd())){
+            Integer hourEnd = Integer.valueOf(workDiary.getWorkTimeEnd().substring(0,workDiary.getWorkTimeEnd().indexOf(":")));
+            Integer hourStart = Integer.valueOf(workDiary.getWorkTimeStart().substring(0,workDiary.getWorkTimeStart().indexOf(":")));
+            Integer minutesEnd = Integer.valueOf(workDiary.getWorkTimeEnd().substring(workDiary.getWorkTimeEnd().indexOf(":")+1));
+            Integer minutesStart = Integer.valueOf(workDiary.getWorkTimeStart().substring(workDiary.getWorkTimeStart().indexOf(":")+1));
+            BigDecimal diffHour = new BigDecimal(hourEnd - hourStart) ;
+            BigDecimal diffMinutes = new BigDecimal(minutesEnd).subtract(new BigDecimal(minutesStart)).divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_UP);
+            workDiary.setWorkHours(diffHour.add(diffMinutes).toString());
+        }
         //初始化更新人和时间（略）
         return workDiaryMapper.updateByPrimaryKeySelective(workDiary)!=0;
     }

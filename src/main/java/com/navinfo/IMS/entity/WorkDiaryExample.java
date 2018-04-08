@@ -585,6 +585,146 @@ public class WorkDiaryExample {
             return (Criteria) this;
         }
 
+        public Criteria andWorkTimeStartIsNull() {
+            addCriterion("WORK_TIME_START is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartIsNotNull() {
+            addCriterion("WORK_TIME_START is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartEqualTo(String value) {
+            addCriterion("WORK_TIME_START =", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartNotEqualTo(String value) {
+            addCriterion("WORK_TIME_START <>", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartGreaterThan(String value) {
+            addCriterion("WORK_TIME_START >", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartGreaterThanOrEqualTo(String value) {
+            addCriterion("WORK_TIME_START >=", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartLessThan(String value) {
+            addCriterion("WORK_TIME_START <", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartLessThanOrEqualTo(String value) {
+            addCriterion("WORK_TIME_START <=", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartLike(String value) {
+            addCriterion("WORK_TIME_START like", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartNotLike(String value) {
+            addCriterion("WORK_TIME_START not like", value, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartIn(List<String> values) {
+            addCriterion("WORK_TIME_START in", values, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartNotIn(List<String> values) {
+            addCriterion("WORK_TIME_START not in", values, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartBetween(String value1, String value2) {
+            addCriterion("WORK_TIME_START between", value1, value2, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeStartNotBetween(String value1, String value2) {
+            addCriterion("WORK_TIME_START not between", value1, value2, "workTimeStart");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndIsNull() {
+            addCriterion("WORK_TIME_END is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndIsNotNull() {
+            addCriterion("WORK_TIME_END is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndEqualTo(String value) {
+            addCriterion("WORK_TIME_END =", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndNotEqualTo(String value) {
+            addCriterion("WORK_TIME_END <>", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndGreaterThan(String value) {
+            addCriterion("WORK_TIME_END >", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndGreaterThanOrEqualTo(String value) {
+            addCriterion("WORK_TIME_END >=", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndLessThan(String value) {
+            addCriterion("WORK_TIME_END <", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndLessThanOrEqualTo(String value) {
+            addCriterion("WORK_TIME_END <=", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndLike(String value) {
+            addCriterion("WORK_TIME_END like", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndNotLike(String value) {
+            addCriterion("WORK_TIME_END not like", value, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndIn(List<String> values) {
+            addCriterion("WORK_TIME_END in", values, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndNotIn(List<String> values) {
+            addCriterion("WORK_TIME_END not in", values, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndBetween(String value1, String value2) {
+            addCriterion("WORK_TIME_END between", value1, value2, "workTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTimeEndNotBetween(String value1, String value2) {
+            addCriterion("WORK_TIME_END not between", value1, value2, "workTimeEnd");
+            return (Criteria) this;
+        }
+
         public Criteria andWorkHoursIsNull() {
             addCriterion("WORK_HOURS is null");
             return (Criteria) this;

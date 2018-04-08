@@ -11,6 +11,7 @@
 <head>
     <%@include file="common/head.jsp"%>
     <%@include file="common/common.jsp"%>
+    <link href="${basePath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <title>工作日志</title>
 </head>
 <body>
@@ -99,7 +100,18 @@
                         </div>
                         <div class="row" style="height: 5px;"></div>
                         <div class="row">
-                            <div class="col-sm-2 col-sm-offset-10">
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="workTimeStart_search_input" class="control-label">工作时间:</label>
+                                    <div class="input-group input-group-sm" style="width: 77%;">
+                                        <input class = "form-control datetimepicker" name="workTimeStart" id="workTimeStart_search_input"/>
+                                        <div class="input-group-addon "><span class="fa fa-calendar"></span></div>
+                                        <input class = "form-control datetimepicker" name="workTimeEnd" id="workTimeEnd_search_input"/>
+                                        <div class="input-group-addon "><span class="fa fa-calendar"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-4">
                                 <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
                                 <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
                             </div>
@@ -192,17 +204,27 @@
                                         <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
                                     </div>
                                 </div>
-                                <label for="workHours_insert_input" class="col-sm-2 control-label">工作用时</label>
-                                <div class="col-sm-4">
-                                    <input class="form-control" type="text" name="workHours" id="workHours_insert_input" placeholder="如：9:00-11:00"/>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
                                 <label for="workModule_insert_select" class="control-label col-sm-2">工作模块</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <select class="form-control" name="workModule" id="workModule_insert_select">
 
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="workTimeStart_insert_input" class="col-sm-2 control-label">工作时间(起)</label>
+                                <div class="col-sm-4 ">
+                                    <div class="input-group">
+                                        <input class = "form-control datetimepicker" name="workTimeStart" id="workTimeStart_insert_input"/>
+                                        <div class="input-group-addon "><span class="fa fa-calendar"></span></div>
+                                    </div>
+                                </div>
+                                <label for="workTimeEnd_insert_input" class="col-sm-2 control-label">工作时间(止)</label>
+                                <div class="col-sm-4 ">
+                                    <div class="input-group">
+                                        <input class = "form-control datetimepicker" name="workTimeEnd" id="workTimeEnd_insert_input"/>
+                                        <div class="input-group-addon "><span class="fa fa-calendar"></span></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -292,17 +314,27 @@
                                         <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
                                     </div>
                                 </div>
-                                <label for="workHours_update_input" class="col-sm-2 control-label">工作用时</label>
-                                <div class="col-sm-4">
-                                    <input class="form-control" type="text" name="workHours" id="workHours_update_input" placeholder="如：9:00-11:00"/>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
                                 <label for="workModule_update_select" class="control-label col-sm-2">工作模块</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <select class="form-control" name="workModule" id="workModule_update_select">
 
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="workTimeStart_update_input" class="col-sm-2 control-label">工作时间(起)</label>
+                                <div class="col-sm-4 ">
+                                    <div class="input-group">
+                                        <input class = "form-control datetimepicker" name="workTimeStart" id="workTimeStart_update_input"/>
+                                        <div class="input-group-addon "><span class="fa fa-calendar"></span></div>
+                                    </div>
+                                </div>
+                                <label for="workTimeEnd_update_input" class="col-sm-2 control-label">工作时间(止)</label>
+                                <div class="col-sm-4 ">
+                                    <div class="input-group">
+                                        <input class = "form-control datetimepicker" name="workTimeEnd" id="workTimeEnd_update_input"/>
+                                        <div class="input-group-addon "><span class="fa fa-calendar"></span></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -328,6 +360,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="${basePath}/js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="${basePath}/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
@@ -346,7 +380,15 @@
         format:"yyyy/mm/dd",
         language:"zh-CN"
     });
-
+    //设置时间
+    $(".datetimepicker").datetimepicker({
+        autoclose:true,
+        format:"hh:ii",
+        language:"zh-CN",
+        startView:1,
+        minView:0,
+        maxView:1
+    });
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
@@ -431,6 +473,14 @@
                 title:"工作日期",
                 formatter:dateFormatter
             },{
+                field:"",
+                title:"工作时间段",
+                formatter:function (value,row,index) {
+                    if(row.workTimeStart || row.workTimeEnd){
+                        return row.workTimeStart+"-"+row.workTimeEnd;
+                    }
+                }
+            },{
                 field:"workHours",
                 title:"工作用时"
             },{
@@ -486,9 +536,15 @@
         var currentDate=currentTime.getDate();
         $("#workDate_insert_input").val(currentYear+"/"+currentMonth+"/"+currentDate);
     }
+    //校验form表单数据
+    function validate_add_form(){
+    }
     //保存数据
     $("#save_btn").click(function(){
         //1.表单数据验证
+//        if (!validate_add_form()){
+//            return;
+//        };
         //2.发送ajax请求
         $.ajax({
             url:"${basePath}/workDiary",
@@ -550,6 +606,8 @@
         $("#workModule_update_select").val(obj.workModule);
         $("#workDate_update_input").val(dateFormatter(obj.workDate));
         $("#workHours_update_input").val(obj.workHours);
+        $("#workTimeStart_update_input").val(obj.workTimeStart);
+        $("#workTimeEnd_update_input").val(obj.workTimeEnd);
         $("#workContent_update_textarea").val(obj.workContent);
         $("#remark_update_textarea").val(obj.remark);
         $("#update_btn").attr("data-id",obj.id);

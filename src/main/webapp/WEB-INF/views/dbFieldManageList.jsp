@@ -48,23 +48,43 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <label for="fieldClass_insert_input" class="col-sm-2 control-label">属性类型</label>
+                                    <label for="fieldClass_insert_select" class="col-sm-2 control-label">属性类型</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" type="text" name="fieldClass" id="fieldClass_insert_input"/>
+                                        <select class="form-control" name="fieldClass" id="fieldClass_insert_select">
+                                            <option value=""></option>
+                                            <option value="string">字符</option>
+                                            <option value="date">日期</option>
+                                            <option value="int">数值</option>
+                                        </select>
                                     </div>
+                                    <label for="objectName_insert_input" class="col-sm-2 control-label">对象名称</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="objectName" id="objectName_insert_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
                                     <label for="columnName_insert_input" class="col-sm-2 control-label">字段名称</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" name="columnName" id="columnName_insert_input"/>
                                     </div>
-                                </div>
-                                <div class="form-group form-group-sm">
                                     <label for="columnDescript_insert_input" class="col-sm-2 control-label">字段描述</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" type="text" name="columnDescript" id="columnDescript_insert_input"/>
                                     </div>
-                                    <label for="columnType_insert_input" class="col-sm-2 control-label">字段类型</label>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="columnType_insert_select" class="col-sm-2 control-label">字段类型</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" name="columnType" id="columnType_insert_input"/>
+                                        <select class="form-control" name="columnType" id="columnType_insert_select">
+                                            <option value=""></option>
+                                            <option value="varchar2">字符</option>
+                                            <option value="date">日期</option>
+                                            <option value="int">数值</option>
+                                        </select>
+                                    </div>
+                                    <label for="tableName_insert_input" class="col-sm-2 control-label">表名</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" name="tableName" id="tableName_insert_input"/>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
@@ -72,9 +92,19 @@
                                     <div class="col-sm-4">
                                         <input class="form-control" name="sortIndex" id="sortIndex_insert_input"/>
                                     </div>
-                                    <label for="tableName_insert_input" class="col-sm-2 control-label">表名</label>
+                                    <label for="status_insert_select" class="col-sm-2 control-label">状态</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" name="tableName" id="tableName_insert_input"/>
+                                        <select class="form-control" name="status" id="status_insert_select">
+                                            <option value="0">启用</option>
+                                            <option value="1">禁用</option>
+                                            <option value="2">主键</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="tableDescript_insert_input" class="col-sm-2 control-label">表名描述</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="tableDescript" id="tableDescript_insert_input"/>
                                     </div>
                                 </div>
                             </form>
@@ -111,23 +141,43 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <label for="fieldClass_update_input" class="col-sm-2 control-label">属性类型</label>
+                                    <label for="fieldClass_update_select" class="col-sm-2 control-label">属性类型</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" type="text" name="fieldClass" id="fieldClass_update_input"/>
+                                        <select class="form-control" name="fieldClass" id="fieldClass_update_select">
+                                            <option value=""></option>
+                                            <option value="string">字符</option>
+                                            <option value="date">日期</option>
+                                            <option value="int">数值</option>
+                                        </select>
                                     </div>
+                                    <label for="objectName_update_input" class="col-sm-2 control-label">对象名称</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="objectName" id="objectName_update_input"/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
                                     <label for="columnName_update_input" class="col-sm-2 control-label">字段名称</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" name="columnName" id="columnName_update_input"/>
                                     </div>
-                                </div>
-                                <div class="form-group form-group-sm">
                                     <label for="columnDescript_update_input" class="col-sm-2 control-label">字段描述</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" type="text" name="columnDescript" id="columnDescript_update_input"/>
                                     </div>
-                                    <label for="columnType_update_input" class="col-sm-2 control-label">字段类型</label>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="columnType_update_select" class="col-sm-2 control-label">字段类型</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" name="columnType" id="columnType_update_input"/>
+                                        <select class="form-control" name="columnType" id="columnType_update_select">
+                                            <option value=""></option>
+                                            <option value="varchar2">字符</option>
+                                            <option value="date">日期</option>
+                                            <option value="int">数值</option>
+                                        </select>
+                                    </div>
+                                    <label for="tableName_update_input" class="col-sm-2 control-label">表名</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" name="tableName" id="tableName_update_input"/>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
@@ -135,9 +185,19 @@
                                     <div class="col-sm-4">
                                         <input class="form-control" name="sortIndex" id="sortIndex_update_input"/>
                                     </div>
-                                    <label for="tableName_update_input" class="col-sm-2 control-label">表名</label>
+                                    <label for="status_update_select" class="col-sm-2 control-label">状态</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" name="tableName" id="tableName_update_input"/>
+                                        <select class="form-control" name="status" id="status_update_select">
+                                            <option value="0">启用</option>
+                                            <option value="1">禁用</option>
+                                            <option value="2">主键</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="tableDescript_update_input" class="col-sm-2 control-label">表名描述</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="tableDescript" id="tableDescript_update_input"/>
                                     </div>
                                 </div>
                             </form>
@@ -247,6 +307,9 @@
                     field:"fieldClass",
                     title:"属性类型"
                 },{
+                    field:"objectName",
+                    title:"对象名称"
+                },{
                     field:"columnName",
                     title:"字段名称"
                 },{
@@ -256,11 +319,20 @@
                     field:"columnType",
                     title:"字段类型"
                 },{
+                    field:"tableName",
+                    title:"表名"
+                },{
+                    field:"tableDescript",
+                    title:"描述"
+                },{
                     field:"sortIndex",
                     title:"排序"
                 },{
-                    field:"tableName",
-                    title:"表名"
+                    field:"status",
+                    title:"状态",
+                    formatter:function (value,row,index) {
+                        return 0 == value ? "启用" : 1 == value ? "禁用" : "主键";
+                    }
                 }],
                 formatSearch:function () {
                     return "搜索：表名";
@@ -330,12 +402,15 @@
         function showEditDataDetail(obj){
             $("#fieldName_update_input").val(obj.fieldName);
             $("#fieldDescript_update_input").val(obj.fieldDescript);
-            $("#fieldClass_update_input").val(obj.fieldClass);
+            $("#fieldClass_update_select").val(obj.fieldClass);
             $("#columnName_update_input").val(obj.columnName);
             $("#columnDescript_update_input").val(obj.columnDescript);
-            $("#columnType_update_input").val(obj.columnType);
+            $("#columnType_update_select").val(obj.columnType);
             $("#sortIndex_update_input").val(obj.sortIndex);
             $("#tableName_update_input").val(obj.tableName);
+            $("#objectName_update_input").val(obj.objectName);
+            $("#status_update_select").val(obj.status);
+            $("#tableDescript_update_input").val(obj.tableDescript);
             $("#update_btn").attr("data-id",obj.uuid);
         }
         //更新按钮

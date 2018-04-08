@@ -9,6 +9,8 @@
     <result column="WORK_DATE" jdbcType="TIMESTAMP" property="workDate" />
     <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType" />
     <result column="WORK_MODULE" jdbcType="VARCHAR" property="workModule" />
+    <result column="WORK_TIME_START" jdbcType="VARCHAR" property="workTimeStart" />
+    <result column="WORK_TIME_END" jdbcType="VARCHAR" property="workTimeEnd" />
     <result column="WORK_HOURS" jdbcType="VARCHAR" property="workHours" />
     <result column="WORK_CONTENT" jdbcType="VARCHAR" property="workContent" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
@@ -80,9 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, EMP_ID, EMP_NAME, SECTION, WORK_DATE, WORK_TYPE, WORK_MODULE, WORK_HOURS, WORK_CONTENT, 
-    REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, 
-    UPDATE_TIME
+    ID, EMP_ID, EMP_NAME, SECTION, WORK_DATE, WORK_TYPE, WORK_MODULE, WORK_TIME_START, 
+    WORK_TIME_END, WORK_HOURS, WORK_CONTENT, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, 
+    CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.WorkDiaryExample" resultMap="BaseResultMap">
     select
@@ -117,18 +119,18 @@
   <insert id="insert" parameterType="com.navinfo.IMS.entity.WorkDiary">
     insert into IMS.WORK_DIARY (ID, EMP_ID, EMP_NAME, 
       SECTION, WORK_DATE, WORK_TYPE, 
-      WORK_MODULE, WORK_HOURS, WORK_CONTENT, 
-      REMARK, STATUS, DEL_FLAG, 
-      CREATOR_ID, CREATOR, CREATE_TIME, 
-      UPDATER_ID, UPDATER, UPDATE_TIME
-      )
+      WORK_MODULE, WORK_TIME_START, WORK_TIME_END, 
+      WORK_HOURS, WORK_CONTENT, REMARK, 
+      STATUS, DEL_FLAG, CREATOR_ID, 
+      CREATOR, CREATE_TIME, UPDATER_ID, 
+      UPDATER, UPDATE_TIME)
     values (#{id,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
       #{section,jdbcType=VARCHAR}, #{workDate,jdbcType=TIMESTAMP}, #{workType,jdbcType=VARCHAR}, 
-      #{workModule,jdbcType=VARCHAR}, #{workHours,jdbcType=VARCHAR}, #{workContent,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
-      #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{workModule,jdbcType=VARCHAR}, #{workTimeStart,jdbcType=VARCHAR}, #{workTimeEnd,jdbcType=VARCHAR}, 
+      #{workHours,jdbcType=VARCHAR}, #{workContent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.WorkDiary">
     insert into IMS.WORK_DIARY
@@ -153,6 +155,12 @@
       </if>
       <if test="workModule != null">
         WORK_MODULE,
+      </if>
+      <if test="workTimeStart != null">
+        WORK_TIME_START,
+      </if>
+      <if test="workTimeEnd != null">
+        WORK_TIME_END,
       </if>
       <if test="workHours != null">
         WORK_HOURS,
@@ -209,6 +217,12 @@
       </if>
       <if test="workModule != null">
         #{workModule,jdbcType=VARCHAR},
+      </if>
+      <if test="workTimeStart != null">
+        #{workTimeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="workTimeEnd != null">
+        #{workTimeEnd,jdbcType=VARCHAR},
       </if>
       <if test="workHours != null">
         #{workHours,jdbcType=VARCHAR},
@@ -275,6 +289,12 @@
       <if test="record.workModule != null">
         WORK_MODULE = #{record.workModule,jdbcType=VARCHAR},
       </if>
+      <if test="record.workTimeStart != null">
+        WORK_TIME_START = #{record.workTimeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTimeEnd != null">
+        WORK_TIME_END = #{record.workTimeEnd,jdbcType=VARCHAR},
+      </if>
       <if test="record.workHours != null">
         WORK_HOURS = #{record.workHours,jdbcType=VARCHAR},
       </if>
@@ -322,6 +342,8 @@
       WORK_DATE = #{record.workDate,jdbcType=TIMESTAMP},
       WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
       WORK_MODULE = #{record.workModule,jdbcType=VARCHAR},
+      WORK_TIME_START = #{record.workTimeStart,jdbcType=VARCHAR},
+      WORK_TIME_END = #{record.workTimeEnd,jdbcType=VARCHAR},
       WORK_HOURS = #{record.workHours,jdbcType=VARCHAR},
       WORK_CONTENT = #{record.workContent,jdbcType=VARCHAR},
       REMARK = #{record.remark,jdbcType=VARCHAR},
@@ -357,6 +379,12 @@
       </if>
       <if test="workModule != null">
         WORK_MODULE = #{workModule,jdbcType=VARCHAR},
+      </if>
+      <if test="workTimeStart != null">
+        WORK_TIME_START = #{workTimeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="workTimeEnd != null">
+        WORK_TIME_END = #{workTimeEnd,jdbcType=VARCHAR},
       </if>
       <if test="workHours != null">
         WORK_HOURS = #{workHours,jdbcType=VARCHAR},
@@ -402,6 +430,8 @@
       WORK_DATE = #{workDate,jdbcType=TIMESTAMP},
       WORK_TYPE = #{workType,jdbcType=VARCHAR},
       WORK_MODULE = #{workModule,jdbcType=VARCHAR},
+      WORK_TIME_START = #{workTimeStart,jdbcType=VARCHAR},
+      WORK_TIME_END = #{workTimeEnd,jdbcType=VARCHAR},
       WORK_HOURS = #{workHours,jdbcType=VARCHAR},
       WORK_CONTENT = #{workContent,jdbcType=VARCHAR},
       REMARK = #{remark,jdbcType=VARCHAR},

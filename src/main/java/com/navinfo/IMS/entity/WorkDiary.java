@@ -17,6 +17,10 @@ public class WorkDiary {
 
     private String workModule;
 
+    private String workTimeStart;
+
+    private String workTimeEnd;
+
     private String workHours;
 
     private String workContent;
@@ -93,6 +97,22 @@ public class WorkDiary {
 
     public void setWorkModule(String workModule) {
         this.workModule = workModule == null ? null : workModule.trim();
+    }
+
+    public String getWorkTimeStart() {
+        return workTimeStart;
+    }
+
+    public void setWorkTimeStart(String workTimeStart) {
+        this.workTimeStart = workTimeStart == null ? null : workTimeStart.trim();
+    }
+
+    public String getWorkTimeEnd() {
+        return workTimeEnd;
+    }
+
+    public void setWorkTimeEnd(String workTimeEnd) {
+        this.workTimeEnd = workTimeEnd == null ? null : workTimeEnd.trim();
     }
 
     public String getWorkHours() {

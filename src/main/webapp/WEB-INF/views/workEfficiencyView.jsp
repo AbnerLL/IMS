@@ -149,7 +149,7 @@
         function initTable(){
             $("#table_list").bootstrapTable({
                 //获取数据的url
-                url:"${basePath}/workEfficiency",
+                url:"${basePath}/view/workEfficiency",
                 method: 'get',//请求方式
                 toolbar: '#toolbar',                //工具按钮用哪个容器
 //            classes:"table table-hover table-bordered",        //设置table的class属性

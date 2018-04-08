@@ -5,12 +5,15 @@
     <id column="UUID" jdbcType="VARCHAR" property="uuid" />
     <result column="FIELD_NAME" jdbcType="VARCHAR" property="fieldName" />
     <result column="FIELD_DESCRIPT" jdbcType="VARCHAR" property="fieldDescript" />
-    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
     <result column="FIELD_CLASS" jdbcType="VARCHAR" property="fieldClass" />
+    <result column="OBJECT_NAME" jdbcType="VARCHAR" property="objectName" />
     <result column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
     <result column="COLUMN_DESCRIPT" jdbcType="VARCHAR" property="columnDescript" />
     <result column="COLUMN_TYPE" jdbcType="VARCHAR" property="columnType" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="TABLE_DESCRIPT" jdbcType="VARCHAR" property="tableDescript" />
     <result column="SORT_INDEX" jdbcType="VARCHAR" property="sortIndex" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UUID, FIELD_NAME, FIELD_DESCRIPT, TABLE_NAME, FIELD_CLASS, COLUMN_NAME, COLUMN_DESCRIPT, 
-    COLUMN_TYPE, SORT_INDEX
+    UUID, FIELD_NAME, FIELD_DESCRIPT, FIELD_CLASS, OBJECT_NAME, COLUMN_NAME, COLUMN_DESCRIPT, 
+    COLUMN_TYPE, TABLE_NAME, TABLE_DESCRIPT, SORT_INDEX, STATUS
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.core.entity.DBFieldManageExample" resultMap="BaseResultMap">
     select
@@ -106,12 +109,14 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.core.entity.DBFieldManage">
     insert into IMS.BASE_TABLE_COL_DEFINE (UUID, FIELD_NAME, FIELD_DESCRIPT, 
-      TABLE_NAME, FIELD_CLASS, COLUMN_NAME, 
-      COLUMN_DESCRIPT, COLUMN_TYPE, SORT_INDEX
+      FIELD_CLASS, OBJECT_NAME, COLUMN_NAME, 
+      COLUMN_DESCRIPT, COLUMN_TYPE, TABLE_NAME, 
+      TABLE_DESCRIPT, SORT_INDEX, STATUS
       )
     values (#{uuid,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, #{fieldDescript,jdbcType=VARCHAR}, 
-      #{tableName,jdbcType=VARCHAR}, #{fieldClass,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, 
-      #{columnDescript,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR}, #{sortIndex,jdbcType=VARCHAR}
+      #{fieldClass,jdbcType=VARCHAR}, #{objectName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, 
+      #{columnDescript,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, 
+      #{tableDescript,jdbcType=VARCHAR}, #{sortIndex,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.core.entity.DBFieldManage">
@@ -126,11 +131,11 @@
       <if test="fieldDescript != null">
         FIELD_DESCRIPT,
       </if>
-      <if test="tableName != null">
-        TABLE_NAME,
-      </if>
       <if test="fieldClass != null">
         FIELD_CLASS,
+      </if>
+      <if test="objectName != null">
+        OBJECT_NAME,
       </if>
       <if test="columnName != null">
         COLUMN_NAME,
@@ -141,8 +146,17 @@
       <if test="columnType != null">
         COLUMN_TYPE,
       </if>
+      <if test="tableName != null">
+        TABLE_NAME,
+      </if>
+      <if test="tableDescript != null">
+        TABLE_DESCRIPT,
+      </if>
       <if test="sortIndex != null">
         SORT_INDEX,
+      </if>
+      <if test="status != null">
+        STATUS,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -155,11 +169,11 @@
       <if test="fieldDescript != null">
         #{fieldDescript,jdbcType=VARCHAR},
       </if>
-      <if test="tableName != null">
-        #{tableName,jdbcType=VARCHAR},
-      </if>
       <if test="fieldClass != null">
         #{fieldClass,jdbcType=VARCHAR},
+      </if>
+      <if test="objectName != null">
+        #{objectName,jdbcType=VARCHAR},
       </if>
       <if test="columnName != null">
         #{columnName,jdbcType=VARCHAR},
@@ -170,8 +184,17 @@
       <if test="columnType != null">
         #{columnType,jdbcType=VARCHAR},
       </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableDescript != null">
+        #{tableDescript,jdbcType=VARCHAR},
+      </if>
       <if test="sortIndex != null">
         #{sortIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -193,11 +216,11 @@
       <if test="record.fieldDescript != null">
         FIELD_DESCRIPT = #{record.fieldDescript,jdbcType=VARCHAR},
       </if>
-      <if test="record.tableName != null">
-        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
-      </if>
       <if test="record.fieldClass != null">
         FIELD_CLASS = #{record.fieldClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectName != null">
+        OBJECT_NAME = #{record.objectName,jdbcType=VARCHAR},
       </if>
       <if test="record.columnName != null">
         COLUMN_NAME = #{record.columnName,jdbcType=VARCHAR},
@@ -208,8 +231,17 @@
       <if test="record.columnType != null">
         COLUMN_TYPE = #{record.columnType,jdbcType=VARCHAR},
       </if>
+      <if test="record.tableName != null">
+        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableDescript != null">
+        TABLE_DESCRIPT = #{record.tableDescript,jdbcType=VARCHAR},
+      </if>
       <if test="record.sortIndex != null">
         SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -221,12 +253,15 @@
     set UUID = #{record.uuid,jdbcType=VARCHAR},
       FIELD_NAME = #{record.fieldName,jdbcType=VARCHAR},
       FIELD_DESCRIPT = #{record.fieldDescript,jdbcType=VARCHAR},
-      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
       FIELD_CLASS = #{record.fieldClass,jdbcType=VARCHAR},
+      OBJECT_NAME = #{record.objectName,jdbcType=VARCHAR},
       COLUMN_NAME = #{record.columnName,jdbcType=VARCHAR},
       COLUMN_DESCRIPT = #{record.columnDescript,jdbcType=VARCHAR},
       COLUMN_TYPE = #{record.columnType,jdbcType=VARCHAR},
-      SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR}
+      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      TABLE_DESCRIPT = #{record.tableDescript,jdbcType=VARCHAR},
+      SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -240,11 +275,11 @@
       <if test="fieldDescript != null">
         FIELD_DESCRIPT = #{fieldDescript,jdbcType=VARCHAR},
       </if>
-      <if test="tableName != null">
-        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
-      </if>
       <if test="fieldClass != null">
         FIELD_CLASS = #{fieldClass,jdbcType=VARCHAR},
+      </if>
+      <if test="objectName != null">
+        OBJECT_NAME = #{objectName,jdbcType=VARCHAR},
       </if>
       <if test="columnName != null">
         COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
@@ -255,8 +290,17 @@
       <if test="columnType != null">
         COLUMN_TYPE = #{columnType,jdbcType=VARCHAR},
       </if>
+      <if test="tableName != null">
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableDescript != null">
+        TABLE_DESCRIPT = #{tableDescript,jdbcType=VARCHAR},
+      </if>
       <if test="sortIndex != null">
         SORT_INDEX = #{sortIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
       </if>
     </set>
     where UUID = #{uuid,jdbcType=VARCHAR}
@@ -265,12 +309,15 @@
     update IMS.BASE_TABLE_COL_DEFINE
     set FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
       FIELD_DESCRIPT = #{fieldDescript,jdbcType=VARCHAR},
-      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
       FIELD_CLASS = #{fieldClass,jdbcType=VARCHAR},
+      OBJECT_NAME = #{objectName,jdbcType=VARCHAR},
       COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
       COLUMN_DESCRIPT = #{columnDescript,jdbcType=VARCHAR},
       COLUMN_TYPE = #{columnType,jdbcType=VARCHAR},
-      SORT_INDEX = #{sortIndex,jdbcType=VARCHAR}
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      TABLE_DESCRIPT = #{tableDescript,jdbcType=VARCHAR},
+      SORT_INDEX = #{sortIndex,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

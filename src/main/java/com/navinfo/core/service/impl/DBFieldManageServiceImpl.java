@@ -27,10 +27,17 @@ public class DBFieldManageServiceImpl implements DBFieldManageService {
     private DBFieldManageExample createSearchExample(DBFieldManageSearch search){
         DBFieldManageExample example=new DBFieldManageExample();
         example.createCriteria();
+        if (StringUtil.notNull(search.getUuid())){
+            example.getOredCriteria().get(0).andUuidEqualTo(search.getUuid());
+        }
         if (StringUtil.notNull(search.getTableName())){
             example.getOredCriteria().get(0).andTableNameEqualTo(search.getTableName());
         }
-        example.setOrderByClause("sort_index");
+        if (StringUtil.notNull(search.getKeyword())){
+            example.or().andTableNameEqualTo(search.getKeyword());
+            example.or().andTableDescriptEqualTo(search.getKeyword());
+        }
+        example.setOrderByClause("table_name,to_number(sort_index)");
         return example;
     }
 

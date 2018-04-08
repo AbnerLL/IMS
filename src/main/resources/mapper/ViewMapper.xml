@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.navinfo.IMS.dao.view.WorkEfficiencyMapper">
+<mapper namespace="com.navinfo.IMS.dao.view.ViewMapper">
     <select id="calculateEfficiency" parameterType="Map" resultMap="baseResultMap">
         SELECT emp_id,emp_name
         <if test="workType=='RoadMark' or workType==''">
@@ -69,4 +69,37 @@
         <result column ="work_num2" property="workNum2"/>
         <result column="hours" property="hours"/>
     </resultMap>
+    <select id="selectWeekReports" resultType="com.navinfo.IMS.entity.WeekReport">
+        SELECT * FROM week_report a
+        <where>
+            <if test="year !=null and year != ''">
+                a.YEAR = #{year}
+            </if>
+            <if test="workType !=null and workType != ''">
+                AND a.work_type = #{workType}
+            </if>
+        </where>
+    </select>
+    <select id="selectQuestionReport" resultType="com.navinfo.IMS.entity.QuestionReport">
+        SELECT * FROM question_report a
+        <where>
+            <if test="workType != null and workType != ''">
+                a.work_type = #{workType}
+            </if>
+            <if test="year != null and year != ''">
+                AND a.year = #{year}
+            </if>
+        </where>
+    </select>
+    <select id="selectKPIReport" resultType="com.navinfo.IMS.entity.KPIReport">
+        SELECT * FROM kpi_report a
+        <where>
+            <if test="workType != null and workType != ''">
+                a.work_type = #{workType}
+            </if>
+            <if test="year != null and year != ''">
+                AND a.year = #{year}
+            </if>
+        </where>
+    </select>
 </mapper>
