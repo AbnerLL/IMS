@@ -67,16 +67,12 @@
                                 <label for="certificate_insert_textarea" class="col-sm-2 control-label">所获证书</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" rows="3" name="certificate" id="certificate_insert_textarea"></textarea>
-                                    <label for="certificate_attach_file" class="control-label sr-only" >奖励情况附件</label>
-                                    <input type="file" id="certificate_attach_file" multiple="multiple"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label for="award_insert_textarea" class="col-sm-2 control-label">奖励情况</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" rows="3" name="award" id="award_insert_textarea"></textarea>
-                                    <label for="award_attach_file" class="control-label sr-only" >奖励情况附件</label>
-                                    <input type="file" id="award_attach_file" multiple="multiple"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
