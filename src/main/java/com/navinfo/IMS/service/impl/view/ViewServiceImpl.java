@@ -7,12 +7,12 @@ import com.navinfo.IMS.entity.KPIReport;
 import com.navinfo.IMS.entity.QuestionReport;
 import com.navinfo.IMS.entity.WeekReport;
 import com.navinfo.IMS.service.view.ViewService;
-import com.navinfo.IMS.utils.Constant;
 import com.navinfo.IMS.utils.PageObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +22,16 @@ import java.util.Map;
  */
 @Service("viewService")
 public class ViewServiceImpl implements ViewService {
+    public static Map<String,String> workTypeMap=new HashMap<String,String>();
+    static{
+        workTypeMap.put("RoadMark","道路图标");
+        workTypeMap.put("ChPOI","中文名称");
+        workTypeMap.put("ChAddress","中文地址");
+        workTypeMap.put("EnPOI","英文名称");
+        workTypeMap.put("EnAddress","英文地址");
+        workTypeMap.put("DepthInfo","深度信息");
+        workTypeMap.put("Agency","代理店");
+    }
     @Autowired
     private ViewMapper viewMapper;
 
@@ -33,7 +43,7 @@ public class ViewServiceImpl implements ViewService {
             map.put("workType","RoadMark");
         }
         //作业类型的名称
-        workType=Constant.map.get(workType);
+//        workType=workTypeMap.get(workType);
         List<WorkEfficiency> list = viewMapper.calculateEfficiency(map);
         //计算工效
         try{
