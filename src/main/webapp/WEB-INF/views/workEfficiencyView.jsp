@@ -187,12 +187,23 @@
                 },{
                     field:"workType",
                     title:"作业类型",
+                        formatter:function (value ,row,index) {
+                            switch(value){
+                                case 'RoadMark' : return '道路图标';
+                                case 'ChPOI' : return '中文名称';
+                                case 'ChAddress' : return '中文地址';
+                                case 'EnPOI' : return '英文名称';
+                                case 'EnAddress' : return '英文地址';
+                                case 'DepthInfo' : return '深度信息';
+                                case 'Agency' : return '代理店';
+                            }
+                        }
                 },{
                     field:"workEfficiency",
                     title:"作业工效"
                 },{
                     field:"auditEfficiency",
-                    title:"质检工效",
+                    title:"质检工效"
                 }]
             });
         }
