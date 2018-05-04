@@ -17,6 +17,13 @@
         fieldset{padding:.35em .625em .75em;margin:0 2px;border:1px solid silver}
 
         legend{padding:.5em;border:0;width:auto}
+        /*#file_list_table tr,td{*/
+            /*border: red 1px solid;*/
+        /*}*/
+        #file_list_table tr{
+            margin-bottom: 5px;
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +62,7 @@
             </div>
             <div class="col-sm-2">
                 <div class="btn-group btn-group-sm">
-                    <button class="btn btn-success" id="add_file_btn">添加文件</button>
+                    <button class="btn btn-success" id="manage_file_btn">文件管理</button>
                     <button class="btn btn-primary" id="import_btn">开始导入</button>
                 </div>
             </div>
@@ -64,7 +71,7 @@
             <div class="col-sm-11" style="margin-left: 30px;">
                 <form id="data_form">
                     <input name="primaryKey" id="primaryKey_hidden" value="" hidden/>
-                    <table class="table table-condensed">
+                    <table class="table table-condensed" id="import_col_tb">
                         <thead>
                             <tr>
                                 <th>编号</th>
@@ -73,13 +80,66 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </form>
             </div>
         </div>
     </div>
+    <!-- 文件管理 -->
+    <div class="modal fade" id="list_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel1">文件列表</h4>
+                    </div>
+                <div class="tab1">
+                    <div class="modal-body" style="margin-bottom: 0px;height: 300px;overflow: auto;">
+                        <table id="file_list_table" style="width:100%;" cellspacing="10" cellpadding="10" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="width: 15%">序号</th>
+                                <th style="width: 55%">文件名</th>
+                                <th style="width: 30%;text-align: center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button id="add_file_btn" type="button" class="btn btn-primary">添加文件</button>
+                    </div>
+                </div>
+                <div class="tab2" style="display: none;">
+                    <div class="modal-body" style="margin-bottom: 0px;">
+                        <div class="file-loading">
+                            <input id="attach_file" name="attachFile" multiple type="file">
+                        </div>
+                        <div id="file-upload-errors"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="return_btn">返回</button>
+                        <button id="upload_btn" type="button" class="btn btn-primary">开始上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 添加文件 -->
+    <div class="modal fade" id="add_file_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="${basePath}/js/bootstrap-fileInput/js/fileinput.js"></script>
+    <script type="text/javascript" src="${basePath}/js/bootstrap-fileInput/js/locales/fileinput_zh.js"></script>
 <script type="text/javascript">
     $(function () {
         initImportFile();
@@ -149,6 +209,7 @@
         //根据primaryKeyMap设置主键字段
         funSetPrimaryKey();
         //根据table中access字段自动匹配oracle字段
+        console.log(primaryKeyMap);
     });
     var primaryKeyMap={};
     //根据primaryKeyMap设置主键字段
@@ -220,35 +281,53 @@
         $("#sheetName_select").append("<option value=''></option>").append(sheetOption);
     });
 
-    //文件上传部分
-    $("#attach_file").fileinput({
-        showPreview: false,
-        showUpload: false,
-        language:'zh',
-        elErrorContainer: '#file-upload-errors',
-        allowedFileExtensions: ["accdb", "mdb"],
-        uploadUrl: '${basePath}/file/fileUpload',
-//        uploadExtraData:getExtraParameter
-    });
     //表单数据校验
     function validateForm(){
-        var $selects = $("table select");
-        var flag =true;
-        $selects.each(function (index) {
-            if (!flag){
-                return ;
+//        var $selects = $("table select");
+//        var flag =true;
+//        $selects.each(function (index) {
+//            if (!flag){
+//                return ;
+//            }
+//           if (!this.value){
+//               alert("ORACLE字段不允许为空！");
+//               flag = false;
+//               return flag;
+//           }
+//           if (index != 0 && $("table select:first").val() == this.value){
+//               alert("ORACLE字段不能出现重复！");
+//               flag = false;
+//               return flag;
+//           }
+//        });
+//        return flag;
+        var flag = true;
+        var value_container = '';
+        var tb = document.getElementById("import_col_tb");
+        var tb_tbody = tb.getElementsByTagName("tbody")[0];
+        var tb_tbody_trs = tb_tbody.getElementsByTagName("tr");
+        if (tb_tbody_trs.length == 0){
+            alert("请至少指定一行数据！");
+            return false;
+        }
+        for (var i=0; i<tb_tbody_trs.length; i++){
+            var tds = tb_tbody_trs[i].childNodes;
+            var td_select = tds[2].firstChild;
+            var selectId = td_select.selectedIndex;
+            var orl_val = td_select.options[selectId].value;
+            if (!orl_val){
+                alert("ORACLE字段不允许为空！");
+                flag = false;
+                break;
+            }else{
+                if (value_container.indexOf(orl_val+';') != -1){
+                    alert("ORACLE字段不能出现重复！");
+                    flag = false;
+                    break;
+                }
+                value_container += orl_val+';';
             }
-           if (!this.value){
-               alert("ORACLE字段不允许为空！");
-               flag = false;
-               return flag;
-           }
-           if (index != 0 && $("table select:first").val() == this.value){
-               alert("ORACLE字段不能出现重复！");
-               flag = false;
-               return flag; ;
-           }
-        });
+        }
         return flag;
     }
     //导入数据开始
@@ -275,6 +354,105 @@
                 alert("请求异常！");
             }
         })
+    });
+    //文件列表按钮
+    $("#manage_file_btn").click(function () {
+        //弹出模态框
+        $("#list_modal").modal("toggle");
+        //加载所有文件信息
+        loadAllImportFileDetail();
+    });
+    //加载所有文件信息
+    function loadAllImportFileDetail() {
+        $.ajax({
+            url:"${basePath}/import/importFileDetail",
+            method:"get",
+            dataType:"json",
+            success:function (result) {
+                if (1==result.code){
+                    initFileListTable(result.extend);
+                }
+            }
+        })
+    }
+    //初始化文件列表
+    function initFileListTable(data) {
+        var fileInfo = data.info;
+        var downloadInfo = data.downloadInfo;
+        var logJson = data.logInfo;
+        var $tbody = $("#file_list_table tbody").empty();
+        $.each(fileInfo,function (index,value) {
+            var fileName = value.dbName.substring(0,value.dbName.indexOf("."));
+            var $tr = $("<tr></tr>");
+            $tr.append("<td>"+(index+1)+"</td>")
+                .append("<td>"+value.dbName+"</td>")
+                .append("<td><div style='text-align: center'><button class='btn btn-info btn-sm download-btn' data-download-url='"+(downloadInfo[value.dbName] || '')+"'><span class='fa fa-download'></button>&nbsp;" +
+                        "<button class='btn btn-success btn-sm search-btn' data-search-id='"+(logJson[fileName] || '')+"'><span class='fa fa-search'></span></button>&nbsp;"+
+                        "<button class='btn btn-danger btn-sm del-file-btn' data-delete-id='"+fileName+"'><span class='fa fa-trash'></span></button></div></td>");
+
+            $tbody.append($tr);
+        });
+    }
+    //查看导入文件的log日志
+    $("#file_list_table").on('click',"button[class*='search-btn']",function () {
+        if($(this).attr("data-search-id")){
+            window.open($(this).attr("data-search-id"));
+        }
+    });
+    //下载文件按钮
+    $("#file_list_table").on('click',"button[class*='download-btn']",function () {
+        if ($(this).attr("data-download-url")){
+            window.open($(this).attr("data-download-url"));
+        }
+    });
+    //删除文件按钮
+    $("#file_list_table").on('click',"button[class*='del-file-btn']",function (){
+        if (confirm("是否删除该文件！")){
+            $.ajax({
+                url:'${basePath}/import/deleteImportFile?fileName='+$(this).attr("data-delete-id"),
+                method:'get',
+                dataType:'json',
+                success:function (result) {
+                    if (1==result.code){
+                        alert("删除成功");
+                        //刷新列表
+                        loadAllImportFileDetail();
+                    }else {
+                        alert("删除失败");
+                    }
+                }
+            })
+        }
+    });
+    //显示
+    $("#add_file_btn").click(function () {
+        $(".tab1").hide();
+        $(".tab2").show();
+    });
+    //返回按钮
+    $("#return_btn").click(function () {
+        $(".tab2").hide();
+        $(".tab1").show();
+        //刷新列表
+        loadAllImportFileDetail();
+    });
+    //初始化文件上传组件
+    $("#attach_file").fileinput({
+        showPreview: true,
+        showUpload: false,
+        language:'zh',
+        elErrorContainer: '#file-upload-errors',
+        allowedFileExtensions: ["accdb"],
+        uploadUrl: '${basePath}/import/uploadImportFile',
+        uploadExtraData:getExtraParameter
+    });
+    //上传文件是添加的额外参数
+    function getExtraParameter(previewId,index){
+        return {};
+    }
+    //上传按钮
+    $("#upload_btn").on("click",function () {
+        $("#attach_file").fileinput("upload");
     });
 </script>
 </body>
