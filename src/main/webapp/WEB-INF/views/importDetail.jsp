@@ -283,24 +283,6 @@
 
     //表单数据校验
     function validateForm(){
-//        var $selects = $("table select");
-//        var flag =true;
-//        $selects.each(function (index) {
-//            if (!flag){
-//                return ;
-//            }
-//           if (!this.value){
-//               alert("ORACLE字段不允许为空！");
-//               flag = false;
-//               return flag;
-//           }
-//           if (index != 0 && $("table select:first").val() == this.value){
-//               alert("ORACLE字段不能出现重复！");
-//               flag = false;
-//               return flag;
-//           }
-//        });
-//        return flag;
         var flag = true;
         var value_container = '';
         var tb = document.getElementById("import_col_tb");
@@ -320,12 +302,12 @@
                 flag = false;
                 break;
             }else{
-                if (value_container.indexOf(orl_val+';') != -1){
+                if (value_container.indexOf('['+orl_val+']') != -1){
                     alert("ORACLE字段不能出现重复！");
                     flag = false;
                     break;
                 }
-                value_container += orl_val+';';
+                value_container += '['+orl_val+']';
             }
         }
         return flag;
@@ -335,6 +317,9 @@
         if (!validateForm()){
             return;
         };
+        var $import_btn = $(this);
+        //禁用导入按钮
+        $import_btn.attr("disabled","true").text("导入中...");
         var fileName = $("#fileName_select").val();
         var sheetName = $("#sheetName_select").val();
         var orclTableName = $("#orclTableName_select").val();
@@ -349,9 +334,13 @@
                 }else{
                     alert("处理失败！")
                 }
+                //启用导入按钮
+                $import_btn.removeAttr("disabled").text("开始导入");
             },
             error:function () {
                 alert("请求异常！");
+                //启用导入按钮
+                $import_btn.removeAttr("disabled").text("开始导入");
             }
         })
     });
