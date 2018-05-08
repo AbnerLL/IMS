@@ -102,6 +102,10 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
             Integer minutesEnd = Integer.valueOf(workDiary.getWorkTimeEnd().substring(workDiary.getWorkTimeEnd().indexOf(":")+1));
             Integer minutesStart = Integer.valueOf(workDiary.getWorkTimeStart().substring(workDiary.getWorkTimeStart().indexOf(":")+1));
             BigDecimal diffHour = new BigDecimal(hourEnd - hourStart) ;
+            //如果工作时间跨越12:00到13:00，则减去一个小时
+            if (hourStart <= 12 && hourEnd >= 13){
+                diffHour = diffHour.subtract(BigDecimal.ONE);
+            }
             BigDecimal diffMinutes = new BigDecimal(minutesEnd).subtract(new BigDecimal(minutesStart)).divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_UP);
             workDiary.setWorkHours(diffHour.add(diffMinutes).toString());
         }
@@ -122,6 +126,10 @@ public class WorkDiaryServiceImpl implements WorkDiaryService{
             Integer minutesEnd = Integer.valueOf(workDiary.getWorkTimeEnd().substring(workDiary.getWorkTimeEnd().indexOf(":")+1));
             Integer minutesStart = Integer.valueOf(workDiary.getWorkTimeStart().substring(workDiary.getWorkTimeStart().indexOf(":")+1));
             BigDecimal diffHour = new BigDecimal(hourEnd - hourStart) ;
+            //如果工作时间跨越12:00到13:00，则减去一个小时
+            if (hourStart <= 12 && hourEnd >= 13){
+                diffHour = diffHour.subtract(BigDecimal.ONE);
+            }
             BigDecimal diffMinutes = new BigDecimal(minutesEnd).subtract(new BigDecimal(minutesStart)).divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_UP);
             workDiary.setWorkHours(diffHour.add(diffMinutes).toString());
         }

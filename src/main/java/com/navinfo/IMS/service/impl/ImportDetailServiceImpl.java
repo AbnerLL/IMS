@@ -9,11 +9,11 @@ import com.navinfo.IMS.dto.AccessTable;
 import com.navinfo.IMS.service.ImportDetailService;
 import com.navinfo.core.dao.DBFieldManageMapper;
 import com.navinfo.core.entity.DBFieldManage;
-import com.navinfo.core.service.DBFieldManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;

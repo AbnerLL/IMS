@@ -122,3 +122,10 @@ hr.hr20 {
     bottom:15px;
     right:15px;
 }
+.login-set{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+#auto-login-lb{
+    float: right;
+}

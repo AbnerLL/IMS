@@ -910,7 +910,9 @@
         <td class="xl66" width="117" style='width:87.75pt;' x:str>项目组</td>
         <td class="xl69" width="109" style='width:81.75pt;' x:str>工作类型</td>
         <td class="xl66" width="129" style='width:96.75pt;' x:str>工作日期</td>
+        <td class="xl66" width="93" style='width:69.75pt;' x:str>工作时间</td>
         <td class="xl66" width="126" style='width:94.50pt;' x:str>工作时长</td>
+        <td class="xl66" width="93" style='width:69.75pt;' x:str>工作模块</td>
         <td class="xl66" width="93" style='width:69.75pt;' x:str>工作内容</td>
     </tr>
     <c:forEach var="workDiary" items="${requestScope.workDiaryList}">
@@ -920,7 +922,9 @@
             <td class="x172">${workDiary.section}</td>
             <td class="x172">${workDiary.workType}</td>
             <td class="xl71"><fmt:formatDate value="${workDiary.workDate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+            <td class="x172">${workDiary.workTimeStart}-${workDiary.workTimeEnd}</td>
             <td class="x172">${workDiary.workHours}</td>
+            <td class="x172">${workDiary.workModule}</td>
             <td class="x172">${workDiary.workContent}</td>
         </tr>
     </c:forEach>
