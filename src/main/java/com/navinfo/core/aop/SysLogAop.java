@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 /**
- * 鏃ュ織aop
+ * 日志aop
  */
 @Aspect
 @Component
@@ -61,7 +61,7 @@ public class SysLogAop {
         }
 
         String strMessage = String
-                .format("[绫诲悕]:%s,[鏂规硶]:%s,[鍙傛暟]:%s", strClassName, strMethodName, bfParams.toString());
+                .format("[类名]:%s,[方法]:%s,[参数]:%s", strClassName, strMethodName, bfParams.toString());
         LOGGER.info(strMessage);
         if (isWriteLog(strMethodName)) {
             try {
