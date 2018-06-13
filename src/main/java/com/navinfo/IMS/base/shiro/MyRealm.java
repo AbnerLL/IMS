@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * è‡ªå®šä¹‰çš„realmç±»
+ * ×Ô¶¨ÒåµÄrealmÀà
  * Created by luozhihui on 2017/11/13.
  */
 public class MyRealm extends AuthorizingRealm {
@@ -29,18 +29,18 @@ public class MyRealm extends AuthorizingRealm {
     @Autowired
     private SysRoleService sysRoleService;
     /**
-     * æˆæƒï¼ˆç¬¬äºŒæ­¥ï¼‰
+     * ÊÚÈ¨£¨µÚ¶ş²½£©
      * @param principalCollection
      * @return
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("shrioæˆæƒdoGetAuthorizationInfo......");
+        System.out.println("shrioÊÚÈ¨doGetAuthorizationInfo......");
         String userName=(String)principalCollection.getPrimaryPrincipal();
-        //è§’è‰²é›†åˆ
+        //½ÇÉ«¼¯ºÏ
         Set<String> roleSet=new HashSet<String>();
-        //æƒé™é›†åˆ
+        //È¨ÏŞ¼¯ºÏ
         Set<String> permissionSet=new HashSet<String>();
-        //è·å–è§’è‰²(å·²ç»åˆå§‹åŒ–æƒé™)
+        //»ñÈ¡½ÇÉ«(ÒÑ¾­³õÊ¼»¯È¨ÏŞ)
         Set<SysRole> sysRoleSet=this.sysRoleService.findSysRoleByUsername(userName);
         Iterator<SysRole> it=sysRoleSet.iterator();
         while (it.hasNext()){
@@ -57,18 +57,18 @@ public class MyRealm extends AuthorizingRealm {
     }
 
     /**
-     * è®¤è¯ï¼ˆç¬¬ä¸€æ­¥ï¼‰
+     * ÈÏÖ¤£¨µÚÒ»²½£©
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
      */
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("shrioè®¤è¯doGetAuthenticationInfo......");
-        //1.è½¬åŒ–tokenï¼ˆç”¨æ¥å­˜æ”¾é¡µé¢ä¼ æ¥çš„ç”¨æˆ·åå’Œå¯†ç ï¼‰
+        System.out.println("shrioÈÏÖ¤doGetAuthenticationInfo......");
+        //1.×ª»¯token£¨ÓÃÀ´´æ·ÅÒ³Ãæ´«À´µÄÓÃ»§ÃûºÍÃÜÂë£©
         UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
-        //2.æ ¹æ®tokenæ¥è·å–ç”¨æˆ·å
+        //2.¸ù¾İtokenÀ´»ñÈ¡ÓÃ»§Ãû
         String username=token.getUsername();
-        //3.æŸ¥è¯¢å‡ºæ•°æ®åº“ä¸­çš„è¯¥å¯¹è±¡
+        //3.²éÑ¯³öÊı¾İ¿âÖĞµÄ¸Ã¶ÔÏó
         List<SysUser> users=sysUserService.getUserById(username);
         if(users!=null&&users.size()>0){
             return new SimpleAuthenticationInfo(users.get(0).getId(),users.get(0).getPassword(),this.getName());

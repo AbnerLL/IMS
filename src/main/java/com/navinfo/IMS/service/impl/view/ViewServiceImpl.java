@@ -73,7 +73,7 @@ public class ViewServiceImpl implements ViewService {
     public List<WeekReport> findWeekReport(WeekReport weekReport){
         String workType = weekReport == null ? null : weekReport.getWorkType() != null ? weekReport.getWorkType() : null ;
         String year = weekReport == null ? null : weekReport.getYear() != null ? weekReport.getYear() : null ;
-        List<WeekReport> weekReportList = viewMapper.selectWeekReports(workType , year);
+        List<WeekReport> weekReportList = viewMapper.selectWeekReports(workType , year,weekReport.getWorker(),weekReport.getSection());
         //计算合格率
         for (WeekReport wr : weekReportList){
             BigDecimal rate = BigDecimal.ONE.subtract(wr.getErrorNum().divide(wr.getAuditNum(),6,BigDecimal.ROUND_HALF_UP)).multiply(BigDecimal.valueOf(100));
@@ -90,7 +90,7 @@ public class ViewServiceImpl implements ViewService {
     public List<QuestionReport> findQuestionReport(QuestionReport questionReport){
         String workType = questionReport == null ? null : questionReport.getWorkType() != null ? questionReport.getWorkType() : null;
         String year = questionReport ==null ? null : questionReport.getYear() !=null ?questionReport.getYear() : null ;
-        List<QuestionReport> questionReports = viewMapper.selectQuestionReport(workType,year);
+        List<QuestionReport> questionReports = viewMapper.selectQuestionReport(workType,year,questionReport.getWorker(),questionReport.getSection());
         BigDecimal totalNum = BigDecimal.ZERO;
         //计算占比
         for (QuestionReport qr : questionReports){

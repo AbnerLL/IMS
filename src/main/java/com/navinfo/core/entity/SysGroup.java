@@ -1,21 +1,24 @@
 package com.navinfo.core.entity;
 
-/**
- * Created by luozhihui on 2018/3/5.
- */
 public class SysGroup {
     private String groupCode;
+
     private String groupName;
+
     private String groupType;
+
     private String parentGroupCode;
+
     private String owner;
+
+    private String sortIndex;
 
     public String getGroupCode() {
         return groupCode;
     }
 
     public void setGroupCode(String groupCode) {
-        this.groupCode = groupCode;
+        this.groupCode = groupCode == null ? null : groupCode.trim();
     }
 
     public String getGroupName() {
@@ -23,7 +26,7 @@ public class SysGroup {
     }
 
     public void setGroupName(String groupName) {
-        this.groupName = groupName;
+        this.groupName = groupName == null ? null : groupName.trim();
     }
 
     public String getGroupType() {
@@ -31,7 +34,7 @@ public class SysGroup {
     }
 
     public void setGroupType(String groupType) {
-        this.groupType = groupType;
+        this.groupType = groupType == null ? null : groupType.trim();
     }
 
     public String getParentGroupCode() {
@@ -39,7 +42,7 @@ public class SysGroup {
     }
 
     public void setParentGroupCode(String parentGroupCode) {
-        this.parentGroupCode = parentGroupCode;
+        this.parentGroupCode = parentGroupCode == null ? null : parentGroupCode.trim();
     }
 
     public String getOwner() {
@@ -47,6 +50,14 @@ public class SysGroup {
     }
 
     public void setOwner(String owner) {
-        this.owner = owner;
+        this.owner = owner == null ? null : owner.trim();
+    }
+
+    public String getSortIndex() {
+        return sortIndex;
+    }
+
+    public void setSortIndex(String sortIndex) {
+        this.sortIndex = sortIndex == null ? null : sortIndex.trim();
     }
 }

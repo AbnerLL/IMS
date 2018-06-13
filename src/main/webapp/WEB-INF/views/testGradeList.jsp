@@ -38,15 +38,7 @@
                                     <div class="form-group form-group-sm">
                                         <label for="section_search_select" class="control-label">所属科室</label>
                                         <select class="form-control" name="section" id="section_search_select">
-                                            <option value="">----选择作业组----</option>
-                                            <option value="品质管理室">品质管理室</option>
-                                            <option value="项目一组">项目一组</option>
-                                            <option value="项目二组">项目二组</option>
-                                            <option value="项目三组">项目三组</option>
-                                            <option value="项目四组">项目四组</option>
-                                            <option value="项目五组">项目五组</option>
-                                            <option value="项目六组">项目六组</option>
-                                            <option value="武汉项目组">武汉项目组</option>
+                                            <option value="">---- 选择科室 ----</option>
                                         </select>
                                     </div>
                                 </div>
@@ -144,7 +136,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel1">新增成绩</h4>
+                    <h4 class="modal-title" id="myModalLabel1"><span class="fa fa-plus fa-lg"></span>&nbsp;新增成绩</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -174,18 +166,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <label for="section_insert_input" class="control-label col-sm-2">项目组</label>
+                                    <label for="section_insert_select" class="control-label col-sm-2">项目组</label>
                                     <div class="col-sm-4">
-                                        <select class="form-control" name="section" id="section_insert_input">
+                                        <select class="form-control" name="section" id="section_insert_select">
                                             <option value="">----选择作业组----</option>
-                                            <option value="品质管理室">品质管理室</option>
-                                            <option value="项目一组">项目一组</option>
-                                            <option value="项目二组">项目二组</option>
-                                            <option value="项目三组">项目三组</option>
-                                            <option value="项目四组">项目四组</option>
-                                            <option value="项目五组">项目五组</option>
-                                            <option value="项目六组">项目六组</option>
-                                            <option value="武汉项目组">武汉项目组</option>
                                         </select>
                                     </div>
                                     <label for="paperGrade_insert_input" class="control-label col-sm-2">笔试成绩</label>
@@ -227,7 +211,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myEditModalLabel1"><span class="fa fa-pencil-square-o"></span>&nbsp;修改</h4>
+                    <h4 class="modal-title" id="myEditModalLabel1"><span class="fa fa-pencil-square-o fa-lg"></span>&nbsp;修改</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -257,18 +241,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <label for="section_update_input" class="control-label col-sm-2">项目组</label>
+                                    <label for="section_update_select" class="control-label col-sm-2">项目组</label>
                                     <div class="col-sm-4">
-                                        <select class="form-control" name="section" id="section_update_input">
+                                        <select class="form-control" name="section" id="section_update_select">
                                             <option value="">----选择作业组----</option>
-                                            <option value="品质管理室">品质管理室</option>
-                                            <option value="项目一组">项目一组</option>
-                                            <option value="项目二组">项目二组</option>
-                                            <option value="项目三组">项目三组</option>
-                                            <option value="项目四组">项目四组</option>
-                                            <option value="项目五组">项目五组</option>
-                                            <option value="项目六组">项目六组</option>
-                                            <option value="武汉项目组">武汉项目组</option>
                                         </select>
                                     </div>
                                     <label for="paperGrade_update_input" class="control-label col-sm-2">笔试成绩</label>
@@ -305,6 +281,7 @@
     </div>
 </body>
 </html>
+<script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -481,6 +458,7 @@
         $("#version_update_input").val(obj.version);
         $("#empId_update_input").val(obj.empId);
         $("#empName_update_input").val(obj.empName);
+        $("#section_update_select").val(obj.section);
         $("#paperGrade_update_input").val(obj.paperGrade);
         $("#comGradeRoad_update_input").val(obj.comGradeRoad);
         $("#comGradePoi_update_input").val(obj.comGradePoi);
@@ -562,4 +540,27 @@
     $("#export_btn").click(function () {
         window.location.href="${basePath}/testGradeExcel?"+$("#search_form").serialize();
     });
+    //加载项目组下拉选
+    $("#section_search_select,#section_insert_select,#section_update_select").weboption({
+        url:"${basePath}/sysGroup/loadAll",
+        key:"groupName",
+        value:"groupName",
+        search:{groupType:"dept"},
+        append:true,
+        processResult:processData
+    });
+    //处理请求返回的数据
+    function processData(resultData){
+        var original_array = resultData.extend.entities;
+        var tempArray = [];
+        var result = original_array.filter(function(item){
+            if (item.parentGroupCode.length >= 5 && !tempArray.includes(item.groupName)){
+                tempArray.push(item.groupName);
+                return true;
+            }else {
+                return false;
+            }
+        });
+        return result;
+    }
 </script>

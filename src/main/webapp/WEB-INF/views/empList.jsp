@@ -153,76 +153,77 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加员工</h4>
+                <h4 class="modal-title" id="myModalLabel"><span class="fa fa-plus fa-lg"></span>&nbsp;添加员工</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="add_form">
-                    <div class="form-group">
-                        <label for="empId_insert_input" class="col-sm-2 control-label">员工编号</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
-                        </div>
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-horizontal" id="add_form">
+                            <div class="form-group form-group-sm">
+                                <label for="empId_insert_input" class="col-sm-2 control-label">员工编号</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="empId" id="empId_insert_input" placeholder="员工编号">
+                                </div>
+                                <label for="empName_insert_input" class="col-sm-2 control-label">员工姓名</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工姓名">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-2 control-label">员工性别</label>
+                                <div class="col-sm-4">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="empSex" id="empSex_insert_radio" value="男" checked="checked">男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="empSex" id="empSex_insert_radio2" value="女"> 女
+                                    </label>
+                                </div>
+                                <label for="empHiredate_insert_input" class="col-sm-2 control-label">入职时间</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control datepicker" name="empHiredate" id="empHiredate_insert_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empEntryAge_insert_input" class="col-sm-2 control-label">员工司龄</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="number" name="empEntryAge" id="empEntryAge_insert_input"/>
+                                </div>
+                                <label for="empDep_insert_select" class="control-label col-sm-2">所属部门</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="empDep_insert_select" name="empDept">
+                                        <option value="数据库制作部">数据库制作部</option>
+                                        <option value="数据库制作部西安分部">数据库制作部西安分部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empSec_insert_select" class="control-label col-sm-2">所属科室</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="empSec_insert_select" name="empSec">
+                                    </select>
+                                </div>
+                                <label for="empPost_insert_select" class="control-label col-sm-2">职务名称</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="empPost_insert_select" name="empPost">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group  form-group-sm">
+                                <label for="empTel_insert_input" class="control-label col-sm-2">联系方式</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" id="empTel_insert_input" name="empTel"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empAddress_insert_input" class="control-label col-sm-2">现住地址</label>
+                                <div class="col-sm-10">
+                                    <textarea id="empAddress_insert_input" class="form-control" name="empAddress" rows="3" ></textarea>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="empName_insert_input" class="col-sm-2 control-label">员工姓名</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="empName" id="empName_insert_input" placeholder="员工姓名">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-8">
-                            <label class="radio-inline">
-                                <input type="radio" name="empSex" id="empSex_insert_radio" value="男" checked="checked">男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="empSex" id="empSex_insert_radio2" value="女"> 女
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empHiredate_insert_input" class="col-sm-2 control-label">入职时间</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control datepicker" name="empHiredate" id="empHiredate_insert_input"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empEntryAge_insert_input" class="col-sm-2 control-label">司龄</label>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="number" name="empEntryAge" id="empEntryAge_insert_input"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empDep_insert_select" class="control-label col-sm-2">所属部门</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="empDep_insert_select" name="empDept">
-                                <option value="数据库制作部">数据库制作部</option>
-                                <option value="数据库制作部西安分部">数据库制作部西安分部</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empSec_insert_select" class="control-label col-sm-2">所属科室</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="empSec_insert_select" name="empSec">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empPost_insert_select" class="control-label col-sm-2">职务名称</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="empPost_insert_select" name="empPost">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empTel_insert_input" class="control-label col-sm-2">联系方式</label>
-                        <div class="col-sm-8">
-                            <input type="tel" class="form-control" id="empTel_insert_input" name="empTel"/>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -237,76 +238,78 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel2">员工修改</h4>
+                <h4 class="modal-title" id="myModalLabel2"><span class="fa fa-pencil-square-o fa-lg"></span>&nbsp;员工修改</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="edit_form">
-                    <div class="form-group">
-                        <label for="empId_update_p" class="col-sm-2 control-label">员工编号</label>
-                        <div class="col-sm-8">
-                            <p class="form-control-static" id="empId_update_p"></p>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form class="form-horizontal" id="edit_form">
+                            <div class="form-group form-group-sm">
+                                <label for="empId_update_p" class="col-sm-2 control-label">员工编号</label>
+                                <div class="col-sm-4">
+                                    <p class="form-control-static" id="empId_update_p"></p>
+                                </div>
+                                <label for="empName_update_input" class="col-sm-2 control-label">员工姓名</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工姓名">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-2 control-label">员工性别</label>
+                                <div class="col-sm-4">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="empSex" id="empSex_update_radio" value="男" checked="checked">男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="empSex" id="empSex_update_radio2" value="女"> 女
+                                    </label>
+                                </div>
+                                <label for="empHiredate_update_input" class="col-sm-2 control-label">入职时间</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control datepicker" name="empHiredate" id="empHiredate_update_input"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empEntryAge_update_input" class="col-sm-2 control-label">员工司龄</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="number" name="empEntryAge" id="empEntryAge_update_input"/>
+                                </div>
+                                <label for="empDep_update_select" class="control-label col-sm-2">所属部门</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="empDep_update_select" name="empDept">
+                                        <option value="数据库制作部">数据库制作部</option>
+                                        <option value="数据库制作部西安分部">数据库制作部西安分部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empSec_update_select" class="control-label col-sm-2">所属科室</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="empSec_update_select" name="empSec">
+                                    </select>
+                                </div>
+                                <label for="empPost_update_select" class="control-label col-sm-2">职务名称</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="empPost_update_select" name="empPost">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empTel_update_select" class="control-label col-sm-2">联系方式</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" id="empTel_update_select" name="empTel"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="empAddress_update_textarea" class="control-label col-sm-2">现住地址</label>
+                                <div class="col-sm-10">
+                                    <textarea id="empAddress_update_textarea" class="form-control" name="empAddress" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="empName_update_input" class="col-sm-2 control-label">员工姓名</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="empName" id="empName_update_input" placeholder="员工姓名">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-8">
-                            <label class="radio-inline">
-                                <input type="radio" name="empSex" id="empSex_update_radio" value="男" checked="checked">男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="empSex" id="empSex_update_radio2" value="女"> 女
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empHiredate_update_input" class="col-sm-2 control-label">入职时间</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control datepicker" name="empHiredate" id="empHiredate_update_input"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empEntryAge_update_input" class="col-sm-2 control-label">司龄</label>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="number" name="empEntryAge" id="empEntryAge_update_input"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empDep_update_select" class="control-label col-sm-2">所属部门</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="empDep_update_select" name="empDept">
-                                <option value="数据库制作部">数据库制作部</option>
-                                <option value="数据库制作部西安分部">数据库制作部西安分部</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empSec_update_select" class="control-label col-sm-2">所属科室</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="empSec_update_select" name="empSec">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empPost_update_select" class="control-label col-sm-2">职务名称</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="empPost_update_select" name="empPost">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="empTel_update_select" class="control-label col-sm-2">联系方式</label>
-                        <div class="col-sm-8">
-                            <input type="tel" class="form-control" id="empTel_update_select" name="empTel"/>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -416,7 +419,8 @@
                 formatter:dateFormatter
             },{
                 field:"empEntryAge",
-                title:"员工司龄"
+                title:"员工司龄",
+                formatter:calEntryAge
             },{
                 field:"empPost",
                 title:"职务名称"
@@ -434,6 +438,12 @@
                 title:"现住地址"
             }]
         });
+    }
+    //计算工龄
+    function calEntryAge(value,row,index){
+        var millis = new Date()-new Date(row.empHiredate);
+        var betweenYears = millis/(3600*24*365*1000)+"";
+        return betweenYears.substring(0,betweenYears.indexOf(".") != -1?betweenYears.indexOf("."):betweenYears.length);
     }
     //显示模态框
     $("#add_btn").click(function(){
@@ -515,6 +525,7 @@
         $("#empSec_update_select").change();
         $("#empPost_update_select").val(empInfo[0].empPost);
         $("#empTel_update_select").val(empInfo[0].empTel);
+        $("#empAddress_update_textarea").val(empInfo[0].empAddress);
         //给更新按钮添加个update-id属性用来存储主键empId
         $("#update_btn").attr("edit-id",empInfo[0].empId);
     }

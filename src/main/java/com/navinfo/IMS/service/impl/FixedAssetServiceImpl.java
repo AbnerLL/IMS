@@ -6,8 +6,11 @@ import com.navinfo.IMS.dao.FixedAssetMapper;
 import com.navinfo.IMS.entity.FixedAsset;
 import com.navinfo.IMS.entity.FixedAssetExample;
 import com.navinfo.IMS.service.FixedAssetService;
+import com.navinfo.IMS.so.FixedAssetSearch;
+import com.navinfo.IMS.utils.PageObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,20 +26,33 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     private FixedAssetMapper fixedAssetMapper;
 
     /**
-     * 分页查询
-     * @param map
+     * 根据search构建example对象
+     * @param search
      * @return
      */
-    public PageInfo findFixedAssetByPage(Map map){
-        Integer pageNum=Integer.valueOf((String) map.get("pageNum"));
-        Integer pageSize=Integer.valueOf((String) map.get("pageSize"));
-        String keyword=(String) map.get("keyword");
-        PageHelper.startPage(pageNum,pageSize);
-        FixedAssetExample example=new FixedAssetExample();
-        if(keyword!=null&&!"".equals(keyword)){
-            example.createCriteria().andAssetUserLike("%"+keyword+"%");
-            example.or().andSectionLike("%"+keyword+"%");
+    private FixedAssetExample createSearchExample(FixedAssetSearch search){
+        FixedAssetExample example = new FixedAssetExample();
+        example.createCriteria();
+        if (!StringUtils.isEmpty(search.getSection())){
+            example.getOredCriteria().get(0).andSectionEqualTo(search.getSection().trim());
         }
+        if (!StringUtils.isEmpty(search.getAssetUser())){
+            example.getOredCriteria().get(0).andAssetUserEqualTo(search.getAssetUser());
+        }
+        if (!StringUtils.isEmpty(search.getKeyword())){
+            example.or().andSectionLike("%"+search.getKeyword()+"%");
+        }
+        return example;
+    }
+    /**
+     * 分页查询
+     * @param search
+     * @param pageObject
+     * @return
+     */
+    public PageInfo findFixedAssetByPage(FixedAssetSearch search, PageObject pageObject){
+        FixedAssetExample example = this.createSearchExample(search);
+        PageHelper.startPage(pageObject.getPageNum(),pageObject.getPageSize());
         List<FixedAsset> list=fixedAssetMapper.selectByExample(example);
         return new PageInfo(list);
     }

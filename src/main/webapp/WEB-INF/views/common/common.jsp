@@ -19,6 +19,8 @@
 <link href="${basePath}/css/font-awesome.min2.css" rel="stylesheet"/>
 <%--日期插件的css--%>
 <link href="${basePath}/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+<%--引入自定义css文件--%>
+<link href="${basePath}/css/common.css" rel="stylesheet"/>
 <%--基础js文件--%>
 <script src="${basePath}/js/jquery/3.2.1/jquery.min.js"></script>
 <script src="${basePath}/js/bootstrap/3.3.7/bootstrap.min.js"></script>

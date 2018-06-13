@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
 import com.navinfo.IMS.entity.FixedAsset;
 import com.navinfo.IMS.service.FixedAssetService;
+import com.navinfo.IMS.so.FixedAssetSearch;
+import com.navinfo.IMS.utils.PageObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +28,8 @@ public class FixedAssetController {
      */
     @RequestMapping(value="/fixedAssets",method= RequestMethod.GET)
     @ResponseBody
-    public Msg search(@RequestParam Map map){
-        PageInfo pageInfo=fixedAssetService.findFixedAssetByPage(map);
+    public Msg search(FixedAssetSearch search, PageObject pageObject){
+        PageInfo pageInfo=fixedAssetService.findFixedAssetByPage(search,pageObject);
         return Msg.success().add("pageInfo",pageInfo);
     }
 

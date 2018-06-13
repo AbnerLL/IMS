@@ -92,10 +92,9 @@
     <div class="modal fade" id="list_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel1">文件列表</h4>
+                        <h4 class="modal-title" id="myModalLabel1"><span class="fa fa-list fa-lg"></span>&nbsp;文件列表</h4>
                     </div>
                 <div class="tab1">
                     <div class="modal-body" style="margin-bottom: 0px;height: 300px;overflow: auto;">
@@ -375,9 +374,9 @@
             var $tr = $("<tr></tr>");
             $tr.append("<td>"+(index+1)+"</td>")
                 .append("<td>"+value.dbName+"</td>")
-                .append("<td><div style='text-align: center'><button class='btn btn-info btn-sm download-btn' data-download-url='"+(downloadInfo[value.dbName] || '')+"'><span class='fa fa-download'></button>&nbsp;" +
-                        "<button class='btn btn-success btn-sm search-btn' data-search-id='"+(logJson[fileName] || '')+"'><span class='fa fa-search'></span></button>&nbsp;"+
-                        "<button class='btn btn-danger btn-sm del-file-btn' data-delete-id='"+fileName+"'><span class='fa fa-trash'></span></button></div></td>");
+                .append("<td><div style='text-align: center'><button class='btn btn-info btn-sm download-btn' data-download-url='"+(downloadInfo[value.dbName] || '')+"' title='下载'><span class='fa fa-download'></button>&nbsp;" +
+                        "<button class='btn btn-success btn-sm search-btn' data-search-id='"+(logJson[fileName] || '')+"' title='查看'><span class='fa fa-search'></span></button>&nbsp;"+
+                        "<button class='btn btn-danger btn-sm del-file-btn' data-delete-id='"+fileName+"' title='删除'><span class='fa fa-trash'></span></button></div></td>");
 
             $tbody.append($tr);
         });

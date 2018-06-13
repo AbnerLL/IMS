@@ -12,9 +12,9 @@ public interface ViewMapper {
 
     List calculateEfficiency(Map map);
 
-    List selectWeekReports(@Param("workType") String workType, @Param("year") String year);
+    List selectWeekReports(@Param("workType") String workType, @Param("year") String year,@Param("worker") String worker,@Param("section") String section);
 
-    List selectQuestionReport(@Param("workType") String workType , @Param("year") String year);
+    List selectQuestionReport(@Param("workType") String workType , @Param("year") String year,@Param("worker") String worker,@Param("section") String section);
 
     List selectKPIReport(@Param("workType") String workType , @Param("year") String year);
 }

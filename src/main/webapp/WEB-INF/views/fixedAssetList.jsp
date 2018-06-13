@@ -10,6 +10,7 @@
 <html>
 <head>
     <%@include file="common/head.jsp"%>
+    <%@include file="common/common.jsp"%>
     <title>资产管理</title>
     <%--针对手机屏幕的设置--%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -25,11 +26,43 @@
 </head>
 <body>
 <div class="container-fluid">
+    <%--查询面板--%>
+    <div class="collapse" id="search_collapse">
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-11">
+                    <form class="form-inline" id="search_form">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="assetUser_search_input" class="control-label">使用人:</label>
+                                    <input class="form-control" type="text" name="assetUser" id="assetUser_search_input"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-group-sm">
+                                    <label for="section_search_select" class="control-label">所属科室:</label>
+                                    <select class="form-control"  name="section" id="section_search_select">
+                                        <option value="">---选择所属科室---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="btn btn-primary btn-sm" id="search_btn">查询</div>
+                                <div class="btn btn-default btn-sm" id="search_reset_btn">清空</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <%--自定义表格工具栏--%>
     <div id="toolbar" class="btn-group">
         <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
         <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
         <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
     <table id="table_list"></table>
@@ -40,7 +73,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">新增</h4>
+                <h4 class="modal-title" id="myModalLabel"><span class="fa fa-plus fa-lg"></span>&nbsp;新增</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -74,28 +107,7 @@
                                 <label for="section_insert_select" class="col-sm-2 control-label">使用科室</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="section" id="section_insert_select">
-                                        <option value="部门">部门</option>
-                                        <option value="北京项目一组">北京项目一组</option>
-                                        <option value="北京项目二组">北京项目二组</option>
-                                        <option value="北京项目三组">北京项目三组</option>
-                                        <option value="北京项目四组">北京项目四组</option>
-                                        <option value="北京项目五组">北京项目五组</option>
-                                        <option value="武汉项目组">武汉项目组</option>
-                                        <option value="互联网小组">互联网小组</option>
-                                        <option value="代理店">代理店</option>
-                                        <option value="品质管理室（北京）">品质管理室（北京）</option>
-                                        <option value="生产管理室（北京）">生产管理室（北京）</option>
-                                        <option value="技术管理室（北京）">技术管理室（北京）</option>
-                                        <option value="西安项目一组">西安项目一组</option>
-                                        <option value="西安项目二组">西安项目二组</option>
-                                        <option value="西安项目三组">西安项目三组</option>
-                                        <option value="西安项目四组">西安项目四组</option>
-                                        <option value="西安项目五组">西安项目五组</option>
-                                        <option value="西安项目六组">西安项目六组</option>
-                                        <option value="综合项目组">综合项目组</option>
-                                        <option value="品质管理室（西安）">品质管理室（西安）</option>
-                                        <option value="生产管理室（西安）">生产管理室（西安）</option>
-                                        <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                        <option value="">---选择使用科室---</option>
                                     </select>
                                 </div>
                             </div>
@@ -135,7 +147,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myEditModalLabel">修改</h4>
+                <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o fa-lg"></span>&nbsp;修改</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -169,28 +181,7 @@
                                 <label for="section_update_select" class="col-sm-2 control-label">使用科室</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="section" id="section_update_select">
-                                        <option value="部门">部门</option>
-                                        <option value="北京项目一组">北京项目一组</option>
-                                        <option value="北京项目二组">北京项目二组</option>
-                                        <option value="北京项目三组">北京项目三组</option>
-                                        <option value="北京项目四组">北京项目四组</option>
-                                        <option value="北京项目五组">北京项目五组</option>
-                                        <option value="武汉项目组">武汉项目组</option>
-                                        <option value="互联网小组">互联网小组</option>
-                                        <option value="代理店">代理店</option>
-                                        <option value="品质管理室（北京）">品质管理室（北京）</option>
-                                        <option value="生产管理室（北京）">生产管理室（北京）</option>
-                                        <option value="技术管理室（北京）">技术管理室（北京）</option>
-                                        <option value="西安项目一组">西安项目一组</option>
-                                        <option value="西安项目二组">西安项目二组</option>
-                                        <option value="西安项目三组">西安项目三组</option>
-                                        <option value="西安项目四组">西安项目四组</option>
-                                        <option value="西安项目五组">西安项目五组</option>
-                                        <option value="西安项目六组">西安项目六组</option>
-                                        <option value="综合项目组">综合项目组</option>
-                                        <option value="品质管理室（西安）">品质管理室（西安）</option>
-                                        <option value="生产管理室（西安）">生产管理室（西安）</option>
-                                        <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                        <option value="">---选择使用科室---</option>
                                     </select>
                                 </div>
                             </div>
@@ -234,6 +225,7 @@
 <%--日期插件js文件及本地化文件--%>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/bootstrap-datepicker.min.js"></script>
 <script src="${basePath}/js/bootstrap-datepicker/1.6.4/locale/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -255,11 +247,13 @@
     //设置发送请求时的参数，当queryParamsType 为limit时
     // params中的参数为{ search: undefined, sort: undefined, order: "asc", offset: 0, limit: 10 }
     function myQueryParams(params){
-        return {
-            pageSize:this.pageSize,       //每页的记录行数
-            pageNum:this.pageNumber,     //当前页数
-            keyword:params.search
-        };
+//        return {
+//            pageSize:this.pageSize,       //每页的记录行数
+//            pageNum:this.pageNumber,     //当前页数
+//            keyword:params.search
+//        };
+        var searchWord=params.search ? params.search:'';
+        return $("#search_form").serialize()+'&pageSize='+this.pageSize+'&pageNum='+this.pageNumber+'&keyword='+searchWord;
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
     function myResponseHandler(result){
@@ -353,6 +347,18 @@
             }
         });
     }
+    //展开或收缩查询面板
+    $("#search_toggle_btn").click(function(){
+        $("#search_collapse").collapse('toggle');
+    });
+    //查询
+    $("#search_btn").click(function(){
+        $("#table_list").bootstrapTable("refresh")
+    });
+    //清空
+    $("#search_reset_btn").click(function () {
+        $("#search_form")[0].reset();
+    });
     //显示新增模态框
     $("#add_btn").click(function(){
         //1.清空表单
@@ -419,7 +425,7 @@
         $("#standard_update_input").val(obj.standard);
         $("#assetClass_update_input").val(obj.assetClass);
         $("#assetUser_update_input").val(obj.assetUser);
-        $("#section_update_input").val(obj.section);
+        $("#section_update_select").val(obj.section);
         $("#useState_update_input").val(obj.useState);
         $("#storePlace_update_input").val(obj.storePlace);
         $("#startDate_update_input").val(dateFormatter(obj.startDate));
@@ -487,6 +493,29 @@
                 alert("处理异常！异常代码："+e.status);
             }
         });
+    };
+    //加载项目组下拉选
+    $("#section_search_select,#section_insert_select,#section_update_select").weboption({
+        url:"${basePath}/sysGroup/loadAll",
+        key:"groupName",
+        value:"groupName",
+        search:{groupType:"dept"},
+        append:true,
+        processResult:processData
+    });
+    //处理请求返回的数据
+    function processData(resultData){
+        var original_array = resultData.extend.entities;
+        var tempArray = [];
+        var result = original_array.filter(function(item){
+            if (item.parentGroupCode.length >= 5 && !tempArray.includes(item.groupName)){
+                tempArray.push(item.groupName);
+                return true;
+            }else {
+                return false;
+            }
+        });
+        return result;
     }
 </script>
 </body>

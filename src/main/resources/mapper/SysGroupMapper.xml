@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navinfo.core.dao.SysGroupMapper">
+  <resultMap id="BaseResultMap" type="com.navinfo.core.entity.SysGroup">
+    <id column="GROUP_CODE" jdbcType="VARCHAR" property="groupCode" />
+    <result column="GROUP_NAME" jdbcType="VARCHAR" property="groupName" />
+    <result column="GROUP_TYPE" jdbcType="VARCHAR" property="groupType" />
+    <result column="PARENT_GROUP_CODE" jdbcType="VARCHAR" property="parentGroupCode" />
+    <result column="OWNER" jdbcType="VARCHAR" property="owner" />
+    <result column="SORT_INDEX" jdbcType="VARCHAR" property="sortIndex" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    GROUP_CODE, GROUP_NAME, GROUP_TYPE, PARENT_GROUP_CODE, OWNER, SORT_INDEX
+  </sql>
+  <select id="selectByExample" parameterType="com.navinfo.core.entity.SysGroupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IMS.SYS_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IMS.SYS_GROUP
+    where GROUP_CODE = #{groupCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from IMS.SYS_GROUP
+    where GROUP_CODE = #{groupCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.navinfo.core.entity.SysGroupExample">
+    delete from IMS.SYS_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.navinfo.core.entity.SysGroup">
+    insert into IMS.SYS_GROUP (GROUP_CODE, GROUP_NAME, GROUP_TYPE, 
+      PARENT_GROUP_CODE, OWNER, SORT_INDEX
+      )
+    values (#{groupCode,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{groupType,jdbcType=VARCHAR}, 
+      #{parentGroupCode,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{sortIndex,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.navinfo.core.entity.SysGroup">
+    insert into IMS.SYS_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupCode != null">
+        GROUP_CODE,
+      </if>
+      <if test="groupName != null">
+        GROUP_NAME,
+      </if>
+      <if test="groupType != null">
+        GROUP_TYPE,
+      </if>
+      <if test="parentGroupCode != null">
+        PARENT_GROUP_CODE,
+      </if>
+      <if test="owner != null">
+        OWNER,
+      </if>
+      <if test="sortIndex != null">
+        SORT_INDEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupCode != null">
+        #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupType != null">
+        #{groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentGroupCode != null">
+        #{parentGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null">
+        #{sortIndex,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.navinfo.core.entity.SysGroupExample" resultType="java.lang.Long">
+    select count(*) from IMS.SYS_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IMS.SYS_GROUP
+    <set>
+      <if test="record.groupCode != null">
+        GROUP_CODE = #{record.groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupName != null">
+        GROUP_NAME = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupType != null">
+        GROUP_TYPE = #{record.groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentGroupCode != null">
+        PARENT_GROUP_CODE = #{record.parentGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.owner != null">
+        OWNER = #{record.owner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortIndex != null">
+        SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IMS.SYS_GROUP
+    set GROUP_CODE = #{record.groupCode,jdbcType=VARCHAR},
+      GROUP_NAME = #{record.groupName,jdbcType=VARCHAR},
+      GROUP_TYPE = #{record.groupType,jdbcType=VARCHAR},
+      PARENT_GROUP_CODE = #{record.parentGroupCode,jdbcType=VARCHAR},
+      OWNER = #{record.owner,jdbcType=VARCHAR},
+      SORT_INDEX = #{record.sortIndex,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.navinfo.core.entity.SysGroup">
+    update IMS.SYS_GROUP
+    <set>
+      <if test="groupName != null">
+        GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupType != null">
+        GROUP_TYPE = #{groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentGroupCode != null">
+        PARENT_GROUP_CODE = #{parentGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        OWNER = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null">
+        SORT_INDEX = #{sortIndex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GROUP_CODE = #{groupCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.navinfo.core.entity.SysGroup">
+    update IMS.SYS_GROUP
+    set GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      GROUP_TYPE = #{groupType,jdbcType=VARCHAR},
+      PARENT_GROUP_CODE = #{parentGroupCode,jdbcType=VARCHAR},
+      OWNER = #{owner,jdbcType=VARCHAR},
+      SORT_INDEX = #{sortIndex,jdbcType=VARCHAR}
+    where GROUP_CODE = #{groupCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

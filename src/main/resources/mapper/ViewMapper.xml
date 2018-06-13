@@ -70,7 +70,8 @@
         <result column="hours" property="hours"/>
     </resultMap>
     <select id="selectWeekReports" resultType="com.navinfo.IMS.entity.WeekReport">
-        SELECT * FROM week_report a
+        SELECT  a.year,a.week,a.work_type,sum(a.audit_num) as audit_num,sum(a.error_num) as error_num
+        FROM week_detail_report a
         <where>
             <if test="year !=null and year != ''">
                 a.YEAR = #{year}
@@ -78,16 +79,35 @@
             <if test="workType !=null and workType != ''">
                 AND a.work_type = #{workType}
             </if>
+            <if test="(worker == null or worker == '') and (section == null or section == '')">
+                group by a.year ,a.week ,a.work_type ORDER BY a.week
+            </if>
+            <if test="worker !=null and worker != ''">
+                AND a.worker = #{worker} group by a.year ,a.week ,a.work_type ORDER BY a.week
+            </if>
+            <if test="section != null and section != '' ">
+                AND a.section = #{section} group by a.year ,a.week ,a.work_type ORDER BY a.week
+            </if>
         </where>
     </select>
     <select id="selectQuestionReport" resultType="com.navinfo.IMS.entity.QuestionReport">
-        SELECT * FROM question_report a
+        SELECT a.year,a.work_type,a.error_type,sum(error_num) as error_num
+        FROM question_detail_report a
         <where>
             <if test="workType != null and workType != ''">
                 a.work_type = #{workType}
             </if>
             <if test="year != null and year != ''">
                 AND a.year = #{year}
+            </if>
+            <if test="(worker == null or worker == '') and (section == null or section == '')">
+                group by a.year ,a.work_type,a.error_type ORDER BY a.year
+            </if>
+            <if test="worker !=null and worker != ''">
+                AND a.worker = #{worker} group by a.year ,a.work_type,a.error_type ORDER BY a.year
+            </if>
+            <if test="section != null and section != '' ">
+                AND a.section = #{section} group by a.year ,a.work_type,a.error_type ORDER BY a.year
             </if>
         </where>
     </select>

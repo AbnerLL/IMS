@@ -42,6 +42,9 @@ public class PreGradeServiceImpl implements PreGradeService{
         if (StringUtil.notNull(search.getVersion())){
             example.getOredCriteria().get(0).andVersionEqualTo(search.getVersion());
         }
+        if (StringUtil.notNull(search.getSection())){
+            example.getOredCriteria().get(0).andSectionEqualTo(search.getSection());
+        }
         if (search.getGradeStart()!=null){
             example.getOredCriteria().get(0).andGradeGreaterThanOrEqualTo(search.getGradeStart());
         }

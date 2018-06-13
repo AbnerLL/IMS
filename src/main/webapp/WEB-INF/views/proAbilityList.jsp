@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group form-group-sm">
-                                        <label for="version_search_input" class="control-label">发生版本:</label>
+                                        <label for="version_search_input" class="control-label">作业版本:</label>
                                         <input class="form-control" type="text" name="version" id="version_search_input"/>
                                     </div>
                                 </div>
@@ -48,14 +48,6 @@
                                         <label for="section_search_select" class="control-label">所属科室:</label>
                                         <select class="form-control" name="section" id="section_search_select">
                                             <option value="">---选择所属科室---</option>
-                                            <option value="品质管理室">品质管理室</option>
-                                            <option value="项目一组">项目一组</option>
-                                            <option value="项目二组">项目二组</option>
-                                            <option value="项目三组">项目三组</option>
-                                            <option value="项目四组">项目四组</option>
-                                            <option value="项目五组">项目五组</option>
-                                            <option value="项目六组">项目六组</option>
-                                            <option value="武汉项目组">武汉项目组</option>
                                         </select>
                                     </div>
                                 </div>
@@ -158,7 +150,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <label for="version_insert_input" class="control-label col-sm-2" >发生版本:</label>
+                                    <label for="version_insert_input" class="control-label col-sm-2" >作业版本:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" type="text" name="version" id="version_insert_input"/>
                                     </div>
@@ -166,14 +158,6 @@
                                     <div class="col-sm-4">
                                         <select class="form-control" name="section" id="section_insert_select">
                                             <option value="">---选择所属科室---</option>
-                                            <option value="品质管理室">品质管理室</option>
-                                            <option value="项目一组">项目一组</option>
-                                            <option value="项目二组">项目二组</option>
-                                            <option value="项目三组">项目三组</option>
-                                            <option value="项目四组">项目四组</option>
-                                            <option value="项目五组">项目五组</option>
-                                            <option value="项目六组">项目六组</option>
-                                            <option value="武汉项目组">武汉项目组</option>
                                         </select>
                                     </div>
                                 </div>
@@ -208,7 +192,7 @@
                                     <label for="testAbility_insert_select" class="control-label col-sm-2">检验能力:</label>
                                     <div class="col-sm-4">
                                         <select class="form-control" name="testAbility" id="testAbility_insert_select">
-                                            <option value="">---选择业务类型---</option>
+                                            <option value="">---选择检验能力---</option>
                                             <option value="有">有</option>
                                             <option value="无">无</option>
                                         </select>
@@ -231,7 +215,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o"></span>&nbsp;修改</h4>
+                    <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o fa-lg"></span>&nbsp;修改</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -248,7 +232,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <label for="version_update_input" class="control-label col-sm-2" >发生版本:</label>
+                                    <label for="version_update_input" class="control-label col-sm-2" >作业版本:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" type="text" name="version" id="version_update_input"/>
                                     </div>
@@ -256,14 +240,6 @@
                                     <div class="col-sm-4">
                                         <select class="form-control" name="section" id="section_update_select">
                                             <option value="">---选择所属科室---</option>
-                                            <option value="品质管理室">品质管理室</option>
-                                            <option value="项目一组">项目一组</option>
-                                            <option value="项目二组">项目二组</option>
-                                            <option value="项目三组">项目三组</option>
-                                            <option value="项目四组">项目四组</option>
-                                            <option value="项目五组">项目五组</option>
-                                            <option value="项目六组">项目六组</option>
-                                            <option value="武汉项目组">武汉项目组</option>
                                         </select>
                                     </div>
                                 </div>
@@ -298,7 +274,7 @@
                                     <label for="testAbility_update_select" class="control-label col-sm-2">检验能力:</label>
                                     <div class="col-sm-4">
                                         <select class="form-control" name="testAbility" id="testAbility_update_select">
-                                            <option value="">---选择业务类型---</option>
+                                            <option value="">---选择检验能力---</option>
                                             <option value="有">有</option>
                                             <option value="无">无</option>
                                         </select>
@@ -316,6 +292,7 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -607,5 +584,28 @@
     $("#export_btn").click(function () {
         window.location.href="${basePath}/proAbilityExcel?"+$("#search_form").serialize();
     });
+    //加载项目组下拉选
+    $("#section_search_select,#section_insert_select,#section_update_select").weboption({
+        url:"${basePath}/sysGroup/loadAll",
+        key:"groupName",
+        value:"groupName",
+        search:{groupType:"dept"},
+        append:true,
+        processResult:processData
+    });
+    //处理请求返回的数据
+    function processData(resultData){
+        var original_array = resultData.extend.entities;
+        var tempArray = [];
+        var result = original_array.filter(function(item){
+            if (item.parentGroupCode.length >= 5 && !tempArray.includes(item.groupName)){
+                tempArray.push(item.groupName);
+                return true;
+            }else {
+                return false;
+            }
+        });
+        return result;
+    }
 </script>
 </html>

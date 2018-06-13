@@ -12,10 +12,10 @@
     }
 
     /**
-     * 结果数据解析
+     * 结果数据解析(default)
      */
-    function responseHandler(){
-
+    function responseHandler(resultData){
+        return resultData.extend.entities;
     }
 
     /**
@@ -23,8 +23,9 @@
      */
     function parseContent(item,result,option) {
         var htmlContent="";
-        $.each(result,function(index,item){
-            htmlContent +='<option value="'+item.dictCode+'">'+item.dictName+'</option>';
+        var resultData = option.processResult(result);
+        $.each(resultData,function(index,obj){
+            htmlContent +='<option value="'+obj[option.key]+'">'+obj[option.value]+'</option>';
         });
         //向容器中添加解析的html内容
         item.each(function () {
@@ -49,11 +50,11 @@
         $.ajax({
             url:options.url,
             type:"get",
-            data:"dictType="+options.search,
+            data:options.search,
             dataType:"json",
             success:function (result) {
                 if (1 == result.code){
-                    parseContent(item,result.extend.entities,options);
+                    parseContent(item,result,options);
                 }else{
                     window.console.log("请求失败，请检查配置！")
                 }
@@ -67,11 +68,12 @@
     function initContainer(item,options){
         //默认参数
         var defaults={
-            url:appPath+'/dictionary/loadAll?',//设置请求路径
+            url:appPath+'/dictionary/loadAll',//设置请求路径
             key:"dictCode",
             value:"dictName",
             append:false,
-            search:""
+            search:{},
+            processResult:responseHandler
         }
         //使用用户自定义参数覆盖默认参数
         var opt=$.extend(defaults,options);

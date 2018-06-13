@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group form-group-sm">
-                                    <label for="empId_search_input" class="control-label">员工姓名:</label>
+                                    <label for="empId_search_input" class="control-label">员工编号:</label>
                                     <input class="form-control" type="text" name="empId" id="empId_search_input"/>
                                 </div>
                             </div>
@@ -45,8 +45,10 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group form-group-sm">
-                                    <label for="section_search_input" class="control-label">项目组:&nbsp;&nbsp;&nbsp;</label>
-                                    <input class="form-control" type="text" name="section" id="section_search_input"/>
+                                    <label for="section_search_select" class="control-label">所属科室:</label>
+                                    <select class="form-control" name="section" id="section_search_select">
+                                        <option value="">----- 选择科室 -----</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -55,8 +57,10 @@
                                     <select class="form-control" name="professionType" id="professionType_search_select">
                                         <option value="">---选择业务类型---</option>
                                         <option value="道路">道路</option>
-                                        <option value="中文">中文</option>
-                                        <option value="英文">英文</option>
+                                        <option value="中文名称">中文名称</option>
+                                        <option value="中文地址">中文地址</option>
+                                        <option value="英文名称">英文名称</option>
+                                        <option value="英文地址">英文地址</option>
                                         <option value="深度信息">深度信息</option>
                                         <option value="代理店">代理店</option>
                                     </select>
@@ -140,9 +144,11 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="section_insert_input" class="control-label col-sm-2">所属科室</label>
+                                <label for="section_insert_select" class="control-label col-sm-2">所属科室</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" type="text" name="section" id="section_insert_input"/>
+                                    <select class="form-control" name="section" id="section_insert_select">
+                                        <option value="">----- 选择科室 -----</option>
+                                    </select>
                                 </div>
                                 <label for="version_insert_input" class="control-label col-sm-2">作业版本</label>
                                 <div class="col-sm-4">
@@ -153,10 +159,12 @@
                                 <label for="professionType_insert_select" class="control-label col-sm-2">业务类型</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="professionType" id="professionType_insert_select">
-                                        <option value=""></option>
+                                        <option value="">---选择业务类型---</option>
                                         <option value="道路">道路</option>
-                                        <option value="中文">中文</option>
-                                        <option value="英文">英文</option>
+                                        <option value="中文名称">中文名称</option>
+                                        <option value="中文地址">中文地址</option>
+                                        <option value="英文名称">英文名称</option>
+                                        <option value="英文地址">英文地址</option>
                                         <option value="深度信息">深度信息</option>
                                         <option value="代理店">代理店</option>
                                     </select>
@@ -198,7 +206,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o"></span>&nbsp;修改资质</h4>
+                <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o fa-lg"></span>&nbsp;修改资质</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -215,9 +223,11 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label for="section_update_input" class="control-label col-sm-2">所属科室</label>
+                                <label for="section_update_select" class="control-label col-sm-2">所属科室</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" type="text" name="section" id="section_update_input"/>
+                                    <select class="form-control" name="section" id="section_update_select">
+                                        <option value="">----- 选择科室 -----</option>
+                                    </select>
                                 </div>
                                 <label for="version_update_input" class="control-label col-sm-2">作业版本</label>
                                 <div class="col-sm-4">
@@ -228,10 +238,12 @@
                                 <label for="professionType_update_select" class="control-label col-sm-2">业务类型</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="professionType" id="professionType_update_select">
-                                        <option value=""></option>
+                                        <option value="">---选择业务类型---</option>
                                         <option value="道路">道路</option>
-                                        <option value="中文">中文</option>
-                                        <option value="英文">英文</option>
+                                        <option value="中文名称">中文名称</option>
+                                        <option value="中文地址">中文地址</option>
+                                        <option value="英文名称">英文名称</option>
+                                        <option value="英文地址">英文地址</option>
                                         <option value="深度信息">深度信息</option>
                                         <option value="代理店">代理店</option>
                                     </select>
@@ -267,6 +279,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -545,6 +558,29 @@
     $("#export_btn").click(function () {
         window.location.href="${basePath}/empAptitudeExcel?"+$("#search_form").serialize();
     });
+    //加载项目组下拉选
+    $("#section_search_select,#section_insert_select,#section_update_select").weboption({
+        url:"${basePath}/sysGroup/loadAll",
+        key:"groupName",
+        value:"groupName",
+        search:{groupType:"dept"},
+        append:true,
+        processResult:processData
+    });
+    //处理请求返回的数据
+    function processData(resultData){
+        var original_array = resultData.extend.entities;
+        var tempArray = [];
+        var result = original_array.filter(function(item){
+            if (item.parentGroupCode.length >= 5 && !tempArray.includes(item.groupName)){
+                tempArray.push(item.groupName);
+                return true;
+            }else {
+                return false;
+            }
+        });
+        return result;
+    }
 </script>
 </body>
 </html>

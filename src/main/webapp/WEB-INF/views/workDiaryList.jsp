@@ -132,9 +132,7 @@
         <shrio:hasPermission name="workDiary:delete">
             <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
         </shrio:hasPermission>
-        <shrio:hasPermission name="workDiary:export">
-            <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
-        </shrio:hasPermission>
+        <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
         <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
     </div>
     <%--表格数据--%>
@@ -146,7 +144,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加日志</h4>
+                <h4 class="modal-title" id="myModalLabel"><span class="fa fa-plus fa-lg"></span>&nbsp;添加日志</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -256,7 +254,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myEditModalLabel">修改日志</h4>
+                <h4 class="modal-title" id="myEditModalLabel"><span class="fa fa-pencil-square-o"></span>&nbsp;修改日志</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -692,9 +690,9 @@
         window.location.href="${basePath}/workDiaryExcel?"+$("#search_form").serialize();
     });
     //初始化下拉选
-    $("#workType_search_select,#workType_insert_select,#workType_update_select").weboption({search:"工作类型",append:true});
+    $("#workType_search_select,#workType_insert_select,#workType_update_select").weboption({search:{dictType:"工作类型"},append:true});
     //工作模块下拉选初始化
-    $("#workModule_search_select,#workModule_insert_select,#workModule_update_select").weboption({search:"工作模块",append:true});
+    $("#workModule_search_select,#workModule_insert_select,#workModule_update_select").weboption({search:{dictType:"工作模块"},append:true});
 </script>
 </body>
 </html>

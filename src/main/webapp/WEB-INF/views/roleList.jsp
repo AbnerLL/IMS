@@ -11,6 +11,7 @@
 <head>
     <title>角色列表</title>
     <%@include file="common/head.jsp"%>
+    <%@include file="common/common.jsp"%>
     <link href="${basePath}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${basePath}/css/bootstrapTable/1.2.4/bootstrap-table.min.css"  rel="stylesheet" />
     <link href="${basePath}/css/zTree/zTreeStyle.css" rel="stylesheet" />
@@ -42,7 +43,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">添加角色</h4>
+                    <h4 class="modal-title" id="myModalLabel"><span class="fa fa-plus fa-lg"></span>&nbsp;添加角色</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="add_form">
@@ -75,7 +76,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel2">编辑角色</h4>
+                    <h4 class="modal-title" id="myModalLabel2"><span class="fa fa-pencil-square-o fa-lg"></span>&nbsp;编辑角色</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="edit_form">
@@ -108,7 +109,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h6 class="modal-title" id="myModalLabel3">权限配置</h6>
+                    <h6 class="modal-title" id="myModalLabel3"><span class="fa fa-indent fa-lg"></span>&nbsp;权限配置</h6>
                 </div>
                 <div class="modal-body">
                     <div>

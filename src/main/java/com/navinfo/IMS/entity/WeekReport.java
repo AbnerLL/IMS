@@ -10,6 +10,9 @@ public class WeekReport {
     private String workType;
     private String year;
     private String week;
+    private String workerId;
+    private String worker;
+    private String section;
     private BigDecimal auditNum;
     private BigDecimal errorNum;
     private String correctRate;
@@ -60,5 +63,29 @@ public class WeekReport {
 
     public void setCorrectRate(String correctRate) {
         this.correctRate = correctRate;
+    }
+
+    public String getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId;
+    }
+
+    public String getWorker() {
+        return worker;
+    }
+
+    public void setWorker(String worker) {
+        this.worker = worker;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 }

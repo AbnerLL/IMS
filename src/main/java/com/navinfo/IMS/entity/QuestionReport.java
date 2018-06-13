@@ -12,6 +12,9 @@ public class QuestionReport {
     private String errorType;
     private BigDecimal errorNum;
     private String errorRate;
+    private String workerId;
+    private String worker;
+    private String section;
 
     public String getWorkType() {
         return workType;
@@ -51,5 +54,29 @@ public class QuestionReport {
 
     public void setErrorRate(String errorRate) {
         this.errorRate = errorRate;
+    }
+
+    public String getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId;
+    }
+
+    public String getWorker() {
+        return worker;
+    }
+
+    public void setWorker(String worker) {
+        this.worker = worker;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 }

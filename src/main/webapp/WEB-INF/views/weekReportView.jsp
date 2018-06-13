@@ -11,6 +11,7 @@
     <title>周报展示</title>
     <%@include file="common/head.jsp"%>
     <%@include file="common/common.jsp"%>
+    <link href="https://cdn.bootcss.com/select2/4.0.6-rc.1/css/select2.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -23,14 +24,42 @@
                     <div id="toolbar" class="">
                         <form id="search_from" class="form-inline"  style="padding-bottom: 0px;margin-bottom: 0px;">
                             <div class="form-group">
-                                <select id="year_search_select" class="form-control">
+                                <select id="year_search_select" class="form-control search-keyword">
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
                                     <option value="2018">2018</option>
                                 </select>
-                                <select id="workType_search_select" class="form-control">
+                                <select id="workType_search_select" class="form-control search-keyword">
                                     <option value="道路">道路</option>
                                     <option value="设施">设施</option>
+                                </select>
+                                <select id="section_search_select" class="form-control search-keyword">
+                                    <option value="">请选择项目组</option>
+                                    <option value="部门">部门</option>
+                                    <option value="北京项目一组">北京项目一组</option>
+                                    <option value="北京项目二组">北京项目二组</option>
+                                    <option value="北京项目三组">北京项目三组</option>
+                                    <option value="北京项目四组">北京项目四组</option>
+                                    <option value="北京项目五组">北京项目五组</option>
+                                    <option value="武汉项目组">武汉项目组</option>
+                                    <option value="互联网小组">互联网小组</option>
+                                    <option value="代理店">代理店</option>
+                                    <option value="品质管理室（北京）">品质管理室（北京）</option>
+                                    <option value="生产管理室（北京）">生产管理室（北京）</option>
+                                    <option value="技术管理室（北京）">技术管理室（北京）</option>
+                                    <option value="西安项目一组">西安项目一组</option>
+                                    <option value="西安项目二组">西安项目二组</option>
+                                    <option value="西安项目三组">西安项目三组</option>
+                                    <option value="西安项目四组">西安项目四组</option>
+                                    <option value="西安项目五组">西安项目五组</option>
+                                    <option value="西安项目六组">西安项目六组</option>
+                                    <option value="综合项目组">综合项目组</option>
+                                    <option value="品质管理室（西安）">品质管理室（西安）</option>
+                                    <option value="生产管理室（西安）">生产管理室（西安）</option>
+                                    <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                </select>
+                                <select id="worker_search_select" class="form-control search-keyword">
+                                    <option value=""></option>
                                 </select>
                             </div>
                         </form>
@@ -57,14 +86,42 @@
                     <div id="toolbar_qr" class="">
                         <form id="qr_search_from" class="form-inline"  style="padding-bottom: 0px;margin-bottom: 0px;">
                             <div class="form-group">
-                                <select id="qr_year_search_select" class="form-control">
+                                <select id="qr_year_search_select" class="form-control qr-search-keyword">
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
                                     <option value="2018">2018</option>
                                 </select>
-                                <select id="qr_workType_search_select" class="form-control">
+                                <select id="qr_workType_search_select" class="form-control qr-search-keyword">
                                     <option value="道路">道路</option>
                                     <option value="设施">设施</option>
+                                </select>
+                                <select id="qr_section_search_select" class="form-control qr-search-keyword">
+                                    <option value="">请选择项目组</option>
+                                    <option value="部门">部门</option>
+                                    <option value="北京项目一组">北京项目一组</option>
+                                    <option value="北京项目二组">北京项目二组</option>
+                                    <option value="北京项目三组">北京项目三组</option>
+                                    <option value="北京项目四组">北京项目四组</option>
+                                    <option value="北京项目五组">北京项目五组</option>
+                                    <option value="武汉项目组">武汉项目组</option>
+                                    <option value="互联网小组">互联网小组</option>
+                                    <option value="代理店">代理店</option>
+                                    <option value="品质管理室（北京）">品质管理室（北京）</option>
+                                    <option value="生产管理室（北京）">生产管理室（北京）</option>
+                                    <option value="技术管理室（北京）">技术管理室（北京）</option>
+                                    <option value="西安项目一组">西安项目一组</option>
+                                    <option value="西安项目二组">西安项目二组</option>
+                                    <option value="西安项目三组">西安项目三组</option>
+                                    <option value="西安项目四组">西安项目四组</option>
+                                    <option value="西安项目五组">西安项目五组</option>
+                                    <option value="西安项目六组">西安项目六组</option>
+                                    <option value="综合项目组">综合项目组</option>
+                                    <option value="品质管理室（西安）">品质管理室（西安）</option>
+                                    <option value="生产管理室（西安）">生产管理室（西安）</option>
+                                    <option value="技术管理室（西安）">技术管理室（西安）</option>
+                                </select>
+                                <select id="qr_worker_search_select" class="form-control qr-search-keyword">
+                                    <option value=""></option>
                                 </select>
                             </div>
                         </form>
@@ -85,10 +142,14 @@
     </div>
 </div>
 <script type="text/javascript" src="${basePath}/js/ECharts/3.8.4/echarts.common.min.js"></script>
+<script src="https://cdn.bootcss.com/select2/4.0.6-rc.1/js/select2.min.js"></script>
 <script type="text/javascript">
     //设置全局变量，用于渲染报表
     var originalWRData = [];
     var originalQRData = [];
+    //用于加载下拉选
+    var originalUserData = {results:[]};
+    var originalSectionData = {results:[]};
     //初始化图表对象
     var weekReportEChart = echarts.init(document.getElementById('weekReportEChart'));
     var questionReportEChart = echarts.init(document.getElementById('questionReportEChart'));
@@ -103,6 +164,8 @@
         },500);
         //修改表格样式
         initTableStyle();
+        //初始化下拉选数据
+        initUserData();
     });
     //表格样式配置
     function initTableStyle(){
@@ -115,12 +178,16 @@
         return {
             workType:$("#workType_search_select").val(),
             year:$("#year_search_select").val(),
+            section:$("#section_search_select").val(),
+            worker:$("#worker_search_select").val()
         };
     }
     function myQueryParams2(params){
         return {
             workType:$("#qr_workType_search_select").val(),
             year:$("#qr_year_search_select").val(),
+            section:$("#qr_section_search_select").val(),
+            worker:$("#qr_worker_search_select").val()
         };
     }
     //设置从服务器返回的数据rows:数据集合，total总记录数
@@ -275,7 +342,13 @@
 
         });
     };
-    $("#workType_search_select,#year_search_select").change(function () {
+    $(".search-keyword").change(function () {
+        var item = this;
+        if ("section_search_select" == item.id){
+            $("#worker_search_select").val("");
+        }else if ("worker_search_select" == item.id){
+            $("#section_search_select").val("");
+        }
         //刷新表格数据
         $("#table_list").bootstrapTable("refresh");
         //重新加载报表数据
@@ -389,7 +462,13 @@
             ]
         });
     }
-    $("#qr_workType_search_select,#qr_year_search_select").change(function () {
+    $(".qr-search-keyword").change(function () {
+        var item = this;
+        if ("qr_section_search_select" == item.id){
+            $("#qr_worker_search_select").val("");
+        }else if ("qr_worker_search_select" == item.id){
+            $("#qr_section_search_select").val("");
+        }
         //刷新表格数据
         $("#table_list_qr").bootstrapTable("refresh");
         //重新加载报表数据
@@ -397,6 +476,39 @@
             loadQuestionReportCharts(originalQRData);
         },500);
     });
+    //加载下拉选数据
+    function initUserData(){
+        $.ajax({
+            url:"${basePath}/emps?pageSize=999999&pageNum=1",
+            type:"get",
+            dataType:"json",
+            success:function (result) {
+                if (1 == result.code){
+                    var listData = result.extend.pageInfo.list;
+                    for (var i = 0;i<listData.length ;i++){
+                        var item = {id:listData[i].empName,text:listData[i].empName};
+                        originalUserData.results.push(item);
+                    }
+                    //初始化插件
+                    $("#worker_search_select,#qr_worker_search_select").select2({
+                        data:originalUserData.results,
+                        placeholder: '请选择',
+                        allowClear:true
+                    });
+                }
+            }
+        })
+    }
+//    function initSectionData(){
+//        $.ajax({
+//            url:"",
+//            type:"get",
+//            dataType:"json",
+//            success:function (result) {
+//
+//            }
+//        })
+//    }
 </script>
 </body>
 </html>
