@@ -11,7 +11,7 @@
 <head>
     <%@include file="common/head.jsp"%>
     <%@include file="common/common.jsp"%>
-    <title>员工列表</title>
+    <title>操作日志</title>
 </head>
 <body>
     <div class="container-fluid">

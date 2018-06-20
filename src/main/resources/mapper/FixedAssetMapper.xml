@@ -7,6 +7,7 @@
     <result column="ASSET_NAME" jdbcType="VARCHAR" property="assetName" />
     <result column="STANDARD" jdbcType="VARCHAR" property="standard" />
     <result column="ASSET_CLASS" jdbcType="VARCHAR" property="assetClass" />
+    <result column="ASSET_USER_ID" jdbcType="VARCHAR" property="assetUserId" />
     <result column="ASSET_USER" jdbcType="VARCHAR" property="assetUser" />
     <result column="SECTION" jdbcType="VARCHAR" property="section" />
     <result column="USE_STATE" jdbcType="VARCHAR" property="useState" />
@@ -81,9 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UUID, ASSET_NUMBER, ASSET_NAME, STANDARD, ASSET_CLASS, ASSET_USER, SECTION, USE_STATE, 
-    STORE_PLACE, START_DATE, REMARK, STATUS, DEL_FLAG, CREATOR_ID, CREATOR, CREATE_TIME, 
-    UPDATER_ID, UPDATER, UPDATE_TIME
+    UUID, ASSET_NUMBER, ASSET_NAME, STANDARD, ASSET_CLASS, ASSET_USER_ID, ASSET_USER, 
+    SECTION, USE_STATE, STORE_PLACE, START_DATE, REMARK, STATUS, DEL_FLAG, CREATOR_ID, 
+    CREATOR, CREATE_TIME, UPDATER_ID, UPDATER, UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.navinfo.IMS.entity.FixedAssetExample" resultMap="BaseResultMap">
     select
@@ -117,19 +118,19 @@
   </delete>
   <insert id="insert" parameterType="com.navinfo.IMS.entity.FixedAsset">
     insert into IMS.FIXED_ASSET (UUID, ASSET_NUMBER, ASSET_NAME, 
-      STANDARD, ASSET_CLASS, ASSET_USER, 
-      SECTION, USE_STATE, STORE_PLACE, 
-      START_DATE, REMARK, STATUS, 
-      DEL_FLAG, CREATOR_ID, CREATOR, 
-      CREATE_TIME, UPDATER_ID, UPDATER, 
-      UPDATE_TIME)
+      STANDARD, ASSET_CLASS, ASSET_USER_ID, 
+      ASSET_USER, SECTION, USE_STATE, 
+      STORE_PLACE, START_DATE, REMARK, 
+      STATUS, DEL_FLAG, CREATOR_ID, 
+      CREATOR, CREATE_TIME, UPDATER_ID, 
+      UPDATER, UPDATE_TIME)
     values (#{uuid,jdbcType=VARCHAR}, #{assetNumber,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, 
-      #{standard,jdbcType=VARCHAR}, #{assetClass,jdbcType=VARCHAR}, #{assetUser,jdbcType=VARCHAR}, 
-      #{section,jdbcType=VARCHAR}, #{useState,jdbcType=VARCHAR}, #{storePlace,jdbcType=VARCHAR}, 
-      #{startDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{standard,jdbcType=VARCHAR}, #{assetClass,jdbcType=VARCHAR}, #{assetUserId,jdbcType=VARCHAR}, 
+      #{assetUser,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}, #{useState,jdbcType=VARCHAR}, 
+      #{storePlace,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.navinfo.IMS.entity.FixedAsset">
     insert into IMS.FIXED_ASSET
@@ -148,6 +149,9 @@
       </if>
       <if test="assetClass != null">
         ASSET_CLASS,
+      </if>
+      <if test="assetUserId != null">
+        ASSET_USER_ID,
       </if>
       <if test="assetUser != null">
         ASSET_USER,
@@ -207,6 +211,9 @@
       </if>
       <if test="assetClass != null">
         #{assetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="assetUserId != null">
+        #{assetUserId,jdbcType=VARCHAR},
       </if>
       <if test="assetUser != null">
         #{assetUser,jdbcType=VARCHAR},
@@ -276,6 +283,9 @@
       <if test="record.assetClass != null">
         ASSET_CLASS = #{record.assetClass,jdbcType=VARCHAR},
       </if>
+      <if test="record.assetUserId != null">
+        ASSET_USER_ID = #{record.assetUserId,jdbcType=VARCHAR},
+      </if>
       <if test="record.assetUser != null">
         ASSET_USER = #{record.assetUser,jdbcType=VARCHAR},
       </if>
@@ -330,6 +340,7 @@
       ASSET_NAME = #{record.assetName,jdbcType=VARCHAR},
       STANDARD = #{record.standard,jdbcType=VARCHAR},
       ASSET_CLASS = #{record.assetClass,jdbcType=VARCHAR},
+      ASSET_USER_ID = #{record.assetUserId,jdbcType=VARCHAR},
       ASSET_USER = #{record.assetUser,jdbcType=VARCHAR},
       SECTION = #{record.section,jdbcType=VARCHAR},
       USE_STATE = #{record.useState,jdbcType=VARCHAR},
@@ -362,6 +373,9 @@
       </if>
       <if test="assetClass != null">
         ASSET_CLASS = #{assetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="assetUserId != null">
+        ASSET_USER_ID = #{assetUserId,jdbcType=VARCHAR},
       </if>
       <if test="assetUser != null">
         ASSET_USER = #{assetUser,jdbcType=VARCHAR},
@@ -414,6 +428,7 @@
       ASSET_NAME = #{assetName,jdbcType=VARCHAR},
       STANDARD = #{standard,jdbcType=VARCHAR},
       ASSET_CLASS = #{assetClass,jdbcType=VARCHAR},
+      ASSET_USER_ID = #{assetUserId,jdbcType=VARCHAR},
       ASSET_USER = #{assetUser,jdbcType=VARCHAR},
       SECTION = #{section,jdbcType=VARCHAR},
       USE_STATE = #{useState,jdbcType=VARCHAR},

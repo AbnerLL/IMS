@@ -99,4 +99,16 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         example.createCriteria().andUuidIn(idList);
         return fixedAssetMapper.deleteByExample(example)!=0;
     }
+
+    /**
+     * 根据条件查询所有数据
+     * @param search
+     * @return
+     */
+    public List<FixedAsset> findFixedAssetBySearch(FixedAssetSearch search) {
+        FixedAssetExample example = this.createSearchExample(search);
+        List<FixedAsset> fixedAssets = this.fixedAssetMapper.selectByExample(example);
+        return fixedAssets;
+    }
+
 }

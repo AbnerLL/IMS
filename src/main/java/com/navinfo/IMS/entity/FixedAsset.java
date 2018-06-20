@@ -13,6 +13,8 @@ public class FixedAsset {
 
     private String assetClass;
 
+    private String assetUserId;
+
     private String assetUser;
 
     private String section;
@@ -79,6 +81,14 @@ public class FixedAsset {
 
     public void setAssetClass(String assetClass) {
         this.assetClass = assetClass == null ? null : assetClass.trim();
+    }
+
+    public String getAssetUserId() {
+        return assetUserId;
+    }
+
+    public void setAssetUserId(String assetUserId) {
+        this.assetUserId = assetUserId == null ? null : assetUserId.trim();
     }
 
     public String getAssetUser() {

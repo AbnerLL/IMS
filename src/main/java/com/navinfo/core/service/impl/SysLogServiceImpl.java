@@ -38,6 +38,7 @@ public class SysLogServiceImpl implements SysLogService {
         if (StringUtil.notNull(search.getKeyword())){
             example.or().andUsernameLike("%"+search.getKeyword()+"%");
         }
+        example.setOrderByClause("create_time desc");
         return example;
     }
 

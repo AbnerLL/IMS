@@ -62,7 +62,9 @@
         <button id="add_btn" class="btn btn-success"><span class="fa fa-plus"></span>新增</button>
         <button id="edit_btn" class="btn btn-primary"><span class="fa fa-pencil-square-o"></span>修改</button>
         <button id="del_btn" class="btn btn-danger"><span class="fa fa-trash-o"></span>删除</button>
+        <button id="export_btn" class="btn btn-success"><span class="fa fa-file-excel-o"></span></span>导出excel</button>
         <button id="search_toggle_btn" class="btn btn-info"><span class="fa fa-search"></span>综合查询</button>
+
     </div>
     <%--表格数据--%>
     <table id="table_list"></table>
@@ -100,21 +102,21 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
+                                <label for="assetUserId_insert_input" class="col-sm-2 control-label">使用人</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="assetUserId" id="assetUserId_insert_input"/>
+                                </div>
                                 <label for="assetUser_insert_input" class="col-sm-2 control-label">使用人</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" name="assetUser" id="assetUser_insert_input"/>
                                 </div>
+                            </div>
+                            <div class="form-group form-group-sm">
                                 <label for="section_insert_select" class="col-sm-2 control-label">使用科室</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="section" id="section_insert_select">
                                         <option value="">---选择使用科室---</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="useState_insert_input" class="col-sm-2 control-label">使用状况</label>
-                                <div class="col-sm-4">
-                                    <input class="form-control" name="useState" id="useState_insert_input"/>
                                 </div>
                                 <label for="startDate_insert_input" class="col-sm-2 control-label">使用日期</label>
                                 <div class="col-sm-4">
@@ -122,6 +124,12 @@
                                         <input class="form-control datepicker" name="startDate" id="startDate_insert_input"/>
                                         <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="useState_insert_input" class="col-sm-2 control-label">使用状况</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="useState" id="useState_insert_input"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -174,21 +182,21 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
+                                <label for="assetUserId_update_input" class="col-sm-2 control-label">使用人编号</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" name="assetUserId" id="assetUserId_update_input"/>
+                                </div>
                                 <label for="assetUser_update_input" class="col-sm-2 control-label">使用人</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" name="assetUser" id="assetUser_update_input"/>
                                 </div>
+                            </div>
+                            <div class="form-group form-group-sm">
                                 <label for="section_update_select" class="col-sm-2 control-label">使用科室</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="section" id="section_update_select">
                                         <option value="">---选择使用科室---</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="useState_update_input" class="col-sm-2 control-label">使用状况</label>
-                                <div class="col-sm-4">
-                                    <input class="form-control" name="useState" id="useState_update_input"/>
                                 </div>
                                 <label for="startDate_update_input" class="col-sm-2 control-label">使用日期</label>
                                 <div class="col-sm-4">
@@ -196,6 +204,12 @@
                                         <input class="form-control datepicker" name="startDate" id="startDate_update_input"/>
                                         <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="useState_update_input" class="col-sm-2 control-label">使用状况</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="useState" id="useState_update_input"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -326,6 +340,9 @@
                 field:"assetClass",
                 title:"资产类别"
             },{
+                field:"assetUserId",
+                title:"使用人编号"
+            },{
                 field:"assetUser",
                 title:"使用人",
             },{
@@ -339,7 +356,7 @@
                 title:"存放地点"
             },{
                 field:"startDate",
-                title:"开始使用日期",
+                title:"启用日期",
                 formatter:dateFormatter
             }],
             formatSearch:function(){
@@ -424,6 +441,7 @@
         $("#assetName_update_input").val(obj.assetName);
         $("#standard_update_input").val(obj.standard);
         $("#assetClass_update_input").val(obj.assetClass);
+        $("#assetUserId_update_input").val(obj.assetUserId);
         $("#assetUser_update_input").val(obj.assetUser);
         $("#section_update_select").val(obj.section);
         $("#useState_update_input").val(obj.useState);
@@ -494,6 +512,10 @@
             }
         });
     };
+    //导出excel按钮
+    $("#export_btn").click(function () {
+        window.location.href="${basePath}/fixedAssetExcel?"+$("#search_form").serialize();
+    });
     //加载项目组下拉选
     $("#section_search_select,#section_insert_select,#section_update_select").weboption({
         url:"${basePath}/sysGroup/loadAll",

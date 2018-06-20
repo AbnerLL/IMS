@@ -39,12 +39,13 @@
                                     <label for="workType_search_select" class="control-label">作业类型:</label>
                                     <select class="form-control" name="workType" id="workType_search_select">
                                         <option value="">---选择作业类型---</option>
-                                        <option value="道路图标">道路图标</option>
-                                        <option value="中文名称">中文名称</option>
+                                        <option value="道路">道路</option>
+                                        <option value="设施">设施</option>
+                                        <option value="背景">背景</option>
                                         <option value="中文地址">中文地址</option>
                                         <option value="英文">英文</option>
-                                        <option value="深度信息">深度信息</option>
-                                        <option value="代理店">代理店</option>
+                                        <option value="行人导航">行人导航</option>
+                                        <option value="点位">点位</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,14 +57,6 @@
                                     <label for="section_search_select" class="control-label">项目组:</label>
                                     <select class="form-control" name="section" id="section_search_select">
                                         <option value="">----选择作业组----</option>
-                                        <option value="品质管理室">品质管理室</option>
-                                        <option value="项目一组">项目一组</option>
-                                        <option value="项目二组">项目二组</option>
-                                        <option value="项目三组">项目三组</option>
-                                        <option value="项目四组">项目四组</option>
-                                        <option value="项目五组">项目五组</option>
-                                        <option value="项目六组">项目六组</option>
-                                        <option value="武汉项目组">武汉项目组</option>
                                     </select>
                                 </div>
                             </div>
@@ -142,12 +135,13 @@
                                 <div class="col-sm-4">
                                     <select class="form-control" name="workType" id="workType_insert_select">
                                         <option value="">---选择作业类型---</option>
-                                        <option value="道路图标">道路图标</option>
-                                        <option value="中文名称">中文名称</option>
+                                        <option value="道路">道路</option>
+                                        <option value="设施">设施</option>
+                                        <option value="背景">背景</option>
                                         <option value="中文地址">中文地址</option>
                                         <option value="英文">英文</option>
-                                        <option value="深度信息">深度信息</option>
-                                        <option value="代理店">代理店</option>
+                                        <option value="行人导航">行人导航</option>
+                                        <option value="点位">点位</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,14 +150,6 @@
                                 <div class="col-sm-4">
                                     <select class="form-control" name="section" id="section_insert_select">
                                         <option value="">----选择作业组----</option>
-                                        <option value="品质管理室">品质管理室</option>
-                                        <option value="项目一组">项目一组</option>
-                                        <option value="项目二组">项目二组</option>
-                                        <option value="项目三组">项目三组</option>
-                                        <option value="项目四组">项目四组</option>
-                                        <option value="项目五组">项目五组</option>
-                                        <option value="项目六组">项目六组</option>
-                                        <option value="武汉项目组">武汉项目组</option>
                                     </select>
                                 </div>
                                 <label for="monitorDate_insert_input" class="control-label col-sm-2">监察日期</label>
@@ -242,12 +228,13 @@
                                 <div class="col-sm-4">
                                     <select class="form-control" name="workType" id="workType_update_select">
                                         <option value="">---选择作业类型---</option>
-                                        <option value="道路图标">道路图标</option>
-                                        <option value="中文名称">中文名称</option>
+                                        <option value="道路">道路</option>
+                                        <option value="设施">设施</option>
+                                        <option value="背景">背景</option>
                                         <option value="中文地址">中文地址</option>
                                         <option value="英文">英文</option>
-                                        <option value="深度信息">深度信息</option>
-                                        <option value="代理店">代理店</option>
+                                        <option value="行人导航">行人导航</option>
+                                        <option value="点位">点位</option>
                                     </select>
                                 </div>
                             </div>
@@ -256,14 +243,6 @@
                                 <div class="col-sm-4">
                                     <select class="form-control" name="section" id="section_update_select">
                                         <option value="">----选择作业组----</option>
-                                        <option value="品质管理室">品质管理室</option>
-                                        <option value="项目一组">项目一组</option>
-                                        <option value="项目二组">项目二组</option>
-                                        <option value="项目三组">项目三组</option>
-                                        <option value="项目四组">项目四组</option>
-                                        <option value="项目五组">项目五组</option>
-                                        <option value="项目六组">项目六组</option>
-                                        <option value="武汉项目组">武汉项目组</option>
                                     </select>
                                 </div>
                                 <label for="monitorDate_update_input" class="control-label col-sm-2">监察日期</label>
@@ -311,6 +290,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="${basePath}/js/weboption.js"></script>
 <script type="text/javascript">
     $(function(){
         //初始化表格
@@ -589,6 +569,29 @@
     $("#export_btn").click(function () {
         window.location.href="${basePath}/monitorInfoExcel?"+$("#search_form").serialize();
     });
+    //加载项目组下拉选
+    $("#section_search_select,#section_insert_select,#section_update_select").weboption({
+        url:"${basePath}/sysGroup/loadAll",
+        key:"groupName",
+        value:"groupName",
+        search:{groupType:"dept"},
+        append:true,
+        processResult:processData
+    });
+    //处理请求返回的数据
+    function processData(resultData){
+        var original_array = resultData.extend.entities;
+        var tempArray = [];
+        var result = original_array.filter(function(item){
+            if (item.parentGroupCode.length >= 5 && !tempArray.includes(item.groupName)){
+                tempArray.push(item.groupName);
+                return true;
+            }else {
+                return false;
+            }
+        });
+        return result;
+    }
 </script>
 </body>
 </html>

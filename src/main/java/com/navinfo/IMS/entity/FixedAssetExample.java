@@ -455,6 +455,76 @@ public class FixedAssetExample {
             return (Criteria) this;
         }
 
+        public Criteria andAssetUserIdIsNull() {
+            addCriterion("ASSET_USER_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdIsNotNull() {
+            addCriterion("ASSET_USER_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdEqualTo(String value) {
+            addCriterion("ASSET_USER_ID =", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdNotEqualTo(String value) {
+            addCriterion("ASSET_USER_ID <>", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdGreaterThan(String value) {
+            addCriterion("ASSET_USER_ID >", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("ASSET_USER_ID >=", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdLessThan(String value) {
+            addCriterion("ASSET_USER_ID <", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdLessThanOrEqualTo(String value) {
+            addCriterion("ASSET_USER_ID <=", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdLike(String value) {
+            addCriterion("ASSET_USER_ID like", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdNotLike(String value) {
+            addCriterion("ASSET_USER_ID not like", value, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdIn(List<String> values) {
+            addCriterion("ASSET_USER_ID in", values, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdNotIn(List<String> values) {
+            addCriterion("ASSET_USER_ID not in", values, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdBetween(String value1, String value2) {
+            addCriterion("ASSET_USER_ID between", value1, value2, "assetUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssetUserIdNotBetween(String value1, String value2) {
+            addCriterion("ASSET_USER_ID not between", value1, value2, "assetUserId");
+            return (Criteria) this;
+        }
+
         public Criteria andAssetUserIsNull() {
             addCriterion("ASSET_USER is null");
             return (Criteria) this;

@@ -28,7 +28,7 @@
       <property name="forceBigDecimals" value="true" />
     </javaTypeResolver>
 	<!-- 指定对象生成的位置以及参数 -->
-    <javaModelGenerator targetPackage="com.navinfo.core.entity"
+    <javaModelGenerator targetPackage="com.navinfo.IMS.entity"
     					targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem2">
         <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
       <property name="enableSubPackages" value="false" />
@@ -46,7 +46,7 @@
       </sqlMapGenerator>
 	<!-- 设置dao接口的位置 -->
     <javaClientGenerator type="XMLMAPPER"
-    targetPackage="com.navinfo.core.dao"  targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem2">
+    targetPackage="com.navinfo.IMS.dao"  targetProject="C:\Users\Administrator\Desktop\情报系统需求文件\新项目\IMSystem2">
         <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
       <property name="enableSubPackages" value="false" />
     </javaClientGenerator>
@@ -74,7 +74,7 @@
       <!--<table schema="ims" tableName="poi_question" domainObjectName="PoiQuestion"></table>-->
       <!--<table schema="ims" tableName="monitor_info" domainObjectName="MonitorInfo"></table>-->
       <!--<table schema="ims" tableName="question_source" domainObjectName="QuestionSource"></table>-->
-      <!--<table schema="ims" tableName="fixed_asset" domainObjectName="FixedAsset"></table>-->
+      <table schema="ims" tableName="fixed_asset" domainObjectName="FixedAsset"></table>
     <!--<table schema="ims" tableName="module_permission_rel" domainObjectName="ModulePermissionRel"></table>-->
     <!--<table schema="ims" tableName="role_module_permission_rel" domainObjectName="RoleModulePermissionRel"></table>-->
       <!--<table schema="ims" tableName="emp_aptitude" domainObjectName="EmpAptitude"></table>-->
@@ -82,6 +82,6 @@
       <!--<table schema="ims" tableName="file_info" domainObjectName="FileInfo"></table>-->
       <!--<table schema="ims" tableName="base_table_col_define" domainObjectName="DBFieldManage"></table>-->
     <!--<table schema="ims" tableName="sys_dictionary" domainObjectName="SysDictionary"></table>-->
-      <table schema="ims" tableName="sys_group" domainObjectName="SysGroup"></table>
+      <!--<table schema="ims" tableName="sys_group" domainObjectName="SysGroup"></table>-->
   </context>
 </generatorConfiguration>

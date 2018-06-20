@@ -2,13 +2,16 @@ package com.navinfo.IMS.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.navinfo.IMS.dto.Msg;
+import com.navinfo.IMS.entity.Emp;
 import com.navinfo.IMS.entity.FixedAsset;
 import com.navinfo.IMS.service.FixedAssetService;
 import com.navinfo.IMS.so.FixedAssetSearch;
 import com.navinfo.IMS.utils.PageObject;
+import com.navinfo.core.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,7 @@ import java.util.Map;
  * Created by luozhihui on 2018/1/20.
  */
 @Controller
-public class FixedAssetController {
+public class FixedAssetController extends BaseController{
     @Autowired
     private FixedAssetService fixedAssetService;
 
@@ -79,5 +82,23 @@ public class FixedAssetController {
     public Msg deleteFixedAsset(@PathVariable String ids){
         boolean flag=fixedAssetService.deleteFixedAsset(ids);
         return flag ? Msg.success():Msg.failure();
+    }
+
+    /**
+     * 根据条件导出excel
+     * @param search
+     * @return
+     */
+    @RequestMapping(value = "fixedAssetExcel")
+    public ModelAndView exportExcel(FixedAssetSearch search){
+        ModelAndView modelAndView = new ModelAndView();
+        Emp currentEmp = super.getCurrentEmp();
+        if (!hasPermission("fixedAsset:export")){
+            search.setAssetUser(currentEmp.getEmpName());
+        }
+        List<FixedAsset> fixedAssets = this.fixedAssetService.findFixedAssetBySearch(search);
+        modelAndView.addObject("fixedAssetList",fixedAssets);
+        modelAndView.setViewName("export/fixedAssetExcel");
+        return modelAndView;
     }
 }

@@ -164,7 +164,7 @@
                 pageNumber:1,                       //初始化加载第一页，默认第一页
                 pageSize: 10,                       //每页的记录行数（*）
                 pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-                search: true,                       //是否显示表格搜索
+                search: false,                       //是否显示表格搜索
                 strictSearch: true,
                 showColumns: true,                  //是否显示所有的列
                 showRefresh: true,                  //是否显示刷新按钮

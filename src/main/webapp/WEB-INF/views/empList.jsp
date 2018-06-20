@@ -49,8 +49,8 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group  form-group-sm">
-                                    <label for="empSec_search_select" class="control-label">所属部门:</label>
-                                    <select class="form-control" id="empSec_search_select" name="empDept">
+                                    <label for="empDep_search_select" class="control-label">所属部门:</label>
+                                    <select class="form-control" id="empDep_search_select" name="empDept">
                                         <option value="">---选择部门---</option>
                                         <option value="数据库制作部">数据库制作部</option>
                                         <option value="数据库制作部西安分部">数据库制作部西安分部</option>
@@ -59,17 +59,9 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group  form-group-sm">
-                                    <label for="empDep_search_select" class="control-label">所属科室:</label>
-                                    <select class="form-control" id="empDep_search_select" name="empSec">
+                                    <label for="empSec_search_select" class="control-label">所属科室:</label>
+                                    <select class="form-control" id="empSec_search_select" name="empSec">
                                         <option value="">---选择所属科室---</option>
-                                        <option value="品质管理室">品质管理室</option>
-                                        <option value="项目一组">项目一组</option>
-                                        <option value="项目二组">项目二组</option>
-                                        <option value="项目三组">项目三组</option>
-                                        <option value="项目四组">项目四组</option>
-                                        <option value="项目五组">项目五组</option>
-                                        <option value="项目六组">项目六组</option>
-                                        <option value="武汉项目组">武汉项目组</option>
                                     </select>
                                 </div>
                             </div>
@@ -94,12 +86,6 @@
                                     <label for="empPost_search_select" class="control-label">职务名称:</label>
                                     <select class="form-control" id="empPost_search_select" name="empPost">
                                         <option value="">---选择职务名称---</option>
-                                        <option value="部门经理">部门经理</option>
-                                        <option value="科室经理">科室经理</option>
-                                        <option value="项目经理">项目经理</option>
-                                        <option value="项目助理">项目助理</option>
-                                        <option value="数据工程师">数据工程师</option>
-                                        <option value="质量工程师">质量工程师</option>
                                     </select>
                                 </div>
                             </div>
@@ -653,6 +639,28 @@
         var postArray=deptMap[deptSelected][secSelected];
         for(var index in postArray){
             $("#empPost_insert_select").append("<option value='"+postArray[index]+"'>"+postArray[index]+"</option>")
+        }
+    });
+    //部门修改关联科室下拉选（查询界面）
+    $("#empDep_search_select").change(function(){
+        $("#empSec_search_select").empty();
+        $("#empSec_search_select").append("<option value=''>---选择所属科室---</option>")
+        var secMap=deptMap[this.value];
+        for(var key in secMap){
+            $("#empSec_search_select").append("<option value='"+key+"'>"+key+"</option>");
+        }
+        //触发科室的单击事件
+        $("#empSec_search_select").change();
+    });
+    //科室修改关联职务下拉选(查询界面)
+    $("#empSec_search_select").change(function(){
+        $("#empPost_search_select").empty();
+        $("#empPost_search_select").append("<option value=''>---选择职务名称---</option>");
+        var deptSelected=$("#empDep_search_select").val();
+        var secSelected=$("#empSec_search_select").val();
+        var postArray=deptMap[deptSelected][secSelected];
+        for(var index in postArray){
+            $("#empPost_search_select").append("<option value='"+postArray[index]+"'>"+postArray[index]+"</option>")
         }
     });
     //查询按钮

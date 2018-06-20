@@ -21,4 +21,6 @@ public interface FixedAssetService {
     boolean updateFixedAsset(FixedAsset fixedAsset);
 
     boolean deleteFixedAsset(String ids);
+
+    List<FixedAsset> findFixedAssetBySearch(FixedAssetSearch search);
 }
